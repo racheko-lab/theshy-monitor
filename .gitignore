@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+
+# Local env (不要把你的真实 key 推到 GitHub!)
+.env
+.env.local
+
+# Local state (本地运行的状态文件, GitHub Actions 会自己管)
+# 注意: 不要忽略 .theshy_opgg_state.json, 因为 GitHub Actions 需要它
+# 如果本地测试不想 commit, 临时取消下一行注释:
+# .theshy_opgg_state.json
+
+# Logs
+*.log
+nohup.out

@@ -1,0 +1,5 @@
+# TheShy 排位监控 (基于 lol_monitor)
+# 核心：lol_monitor 自带 pulsefire / requests / python-dateutil
+# wrapper 额外需要：
+requests>=2.31.0
+python-dotenv>=1.0.0
