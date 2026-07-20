@@ -3,19 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TheShy 排位监控</title>
+<title>TheShy 排位监控 · 完整数据</title>
 <style>
   :root {
     --bg: #0d1117;
     --card: #161b22;
+    --card-2: #1c2128;
     --border: #30363d;
+    --border-2: #21262d;
     --text: #c9d1d9;
+    --text-bright: #f0f6fc;
     --muted: #8b949e;
+    --muted-2: #6e7681;
     --accent: #58a6ff;
     --green: #3fb950;
     --red: #f85149;
     --yellow: #d29922;
     --orange: #db6d28;
+    --purple: #bc8cff;
+    --tier-challenger: #5b6ee1;
+    --tier-grandmaster: #e02c2c;
+    --tier-master: #a335ee;
+    --tier-diamond: #5b9bd5;
+    --tier-emerald: #00bfa5;
+    --tier-platinum: #4ec9b0;
+    --tier-gold: #ff9b3a;
+    --tier-silver: #b6c3cf;
+    --tier-bronze: #c08e55;
+    --tier-iron: #8a8a8a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -24,58 +39,74 @@
     color: var(--text);
     min-height: 100vh;
     padding: 16px;
+    line-height: 1.5;
   }
-  .container { max-width: 920px; margin: 0 auto; }
+  .container { max-width: 1200px; margin: 0 auto; }
 
-  /* 顶部 Hero */
+  /* Hero */
   .hero {
     background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 32px 24px;
+    padding: 24px;
     margin-bottom: 16px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 24px;
   }
   .hero::before {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 400px;
-    height: 400px;
+    top: -50%; right: -20%;
+    width: 400px; height: 400px;
     background: radial-gradient(circle, rgba(88,166,255,0.15), transparent 70%);
     pointer-events: none;
   }
+  .hero-avatar {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    background: var(--card);
+    flex-shrink: 0;
+  }
+  .hero-info { flex: 1; min-width: 0; }
   .hero h1 {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 8px;
-    background: linear-gradient(90deg, #58a6ff, #d29922);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+    color: var(--text-bright);
   }
   .hero .subtitle {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 13px;
+    margin-bottom: 12px;
   }
-  .status-pill {
+  .hero-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .tag {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
+    gap: 6px;
+    padding: 4px 10px;
     border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-top: 16px;
+    font-size: 12px;
+    font-weight: 500;
     border: 1px solid var(--border);
+    background: var(--card);
   }
-  .status-pill.online { background: rgba(63,185,80,0.15); color: var(--green); border-color: rgba(63,185,80,0.4); }
-  .status-pill.offline { background: rgba(139,148,158,0.15); color: var(--muted); }
-  .status-pill.unknown { background: rgba(210,153,34,0.15); color: var(--yellow); }
-  .status-pill .dot {
-    width: 8px; height: 8px; border-radius: 50%;
+  .tag.online { background: rgba(63,185,80,0.15); color: var(--green); border-color: rgba(63,185,80,0.4); }
+  .tag.offline { background: rgba(139,148,158,0.15); color: var(--muted); }
+  .tag.unknown { background: rgba(210,153,34,0.15); color: var(--yellow); }
+  .tag.level { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .tag.ladder { background: rgba(188,140,255,0.15); color: var(--purple); }
+  .tag .dot {
+    width: 6px; height: 6px; border-radius: 50%;
     background: currentColor;
     animation: pulse 2s infinite;
   }
@@ -84,47 +115,163 @@
     50% { opacity: 0.4; }
   }
 
-  /* 网格布局 */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-  }
-  .card .label {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
-  }
-  .card .value {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .card .sub {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  /* 事件历史 */
+  /* Sections */
+  .section { margin-bottom: 16px; }
   .section-title {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin: 24px 0 12px;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+  .section-title .meta {
+    font-size: 11px;
+    color: var(--muted-2);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-2);
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  .card-meta {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .kv {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 3px 0;
+  }
+  .kv .k { color: var(--muted); }
+  .kv .v { color: var(--text-bright); font-weight: 500; }
+
+  /* Tier display */
+  .tier-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tier-img {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--card-2);
+  }
+  .tier-info {
+    flex: 1;
+  }
+  .tier-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 2px;
+  }
+  .tier-name.tier-CHALLENGER { color: var(--tier-challenger); }
+  .tier-name.tier-GRANDMASTER { color: var(--tier-grandmaster); }
+  .tier-name.tier-MASTER { color: var(--tier-master); }
+  .tier-name.tier-DIAMOND { color: var(--tier-diamond); }
+  .tier-name.tier-EMERALD { color: var(--tier-emerald); }
+  .tier-name.tier-PLATINUM { color: var(--tier-platinum); }
+  .tier-name.tier-GOLD { color: var(--tier-gold); }
+  .tier-name.tier-SILVER { color: var(--tier-silver); }
+  .tier-name.tier-BRONZE { color: var(--tier-bronze); }
+  .tier-name.tier-IRON { color: var(--tier-iron); }
+  .tier-name.tier-None { color: var(--muted); }
+  .tier-stats { font-size: 12px; color: var(--muted); }
+  .tier-stats .lp { color: var(--accent); font-weight: 600; }
+  .tier-stats .win { color: var(--green); }
+  .tier-stats .lose { color: var(--red); }
+  .tier-stats .wr { color: var(--text-bright); }
+
+  .high-leagues {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-2);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .high-leagues div { margin-top: 2px; }
+
+  /* Champion table */
+  .champ-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .champ-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .champ-table td {
+    padding: 8px;
+    border-bottom: 1px solid var(--border-2);
+    vertical-align: middle;
+  }
+  .champ-table tr:last-child td { border-bottom: none; }
+  .champ-table tr:hover td { background: var(--card-2); }
+  .champ-name {
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  .champ-meta {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 1px;
+  }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pill.win { background: rgba(63,185,80,0.15); color: var(--green); }
+  .pill.lose { background: rgba(248,81,73,0.15); color: var(--red); }
+  .pill.kda { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .pill.op { background: rgba(188,140,255,0.15); color: var(--purple); }
+  .pill.mvp { background: rgba(255,155,58,0.15); color: var(--orange); }
+
+  /* Event list */
   .events {
     background: var(--card);
     border: 1px solid var(--border);
@@ -135,34 +282,59 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-2);
+    font-size: 13px;
   }
   .event-item:last-child { border-bottom: none; }
-  .event-item .icon {
-    font-size: 18px;
-    line-height: 1;
-    padding-top: 2px;
-  }
-  .event-item .body {
-    flex: 1;
-  }
-  .event-item .title { font-weight: 600; margin-bottom: 2px; }
-  .event-item .meta { font-size: 12px; color: var(--muted); }
+  .event-item .icon { font-size: 16px; line-height: 1.4; }
+  .event-item .body { flex: 1; min-width: 0; }
+  .event-item .title { font-weight: 600; margin-bottom: 1px; }
+  .event-item .meta { font-size: 11px; color: var(--muted); }
+  .event-item.active .title { color: var(--orange); }
   .event-item.match-win .title { color: var(--green); }
   .event-item.match-lose .title { color: var(--red); }
-  .event-item.active .title { color: var(--orange); }
   .event-item.level .title { color: var(--accent); }
+  .event-item.rank .title { color: var(--purple); }
 
-  /* 刷新控制 */
+  /* Match list */
+  .match {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .match-result {
+    width: 4px;
+    height: 40px;
+    border-radius: 2px;
+  }
+  .match-result.win { background: var(--green); }
+  .match-result.lose { background: var(--red); }
+  .match-info .champ { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+  .match-info .meta { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .match-stats {
+    text-align: right;
+    font-size: 12px;
+  }
+  .match-stats .kda { font-weight: 600; color: var(--text-bright); }
+  .match-stats .sub { font-size: 11px; color: var(--muted); }
+
+  /* Toolbar */
   .toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 16px 0;
-    font-size: 13px;
+    margin: 12px 0;
+    font-size: 12px;
     color: var(--muted);
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .toolbar button {
     background: var(--card);
@@ -171,7 +343,7 @@
     padding: 6px 14px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     transition: all 0.2s;
   }
   .toolbar button:hover {
@@ -182,44 +354,94 @@
     background: var(--card);
     border: 1px solid var(--border);
     color: var(--text);
-    padding: 6px 10px;
+    padding: 4px 8px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
-  /* loading */
-  .loading {
+  /* Loading + empty */
+  .loading, .empty {
     text-align: center;
-    padding: 40px;
+    padding: 30px;
     color: var(--muted);
+    font-size: 13px;
   }
   .spinner {
     display: inline-block;
-    width: 24px; height: 24px;
+    width: 20px; height: 20px;
     border: 2px solid var(--border);
     border-top-color: var(--accent);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
-    margin-bottom: 8px;
+    margin-right: 6px;
+    vertical-align: middle;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .empty {
-    text-align: center;
-    padding: 40px;
-    color: var(--muted);
-    font-size: 13px;
+  .tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    overflow-x: auto;
   }
+  .tab {
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .tab:hover { color: var(--text); }
 
   footer {
     text-align: center;
     color: var(--muted);
     font-size: 12px;
     margin-top: 32px;
-    padding-top: 16px;
+    padding: 16px 0;
     border-top: 1px solid var(--border);
   }
   footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Number formatting */
+  .num-mono { font-variant-numeric: tabular-nums; }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-yellow { color: var(--yellow); }
+  .text-accent { color: var(--accent); }
+  .text-purple { color: var(--purple); }
+
+  .debug {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  @media (max-width: 640px) {
+    .hero { flex-direction: column; text-align: center; }
+    .hero-avatar { width: 72px; height: 72px; }
+    .hero-tags { justify-content: center; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .champ-table { font-size: 11px; }
+    .champ-table th, .champ-table td { padding: 6px 4px; }
+  }
 </style>
 </head>
 <body>
@@ -227,184 +449,607 @@
 
   <!-- Hero -->
   <div class="hero">
-    <h1>TheShy 排位监控</h1>
-    <div class="subtitle">基于 OP.GG MCP API · GitHub Actions 部署 · 数据每 10 分钟刷新</div>
-    <div id="status-pill" class="status-pill unknown">
-      <span class="dot"></span>
-      <span id="status-text">加载中...</span>
+    <img class="hero-avatar" id="avatar" src="" alt="" onerror="this.style.display='none'">
+    <div class="hero-info">
+      <h1 id="hero-name">TheShy</h1>
+      <div class="subtitle" id="hero-subtitle">韩服 KR · 加载中...</div>
+      <div class="hero-tags">
+        <span id="status-tag" class="tag unknown">
+          <span class="dot"></span>
+          <span id="status-text">加载中</span>
+        </span>
+        <span id="level-tag" class="tag level" style="display:none;">Lv <span id="level-val">-</span></span>
+        <span id="ladder-tag" class="tag ladder" style="display:none;">排名 <span id="ladder-val">-</span></span>
+      </div>
     </div>
   </div>
 
-  <!-- 状态卡片 -->
-  <div class="grid">
-    <div class="card">
-      <div class="label">召唤师</div>
-      <div class="value" id="summoner-name">TheShy#KR1</div>
-      <div class="sub" id="summoner-internal">韩服 KR</div>
-    </div>
-    <div class="card">
-      <div class="label">等级</div>
-      <div class="value" id="summoner-level">-</div>
-      <div class="sub" id="summoner-puuid"></div>
-    </div>
-    <div class="card">
-      <div class="label">OP.GG 最后刷新</div>
-      <div class="value" id="updated-at">-</div>
-      <div class="sub" id="updated-age">-</div>
-    </div>
-    <div class="card">
-      <div class="label">本仓库检测</div>
-      <div class="value" id="last-check">-</div>
-      <div class="sub" id="check-count">已运行 - 次</div>
-    </div>
-  </div>
-
-  <!-- 工具栏 -->
+  <!-- Toolbar -->
   <div class="toolbar">
     <div>
       <span id="last-fetch">未刷新</span> ·
       <label>自动刷新:
         <select id="refresh-interval">
           <option value="0">关闭</option>
-          <option value="30">30 秒</option>
-          <option value="60" selected>1 分钟</option>
-          <option value="300">5 分钟</option>
+          <option value="30">30s</option>
+          <option value="60" selected>1m</option>
+          <option value="300">5m</option>
         </select>
-      </label>
+      </label> ·
+      <span id="check-count">-</span> 次检测
     </div>
     <button id="refresh-btn">立即刷新</button>
   </div>
 
-  <!-- 事件历史 -->
-  <div class="section-title">事件历史</div>
-  <div class="events" id="events-list">
-    <div class="empty">暂无事件数据</div>
+  <!-- 当前段位 -->
+  <div class="section">
+    <div class="section-title">
+      当前段位 · Ranked Tiers
+      <span class="meta" id="rank-meta"></span>
+    </div>
+    <div class="grid-3" id="rank-grid">
+      <div class="loading"><span class="spinner"></span>加载中...</div>
+    </div>
   </div>
+
+  <!-- 赛季信息 -->
+  <div class="section">
+    <div class="section-title">赛季历史 · Season History</div>
+    <div class="grid-3" id="season-grid">
+      <div class="loading"><span class="spinner"></span>加载中...</div>
+    </div>
+  </div>
+
+  <!-- 最近比赛 -->
+  <div class="section">
+    <div class="section-title">
+      最近比赛 · Recent Matches
+      <span class="meta" id="matches-meta"></span>
+    </div>
+    <div id="matches-list">
+      <div class="loading"><span class="spinner"></span>加载中...</div>
+    </div>
+  </div>
+
+  <!-- 最常玩英雄 -->
+  <div class="section">
+    <div class="section-title">
+      最常玩英雄 · Most Champions
+      <span class="meta" id="mc-meta"></span>
+    </div>
+    <div class="tabs" id="mc-tabs"></div>
+    <div id="mc-content">
+      <div class="loading"><span class="spinner"></span>加载中...</div>
+    </div>
+  </div>
+
+  <!-- 事件历史 -->
+  <div class="section">
+    <div class="section-title">
+      事件历史 · Event Log
+      <span class="meta" id="events-meta"></span>
+    </div>
+    <div class="events" id="events-list">
+      <div class="empty">暂无事件</div>
+    </div>
+  </div>
+
+  <!-- Debug -->
+  <details>
+    <summary style="cursor:pointer; color:var(--muted); font-size:12px; padding:8px 0;">📦 调试 JSON (state + profile + matches)</summary>
+    <div class="debug" id="debug">未加载</div>
+  </details>
 
   <footer>
     数据源:
-    <a href="https://mcp-api.op.gg/mcp" target="_blank">OP.GG MCP</a>
-    ·
-    <a href="https://www.op.gg/summoners/kr/TheShy" target="_blank">OP.GG TheShy</a>
-    ·
+    <a href="https://mcp-api.op.gg/mcp" target="_blank">OP.GG MCP</a> ·
+    <a href="https://www.op.gg/summoners/kr/TheShy" target="_blank">OP.GG TheShy</a> ·
     <a href="https://github.com/racheko-lab/theshy-monitor" target="_blank">GitHub 源码</a>
   </footer>
 </div>
 
 <script>
 // ============================================================
-// 配置 - 通过 URL 参数可改: ?repo=owner/name&branch=main&state=.theshy_opgg_state.json
+// 配置
 // ============================================================
 const params = new URLSearchParams(location.search);
 const REPO = params.get('repo') || 'racheko-lab/theshy-monitor';
 const BRANCH = params.get('branch') || 'main';
-const STATE_FILE = params.get('state') || '.theshy_opgg_state.json';
-const EVENTS_FILE = params.get('events') || '.theshy_events.json';
-const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/`;
+const RAW = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/`;
+const FILES = {
+  state:   RAW + '.theshy_opgg_state.json',
+  events:  RAW + '.theshy_events.json',
+  profile: RAW + '.theshy_profile.json',
+  matches: RAW + '.theshy_matches.json',
+};
 const API_BASE = `https://api.github.com/repos/${REPO}/`;
 
+const TIER_NAMES = {
+  CHALLENGER: '王者', GRANDMASTER: '超凡大师', MASTER: '大师',
+  DIAMOND: '钻石', EMERALD: '翡翠', PLATINUM: '铂金',
+  GOLD: '黄金', SILVER: '白银', BRONZE: '青铜', IRON: '黑铁',
+};
+const DIVISION_NAMES = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV' };
+const GAME_TYPES = {
+  SOLORANKED: '单双排', FLEXRANKED: '灵活组排', ARENA: '竞技场',
+  NORMAL: '匹配', ARAM: '大乱斗', RANKED: '排位', BOT: '人机',
+};
+const POSITIONS = {
+  TOP: '上单', JUNGLE: '打野', MID: '中单', ADC: 'ADC', SUPPORT: '辅助', NONE: '无'
+};
+
 // ============================================================
-// 时间格式化
+// 工具函数
 // ============================================================
-function fmtKst(iso) {
+function fmtKst(iso, withSeconds = false) {
   if (!iso) return '-';
   try {
     const dt = new Date(iso);
-    // 转为 KST (UTC+9)
-    const kst = new Date(dt.getTime() + (9 * 60 - dt.getTimezoneOffset() * -1) * 60000);
-    return dt.toLocaleString('zh-CN', { timeZone: 'Asia/Seoul', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
-  } catch (e) {
-    return iso;
-  }
+    const opts = { timeZone: 'Asia/Seoul', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+    if (withSeconds) opts.second = '2-digit';
+    return dt.toLocaleString('zh-CN', opts);
+  } catch { return iso.slice(0, 16); }
 }
 
 function ageString(iso) {
   if (!iso) return '-';
-  const dt = new Date(iso);
-  const ageSec = (Date.now() - dt.getTime()) / 1000;
-  if (ageSec < 60) return `${Math.floor(ageSec)} 秒前`;
-  if (ageSec < 3600) return `${Math.floor(ageSec / 60)} 分钟前`;
-  if (ageSec < 86400) return `${Math.floor(ageSec / 3600)} 小时前`;
-  return `${Math.floor(ageSec / 86400)} 天前`;
+  const ageSec = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (ageSec < 60) return `${Math.floor(ageSec)}秒前`;
+  if (ageSec < 3600) return `${Math.floor(ageSec/60)}分钟前`;
+  if (ageSec < 86400) return `${Math.floor(ageSec/3600)}小时前`;
+  return `${Math.floor(ageSec/86400)}天前`;
+}
+
+function fmtNum(n, suffix = '') {
+  if (n == null || isNaN(n)) return '-';
+  n = Number(n);
+  if (n >= 10000) return (n/10000).toFixed(1) + 'w' + suffix;
+  if (n >= 1000) return (n/1000).toFixed(1) + 'k' + suffix;
+  return n + suffix;
+}
+
+function fmtDuration(sec) {
+  if (!sec) return '-';
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}分${s}秒`;
+}
+
+function tierName(tier) {
+  if (!tier) return '未定级';
+  return TIER_NAMES[tier] || tier;
+}
+
+function fmtRank(rank, total) {
+  if (!rank) return '-';
+  const fmt = (n) => n >= 10000 ? (n/10000).toFixed(1) + 'w' : n.toLocaleString();
+  if (total) return `${fmt(rank)} / ${fmt(total)}`;
+  return fmt(rank);
+}
+
+function calcKdaStr(k, d, a) {
+  k = +k||0; d = +d||0; a = +a||0;
+  if (d === 0) return k+a > 0 ? 'Perfect' : '0.00';
+  return ((k+a)/d).toFixed(2);
+}
+
+function calcWr(w, p) {
+  w = +w||0; p = +p||0;
+  if (!p) return '0%';
+  return (w/p*100).toFixed(1) + '%';
 }
 
 // ============================================================
-// 状态判断
+// 数据获取
 // ============================================================
-function deriveStatus(state) {
-  if (!state || !state.profile || !state.profile.updated_at) {
-    return { level: 'unknown', text: '暂无数据' };
+async function fetchJson(url) {
+  const u = `${url}?t=${Date.now()}`;
+  const r = await fetch(u, { cache: 'no-store' });
+  if (!r.ok) throw new Error(`${r.status}`);
+  return r.json();
+}
+
+let currentData = { state: null, events: [], profile: null, matches: [] };
+
+async function refresh() {
+  const fetchEl = document.getElementById('last-fetch');
+  fetchEl.textContent = '刷新中...';
+  try {
+    const [state, events, profile, matches] = await Promise.all([
+      fetchJson(FILES.state).catch(() => null),
+      fetchJson(FILES.events).catch(() => null),
+      fetchJson(FILES.profile).catch(() => null),
+      fetchJson(FILES.matches).catch(() => null),
+    ]);
+    currentData = { state, events: events || [], profile, matches: matches || [] };
+    renderAll();
+    fetchEl.textContent = `最后刷新: ${new Date().toLocaleTimeString('zh-CN')}`;
+  } catch (e) {
+    fetchEl.textContent = `刷新失败: ${e.message}`;
   }
-  const updatedAt = new Date(state.profile.updated_at);
-  const ageSec = (Date.now() - updatedAt.getTime()) / 1000;
-  if (ageSec < 300) {
-    return { level: 'online', text: '可能正在游戏中 (OP.GG 高频刷新)' };
-  }
-  if (ageSec < 1800) {
-    return { level: 'unknown', text: '可能刚下线 / 等待 OP.GG 刷新' };
-  }
-  return { level: 'offline', text: `离线 (${ageString(state.profile.updated_at)})` };
 }
 
 // ============================================================
 // 渲染
 // ============================================================
-function renderState(state, events) {
-  // 状态 pill
-  const status = deriveStatus(state);
-  const pill = document.getElementById('status-pill');
-  pill.className = `status-pill ${status.level}`;
+function deriveStatus(state, profile) {
+  const updated = (profile && profile.updated_at) || (state && state.profile && state.profile.updated_at);
+  if (!updated) return { level: 'unknown', text: '无数据' };
+  const ageSec = (Date.now() - new Date(updated).getTime()) / 1000;
+  if (ageSec < 300) return { level: 'online', text: `游戏中? (${Math.floor(ageSec)}s 前刷新)` };
+  if (ageSec < 1800) return { level: 'unknown', text: `可能离线 (${ageString(updated)})` };
+  return { level: 'offline', text: `离线 (${ageString(updated)})` };
+}
+
+function renderHero() {
+  const { state, profile } = currentData;
+  const p = profile || (state && state.profile) || {};
+
+  if (p.profile_image_url) {
+    const img = document.getElementById('avatar');
+    img.src = p.profile_image_url;
+    img.style.display = '';
+  }
+  document.getElementById('hero-name').textContent = p.name || p.game_name || 'TheShy';
+  const tagline = p.tagline || 'KR1';
+  document.getElementById('hero-subtitle').textContent =
+    `${p.internal_name || 'theshy'}#${tagline} · 韩服 KR · ID ${p.id || '-'}`;
+
+  const status = deriveStatus(state, profile);
+  const tag = document.getElementById('status-tag');
+  tag.className = `tag ${status.level}`;
   document.getElementById('status-text').textContent = status.text;
 
-  // 召唤师卡片
-  if (state && state.profile) {
-    document.getElementById('summoner-name').textContent =
-      `${state.profile.name || 'TheShy'}#KR1`;
-    document.getElementById('summoner-internal').textContent = '韩服 KR';
-    document.getElementById('summoner-level').textContent = state.profile.level || '-';
-    if (state.profile.puuid) {
-      const p = state.profile.puuid;
-      document.getElementById('summoner-puuid').textContent =
-        `PUUID: ${p.substring(0, 8)}...${p.substring(p.length - 6)}`;
-    }
-    document.getElementById('updated-at').textContent = fmtKst(state.profile.updated_at);
-    document.getElementById('updated-age').textContent = ageString(state.profile.updated_at);
-  }
-  if (state && state.last_check) {
-    document.getElementById('last-check').textContent = fmtKst(state.last_check);
+  if (p.level != null) {
+    document.getElementById('level-tag').style.display = '';
+    document.getElementById('level-val').textContent = p.level;
   }
 
-  // 事件列表
-  const listEl = document.getElementById('events-list');
-  if (!events || events.length === 0) {
-    listEl.innerHTML = '<div class="empty">暂无事件 (TheShy 上线/下线/打完排位会出现在这里)</div>';
+  const lr = p.ladder_rank;
+  if (lr && (lr.rank || lr.total)) {
+    document.getElementById('ladder-tag').style.display = '';
+    document.getElementById('ladder-val').textContent = fmtRank(lr.rank, lr.total);
+  }
+}
+
+function renderRank() {
+  const { profile } = currentData;
+  if (!profile || !profile.league_stats) {
+    document.getElementById('rank-grid').innerHTML = '<div class="empty">无段位数据</div>';
     return;
   }
-  listEl.innerHTML = events.slice(0, 50).map(ev => {
+  const ls = profile.league_stats.filter(l => l.game_type !== 'ARENA');
+  if (ls.length === 0) {
+    document.getElementById('rank-grid').innerHTML = '<div class="empty">TheShy 暂未进行任何排位</div>';
+    return;
+  }
+  document.getElementById('rank-meta').textContent =
+    `更新于 ${fmtKst(profile.updated_at)} · ${ageString(profile.updated_at)}`;
+
+  document.getElementById('rank-grid').innerHTML = ls.map(l => {
+    const play = l.play || (l.match_win || 0) + (l.match_lose || 0);
+    const wr = play ? ((l.match_win/play)*100).toFixed(1) : 0;
+    const highLeaguesHtml = (l.high_leagues || []).map(h => {
+      return `<div>历史最高: ${h.key || '-'} · 当前 ${h.current_count} · 阈值 ${h.lp_threshold} · 晋级候选 ${h.promotion_candidate_count}</div>`;
+    }).join('');
+    return `
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">${GAME_TYPES[l.game_type] || l.game_type}</div>
+          <div class="card-meta">${l.is_hot_streak ? '🔥 连胜' : ''} ${l.is_veteran ? '老兵' : ''} ${l.is_fresh_blood ? '新血' : ''} ${l.is_inactive ? '休眠' : ''}</div>
+        </div>
+        <div class="tier-card">
+          ${l.tier_image_url ? `<img class="tier-img" src="${l.tier_image_url}" alt="">` : ''}
+          <div class="tier-info">
+            <div class="tier-name tier-${l.tier}">${tierName(l.tier)} ${l.division ? DIVISION_NAMES[l.division] || l.division : ''}</div>
+            <div class="tier-stats">
+              <span class="lp">${l.lp ?? 0} LP</span> ·
+              <span class="win">${l.match_win ?? l.win ?? 0}W</span> ·
+              <span class="lose">${l.match_lose ?? l.lose ?? 0}L</span> ·
+              <span class="wr">胜率 ${wr}%</span> ·
+              <span>总场 ${play}</span>
+            </div>
+            ${highLeaguesHtml ? `<div class="high-leagues">${highLeaguesHtml}</div>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderSeasons() {
+  const { profile } = currentData;
+  if (!profile) {
+    document.getElementById('season-grid').innerHTML = '<div class="empty">无赛季数据</div>';
+    return;
+  }
+  const prev = profile.previous_season_tiers || [];
+  const seas = profile.previous_seasons || [];
+  const allSeasons = {};
+  for (const s of seas) allSeasons[s.season_id] = { tier: s.tier, division: s.division, lp: s.lp };
+  for (const pst of prev) {
+    if (!allSeasons[pst.season_id]) allSeasons[pst.season_id] = {};
+    allSeasons[pst.season_id][pst.game_type] = {
+      tier: pst.tier, division: pst.division, lp: pst.lp, win: pst.win, lose: pst.lose,
+      high_tier: pst.high_tier, high_division: pst.high_division, high_lp: pst.high_lp,
+      created_at: pst.created_at,
+    };
+  }
+  const seasons = Object.keys(allSeasons).sort((a, b) => b - a);
+  if (seasons.length === 0) {
+    document.getElementById('season-grid').innerHTML = '<div class="empty">无历史赛季</div>';
+    return;
+  }
+  document.getElementById('season-grid').innerHTML = seasons.map(sid => {
+    const s = allSeasons[sid];
+    let parts = [];
+    if (s.tier) parts.push(`<div class="tier-name tier-${s.tier}">${tierName(s.tier)} ${s.division ? DIVISION_NAMES[s.division]||s.division : ''} <span class="card-meta">LP ${s.lp ?? 0}</span></div>`);
+    for (const gt of ['SOLORANKED', 'FLEXRANKED']) {
+      if (s[gt]) {
+        const x = s[gt];
+        const highStr = x.high_tier ? ` · 最高 ${tierName(x.high_tier)} ${x.high_division||''} (${x.high_lp} LP)` : '';
+        parts.push(`<div class="kv"><span class="k">${GAME_TYPES[gt]}</span><span class="v tier-${x.tier}">${tierName(x.tier)} ${x.division?DIVISION_NAMES[x.division]||x.division:''} · ${x.win||0}W ${x.lose||0}L${highStr}</span></div>`);
+      }
+    }
+    return `<div class="card"><div class="card-header"><div class="card-title">S${sid}</div></div>${parts.join('')}</div>`;
+  }).join('');
+}
+
+function renderMatches() {
+  const { matches } = currentData;
+  if (!matches || matches.length === 0) {
+    document.getElementById('matches-list').innerHTML = '<div class="empty">暂无最近比赛 (OP.GG 还没记录到)</div>';
+    return;
+  }
+  document.getElementById('matches-meta').textContent = `${matches.length} 场`;
+  document.getElementById('matches-list').innerHTML = matches.map(m => {
+    const win = m.result === 'WIN';
+    const mins = m.game_length_second ? Math.floor(m.game_length_second/60) : '-';
+    return `
+      <div class="match">
+        <div class="match-result ${win ? 'win' : 'lose'}"></div>
+        <div class="match-info">
+          <div class="champ">${m.champion || '?'} <span class="pill ${win?'win':'lose'}">${win?'胜':'败'}</span></div>
+          <div class="meta">
+            ${GAME_TYPES[m.game_type] || m.game_type || '-'} ·
+            ${POSITIONS[m.position] || m.position || '-'} ·
+            ${mins}分钟 ·
+            ${fmtKst(m.created_at)}
+            ${m.op_score ? ` · <span class="text-purple">OP ${m.op_score}</span>` : ''}
+            ${m.op_score_rank ? ` · 排名 #${m.op_score_rank}` : ''}
+          </div>
+        </div>
+        <div class="match-stats">
+          <div class="kda">${m.kill||0}/${m.death||0}/${m.assist||0} <span class="pill kda">${m.kda}</span></div>
+          <div class="sub">CS ${fmtNum(m.minion_kill)}/${fmtNum(m.neutral_minion_kill)} · 金币 ${fmtNum(m.gold_earned)}</div>
+          <div class="sub">伤害 ${fmtNum(m.total_damage_dealt_to_champions)} · 承伤 ${fmtNum(m.total_damage_taken)}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+let mcTabIndex = 0;
+function renderMostChampions() {
+  const { profile } = currentData;
+  if (!profile) return;
+
+  const tabs = [];
+  if (profile.most_champions && profile.most_champions.champion_stats && profile.most_champions.champion_stats.length) {
+    tabs.push({ key: 'mc', label: `赛季总览 (${profile.most_champions.play||0}场)`, data: profile.most_champions, type: 'season' });
+  }
+  if (profile.ranked_most_champions && profile.ranked_most_champions.my_champion_stats && profile.ranked_most_champions.my_champion_stats.length) {
+    tabs.push({ key: 'rmc', label: `排位专属 (${profile.ranked_most_champions.play||0}场)`, data: profile.ranked_most_champions, type: 'ranked' });
+  }
+  if (profile.recent_champion_stats && profile.recent_champion_stats.length) {
+    tabs.push({ key: 'rcs', label: `近期 (${profile.recent_champion_stats.length}英雄)`, data: profile.recent_champion_stats, type: 'recent' });
+  }
+
+  if (tabs.length === 0) {
+    document.getElementById('mc-tabs').innerHTML = '';
+    document.getElementById('mc-content').innerHTML = '<div class="empty">无英雄数据</div>';
+    return;
+  }
+  if (mcTabIndex >= tabs.length) mcTabIndex = 0;
+
+  document.getElementById('mc-tabs').innerHTML = tabs.map((t, i) =>
+    `<div class="tab ${i === mcTabIndex ? 'active' : ''}" data-idx="${i}">${t.label}</div>`
+  ).join('');
+  document.querySelectorAll('#mc-tabs .tab').forEach(el => {
+    el.onclick = () => { mcTabIndex = +el.dataset.idx; renderMostChampions(); };
+  });
+
+  const t = tabs[mcTabIndex];
+  document.getElementById('mc-meta').textContent = `S${t.data.season_id || '-'} · ${t.data.game_type ? (GAME_TYPES[t.data.game_type]||t.data.game_type) : ''}`;
+
+  let html = '';
+  if (t.type === 'season') {
+    html = renderSeasonChampTable(t.data);
+  } else if (t.type === 'ranked') {
+    html = renderRankedChampTable(t.data);
+  } else if (t.type === 'recent') {
+    html = renderRecentChampTable(t.data);
+  }
+  document.getElementById('mc-content').innerHTML = html;
+}
+
+function renderSeasonChampTable(mc) {
+  const champs = mc.champion_stats || [];
+  if (champs.length === 0) return '<div class="empty">无英雄数据</div>';
+  return `
+    <table class="champ-table">
+      <thead>
+        <tr>
+          <th>英雄</th>
+          <th>场次</th>
+          <th>胜率</th>
+          <th>KDA</th>
+          <th>伤害</th>
+          <th>金币</th>
+          <th>CS</th>
+          <th>多杀</th>
+          <th>评分</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${champs.map(c => {
+          const multi = [c.double_kill||0, c.triple_kill||0, c.quadra_kill||0, c.penta_kill||0].filter(x => x>0).join('/');
+          return `
+            <tr>
+              <td>
+                <div class="champ-name">${c.champion_name || '?'}</div>
+                <div class="champ-meta">${c.play||0}场 · ${c.win||0}W ${c.lose||0}L</div>
+              </td>
+              <td class="num-mono">${c.play||0}</td>
+              <td class="num-mono">${c.win_rate}</td>
+              <td class="num-mono"><span class="pill kda">${c.kda}</span><br><span class="champ-meta">${c.kill||0}/${c.death||0}/${c.assist||0}</span></td>
+              <td class="num-mono">${fmtNum(c.damage_dealt_to_champions)}</td>
+              <td class="num-mono">${fmtNum(c.gold_earned)}</td>
+              <td class="num-mono">${fmtNum(c.minion_kill)}+${fmtNum(c.neutral_minion_kill)}</td>
+              <td class="num-mono">${multi || '-'}</td>
+              <td class="num-mono">${c.op_score || '-'}</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderRankedChampTable(rmc) {
+  const champs = rmc.my_champion_stats || [];
+  if (champs.length === 0) return '<div class="empty">无排位英雄数据</div>';
+  return `
+    <table class="champ-table">
+      <thead>
+        <tr>
+          <th>英雄</th>
+          <th>场次</th>
+          <th>胜率</th>
+          <th>KDA</th>
+          <th>OP 评分</th>
+          <th>MVP/ACE</th>
+          <th>伤害</th>
+          <th>金币/CS</th>
+          <th>视野</th>
+          <th>多杀</th>
+          <th>单杀</th>
+          <th>塔/龙/视野</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${champs.map(c => {
+          const multi = [c.double_kill||0, c.triple_kill||0, c.quadra_kill||0, c.penta_kill||0].filter(x => x>0).join('/');
+          const mvpAce = `${c.mvp ? `<span class="pill mvp">MVP ${c.mvp}</span>` : ''} ${c.ace ? `<span class="pill op">ACE ${c.ace}</span>` : ''}`;
+          return `
+            <tr>
+              <td>
+                <div class="champ-name">${c.champion_name || '?'}</div>
+                <div class="champ-meta">${c.play||0}场 · ${c.win||0}W ${c.lose||0}L</div>
+              </td>
+              <td class="num-mono">${c.play||0}</td>
+              <td class="num-mono">${c.win_rate}</td>
+              <td class="num-mono"><span class="pill kda">${c.kda}</span></td>
+              <td class="num-mono">
+                <span class="text-purple">${c.op_score || '-'}</span>
+                ${c.op_score_rank ? `<div class="champ-meta">#${c.op_score_rank}</div>` : ''}
+              </td>
+              <td>${mvpAce.trim() || '-'}</td>
+              <td class="num-mono">
+                ${fmtNum(c.damage_to_champion)}
+                <div class="champ-meta">占比 ${c.damage_participation||'-'}</div>
+              </td>
+              <td class="num-mono">
+                ${fmtNum(c.gold)}
+                <div class="champ-meta">CS ${fmtNum(c.cs)}</div>
+              </td>
+              <td class="num-mono">
+                ${c.vision_score||'-'}
+                <div class="champ-meta">眼 ${c.vision_ward||0}/${c.ward_placed||0}</div>
+              </td>
+              <td class="num-mono">${multi || '-'}</td>
+              <td class="num-mono">
+                ${c.solo_kill||0}/${c.make_solo_kill||0}
+                <div class="champ-meta">单杀/制造</div>
+              </td>
+              <td class="num-mono">
+                塔 ${c.turret_kill||0}
+                <div class="champ-meta">CC ${c.cc_score||'-'} · 救人 ${c.save_ally||0}</div>
+              </td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderRecentChampTable(rcs) {
+  if (!rcs || rcs.length === 0) return '<div class="empty">无近期英雄数据</div>';
+  return `
+    <table class="champ-table">
+      <thead>
+        <tr>
+          <th>英雄</th>
+          <th>场次</th>
+          <th>胜场</th>
+          <th>K</th><th>D</th><th>A</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rcs.map(c => `
+          <tr>
+            <td class="champ-name">${c.champion_name || '?'}</td>
+            <td class="num-mono">${c.play||0}</td>
+            <td class="num-mono">${c.win||0}</td>
+            <td class="num-mono">${c.kill||0}</td>
+            <td class="num-mono">${c.death||0}</td>
+            <td class="num-mono">${c.assist||0}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderEvents() {
+  const { events } = currentData;
+  if (!events || events.length === 0) {
+    document.getElementById('events-list').innerHTML = '<div class="empty">暂无事件 (TheShy 上线/打完排位会出现在这里)</div>';
+    return;
+  }
+  document.getElementById('events-meta').textContent = `${events.length} 条`;
+  document.getElementById('events-list').innerHTML = events.slice(0, 100).map(ev => {
     let cls = 'event-item';
     let icon = '📨';
     let title = ev.type;
-    let meta = ev.timestamp || '';
+    let meta = fmtKst(ev.timestamp, true);
     if (ev.type === 'became_active' || ev.type === 'opgg_updated') {
       cls += ' active';
       icon = '🔥';
       title = 'TheShy 可能开始排位了';
-      meta = `OP.GG 更新: ${fmtKst(ev.updated_at)}`;
+      meta = `OP.GG 更新: ${fmtKst(ev.updated_at)} · ${ageString(ev.updated_at)}`;
     } else if (ev.type === 'new_match') {
       cls += ev.result === 'WIN' ? ' match-win' : ' match-lose';
       icon = ev.result === 'WIN' ? '🏆' : '💔';
-      const typeMap = { SOLORANKED: '单双排', FLEXRANKED: '灵活', NORMAL: '匹配', ARAM: '大乱斗' };
-      title = `${typeMap[ev.game_type] || ev.game_type} · ${ev.champion} · ${ev.result}`;
-      meta = `KDA ${ev.kda} · ${fmtKst(ev.created_at || ev.timestamp)}`;
+      title = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${ev.champion} · ${ev.result}`;
+      meta = `KDA ${ev.kda} (${ev.kill}/${ev.death}/${ev.assist}) · ${fmtKst(ev.created_at)}`;
     } else if (ev.type === 'level_changed') {
       cls += ' level';
       icon = '📈';
-      title = `等级 ${ev.old} → ${ev.new}`;
+      title = `等级 ${ev.old ?? '-'} → ${ev.new}`;
+    } else if (ev.type === 'rank_changed') {
+      cls += ' rank';
+      icon = '🏆';
+      title = `段位变化: ${ev.old} → ${ev.new}`;
+      meta = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${fmtKst(ev.timestamp)}`;
     } else if (ev.type === 'error') {
-      cls += '';
       icon = '⚠️';
       title = '监控错误';
       meta = ev.msg || '';
+    } else if (ev.type === 'system_initialized') {
+      icon = '🚀';
+      title = ev.msg || '监控启动';
     }
     return `
       <div class="${cls}">
@@ -418,34 +1063,36 @@ function renderState(state, events) {
   }).join('');
 }
 
-// ============================================================
-// 拉取数据
-// ============================================================
-async function fetchJson(url, useCacheBust = true) {
-  const u = useCacheBust ? `${url}?t=${Date.now()}` : url;
-  const r = await fetch(u, { cache: 'no-store' });
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return r.json();
-}
-
-async function refresh() {
-  const fetchEl = document.getElementById('last-fetch');
-  fetchEl.textContent = '刷新中...';
-  try {
-    const [state, events] = await Promise.all([
-      fetchJson(RAW_BASE + STATE_FILE).catch(() => null),
-      fetchJson(RAW_BASE + EVENTS_FILE).catch(() => null),
-    ]);
-    renderState(state || {}, events || []);
-    fetchEl.textContent = `最后刷新: ${new Date().toLocaleTimeString('zh-CN')}`;
-  } catch (e) {
-    fetchEl.textContent = `刷新失败: ${e.message}`;
-    console.error(e);
+function renderDebug() {
+  const { state, profile, matches } = currentData;
+  const dbg = document.getElementById('debug');
+  if (!state && !profile) {
+    dbg.textContent = '未加载到任何数据, 检查 raw URL 是否可访问';
+    return;
   }
+  const summary = {
+    state_keys: state ? Object.keys(state) : [],
+    state_last_check: state && state.last_check,
+    state_is_active: state && state.is_active,
+    profile_keys: profile ? Object.keys(profile) : [],
+    profile_updated_at: profile && profile.updated_at,
+    matches_count: matches ? matches.length : 0,
+  };
+  dbg.textContent = JSON.stringify(summary, null, 2);
+}
+
+function renderAll() {
+  renderHero();
+  renderRank();
+  renderSeasons();
+  renderMatches();
+  renderMostChampions();
+  renderEvents();
+  renderDebug();
 }
 
 // ============================================================
-// commit count (检测次数)
+// commit count
 // ============================================================
 async function fetchCommitCount() {
   try {
@@ -454,32 +1101,29 @@ async function fetchCommitCount() {
     const link = r.headers.get('Link') || '';
     const m = link.match(/page=(\d+)>; rel="last"/);
     const count = m ? parseInt(m[1]) : 1;
-    document.getElementById('check-count').textContent = `已运行 ${count} 次`;
-  } catch (e) {}
+    document.getElementById('check-count').textContent = count;
+  } catch {}
 }
 
 // ============================================================
 // 自动刷新
 // ============================================================
-let refreshTimer = null;
-function setupAutoRefresh() {
+let timer = null;
+function setupAuto() {
   const sel = document.getElementById('refresh-interval');
   sel.addEventListener('change', () => {
     const sec = parseInt(sel.value);
-    if (refreshTimer) { clearInterval(refreshTimer); refreshTimer = null; }
-    if (sec > 0) {
-      refreshTimer = setInterval(refresh, sec * 1000);
-    }
+    if (timer) { clearInterval(timer); timer = null; }
+    if (sec > 0) timer = setInterval(refresh, sec * 1000);
   });
 }
 
 document.getElementById('refresh-btn').addEventListener('click', refresh);
 
-// 初始化
-setupAutoRefresh();
+setupAuto();
 refresh();
 fetchCommitCount();
-setInterval(fetchCommitCount, 60000);  // 每 60s 更新运行次数
+setInterval(fetchCommitCount, 60000);
 </script>
 </body>
 </html>

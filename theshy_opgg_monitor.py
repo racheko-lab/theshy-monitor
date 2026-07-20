@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 """
-TheShy 排位监控 - 基于 OP.GG MCP API
+TheShy 排位监控 - 基于 OP.GG MCP API (完整数据版)
 
-数据源: https://mcp-api.op.gg/mcp (官方 MCP, 无需 API Key, 无需认证)
-推送: Bark / Server酱 / Discord Webhook (任选)
-监控逻辑:
-  1. 每 N 分钟拉一次 OP.GG 的 summoner profile
-  2. 跟踪 updated_at / league_stats / most_champions 字段变化
-  3. 检测到玩家最近活跃 (updated_at 在过去 5 分钟内更新) -> 推送通知
-  4. 同时拉最近一场 match_history, 检测新比赛 -> 推送结果通知
+数据源: https://mcp-api.op.gg/mcp (官方 MCP, 免费, 无需认证)
+部署: GitHub Actions + GitHub Pages (零成本)
+推送: Bark / Server酱 / Discord (任选)
 """
 
 import os
@@ -17,7 +13,6 @@ import json
 import time
 import re
 import argparse
-import threading
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -34,52 +29,277 @@ OPGG_HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json, text/event-stream",
 }
-
-# 韩国时区 (OP.GG 时间戳带 +09:00, 我们也用 KST 显示)
 KST = timezone(timedelta(hours=9))
 
-# 状态文件 (持久化上次查询结果)
 STATE_FILE = Path(__file__).parent / ".theshy_opgg_state.json"
-# 事件历史文件 (前端读取, 保留最近 50 条)
 EVENTS_FILE = Path(__file__).parent / ".theshy_events.json"
-MAX_EVENTS = 50
+PROFILE_FILE = Path(__file__).parent / ".theshy_profile.json"   # 完整 profile 数据
+MATCHES_FILE = Path(__file__).parent / ".theshy_matches.json"   # 最近比赛数据
+MAX_EVENTS = 100
 
-# 默认轮询间隔 (秒)
-DEFAULT_INTERVAL = 180  # 3 分钟
+DEFAULT_INTERVAL = 180  # 本地运行用, GitHub Actions 用 --once 模式
 
 
 # ============================================================
-# OP.GG MCP 调用层
+# OP.GG Python-repr 通用解析器
+# 把 OP.GG MCP 返回的 "ClassName(arg1, arg2, Nested(...))" 转成 dict/list
+# ============================================================
+def parse_repr(text):
+    """把 OP.GG 自定义的 Python-repr 字符串转成 JSON-able 结构
+
+    OP.GG 返回格式:
+        class LolGetSummonerProfile: data
+        class Data: summoner
+        class Summoner: field1, field2, ...
+
+        LolGetSummonerProfile(Data(Summoner(val1, val2, ...)))
+
+    前面几行是 schema 描述 (ClassName + 字段列表),
+    最后一行才是实际数据 (一个 ClassName(...) 调用)。
+    我们用 schema 给每个 class 的位置参数命名, 转成 dict。
+    """
+    if not text or not text.strip():
+        return None
+
+    text = text.strip()
+
+    # 空数组
+    if text == "[]":
+        return []
+    if text in ("None", "null"):
+        return None
+    if text == "True":
+        return True
+    if text == "False":
+        return False
+
+    # 字符串字面量
+    if text.startswith('"') and text.endswith('"'):
+        return _unescape_str(text[1:-1])
+
+    # 数字
+    if re.fullmatch(r'-?\d+', text):
+        try:
+            return int(text)
+        except ValueError:
+            return text
+    if re.fullmatch(r'-?\d+\.\d+', text):
+        try:
+            return float(text)
+        except ValueError:
+            return text
+
+    # 数组
+    if text.startswith("[") and text.endswith("]"):
+        return _parse_list_body(text[1:-1])
+
+    # 提取 schema: 每个 "class Xxx: field1, field2, ..." 一行
+    schema = {}
+    data_lines = []
+    for ln in text.split("\n"):
+        s = ln.strip()
+        if not s:
+            continue
+        if s.startswith("class "):
+            # class ClassName: field1, field2, ...
+            m = re.match(r'class\s+(\w+)\s*:\s*(.*)$', s)
+            if m:
+                cname = m.group(1)
+                fields_str = m.group(2).strip()
+                if fields_str:
+                    fields = [f.strip() for f in fields_str.split(",") if f.strip()]
+                    schema[cname] = fields
+        else:
+            data_lines.append(ln)
+
+    if not data_lines:
+        return text
+
+    # 把多行数据合并 (新行可能出现在数据内部)
+    data_text = " ".join(ln.strip() for ln in data_lines)
+
+    # 用 schema 解析数据
+    return _parse_call_with_schema(data_text, schema)
+
+
+def _parse_call_with_schema(text, schema):
+    """解析 ClassName(args), 用 schema 给位置参数命名"""
+    text = text.strip()
+    if not text:
+        return None
+
+    # 标量
+    if text == "[]":
+        return []
+    if text in ("None", "null"):
+        return None
+    if text == "True":
+        return True
+    if text == "False":
+        return False
+    if text.startswith('"') and text.endswith('"'):
+        return _unescape_str(text[1:-1])
+    if re.fullmatch(r'-?\d+', text):
+        try:
+            return int(text)
+        except ValueError:
+            return text
+    if re.fullmatch(r'-?\d+\.\d+', text):
+        try:
+            return float(text)
+        except ValueError:
+            return text
+    if text.startswith("[") and text.endswith("]"):
+        return [_parse_call_with_schema(p, schema) for p in _split_top_level(text[1:-1])]
+
+    # ClassName(args) 形式
+    m = re.match(r'^(\w+)\((.*)\)$', text, re.DOTALL)
+    if m:
+        class_name = m.group(1)
+        body = m.group(2).strip()
+
+        # 整个 body 就是一个 [array]
+        if body.startswith("[") and body.endswith("]"):
+            inner = body[1:-1].strip()
+            if not inner:
+                return []
+            return [_parse_call_with_schema(p, schema) for p in _split_top_level(inner)]
+
+        # 解析参数
+        args, kwargs = _parse_call_args_with_schema(body, schema)
+        if args and not kwargs:
+            # 位置参数: 用 schema 命名
+            fields = schema.get(class_name, [])
+            if fields and len(fields) >= len(args):
+                out = {"_class": class_name}
+                for i, val in enumerate(args):
+                    if i < len(fields):
+                        out[fields[i]] = val
+                return out
+            # 没 schema, 直接返回 list
+            return args
+        if kwargs:
+            return {"_class": class_name, **kwargs}
+        return None
+
+    return text
+
+
+def _parse_call_args_with_schema(body, schema):
+    """解析 ClassName(arg1, arg2, key=val) 的参数, 递归用 schema"""
+    parts = _split_top_level(body)
+    args = []
+    kwargs = {}
+    for p in parts:
+        m = re.match(r'^(\w+)=(.*)$', p, re.DOTALL)
+        if m:
+            kwargs[m.group(1)] = _parse_call_with_schema(m.group(2).strip(), schema)
+        else:
+            args.append(_parse_call_with_schema(p, schema))
+    return args, kwargs
+
+
+def _unescape_str(s):
+    """反转义 Python 字符串字面量"""
+    out = []
+    i = 0
+    while i < len(s):
+        if s[i] == '\\' and i + 1 < len(s):
+            nxt = s[i + 1]
+            mapping = {'n': '\n', 't': '\t', 'r': '\r', '"': '"', '\\': '\\', "'": "'"}
+            out.append(mapping.get(nxt, nxt))
+            i += 2
+        else:
+            out.append(s[i])
+            i += 1
+    return "".join(out)
+
+
+def _split_top_level(s):
+    """按逗号切分, 但不进入括号/引号内部"""
+    parts = []
+    buf = []
+    depth = 0
+    in_str = False
+    escape = False
+    for c in s:
+        if escape:
+            buf.append(c)
+            escape = False
+            continue
+        if c == '\\':
+            buf.append(c)
+            escape = True
+            continue
+        if c == '"':
+            in_str = not in_str
+            buf.append(c)
+            continue
+        if in_str:
+            buf.append(c)
+            continue
+        if c in "([{":
+            depth += 1
+            buf.append(c)
+        elif c in ")]}":
+            depth -= 1
+            buf.append(c)
+        elif c == "," and depth == 0:
+            parts.append("".join(buf))
+            buf = []
+        else:
+            buf.append(c)
+    if buf:
+        parts.append("".join(buf))
+    return [p.strip() for p in parts if p.strip()]
+
+
+def _parse_call_args(body):
+    """解析 ClassName(arg1, arg2, key=val) 的参数"""
+    parts = _split_top_level(body)
+    args = []
+    kwargs = {}
+    for p in parts:
+        # key=value 形式
+        m = re.match(r'^(\w+)=(.*)$', p, re.DOTALL)
+        if m:
+            kwargs[m.group(1)] = parse_repr(m.group(2).strip())
+        else:
+            args.append(parse_repr(p))
+    return args, kwargs
+
+
+def _parse_list_body(body):
+    """解析 [item1, item2, ...] 的 body"""
+    if not body.strip():
+        return []
+    parts = _split_top_level(body)
+    return [parse_repr(p) for p in parts]
+
+
+# ============================================================
+# OP.GG MCP 客户端
 # ============================================================
 class OpggClient:
-    """OP.GG MCP API 客户端 (JSON-RPC over HTTP)"""
-
     def __init__(self, verbose=False):
         self.verbose = verbose
         self._rpc_id = 100
 
     def _call(self, tool_name, arguments):
-        """调用一个 MCP tool, 返回 text 内容"""
         self._rpc_id += 1
         payload = {
-            "jsonrpc": "2.0",
-            "id": self._rpc_id,
+            "jsonrpc": "2.0", "id": self._rpc_id,
             "method": "tools/call",
             "params": {"name": tool_name, "arguments": arguments},
         }
         for attempt in range(3):
             try:
-                r = requests.post(
-                    OPGG_MCP_URL,
-                    headers=OPGG_HEADERS,
-                    json=payload,
-                    timeout=20,
-                )
+                r = requests.post(OPGG_MCP_URL, headers=OPGG_HEADERS,
+                                  json=payload, timeout=30)
                 r.raise_for_status()
                 data = r.json()
                 if "error" in data:
                     return {"error": data["error"]}
-                # result.content[0].text 是 OP.GG 自定义的 Python-style repr
                 content = data.get("result", {}).get("content", [])
                 if content and isinstance(content, list):
                     return {"text": content[0].get("text", "")}
@@ -91,209 +311,50 @@ class OpggClient:
         return {"error": "request_failed"}
 
     def get_summoner_profile(self, game_name, tag_line, region="KR"):
-        """拉召唤师 profile, 关注 updated_at / league_stats / level"""
-        fields = [
-            "data.summoner.{game_name,tagline,name,puuid,summoner_id,level,"
-            "updated_at,renewable_at,revision_at}",
-            "data.summoner.league_stats[].{game_type,win,lose,updated_at}",
-            "data.summoner.league_stats[].tier_info.{tier,division,lp}",
-            "data.summoner.recent_champion_stats[].{champion_name,play,win,kill,death,assist}",
-            "data.summoner.ladder_rank.{rank,total}",
-        ]
         return self._call("lol_get_summoner_profile", {
-            "game_name": game_name,
-            "tag_line": tag_line,
-            "region": region,
-            "lang": "zh_CN",
-            "desired_output_fields": fields,
+            "game_name": game_name, "tag_line": tag_line,
+            "region": region, "lang": "zh_CN",
         })
 
-    def list_matches(self, game_name, tag_line, region="KR", limit=5):
-        """拉最近 N 场比赛"""
-        fields = [
-            "data.game_history[].{id,created_at,game_type,game_length_second,game_map}",
-            "data.game_history[].participants[0].{champion_name,team_key}",
-            "data.game_history[].participants[0].stats.{kill,death,assist,result}",
-        ]
+    def list_matches(self, game_name, tag_line, region="KR", limit=20):
         return self._call("lol_list_summoner_matches", {
-            "game_name": game_name,
-            "tag_line": tag_line,
-            "region": region,
-            "lang": "zh_CN",
-            "limit": limit,
-            "desired_output_fields": fields,
+            "game_name": game_name, "tag_line": tag_line,
+            "region": region, "lang": "zh_CN", "limit": limit,
         })
 
-
-# ============================================================
-# OP.GG 返回的 Python-repr 解析器
-# OP.GG 返回格式: Summoner("val1","val2",123,"val4",...)
-# 按 schema 顺序映射到字段名
-# ============================================================
-SUMMONER_FIELDS = [
-    "game_name", "tagline", "name", "puuid", "summoner_id",
-    "level", "updated_at", "renewable_at", "revision_at",
-]
-
-
-def _split_args(s):
-    """把 Python-style 参数列表切成 token (处理字符串/数字/None)"""
-    tokens = []
-    i = 0
-    n = len(s)
-    while i < n:
-        c = s[i]
-        if c in " \t,":
-            i += 1
-            continue
-        if c == '"':
-            # 字符串
-            j = i + 1
-            buf = []
-            while j < n:
-                if s[j] == '\\' and j + 1 < n:
-                    buf.append(s[j + 1])
-                    j += 2
-                    continue
-                if s[j] == '"':
-                    break
-                buf.append(s[j])
-                j += 1
-            tokens.append(("str", "".join(buf)))
-            i = j + 1
-        elif s[i:i + 4] == "None":
-            tokens.append(("none", None))
-            i += 4
-        elif s[i:i + 4] == "True":
-            tokens.append(("bool", True))
-            i += 4
-        elif s[i:i + 5] == "False":
-            tokens.append(("bool", False))
-            i += 5
-        elif c == "-" or c.isdigit():
-            j = i + 1
-            while j < n and (s[j].isdigit() or s[j] == "."):
-                j += 1
-            num_str = s[i:j]
-            try:
-                num = int(num_str)
-            except ValueError:
-                num = float(num_str)
-            tokens.append(("num", num))
-            i = j
-        elif c == "[":
-            # 数组, 跳到匹配 ]
-            depth = 1
-            j = i + 1
-            while j < n and depth > 0:
-                if s[j] == "[":
-                    depth += 1
-                elif s[j] == "]":
-                    depth -= 1
-                j += 1
-            tokens.append(("array", s[i:j]))
-            i = j
-        else:
-            # 跳过未知 token
-            j = i
-            while j < n and s[j] != ",":
-                j += 1
-            i = j
-    return tokens
-
-
-def parse_summoner(text):
-    """从 Summoner(arg1, arg2, ...) 提取字段"""
-    if not text:
-        return {}
-    m = re.search(r'Summoner\((.*?)(?:,\s*\[.*?\])?\)\s*\)?\s*$', text, re.DOTALL)
-    if not m:
-        # 退化: 找 Summoner( 后到第一个 ),
-        m = re.search(r'Summoner\(([^)]+)\)', text)
-        if not m:
-            return {}
-    args_str = m.group(1)
-    tokens = _split_args(args_str)
-    out = {}
-    for idx, (_, val) in enumerate(tokens[:len(SUMMONER_FIELDS)]):
-        out[SUMMONER_FIELDS[idx]] = val
-    return out
-
-
-def parse_first_match(text):
-    """从 game_history 提取第一场比赛的关键字段"""
-    if not text or "game_history" not in text:
-        return None
-    # 找第一个 GameHistory(...) 块
-    m = re.search(r'GameHistory\(([^)]+)\)', text)
-    if not m:
-        return None
-    args_str = m.group(1)
-    tokens = _split_args(args_str)
-    # GameHistory 字段顺序: id, created_at, game_type, game_length_second, game_map, ...
-    fields = ["id", "created_at", "game_type", "game_length_second", "game_map"]
-    out = {}
-    for idx, (_, val) in enumerate(tokens[:len(fields)]):
-        out[fields[idx]] = val
-    # 单独提 champion_name / result / kda
-    cm = re.search(r'champion_name="([^"]+)"', text)
-    if cm:
-        out["champion"] = cm.group(1)
-    rm = re.search(r'result="?(WIN|LOSE)"?', text, re.IGNORECASE)
-    if rm:
-        out["result"] = rm.group(1).upper()
-    km = re.search(r'kill=(\d+),\s*death=(\d+),\s*assist=(\d+)', text)
-    if km:
-        out["kda"] = f"{km.group(1)}/{km.group(2)}/{km.group(3)}"
-    return out
-
-
-def parse_all_match_ids(text):
-    """从 game_history 文本提取所有 match id (长字符串)"""
-    if not text:
-        return []
-    # match id 通常是 30+ 字符的 base64-like 字符串
-    ids = re.findall(r'"([A-Za-z0-9_-]{20,})"', text)
-    # 过滤: 不能纯数字, 长度 > 20
-    return [i for i in ids if len(i) >= 20 and not i.isdigit()]
-
-
-def parse_game_type(text):
-    """提取第一场比赛的 game_type"""
-    m = re.search(r'"(SOLORANKED|FLEXRANKED|NORMAL|ARAM|CHERRY|TOURNAMENT)"', text)
-    return m.group(1) if m else None
+    def get_match_detail(self, match_id, region="KR"):
+        """拉单场比赛详情 (含所有玩家)"""
+        return self._call("lol_get_summoner_game_detail", {
+            "game_id": match_id, "region": region, "lang": "zh_CN",
+        })
 
 
 # ============================================================
 # 通知层
 # ============================================================
 def html_to_text(html):
-    """简单 HTML 转纯文本"""
     if not html:
         return ""
-    import re as _re
-    text = _re.sub(r'<br\s*/?>', '\n', html, flags=_re.IGNORECASE)
-    text = _re.sub(r'</p>', '\n', text, flags=_re.IGNORECASE)
-    text = _re.sub(r'<[^>]+>', '', text)
-    text = _re.sub(r'&nbsp;', ' ', text)
-    text = _re.sub(r'&amp;', '&', text)
-    text = _re.sub(r'\n{3,}', '\n\n', text)
+    text = re.sub(r'<br\s*/?>', '\n', html, flags=re.IGNORECASE)
+    text = re.sub(r'</p>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'<[^>]+>', '', text)
+    text = re.sub(r'&nbsp;', ' ', text)
+    text = re.sub(r'&amp;', '&', text)
+    text = re.sub(r'\n{3,}', '\n\n', text)
     return text.strip()
 
 
 def send_bark(bark_key, title, body):
     if not bark_key:
         return False
-    # Bark key 可以是完整 URL (https://api.day.app/<key>) 或纯 key
     if bark_key.startswith("http"):
         base = bark_key.rstrip("/")
     else:
         base = f"https://api.day.app/{bark_key}"
-    # 用 POST 形式, title/body 走 form
     try:
-        r = requests.post(
-            base, json={"title": title, "body": body, "group": "theshy"}, timeout=10
-        )
+        r = requests.post(base, json={
+            "title": title, "body": body, "group": "theshy",
+        }, timeout=10)
         return r.status_code == 200
     except requests.RequestException:
         return False
@@ -303,11 +364,8 @@ def send_serverchan(key, title, body):
     if not key:
         return False
     try:
-        r = requests.post(
-            f"https://sctapi.ftqq.com/{key}.send",
-            data={"title": title, "desp": body},
-            timeout=10,
-        )
+        r = requests.post(f"https://sctapi.ftqq.com/{key}.send",
+                          data={"title": title, "desp": body}, timeout=10)
         return r.status_code == 200
     except requests.RequestException:
         return False
@@ -327,7 +385,6 @@ def send_discord(webhook, title, body):
 
 
 def notify(title, body, cfg):
-    """同时推送到所有已配置的渠道"""
     body = html_to_text(body)
     results = []
     if cfg.get("BARK_KEY"):
@@ -342,6 +399,10 @@ def notify(title, body, cfg):
 # ============================================================
 # 状态持久化
 # ============================================================
+def save_json(path, data):
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2, default=str))
+
+
 def load_state():
     if STATE_FILE.exists():
         try:
@@ -352,11 +413,10 @@ def load_state():
 
 
 def save_state(state):
-    STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2))
+    save_json(STATE_FILE, state)
 
 
 def append_event(event):
-    """把事件追加到 events 文件 (前端读), 保留最近 MAX_EVENTS 条"""
     events = []
     if EVENTS_FILE.exists():
         try:
@@ -365,26 +425,23 @@ def append_event(event):
                 events = []
         except Exception:
             events = []
-    # 加 timestamp
     event = {**event, "timestamp": datetime.now(KST).isoformat()}
     events.insert(0, event)
     events = events[:MAX_EVENTS]
-    EVENTS_FILE.write_text(json.dumps(events, ensure_ascii=False, indent=2))
+    save_json(EVENTS_FILE, events)
 
 
 # ============================================================
-# 主监控循环
+# 时间工具
 # ============================================================
 def kst_now():
     return datetime.now(KST)
 
 
 def fmt_kst(iso_str):
-    """转 KST 显示字符串"""
     if not iso_str:
-        return "?"
+        return "-"
     try:
-        # 处理 +09:00 后缀
         dt = datetime.fromisoformat(iso_str)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=KST)
@@ -393,38 +450,412 @@ def fmt_kst(iso_str):
         return iso_str[:16]
 
 
+def age_string(iso):
+    if not iso:
+        return "-"
+    try:
+        dt = datetime.fromisoformat(iso)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=KST)
+        age_sec = (datetime.now(KST) - dt).total_seconds()
+        if age_sec < 60:
+            return f"{int(age_sec)} 秒前"
+        if age_sec < 3600:
+            return f"{int(age_sec / 60)} 分钟前"
+        if age_sec < 86400:
+            return f"{int(age_sec / 3600)} 小时前"
+        return f"{int(age_sec / 86400)} 天前"
+    except Exception:
+        return "?"
+
+
+# ============================================================
+# 主检测逻辑
+# ============================================================
+def _deep_get(obj, *keys, default=None):
+    """安全地从嵌套 dict/list 中取值"""
+    cur = obj
+    for k in keys:
+        if cur is None:
+            return default
+        if isinstance(k, int):
+            if not isinstance(cur, list) or k >= len(cur):
+                return default
+            cur = cur[k]
+        else:
+            if not isinstance(cur, dict) or k not in cur:
+                return default
+            cur = cur[k]
+    return cur if cur is not None else default
+
+
+def normalize_summoner(parsed):
+    """从 parse_repr 结果中提取召唤师关键字段, 返回标准 dict"""
+    # parsed 可能是 {"_class": "LolGetSummonerProfile", "_args": [{"_class": "Data", "summoner": {...}}]}
+    # 我们直接深找 "summoner"
+    summoner = _find_key(parsed, "summoner")
+    if not summoner:
+        return {}
+
+    # 提取常用字段
+    get = lambda *keys, **kw: _deep_get(summoner, *keys, default=kw.get("default"))
+
+    info = {
+        "id": get("id"),
+        "summoner_id": get("summoner_id"),
+        "acct_id": get("acct_id"),
+        "puuid": get("puuid"),
+        "game_name": get("game_name"),
+        "tagline": get("tagline"),
+        "name": get("name"),
+        "internal_name": get("internal_name"),
+        "profile_image_url": get("profile_image_url"),
+        "level": get("level"),
+        "updated_at": get("updated_at"),
+        "renewable_at": get("renewable_at"),
+        "revision_at": get("revision_at"),
+        "recent_videos_added_count": get("recent_videos_added_count"),
+        "has_highlight": get("has_highlight"),
+    }
+
+    # ladder_rank
+    ladder = get("ladder_rank")
+    if isinstance(ladder, dict):
+        info["ladder_rank"] = {
+            "rank": ladder.get("rank"),
+            "total": ladder.get("total"),
+        }
+
+    # league_stats
+    league_stats = get("league_stats") or []
+    info["league_stats"] = []
+    for ls in league_stats:
+        if not isinstance(ls, dict):
+            continue
+        ti = ls.get("tier_info") or {}
+        mr = ls.get("match_record") or {}
+        info["league_stats"].append({
+            "game_type": ls.get("game_type"),
+            "tier": ti.get("tier"),
+            "division": ti.get("division"),
+            "lp": ti.get("lp"),
+            "tier_image_url": ti.get("tier_image_url"),
+            "border_image_url": ti.get("border_image_url"),
+            "win": ls.get("win"),
+            "lose": ls.get("lose"),
+            "play": mr.get("play"),
+            "match_win": mr.get("win"),
+            "match_lose": mr.get("lose"),
+            "is_hot_streak": ls.get("is_hot_streak"),
+            "is_fresh_blood": ls.get("is_fresh_blood"),
+            "is_veteran": ls.get("is_veteran"),
+            "is_inactive": ls.get("is_inactive"),
+            "updated_at": ls.get("updated_at"),
+            "high_leagues": ls.get("high_leagues") or [],
+        })
+
+    # previous_seasons
+    info["previous_seasons"] = []
+    for ps in (get("previous_seasons") or []):
+        if isinstance(ps, dict):
+            ti = ps.get("tier_info") or {}
+            info["previous_seasons"].append({
+                "season_id": ps.get("season_id"),
+                "tier": ti.get("tier"),
+                "division": ti.get("division"),
+                "lp": ti.get("lp"),
+            })
+
+    # previous_season_tiers
+    info["previous_season_tiers"] = []
+    for pst in (get("previous_season_tiers") or []):
+        if not isinstance(pst, dict):
+            continue
+        rank_entries = pst.get("rank_entries") or pst.get("_args") or []
+        for re in rank_entries:
+            if not isinstance(re, dict):
+                continue
+            ri = re.get("rank_info") or {}
+            hri = re.get("high_rank_info") or {}
+            info["previous_season_tiers"].append({
+                "season_id": pst.get("season_id"),
+                "game_type": re.get("game_type"),
+                "tier": ri.get("tier"),
+                "division": ri.get("division"),
+                "lp": ri.get("lp"),
+                "win": ri.get("win"),
+                "lose": ri.get("lose"),
+                "elo": ri.get("elo"),
+                "created_at": ri.get("created_at"),
+                "high_tier": hri.get("tier") if hri else None,
+                "high_division": hri.get("division") if hri else None,
+                "high_lp": hri.get("lp") if hri else None,
+            })
+
+    # current_season_high_tiers
+    csht = get("current_season_high_tiers")
+    if isinstance(csht, dict):
+        info["current_season_high_tiers"] = {
+            "season_id": csht.get("season_id"),
+            "rank_entries": csht.get("rank_entries") or [],
+        }
+
+    # lp_histories
+    info["lp_histories"] = []
+    for lh in (get("lp_histories") or []):
+        if isinstance(lh, dict):
+            ti = lh.get("tier_info") or {}
+            info["lp_histories"].append({
+                "created_at": lh.get("created_at"),
+                "elo_point": lh.get("elo_point"),
+                "tier": ti.get("tier"),
+                "division": ti.get("division"),
+                "lp": ti.get("lp"),
+            })
+
+    # most_champions (本赛季所有模式)
+    mc = get("most_champions")
+    info["most_champions"] = _extract_champion_stats(mc)
+
+    # ranked_most_champions (排位专属, 含 basic+extend 详细数据)
+    rmc = get("ranked_most_champions")
+    info["ranked_most_champions"] = _extract_ranked_champion_stats(rmc)
+
+    # recent_champion_stats
+    info["recent_champion_stats"] = []
+    for rcs in (get("recent_champion_stats") or []):
+        if isinstance(rcs, dict):
+            info["recent_champion_stats"].append({
+                "champion_name": rcs.get("champion_name"),
+                "id": rcs.get("id"),
+                "play": rcs.get("play"),
+                "win": rcs.get("win"),
+                "kill": rcs.get("kill"),
+                "death": rcs.get("death"),
+                "assist": rcs.get("assist"),
+            })
+
+    # highlight_info
+    hi = get("highlight_info")
+    if isinstance(hi, dict):
+        info["highlight_info"] = {
+            "created_at": hi.get("created_at"),
+            "scene_type": hi.get("scene_type") or [],
+        }
+
+    return info
+
+
+def _extract_champion_stats(mc):
+    """从 MostChampions 提取英雄统计"""
+    if not isinstance(mc, dict):
+        return None
+    out = {
+        "game_type": mc.get("game_type"),
+        "season_id": mc.get("season_id"),
+        "year": mc.get("year"),
+        "play": mc.get("play"),
+        "win": mc.get("win"),
+        "lose": mc.get("lose"),
+        "champion_stats": [],
+    }
+    for cs in (mc.get("champion_stats") or []):
+        if not isinstance(cs, dict):
+            continue
+        out["champion_stats"].append({
+            "id": cs.get("id"),
+            "champion_name": cs.get("champion_name"),
+            "play": cs.get("play"),
+            "win": cs.get("win"),
+            "lose": cs.get("lose"),
+            "kill": cs.get("kill"),
+            "death": cs.get("death"),
+            "assist": cs.get("assist"),
+            "kda": _calc_kda(cs.get("kill"), cs.get("death"), cs.get("assist")),
+            "win_rate": _calc_win_rate(cs.get("win"), cs.get("play")),
+            "game_length_second": cs.get("game_length_second"),
+            "gold_earned": cs.get("gold_earned"),
+            "minion_kill": cs.get("minion_kill"),
+            "neutral_minion_kill": cs.get("neutral_minion_kill"),
+            "damage_dealt_to_champions": cs.get("damage_dealt_to_champions"),
+            "damage_taken": cs.get("damage_taken"),
+            "double_kill": cs.get("double_kill"),
+            "triple_kill": cs.get("triple_kill"),
+            "quadra_kill": cs.get("quadra_kill"),
+            "penta_kill": cs.get("penta_kill"),
+            "vision_wards_bought_in_game": cs.get("vision_wards_bought_in_game"),
+            "op_score": cs.get("op_score"),
+        })
+    # 按 play 降序
+    out["champion_stats"].sort(key=lambda x: x.get("play", 0) or 0, reverse=True)
+    return out
+
+
+def _extract_ranked_champion_stats(rmc):
+    """从 RankedMostChampions 提取排位英雄详细数据 (basic + extend)"""
+    if not isinstance(rmc, dict):
+        return None
+    out = {
+        "game_type": rmc.get("game_type"),
+        "season_id": rmc.get("season_id"),
+        "play": rmc.get("play"),
+        "win": rmc.get("win"),
+        "lose": rmc.get("lose"),
+        "my_champion_stats": [],
+    }
+    for mcs in (rmc.get("my_champion_stats") or []):
+        if not isinstance(mcs, dict):
+            continue
+        basic = mcs.get("basic") or {}
+        extend = mcs.get("extend") or {}
+        out["my_champion_stats"].append({
+            "id": mcs.get("id"),
+            "champion_name": mcs.get("champion_name"),
+            "play": mcs.get("play"),
+            "win": mcs.get("win"),
+            "lose": mcs.get("lose"),
+            "game_second": mcs.get("game_second"),
+            # basic 字段
+            "b_kill": basic.get("kill"),
+            "b_death": basic.get("death"),
+            "b_assist": basic.get("assist"),
+            "kda": _calc_kda(basic.get("kill"), basic.get("death"), basic.get("assist")),
+            "win_rate": _calc_win_rate(mcs.get("win"), mcs.get("play")),
+            "kill_participation": basic.get("kill_participation"),
+            "damage_to_champion": basic.get("damage_to_champion"),
+            "damage_participation": basic.get("damage_participation"),
+            "cs": basic.get("cs"),
+            "gold": basic.get("gold"),
+            "vision_score": basic.get("vision_score"),
+            "vision_ward": basic.get("vision_ward"),
+            "ward_placed": basic.get("ward_placed"),
+            "ward_kill": basic.get("ward_kill"),
+            "op_score": basic.get("op_score"),
+            "op_score_rank": basic.get("op_score_rank"),
+            "mvp": basic.get("mvp"),
+            "ace": basic.get("ace"),
+            "lane_score": basic.get("lane_score"),
+            "lane_lead": basic.get("lane_lead"),
+            "double_kill": basic.get("double_kill"),
+            "triple_kill": basic.get("triple_kill"),
+            "quadra_kill": basic.get("quadra_kill"),
+            "penta_kill": basic.get("penta_kill"),
+            # extend 字段
+            "damage_taken": extend.get("damage_taken"),
+            "damage_self_mitigated": extend.get("damage_self_mitigated"),
+            "heal": extend.get("heal"),
+            "heal_to_team": extend.get("heal_to_team"),
+            "shield_to_team": extend.get("shield_to_team"),
+            "physical_damage_to_champion": extend.get("physical_damage_to_champion"),
+            "magic_damage_to_champion": extend.get("magic_damage_to_champion"),
+            "true_damage_to_champion": extend.get("true_damage_to_champion"),
+            "damage_to_objective": extend.get("damage_to_objective"),
+            "damage_to_turret": extend.get("damage_to_turret"),
+            "damage_to_building": extend.get("damage_to_building"),
+            "turret_kill": extend.get("turret_kill"),
+            "inhibitor_kill": extend.get("inhibitor_kill"),
+            "object_steal": extend.get("object_steal"),
+            "cc_score": extend.get("cc_score"),
+            "solo_kill": extend.get("solo_kill"),
+            "make_solo_kill": extend.get("make_solo_kill"),
+            "invade_kill": extend.get("invade_kill"),
+            "invade_play": extend.get("invade_play"),
+            "neutral_cs": extend.get("neutral_cs"),
+            "buff_steal": extend.get("buff_steal"),
+            "enemy_jungle_monster_kill": extend.get("enemy_jungle_monster_kill"),
+            "epic_monster_kill_near_enemy_jungler": extend.get("epic_monster_kill_near_enemy_jungler"),
+            "epic_monster_steal_no_smite": extend.get("epic_monster_steal_no_smite"),
+            "initial_crab_kill": extend.get("initial_crab_kill"),
+            "jungle_cs_10_minute": extend.get("jungle_cs_10_minute"),
+            "lane_advantage_7_minute": extend.get("lane_advantage_7_minute"),
+            "lane_cs_10_minute": extend.get("lane_cs_10_minute"),
+            "turret_plate": extend.get("turret_plate"),
+            "cc": extend.get("cc"),
+            "cc_make_kill": extend.get("cc_make_kill"),
+            "save_ally": extend.get("save_ally"),
+            "ward_guard": extend.get("ward_guard"),
+            "faster_support_quest": extend.get("faster_support_quest"),
+        })
+    out["my_champion_stats"].sort(key=lambda x: x.get("play", 0) or 0, reverse=True)
+    return out
+
+
+def _calc_kda(k, d, a):
+    try:
+        k = float(k or 0); d = float(d or 0); a = float(a or 0)
+        if d == 0:
+            return "Perfect" if k + a > 0 else "0.00"
+        return f"{(k + a) / d:.2f}"
+    except Exception:
+        return "?"
+
+
+def _calc_win_rate(w, p):
+    try:
+        w = float(w or 0); p = float(p or 0)
+        if p == 0:
+            return "0%"
+        return f"{w/p*100:.1f}%"
+    except Exception:
+        return "?"
+
+
+def _find_key(obj, key):
+    """递归查找 dict 中的某个 key"""
+    if isinstance(obj, dict):
+        if key in obj:
+            return obj[key]
+        for v in obj.values():
+            r = _find_key(v, key)
+            if r is not None:
+                return r
+    elif isinstance(obj, list):
+        for v in obj:
+            r = _find_key(v, key)
+            if r is not None:
+                return r
+    return None
+
+
+# ============================================================
+# 检测主函数
+# ============================================================
 def check_theshy(client, cfg, state, verbose=False):
-    """单次检测, 返回 (事件列表, 新状态)"""
     events = []
     riot_id = cfg.get("THESHY_RIOT_ID", "TheShy#KR1").split("#")
     game_name = riot_id[0]
     tag_line = riot_id[1] if len(riot_id) > 1 else "KR1"
     region = cfg.get("THESHY_REGION", "KR")
 
-    # 1. 拉 profile
+    # 1. profile
     resp = client.get_summoner_profile(game_name, tag_line, region)
     if "error" in resp:
         return [{"type": "error", "msg": str(resp["error"])}], state
-    text = resp.get("text", "")
-    if verbose:
-        print(f"  [profile raw] {text[:300]}")
 
-    parsed = parse_summoner(text)
-    updated_at = parsed.get("updated_at")
-    renewable_at = parsed.get("renewable_at")
-    level = parsed.get("level")
-    puuid = parsed.get("puuid")
-    name = parsed.get("name")
+    parsed = parse_repr(resp.get("text", ""))
+    profile = normalize_summoner(parsed)
 
     if verbose:
-        print(f"  parsed: name={name} level={level} updated_at={updated_at}")
+        print(f"  name={profile.get('name')} level={profile.get('level')} "
+              f"updated_at={profile.get('updated_at')}")
 
-    # 2. 判断玩家活跃度
-    # OP.GG updated_at 是后端最后刷新时间
-    # 当玩家在游戏中, OP.GG 会高频更新 (每 1-2 分钟)
-    # 当玩家离线, updated_at 几乎不动
+    # 完整 profile 存文件 (前端读)
+    save_json(PROFILE_FILE, profile)
+
+    # 2. matches
+    matches_resp = client.list_matches(game_name, tag_line, region, limit=20)
+    matches_text = matches_resp.get("text", "")
+    matches_parsed = parse_repr(matches_text) if matches_text else None
+    matches_list = _extract_matches(matches_parsed)
+    save_json(MATCHES_FILE, matches_list)
+
+    if verbose:
+        print(f"  matches: {len(matches_list)} 场")
+
+    # 3. 判断活跃
+    updated_at = profile.get("updated_at")
     now = kst_now()
-    is_active_recently = False
+    is_active = False
     if updated_at:
         try:
             upd_dt = datetime.fromisoformat(updated_at)
@@ -433,14 +864,12 @@ def check_theshy(client, cfg, state, verbose=False):
             age_sec = (now - upd_dt.astimezone(KST)).total_seconds()
             if verbose:
                 print(f"  updated_at age={age_sec:.0f}s")
-            # 5 分钟内 OP.GG 后端刷新过 -> 玩家可能在线
             if 0 <= age_sec < 300:
-                is_active_recently = True
-        except Exception as e:
-            if verbose:
-                print(f"  parse updated_at failed: {e}")
+                is_active = True
+        except Exception:
+            pass
 
-    # 3. 比较上次状态
+    # 4. 对比上次状态
     last_state = state.get("profile", {})
     last_updated = last_state.get("updated_at")
     last_active = state.get("is_active", False)
@@ -449,108 +878,174 @@ def check_theshy(client, cfg, state, verbose=False):
         events.append({
             "type": "opgg_updated",
             "updated_at": updated_at,
-            "level": level,
-            "is_active": is_active_recently,
+            "level": profile.get("level"),
+            "is_active": is_active,
         })
 
-    # 状态切换: 不活跃 → 活跃 (OP.GG 在刷新, 说明玩家上线了)
-    if is_active_recently and not last_active:
+    if is_active and not last_active:
         events.append({
             "type": "became_active",
             "updated_at": updated_at,
-            "level": level,
+            "level": profile.get("level"),
         })
 
-    if last_state.get("level") != level and level:
+    if last_state.get("level") != profile.get("level") and profile.get("level"):
         events.append({
             "type": "level_changed",
             "old": last_state.get("level"),
-            "new": level,
+            "new": profile.get("level"),
         })
 
-    # 4. 拉最近一场比赛
-    matches_resp = client.list_matches(game_name, tag_line, region, limit=5)
-    matches_text = matches_resp.get("text", "")
-    if verbose:
-        print(f"  [matches raw] {matches_text[:300]}")
-
+    # 5. 新比赛检测
     last_match_id = state.get("last_match_id")
-    new_match = None
-    if matches_text and "game_history" in matches_text and "[]" not in matches_text[:50]:
-        new_match = parse_first_match(matches_text)
-        if new_match:
-            mid = new_match.get("id")
-            if mid and mid != last_match_id:
-                events.append({
-                    "type": "new_match",
-                    "match_id": mid,
-                    "game_type": new_match.get("game_type", "?"),
-                    "champion": new_match.get("champion", "?"),
-                    "result": new_match.get("result", "?"),
-                    "kda": new_match.get("kda", "?"),
-                    "created_at": new_match.get("created_at"),
-                })
+    if matches_list:
+        latest = matches_list[0]
+        mid = latest.get("id")
+        if mid and mid != last_match_id:
+            events.append({
+                "type": "new_match",
+                "match_id": mid,
+                "game_type": latest.get("game_type"),
+                "champion": latest.get("champion"),
+                "result": latest.get("result"),
+                "kda": latest.get("kda"),
+                "kill": latest.get("kill"),
+                "death": latest.get("death"),
+                "assist": latest.get("assist"),
+                "created_at": latest.get("created_at"),
+                "game_length_second": latest.get("game_length_second"),
+                "position": latest.get("position"),
+            })
 
-    # 5. 更新 state
+    # 6. 段位变化检测
+    last_league = last_state.get("league_stats_summary", [])
+    cur_league = [
+        {"game_type": ls.get("game_type"), "tier": ls.get("tier"),
+         "division": ls.get("division"), "lp": ls.get("lp")}
+        for ls in (profile.get("league_stats") or [])
+    ]
+    if last_league and cur_league:
+        for cl, ll in zip(cur_league, last_league):
+            if (cl.get("tier") != ll.get("tier") or
+                cl.get("division") != ll.get("division")):
+                events.append({
+                    "type": "rank_changed",
+                    "game_type": cl.get("game_type"),
+                    "old": f"{ll.get('tier')} {ll.get('division')}",
+                    "new": f"{cl.get('tier')} {cl.get('division')}",
+                })
+                break
+
+    # 7. 更新 state
     state["profile"] = {
         "updated_at": updated_at,
-        "level": level,
-        "puuid": puuid,
-        "name": name,
+        "level": profile.get("level"),
+        "puuid": profile.get("puuid"),
+        "name": profile.get("name"),
+        "game_name": profile.get("game_name"),
+        "tagline": profile.get("tagline"),
+        "profile_image_url": profile.get("profile_image_url"),
+        "internal_name": profile.get("internal_name"),
+        "league_stats_summary": cur_league,
     }
-    state["is_active"] = is_active_recently
-    if new_match and new_match.get("id"):
-        state["last_match_id"] = new_match["id"]
-    if updated_at:
-        state["last_check"] = datetime.now(KST).isoformat()
+    state["is_active"] = is_active
+    if matches_list:
+        state["last_match_id"] = matches_list[0].get("id")
+    state["last_check"] = datetime.now(KST).isoformat()
+    state["matches_count"] = len(matches_list)
 
     return events, state
 
 
+def _extract_matches(parsed):
+    """从 matches 解析结果中提取标准 list"""
+    if not parsed:
+        return []
+    # parsed 可能是 {"_class": "LolListSummonerMatches", "data": {"_class": "Data", "game_history": [...]}}
+    game_history = _find_key(parsed, "game_history")
+    if not game_history or not isinstance(game_history, list):
+        return []
+
+    out = []
+    for m in game_history:
+        if not isinstance(m, dict):
+            continue
+        # participants[0] 是 TheShy 自己
+        parts = m.get("participants") or []
+        me = parts[0] if parts else {}
+        stats = me.get("stats") or {} if isinstance(me, dict) else {}
+
+        out.append({
+            "id": m.get("id"),
+            "created_at": m.get("created_at"),
+            "game_type": m.get("game_type"),
+            "game_length_second": m.get("game_length_second"),
+            "game_map": m.get("game_map"),
+            "champion_id": me.get("champion_id") if isinstance(me, dict) else None,
+            "champion": me.get("champion_name") if isinstance(me, dict) else None,
+            "team_key": me.get("team_key") if isinstance(me, dict) else None,
+            "position": me.get("position") if isinstance(me, dict) else None,
+            "kill": stats.get("kill"),
+            "death": stats.get("death"),
+            "assist": stats.get("assist"),
+            "kda": _calc_kda(stats.get("kill"), stats.get("death"), stats.get("assist")),
+            "result": stats.get("result"),
+            "op_score": stats.get("op_score"),
+            "op_score_rank": stats.get("op_score_rank"),
+            "gold_earned": stats.get("gold_earned"),
+            "minion_kill": stats.get("minion_kill"),
+            "neutral_minion_kill": stats.get("neutral_minion_kill"),
+            "total_damage_dealt_to_champions": stats.get("total_damage_dealt_to_champions"),
+            "total_damage_taken": stats.get("total_damage_taken"),
+            "total_heal": stats.get("total_heal"),
+            "vision_wards_bought_in_game": stats.get("vision_wards_bought_in_game"),
+            "ward_place": stats.get("ward_place"),
+            "largest_killing_spree": stats.get("largest_killing_spree"),
+            "largest_multi_kill": stats.get("largest_multi_kill"),
+            "largest_critical_strike": stats.get("largest_critical_strike"),
+            "time_ccing_others": stats.get("time_ccing_others"),
+            "champion_level": stats.get("champion_level"),
+            "items": me.get("items") if isinstance(me, dict) else None,
+            "items_names": me.get("items_names") if isinstance(me, dict) else None,
+            "spells": me.get("spells") if isinstance(me, dict) else None,
+            "rune": me.get("rune") if isinstance(me, dict) else None,
+            # 队伍信息
+            "teams": m.get("teams") or [],
+        })
+    return out
+
+
+# ============================================================
+# 事件处理
+# ============================================================
 def handle_event(event, cfg):
-    """把事件转成通知"""
-    if event["type"] == "opgg_updated":
+    et = event["type"]
+    if et == "opgg_updated":
         if event.get("is_active"):
-            title = "🔥 TheShy 似乎上线了"
-            body = (f"OP.GG 数据 {fmt_kst(event['updated_at'])} 被刷新\n"
-                    f"等级: {event.get('level', '?')}\n"
-                    f"可能正在游戏中, 注意观察")
-        else:
-            title = "📡 TheShy 数据更新"
-            body = f"OP.GG 更新时间: {fmt_kst(event['updated_at'])}"
-        return notify(title, body, cfg)
-
-    if event["type"] == "became_active":
-        title = "🔥 TheShy 可能开始排位了!"
-        body = (f"OP.GG 在最近 5 分钟内更新了 TheShy 的数据\n"
-                f"更新时间: {fmt_kst(event.get('updated_at'))}\n"
-                f"等级: {event.get('level', '?')}\n"
-                f"\n通常意味着他刚登录或开始打排位")
-        return notify(title, body, cfg)
-
-    if event["type"] == "level_changed":
-        title = "📈 TheShy 升级"
-        body = f"等级: {event['old']} → {event['new']}"
-        return notify(title, body, cfg)
-
-    if event["type"] == "new_match":
-        type_map = {
-            "SOLORANKED": "单双排",
-            "FLEXRANKED": "灵活组排",
-            "NORMAL": "匹配",
-            "ARAM": "大乱斗",
-        }
+            return notify("🔥 TheShy 似乎上线了",
+                          f"OP.GG 在 {fmt_kst(event['updated_at'])} 刷新\n等级: {event.get('level', '?')}\n可能正在游戏中", cfg)
+        return []
+    if et == "became_active":
+        return notify("🔥 TheShy 可能开始排位了!",
+                      f"OP.GG 5 分钟内刷新过 TheShy 数据\n更新时间: {fmt_kst(event.get('updated_at'))}\n等级: {event.get('level', '?')}", cfg)
+    if et == "level_changed":
+        return notify("📈 TheShy 升级",
+                      f"等级: {event['old']} → {event['new']}", cfg)
+    if et == "new_match":
+        type_map = {"SOLORANKED": "单双排", "FLEXRANKED": "灵活", "NORMAL": "匹配", "ARAM": "大乱斗"}
         gt = type_map.get(event["game_type"], event["game_type"])
-        title = f"🎮 TheShy 刚打完 {gt}"
+        title = f"🎮 TheShy 刚打完 {gt} · {event['result']}"
         body = (f"英雄: {event['champion']}\n"
-                f"结果: {event['result']}\n"
-                f"KDA: {event['kda']}\n"
-                f"时间: {kst_now().strftime('%m-%d %H:%M KST')}")
+                f"KDA: {event['kda']} ({event['kill']}/{event['death']}/{event['assist']})\n"
+                f"时长: {event.get('game_length_second', 0) and int(event['game_length_second']//60)} 分钟\n"
+                f"位置: {event.get('position', '?')}\n"
+                f"时间: {fmt_kst(event.get('created_at'))}")
         return notify(title, body, cfg)
-
-    if event["type"] == "error":
+    if et == "rank_changed":
+        return notify("🏆 TheShy 段位变化!",
+                      f"{event['game_type']}: {event['old']} → {event['new']}", cfg)
+    if et == "error":
         return notify("⚠️ OP.GG 监控错误", event.get("msg", "未知错误"), cfg)
-
     return []
 
 
@@ -558,18 +1053,14 @@ def handle_event(event, cfg):
 # 主入口
 # ============================================================
 def main():
-    parser = argparse.ArgumentParser(description="TheShy 排位监控 (OP.GG 数据源)")
+    parser = argparse.ArgumentParser(description="TheShy 排位监控 (OP.GG 完整数据)")
     parser.add_argument("--once", action="store_true", help="只检测一次")
-    parser.add_argument("--interval", type=int, default=DEFAULT_INTERVAL,
-                        help=f"轮询间隔秒数 (默认 {DEFAULT_INTERVAL})")
+    parser.add_argument("--interval", type=int, default=DEFAULT_INTERVAL)
     parser.add_argument("--test-notify", action="store_true", help="测试通知")
-    parser.add_argument("--verbose", "-v", action="store_true", help="详细日志")
+    parser.add_argument("--verbose", "-v", action="store_true")
     args = parser.parse_args()
 
     load_dotenv()
-    # 优先级: 已有环境变量 > .env 文件
-    # (GitHub Actions 直接把 secrets 注入环境变量, 不会读 .env)
-    # 注意: 用 `or` 而不是默认值, 因为空字符串也要走默认
     cfg = {
         "BARK_KEY": os.getenv("BARK_KEY") or "",
         "SERVERCHAN_KEY": os.getenv("SERVERCHAN_KEY") or "",
@@ -579,9 +1070,7 @@ def main():
     }
 
     if not (cfg["BARK_KEY"] or cfg["SERVERCHAN_KEY"] or cfg["DISCORD_WEBHOOK"]):
-        # 没配推送渠道, 只警告不退出 (监控 state 仍写入供前端展示)
-        print("⚠️  未配置任何推送渠道 (BARK_KEY / SERVERCHAN_KEY / DISCORD_WEBHOOK)")
-        print("   状态文件仍会写入, 前端可正常显示\n")
+        print("⚠️  未配置推送渠道, 状态文件仍会写入供前端展示\n")
 
     if args.test_notify:
         print("📤 测试通知...")
@@ -595,9 +1084,7 @@ def main():
 
     print(f"🚀 TheShy 监控启动 (OP.GG 数据源)")
     print(f"   目标: {cfg['THESHY_RIOT_ID']} @ {cfg['THESHY_REGION']}")
-    print(f"   间隔: {args.interval}s")
-    print(f"   推送: {[k for k in ['BARK_KEY','SERVERCHAN_KEY','DISCORD_WEBHOOK'] if cfg.get(k)]}")
-    print(f"   Ctrl+C 退出\n")
+    print(f"   推送: {[k for k in ['BARK_KEY','SERVERCHAN_KEY','DISCORD_WEBHOOK'] if cfg.get(k)]}\n")
 
     while True:
         try:
@@ -609,7 +1096,6 @@ def main():
             for ev in events:
                 if args.verbose:
                     print(f"  📨 事件: {ev}")
-                # 追加到 events 文件 (前端读取)
                 append_event(ev)
                 results = handle_event(ev, cfg)
                 for ch, ok in results:
@@ -620,13 +1106,15 @@ def main():
 
             if args.once:
                 return
-
             time.sleep(args.interval)
         except KeyboardInterrupt:
             print("\n👋 退出")
             return
         except Exception as e:
+            import traceback
             print(f"❌ 异常: {e}")
+            if args.verbose:
+                traceback.print_exc()
             if args.once:
                 return
             time.sleep(args.interval)
