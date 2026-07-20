@@ -249,6 +249,16 @@
   }
   .champ-table tr:last-child td { border-bottom: none; }
   .champ-table tr:hover td { background: var(--card-2); }
+  .champ-row { cursor: pointer; }
+  .champ-detail td { background: var(--card-2); padding: 12px 16px; }
+  .champ-detail .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 6px 16px;
+  }
+  .champ-detail .kv { display: flex; gap: 8px; font-size: 11px; }
+  .champ-detail .k { color: var(--muted); min-width: 80px; }
+  .champ-detail .v { color: var(--text); font-family: var(--mono); }
   .champ-name {
     font-weight: 600;
     color: var(--text-bright);
@@ -483,6 +493,17 @@
     <button id="refresh-btn">立即刷新</button>
   </div>
 
+  <!-- 召唤师详情 -->
+  <div class="section">
+    <div class="section-title">
+      召唤师详情 · Summoner Info
+      <span class="meta" id="info-meta"></span>
+    </div>
+    <div class="grid-3" id="info-grid">
+      <div class="loading"><span class="spinner"></span>加载中...</div>
+    </div>
+  </div>
+
   <!-- 当前段位 -->
   <div class="section">
     <div class="section-title">
@@ -714,6 +735,77 @@ function renderHero() {
   }
 }
 
+// 召唤师详情: 顶层杂项字段 + 本赛季最高段位 + 4 次 LP 历史
+function renderSummonerInfo() {
+  const { profile } = currentData;
+  if (!profile) {
+    document.getElementById('info-grid').innerHTML = '<div class="empty">无召唤师数据</div>';
+    return;
+  }
+  document.getElementById('info-meta').textContent =
+    `更新于 ${fmtKst(profile.updated_at)} · ${ageString(profile.updated_at)}`;
+
+  const cards = [];
+
+  // 基础信息卡
+  const items = [];
+  if (profile.id) items.push(['召唤师 ID', profile.id]);
+  if (profile.summoner_id) items.push(['Summoner ID', profile.summoner_id.slice(0, 16) + '…']);
+  if (profile.acct_id) items.push(['Account ID', profile.acct_id.slice(0, 16) + '…']);
+  if (profile.puuid) items.push(['PUUID', profile.puuid.slice(0, 16) + '…']);
+  if (profile.game_name) items.push(['Riot ID', `${profile.game_name}#${profile.tagline}`]);
+  if (profile.internal_name) items.push(['Internal Name', profile.internal_name]);
+  if (profile.level != null) items.push(['等级', profile.level]);
+  if (profile.ladder_rank) items.push(['排名', fmtRank(profile.ladder_rank.rank, profile.ladder_rank.total)]);
+  if (profile.updated_at) items.push(['OP.GG 更新', fmtKst(profile.updated_at)]);
+  if (profile.renewable_at) items.push(['可刷新时间', fmtKst(profile.renewable_at)]);
+  if (profile.revision_at) items.push(['信息修改于', fmtKst(profile.revision_at)]);
+  items.push(['最近视频', `${profile.recent_videos_added_count || 0} 个`]);
+  items.push(['有集锦', profile.has_highlight === 'true' ? '是' : '否']);
+  cards.push(`
+    <div class="card">
+      <div class="card-header"><div class="card-title">基础信息</div></div>
+      ${items.map(([k, v]) => `<div class="kv"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('')}
+    </div>
+  `);
+
+  // 本赛季最高段位
+  const csh = profile.current_season_high_tiers || {};
+  const rankEntries = csh.rank_entries || [];
+  if (rankEntries.length) {
+    const parts = rankEntries.map(e => {
+      const ri = e.high_rank_info || {};
+      const gt = GAME_TYPES[e.game_type] || e.game_type;
+      const tier = ri.tier ? `${tierName(ri.tier)} ${ri.division ? (DIVISION_NAMES[ri.division] || ri.division) : ''} · ${ri.lp || 0} LP` : '未定级';
+      const when = ri.created_at ? ` (${fmtKst(ri.created_at).split(' ')[0]})` : '';
+      return `<div class="kv"><span class="k">${gt}</span><span class="v tier-${ri.tier}">${tier}${when}</span></div>`;
+    }).join('');
+    cards.push(`
+      <div class="card">
+        <div class="card-header"><div class="card-title">S${csh.season_id || '?'} 赛季最高</div></div>
+        ${parts}
+      </div>
+    `);
+  }
+
+  // LP 历史 (近 4-5 次)
+  const lp = profile.lp_histories || [];
+  if (lp.length) {
+    const parts = lp.map(h => {
+      const tier = h.tier ? `${tierName(h.tier)} ${h.division ? (DIVISION_NAMES[h.division] || h.division) : ''}` : '?';
+      return `<div class="kv"><span class="k">${fmtKst(h.created_at).split(' ')[0]}</span><span class="v tier-${h.tier}">${tier} · ${h.lp || 0} LP <span class="card-meta">elo ${h.elo_point || '-'}</span></span></div>`;
+    }).join('');
+    cards.push(`
+      <div class="card">
+        <div class="card-header"><div class="card-title">LP 历史 (近 ${lp.length} 次)</div></div>
+        ${parts}
+      </div>
+    `);
+  }
+
+  document.getElementById('info-grid').innerHTML = cards.join('');
+}
+
 function renderRank() {
   const { profile } = currentData;
   if (!profile || !profile.league_stats) {
@@ -873,6 +965,15 @@ function renderMostChampions() {
     html = renderRecentChampTable(t.data);
   }
   document.getElementById('mc-content').innerHTML = html;
+
+  // 绑定点击展开/收起事件
+  document.querySelectorAll('#mc-content .champ-row').forEach(row => {
+    row.onclick = () => {
+      const idx = row.dataset.idx;
+      const detail = document.querySelector(`#mc-content .champ-detail[data-detail="${idx}"]`);
+      if (detail) detail.style.display = detail.style.display === 'none' ? '' : 'none';
+    };
+  });
 }
 
 function renderSeasonChampTable(mc) {
@@ -940,11 +1041,51 @@ function renderRankedChampTable(rmc) {
         </tr>
       </thead>
       <tbody>
-        ${champs.map(c => {
+        ${champs.map((c, i) => {
           const multi = [c.double_kill||0, c.triple_kill||0, c.quadra_kill||0, c.penta_kill||0].filter(x => x>0).join('/');
           const mvpAce = `${c.mvp ? `<span class="pill mvp">MVP ${c.mvp}</span>` : ''} ${c.ace ? `<span class="pill op">ACE ${c.ace}</span>` : ''}`;
+          // 展开区: 显示所有详细字段
+          const detail = [
+            ['总时长', c.game_second ? Math.floor(c.game_second/60) + ' 分钟' : '-'],
+            ['KDA', `${c.kda} (${c.b_kill||0}/${c.b_death||0}/${c.b_assist||0})`],
+            ['参团率', c.kill_participation || '-'],
+            ['伤害占比', c.damage_participation || '-'],
+            ['总伤害', fmtNum(c.damage_to_champion)],
+            ['物理伤害', fmtNum(c.physical_damage_to_champion)],
+            ['魔法伤害', fmtNum(c.magic_damage_to_champion)],
+            ['真实伤害', fmtNum(c.true_damage_to_champion)],
+            ['承伤', fmtNum(c.damage_taken)],
+            ['减伤', fmtNum(c.damage_self_mitigated)],
+            ['治疗', fmtNum(c.heal)],
+            ['团队治疗', fmtNum(c.heal_to_team)],
+            ['团队护盾', fmtNum(c.shield_to_team)],
+            ['推塔伤害', fmtNum(c.damage_to_turret)],
+            ['建筑伤害', fmtNum(c.damage_to_building)],
+            ['目标伤害', fmtNum(c.damage_to_objective)],
+            ['拆塔', c.turret_kill || 0],
+            ['拆水晶', c.inhibitor_kill || 0],
+            ['镀层', c.turret_plate || 0],
+            ['单杀', `${c.solo_kill||0} (制造 ${c.make_solo_kill||0})`],
+            ['入侵击杀', c.invade_kill || 0],
+            ['入侵次数', c.invade_play || 0],
+            ['偷中立', c.object_steal || 0],
+            ['偷 BUFF', c.buff_steal || 0],
+            ['敌方野怪', c.enemy_jungle_monster_kill || 0],
+            ['CC 时长', c.cc_score || 0],
+            ['CC 制造击杀', c.cc_make_kill || 0],
+            ['控眼', c.ward_guard || 0],
+            ['辅助任务', c.faster_support_quest || 0],
+            ['救人', c.save_ally || 0],
+            ['对线评分', c.lane_score || '-'],
+            ['对线优势', c.lane_lead || '-'],
+            ['7 分钟优势', c.lane_advantage_7_minute || '-'],
+            ['10 分钟 CS', c.lane_cs_10_minute || '-'],
+            ['10 分钟野怪', c.jungle_cs_10_minute || '-'],
+            ['OP 评分排名', c.op_score_rank ? '#' + c.op_score_rank : '-'],
+            ['双杀/三杀/四杀/五杀', `${c.double_kill||0}/${c.triple_kill||0}/${c.quadra_kill||0}/${c.penta_kill||0}`],
+          ];
           return `
-            <tr>
+            <tr class="champ-row" data-idx="${i}">
               <td>
                 <div class="champ-name">${c.champion_name || '?'}</div>
                 <div class="champ-meta">${c.play||0}场 · ${c.win||0}W ${c.lose||0}L</div>
@@ -979,10 +1120,18 @@ function renderRankedChampTable(rmc) {
                 <div class="champ-meta">CC ${c.cc_score||'-'} · 救人 ${c.save_ally||0}</div>
               </td>
             </tr>
+            <tr class="champ-detail" style="display:none;" data-detail="${i}">
+              <td colspan="12">
+                <div class="detail-grid">
+                  ${detail.map(([k, v]) => `<div class="kv"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('')}
+                </div>
+              </td>
+            </tr>
           `;
         }).join('')}
       </tbody>
     </table>
+    <div class="champ-meta" style="margin-top:8px;">💡 点击任意行展开查看完整数据 (35+ 字段)</div>
   `;
 }
 
@@ -1091,6 +1240,7 @@ function renderDebug() {
 
 function renderAll() {
   renderHero();
+  renderSummonerInfo();
   renderRank();
   renderSeasons();
   renderMatches();
