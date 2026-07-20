@@ -370,6 +370,15 @@
   }
   .match-stats .kda { font-weight: 600; color: var(--text-bright); }
   .match-stats .sub { font-size: 11px; color: var(--muted); }
+  .match-detail {
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 12px;
+    margin: -8px 0 8px;
+  }
+  .match-row:hover { background: var(--card-2); }
 
   /* Toolbar */
   .toolbar {
@@ -800,12 +809,12 @@ function renderMatches() {
     document.getElementById('matches-list').innerHTML = '<div class="empty">暂无最近比赛 (OP.GG 还没记录到)</div>';
     return;
   }
-  document.getElementById('matches-meta').textContent = `${matches.length} 场`;
-  document.getElementById('matches-list').innerHTML = matches.map(m => {
+  document.getElementById('matches-meta').textContent = `${matches.length} 场 · 点击展开详情`;
+  document.getElementById('matches-list').innerHTML = matches.map((m, idx) => {
     const win = m.result === 'WIN';
     const mins = m.game_length_second ? Math.floor(m.game_length_second/60) : '-';
     return `
-      <div class="match">
+      <div class="match match-row" data-idx="${idx}" style="cursor:pointer;">
         <div class="match-result ${win ? 'win' : 'lose'}"></div>
         <div class="match-info">
           <div class="champ">${m.champion || '?'} <span class="pill ${win?'win':'lose'}">${win?'胜':'败'}</span></div>
@@ -824,8 +833,121 @@ function renderMatches() {
           <div class="sub">伤害 ${fmtNum(m.total_damage_dealt_to_champions)} · 承伤 ${fmtNum(m.total_damage_taken)}</div>
         </div>
       </div>
+      <div class="match-detail" data-detail="${idx}" style="display:none;">
+        ${renderMatchDetail(m)}
+      </div>
     `;
   }).join('');
+
+  document.querySelectorAll('#matches-list .match-row').forEach(row => {
+    row.onclick = () => {
+      const idx = row.dataset.idx;
+      const detail = document.querySelector(`#matches-list .match-detail[data-detail="${idx}"]`);
+      if (detail) detail.style.display = detail.style.display === 'none' ? '' : 'none';
+    };
+  });
+}
+
+function renderMatchDetail(m) {
+  const rows = [];
+  // 个人表现
+  const personal = [
+    ['英雄等级', m.champion_level],
+    ['队伍', m.team_key === 'BLUE' ? '蓝方' : (m.team_key === 'RED' ? '红方' : m.team_key)],
+    ['地图', m.game_map],
+    ['总治疗', fmtNum(m.total_heal)],
+    ['插眼数', m.ward_place],
+    ['控制守卫购买', m.vision_wards_bought_in_game],
+    ['最大连杀', m.largest_killing_spree],
+    ['最大多杀', m.largest_multi_kill],
+    ['最大暴击伤害', m.largest_critical_strike ? fmtNum(m.largest_critical_strike) : null],
+    ['控制敌人时长', m.time_ccing_others != null ? `${m.time_ccing_others}s` : null],
+    ['英雄 ID', m.champion_id],
+    ['比赛 ID', m.id],
+  ].filter(([, v]) => v != null && v !== '');
+  if (personal.length) {
+    rows.push(`
+      <div class="card">
+        <div class="card-header"><div class="card-title">个人表现</div></div>
+        ${personal.map(([k, v]) => `<div class="kv"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('')}
+      </div>
+    `);
+  }
+
+  // 装备
+  if (m.items_names && m.items_names.length) {
+    rows.push(`
+      <div class="card">
+        <div class="card-header"><div class="card-title">装备</div></div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          ${m.items_names.map((n, i) => `<span class="pill" style="background:rgba(139,148,158,0.15); color:var(--text);">${n}</span>`).join('')}
+        </div>
+      </div>
+    `);
+  }
+
+  // 召唤师技能
+  if (m.spells && m.spells.length) {
+    const SPELLS = { 1:'净化', 3:'虚弱', 4:'闪现', 6:'疾跑', 7:'治疗', 11:'惩戒', 12:'传送', 13:'清晰', 14:'点燃', 21:'屏障', 30:'标记', 31:'终结', 32:'传送(特殊)', 39:'标记/冲刺' };
+    rows.push(`
+      <div class="card">
+        <div class="card-header"><div class="card-title">召唤师技能</div></div>
+        <div style="display:flex; gap:6px;">
+          ${m.spells.map(s => `<span class="pill" style="background:rgba(88,166,255,0.15); color:var(--accent);">${SPELLS[s] || `技能${s}`}</span>`).join('')}
+        </div>
+      </div>
+    `);
+  }
+
+  // 符文
+  if (m.rune) {
+    const RUNE_PAGES = { 8000:'精密', 8100:'主宰', 8200:'巫术', 8300:'灵感', 8400:'坚决' };
+    const r = m.rune;
+    const primary = RUNE_PAGES[r.primary_page_id] || r.primary_page_id;
+    const secondary = RUNE_PAGES[r.secondary_page_id] || r.secondary_page_id;
+    const primaryRune = r.primary_rune_id || '-';
+    rows.push(`
+      <div class="card">
+        <div class="card-header"><div class="card-title">符文</div></div>
+        <div class="kv"><span class="k">主系</span><span class="v">${primary} (基石 ${primaryRune})</span></div>
+        <div class="kv"><span class="k">副系</span><span class="v">${secondary}</span></div>
+      </div>
+    `);
+  }
+
+  // 双方队伍
+  if (m.teams && m.teams.length) {
+    const teamsHtml = m.teams.map(t => {
+      const gs = t.game_stat || {};
+      const winStr = gs.is_win === 'true' ? ' · 胜' : '';
+      const side = t.key === 'BLUE' ? '蓝方' : (t.key === 'RED' ? '红方' : t.key);
+      const bans = (t.banned_champions_names || []).join(', ');
+      return `
+        <div class="card">
+          <div class="card-header"><div class="card-title">${side}${winStr}</div></div>
+          <div class="kv"><span class="k">击杀</span><span class="v">${gs.champion_kill ?? '-'}</span></div>
+          <div class="kv"><span class="k">塔</span><span class="v">${gs.tower_kill ?? '-'}</span></div>
+          <div class="kv"><span class="k">龙</span><span class="v">${gs.dragon_kill ?? '-'}</span></div>
+          <div class="kv"><span class="k">大龙</span><span class="v">${gs.baron_kill ?? '-'}</span></div>
+          <div class="kv"><span class="k">水晶</span><span class="v">${gs.inhibitor_kill ?? '-'}</span></div>
+          <div class="kv"><span class="k">先锋</span><span class="v">${gs.rift_herald_kill ?? '-'}</span></div>
+          <div class="kv"><span class="k">阿塔坎</span><span class="v">${gs.atakhan_kill ?? '-'}</span></div>
+          <div class="kv"><span class="k">金币</span><span class="v">${gs.gold_earned ? fmtNum(gs.gold_earned) : '-'}</span></div>
+          <div class="kv"><span class="k">禁用</span><span class="v">${bans || '-'}</span></div>
+        </div>
+      `;
+    }).join('');
+    rows.push(`
+      <div class="card" style="grid-column: 1 / -1;">
+        <div class="card-header"><div class="card-title">双方队伍</div></div>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
+          ${teamsHtml}
+        </div>
+      </div>
+    `);
+  }
+
+  return `<div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px;">${rows.join('')}</div>`;
 }
 
 let mcTabIndex = 0;
