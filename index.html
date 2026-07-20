@@ -498,7 +498,6 @@
     <img class="hero-avatar" id="avatar" src="" alt="" onerror="this.style.display='none'">
     <div class="hero-info">
       <h1 id="hero-name">TheShy</h1>
-      <div class="subtitle" id="hero-subtitle">韩服 KR · 加载中...</div>
       <div class="hero-tags">
         <span id="status-tag" class="tag unknown">
           <span class="dot"></span>
@@ -727,9 +726,6 @@ function renderHero() {
     img.style.display = '';
   }
   document.getElementById('hero-name').textContent = p.name || p.game_name || 'TheShy';
-  const tagline = p.tagline || 'KR1';
-  document.getElementById('hero-subtitle').textContent =
-    `${p.internal_name || 'theshy'}#${tagline} · 韩服 KR · ID ${p.id || '-'}`;
 
   const status = deriveStatus(state, profile);
   const tag = document.getElementById('status-tag');
