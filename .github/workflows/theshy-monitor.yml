@@ -21,7 +21,7 @@ on:
 
 concurrency:
   group: theshy-monitor
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   monitor:
@@ -78,7 +78,10 @@ jobs:
           done
           if [ "$changed" = "1" ]; then
             git commit -m "chore: update theshy state [skip ci]"
-            git push
+            # 并发时 (cron 与 push 触发的两个 run), 远端可能已有新 commit
+            # pull --rebase 处理冲突, push 失败时降级到下次重试
+            git pull --rebase origin main || true
+            git push || echo "push 失败, 下次 cron 会重试"
             echo "State committed"
           else
             echo "No state changes"
