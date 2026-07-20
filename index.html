@@ -105,6 +105,23 @@
   .tag.unknown { background: rgba(210,153,34,0.15); color: var(--yellow); }
   .tag.level { background: rgba(88,166,255,0.15); color: var(--accent); }
   .tag.ladder { background: rgba(188,140,255,0.15); color: var(--purple); }
+  .tag.streamer {
+    background: rgba(219,109,40,0.15);
+    color: var(--orange);
+    border-color: rgba(219,109,40,0.4);
+  }
+  .tag.streamer .dot { animation: none; }
+  .banner {
+    background: linear-gradient(90deg, rgba(219,109,40,0.15), rgba(219,109,40,0.05));
+    border: 1px solid rgba(219,109,40,0.4);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .banner strong { color: var(--orange); }
   .tag .dot {
     width: 6px; height: 6px; border-radius: 50%;
     background: currentColor;
@@ -296,6 +313,8 @@
   .event-item.match-lose .title { color: var(--red); }
   .event-item.level .title { color: var(--accent); }
   .event-item.rank .title { color: var(--purple); }
+  .event-item.lp-up .title { color: var(--green); }
+  .event-item.lp-down .title { color: var(--red); }
 
   /* Match list */
   .match {
@@ -460,8 +479,22 @@
         </span>
         <span id="level-tag" class="tag level" style="display:none;">Lv <span id="level-val">-</span></span>
         <span id="ladder-tag" class="tag ladder" style="display:none;">排名 <span id="ladder-val">-</span></span>
+        <span class="tag streamer" title="TheShy 已开启 Riot Streamer Mode (Patch 25.20+), 游戏进行中 OP.GG 拿不到数据">
+          <span>⚠️ 主播模式</span>
+        </span>
       </div>
     </div>
+  </div>
+
+  <!-- 主播模式说明 banner -->
+  <div class="banner">
+    <strong>⚠️ 主播模式限制说明</strong><br>
+    TheShy 开启了 Riot <strong>Streamer Mode</strong> (Patch 25.20+, 2025-10),
+    游戏进行中 Riot API 对第三方应用完全屏蔽该玩家数据 (OP.GG 也无法获取)。<br>
+    本监控已调整为「<strong>赛后感知模式</strong>」:
+    比赛结束后 5-15 分钟内通过 <strong>new_match</strong> / <strong>LP 变化</strong> 触发推送,
+    无法再做到「比赛开始时」实时通知。
+    状态卡片中显示的「在线状态」可能不准确, 仅供参考。
   </div>
 
   <!-- Toolbar -->
@@ -1043,6 +1076,12 @@ function renderEvents() {
       icon = '🏆';
       title = `段位变化: ${ev.old} → ${ev.new}`;
       meta = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${fmtKst(ev.timestamp)}`;
+    } else if (ev.type === 'lp_changed') {
+      const sign = ev.delta >= 0 ? '+' : '';
+      cls += ev.delta >= 0 ? ' lp-up' : ' lp-down';
+      icon = ev.delta >= 0 ? '📈' : '📉';
+      title = `LP ${ev.old_lp} → ${ev.new_lp} (${sign}${ev.delta})`;
+      meta = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${tierName(ev.tier)} ${ev.division ? (DIVISION_NAMES[ev.division]||ev.division) : ''} · ${fmtKst(ev.timestamp)}`;
     } else if (ev.type === 'error') {
       icon = '⚠️';
       title = '监控错误';

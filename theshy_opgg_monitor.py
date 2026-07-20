@@ -936,6 +936,29 @@ def check_theshy(client, cfg, state, verbose=False):
                 })
                 break
 
+    # 6.5 LP 变化检测 (主播模式下最重要的实时信号)
+    # LP 变化必然意味着刚打完排位
+    if last_league and cur_league:
+        for cl, ll in zip(cur_league, last_league):
+            if cl.get("tier") == ll.get("tier") and \
+               cl.get("division") == ll.get("division") and \
+               cl.get("lp") is not None and ll.get("lp") is not None and \
+               cl.get("lp") != ll.get("lp"):
+                try:
+                    delta = int(cl["lp"]) - int(ll["lp"])
+                    if delta != 0:
+                        events.append({
+                            "type": "lp_changed",
+                            "game_type": cl.get("game_type"),
+                            "old_lp": ll.get("lp"),
+                            "new_lp": cl.get("lp"),
+                            "delta": delta,
+                            "tier": cl.get("tier"),
+                            "division": cl.get("division"),
+                        })
+                except (TypeError, ValueError):
+                    pass
+
     # 7. 更新 state
     state["profile"] = {
         "updated_at": updated_at,
@@ -1019,31 +1042,73 @@ def _extract_matches(parsed):
 # 事件处理
 # ============================================================
 def handle_event(event, cfg):
+    """处理事件并发送通知
+
+    主播模式说明 (2025-10 Riot Patch 25.20 起):
+    Riot API 在游戏进行中对开启 Streamer Mode 的玩家不返回数据,
+    OP.GG 也无法获取 updated_at 实时刷新, 所以 became_active 事件几乎不会触发。
+    主要依赖 new_match 事件 (比赛结束后 OP.GG 才能拉到) 作为通知触发器。
+    """
     et = event["type"]
-    if et == "opgg_updated":
-        if event.get("is_active"):
-            return notify("🔥 TheShy 似乎上线了",
-                          f"OP.GG 在 {fmt_kst(event['updated_at'])} 刷新\n等级: {event.get('level', '?')}\n可能正在游戏中", cfg)
-        return []
     if et == "became_active":
-        return notify("🔥 TheShy 可能开始排位了!",
-                      f"OP.GG 5 分钟内刷新过 TheShy 数据\n更新时间: {fmt_kst(event.get('updated_at'))}\n等级: {event.get('level', '?')}", cfg)
+        # 主播模式下几乎不会触发, 即使触发也只是 OP.GG 主动刷新
+        # 不再推送, 但事件仍然记录到 events.json 供前端展示
+        return []
+    if et == "opgg_updated":
+        # 不再推送 OP.GG 更新事件 (主播模式下基本是 OP.GG 定期刷新, 与游戏无关)
+        return []
     if et == "level_changed":
         return notify("📈 TheShy 升级",
                       f"等级: {event['old']} → {event['new']}", cfg)
+    if et == "lp_changed":
+        # LP 变化是主播模式下最有价值的实时信号之一
+        # 因为 LP 变化一定意味着刚结束排位
+        delta = event.get('delta', 0)
+        sign = "+" if delta >= 0 else ""
+        arrow = "📈" if delta >= 0 else "📉"
+        return notify(
+            f"{arrow} TheShy 排位 LP 变化 {sign}{delta}",
+            f"{event['game_type']}: {event['old_lp']} → {event['new_lp']} LP\n"
+            f"段位: {event['tier']} {event['division']}\n"
+            f"变化: {sign}{delta} LP\n"
+            f"⚠️ 主播模式下无法预知比赛开始, 仅在赛后才能感知",
+            cfg,
+        )
     if et == "new_match":
-        type_map = {"SOLORANKED": "单双排", "FLEXRANKED": "灵活", "NORMAL": "匹配", "ARAM": "大乱斗"}
+        # 主力通知: TheShy 刚打完一场排位
+        type_map = {"SOLORANKED": "单双排", "FLEXRANKED": "灵活组排",
+                    "NORMAL": "匹配", "ARAM": "大乱斗"}
         gt = type_map.get(event["game_type"], event["game_type"])
-        title = f"🎮 TheShy 刚打完 {gt} · {event['result']}"
-        body = (f"英雄: {event['champion']}\n"
-                f"KDA: {event['kda']} ({event['kill']}/{event['death']}/{event['assist']})\n"
-                f"时长: {event.get('game_length_second', 0) and int(event['game_length_second']//60)} 分钟\n"
-                f"位置: {event.get('position', '?')}\n"
-                f"时间: {fmt_kst(event.get('created_at'))}")
+        win = event.get("result") == "WIN"
+        # 计算比赛结束到现在多久 (KST)
+        ago = ""
+        if event.get("created_at"):
+            try:
+                dt = datetime.fromisoformat(event["created_at"])
+                if dt.tzinfo is None:
+                    dt = dt.replace(tzinfo=KST)
+                age_min = int((datetime.now(KST) - dt).total_seconds() // 60)
+                if age_min < 60:
+                    ago = f" ({age_min} 分钟前结束)"
+                else:
+                    ago = f" ({age_min // 60} 小时前结束)"
+            except Exception:
+                pass
+        title_emoji = "🏆" if win else "💔"
+        title = f"{title_emoji} TheShy 刚打完{gt} · {'胜' if win else '败'}"
+        body = (
+            f"英雄: {event.get('champion', '?')}\n"
+            f"KDA: {event.get('kda', '?')} "
+            f"({event.get('kill', 0)}/{event.get('death', 0)}/{event.get('assist', 0)})\n"
+            f"时长: {event.get('game_length_second', 0) and int(event['game_length_second']//60)} 分钟\n"
+            f"位置: {event.get('position', '?')}\n"
+            f"结束时间: {fmt_kst(event.get('created_at'))}{ago}"
+        )
         return notify(title, body, cfg)
     if et == "rank_changed":
         return notify("🏆 TheShy 段位变化!",
-                      f"{event['game_type']}: {event['old']} → {event['new']}", cfg)
+                      f"{event['game_type']}: {event['old']} → {event['new']}\n"
+                      f"⚠️ 主播模式下, 段位变化通常需要等下一场比赛结束才能感知", cfg)
     if et == "error":
         return notify("⚠️ OP.GG 监控错误", event.get("msg", "未知错误"), cfg)
     return []
