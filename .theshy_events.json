@@ -1,5 +1,11 @@
 [
   {
+    "type": "level_changed",
+    "old": null,
+    "new": 1,
+    "timestamp": "2026-07-21T06:01:27.029475+09:00"
+  },
+  {
     "type": "error",
     "msg": "{'code': -32600, 'message': '{\"game_name\":[\"The game name field is required.\"],\"region\":[\"The region field is required.\"]}'}",
     "timestamp": "2026-07-21T05:58:16.250177+09:00"
