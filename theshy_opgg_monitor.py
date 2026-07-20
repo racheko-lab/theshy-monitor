@@ -331,10 +331,11 @@ class OpggClient:
             "region": region, "lang": "zh_CN", "limit": limit,
         })
 
-    def get_match_detail(self, match_id, region="KR"):
+    def get_match_detail(self, match_id, created_at, region="KR"):
         """拉单场比赛详情 (含所有玩家)"""
         return self._call("lol_get_summoner_game_detail", {
             "game_id": match_id, "region": region, "lang": "zh_CN",
+            "created_at": created_at,
         })
 
 
@@ -856,10 +857,50 @@ def check_theshy(client, cfg, state, verbose=False):
     matches_text = matches_resp.get("text", "")
     matches_parsed = parse_repr(matches_text) if matches_text else None
     matches_list = _extract_matches(matches_parsed)
+
+    # 2.5 拉取比赛详情 (participants/10人阵容), 缓存已有详情跳过
+    existing_matches = []
+    try:
+        if MATCHES_FILE.exists():
+            existing_matches = json.loads(MATCHES_FILE.read_text())
+    except Exception:
+        pass
+    existing_map = {m.get("id"): m for m in existing_matches if m.get("id")}
+    detail_count = 0
+    for m in matches_list:
+        mid = m.get("id")
+        if not mid:
+            continue
+        old = existing_map.get(mid, {})
+        if old.get("participants") and old.get("average_tier_info"):
+            m["participants"] = old["participants"]
+            m["average_tier_info"] = old["average_tier_info"]
+            if old.get("teams"):
+                m["teams"] = old["teams"]
+            continue
+        ca = m.get("created_at")
+        if not ca:
+            continue
+        try:
+            d_resp = client.get_match_detail(mid, ca, region)
+            d_text = d_resp.get("text", "")
+            if d_text and "error" not in d_resp:
+                d_parsed = parse_repr(d_text)
+                gd = _extract_game_detail(d_parsed)
+                if gd:
+                    m["participants"] = gd.get("participants", [])
+                    m["average_tier_info"] = gd.get("average_tier_info")
+                    m["teams"] = gd.get("teams", [])
+                    detail_count += 1
+                    time.sleep(0.3)
+        except Exception as e:
+            if verbose:
+                print(f"  detail fail for {mid[:16]}: {e}")
+
     save_json(MATCHES_FILE, matches_list)
 
     if verbose:
-        print(f"  matches: {len(matches_list)} 场")
+        print(f"  matches: {len(matches_list)} 场 (新增详情 {detail_count})")
 
     # 3. 判断活跃
     updated_at = profile.get("updated_at")
@@ -987,6 +1028,91 @@ def check_theshy(client, cfg, state, verbose=False):
     state["matches_count"] = len(matches_list)
 
     return events, state
+
+
+def _extract_game_detail(parsed):
+    """从 game detail 解析结果中提取 participants + average_tier_info"""
+    if not parsed:
+        return None
+    gd = _find_key(parsed, "game_detail")
+    if not gd:
+        gd = parsed.get("data", parsed) if isinstance(parsed, dict) else None
+    if not isinstance(gd, dict):
+        return None
+
+    out = {"participants": [], "average_tier_info": None, "teams": []}
+
+    ati = gd.get("average_tier_info")
+    if isinstance(ati, dict):
+        out["average_tier_info"] = {
+            "tier": ati.get("tier"),
+            "division": ati.get("division"),
+            "border_image_url": ati.get("border_image_url"),
+        }
+
+    for t in gd.get("teams", []):
+        if not isinstance(t, dict):
+            continue
+        team_key = t.get("key")
+        bans = t.get("banned_champions_names") or []
+        ban_ids = t.get("banned_champions") or []
+        gs = t.get("game_stat") or {}
+        for p in t.get("participants", []):
+            if not isinstance(p, dict):
+                continue
+            s = p.get("summoner") or {}
+            st = p.get("stats") or {}
+            out["participants"].append({
+                "summoner_name": s.get("game_name"),
+                "summoner_tag": s.get("tagline"),
+                "champion_id": p.get("champion_id"),
+                "champion_name": p.get("champion_name"),
+                "team_key": team_key,
+                "position": p.get("position"),
+                "items": p.get("items") or [],
+                "items_names": p.get("items_names") or [],
+                "spells": p.get("spells") or [],
+                "rune": p.get("rune") if isinstance(p.get("rune"), dict) else {},
+                "champion_level": st.get("champion_level"),
+                "kill": st.get("kill"),
+                "death": st.get("death"),
+                "assist": st.get("assist"),
+                "kda": _calc_kda(st.get("kill"), st.get("death"), st.get("assist")),
+                "result": st.get("result"),
+                "op_score": st.get("op_score"),
+                "op_score_rank": st.get("op_score_rank"),
+                "gold_earned": st.get("gold_earned"),
+                "minion_kill": st.get("minion_kill"),
+                "neutral_minion_kill": st.get("neutral_minion_kill"),
+                "total_damage_dealt_to_champions": st.get("total_damage_dealt_to_champions"),
+                "total_damage_taken": st.get("total_damage_taken"),
+                "total_heal": st.get("total_heal"),
+                "vision_wards_bought_in_game": st.get("vision_wards_bought_in_game"),
+                "ward_place": st.get("ward_place"),
+                "largest_killing_spree": st.get("largest_killing_spree"),
+                "largest_multi_kill": st.get("largest_multi_kill"),
+                "largest_critical_strike": st.get("largest_critical_strike"),
+                "time_ccing_others": st.get("time_ccing_others"),
+            })
+        out["teams"].append({
+            "key": team_key,
+            "banned_champions": ban_ids,
+            "banned_champions_names": bans,
+            "game_stat": {
+                "is_win": gs.get("is_win"),
+                "champion_kill": gs.get("champion_kill"),
+                "tower_kill": gs.get("tower_kill"),
+                "dragon_kill": gs.get("dragon_kill"),
+                "baron_kill": gs.get("baron_kill"),
+                "inhibitor_kill": gs.get("inhibitor_kill"),
+                "rift_herald_kill": gs.get("rift_herald_kill"),
+                "atakhan_kill": gs.get("atakhan_kill"),
+                "gold_earned": gs.get("gold_earned"),
+                "champion_first": gs.get("champion_first"),
+                "horde_kill": gs.get("horde_kill"),
+            },
+        })
+    return out
 
 
 def _extract_matches(parsed):
