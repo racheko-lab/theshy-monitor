@@ -817,6 +817,42 @@ def _find_key(obj, key):
     return None
 
 
+def is_anonymized(profile):
+    """检测 OP.GG 返回的数据是否为主播模式匿名化的占位空数据
+
+    主播模式下 OP.GG 把整个 profile 字段全部匿名化:
+    - level=1 (占位)
+    - league_stats 所有 tier/lp/win/lose 都为 null
+    - previous_seasons / previous_season_tiers 都为空数组
+    - most_champions / ranked_most_champions 都为 null
+    - revision_at 停留在很久以前 (召唤师信息最后一次真实修改)
+
+    这会导致脚本误判:
+    - 把 updated_at 刷新当成 "开始排位" (became_active)
+    - 把 level 从 null -> 1 当成升级 (level_changed)
+    - 前端显示 Lv 1 / 未定级 误导用户
+    所以检测到这个状态时所有相关事件都跳过。
+    """
+    if not profile or not isinstance(profile, dict):
+        return False
+    # level 必须是 1 (占位)
+    if profile.get("level") != 1:
+        return False
+    # league_stats 全部 tier null
+    leagues = profile.get("league_stats") or []
+    if leagues and not all(
+        ls.get("tier") is None and ls.get("lp") is None for ls in leagues
+    ):
+        return False
+    # 历史赛季空
+    if profile.get("previous_seasons"):
+        return False
+    # 最常玩英雄为 null
+    if profile.get("most_champions") is not None:
+        return False
+    return True
+
+
 # ============================================================
 # 检测主函数
 # ============================================================
@@ -835,9 +871,18 @@ def check_theshy(client, cfg, state, verbose=False):
     parsed = parse_repr(resp.get("text", ""))
     profile = normalize_summoner(parsed)
 
+    # 主播模式匿名化检测:
+    # OP.GG 在玩家游戏中 (Streamer Mode) 会把整个 profile 屏蔽成空占位数据,
+    # updated_at 还会一直刷新 (导致 is_active=True 误判), 但 level/league_stats 全空。
+    # 检测到该状态时跳过 became_active/opgg_updated/level_changed 事件,
+    # 否则会一直误报 "开始排位" 和 "等级 - -> 1"。
+    anonymized = is_anonymized(profile)
+    state["anonymized"] = anonymized
+
     if verbose:
         print(f"  name={profile.get('name')} level={profile.get('level')} "
-              f"updated_at={profile.get('updated_at')}")
+              f"updated_at={profile.get('updated_at')} "
+              f"anonymized={anonymized}")
 
     # 完整 profile 存文件 (前端读)
     save_json(PROFILE_FILE, profile)
@@ -873,28 +918,36 @@ def check_theshy(client, cfg, state, verbose=False):
     last_state = state.get("profile", {})
     last_updated = last_state.get("updated_at")
     last_active = state.get("is_active", False)
+    last_anonymized = state.get("anonymized", False)
 
-    if last_updated and updated_at and last_updated != updated_at:
-        events.append({
-            "type": "opgg_updated",
-            "updated_at": updated_at,
-            "level": profile.get("level"),
-            "is_active": is_active,
-        })
+    # 主播模式匿名化时不生成 became_active/opgg_updated/level_changed 事件,
+    # 防止 "OP.GG updated_at 刷新" 被误判成 "开始排位"。
+    if not anonymized:
+        if last_updated and updated_at and last_updated != updated_at:
+            events.append({
+                "type": "opgg_updated",
+                "updated_at": updated_at,
+                "level": profile.get("level"),
+                "is_active": is_active,
+            })
 
-    if is_active and not last_active:
-        events.append({
-            "type": "became_active",
-            "updated_at": updated_at,
-            "level": profile.get("level"),
-        })
+        if is_active and not last_active:
+            events.append({
+                "type": "became_active",
+                "updated_at": updated_at,
+                "level": profile.get("level"),
+            })
 
-    if last_state.get("level") != profile.get("level") and profile.get("level"):
-        events.append({
-            "type": "level_changed",
-            "old": last_state.get("level"),
-            "new": profile.get("level"),
-        })
+        # 上次也是非匿名化时才检测 level_changed,
+        # 否则 (上次屏蔽 -> 这次恢复) 会把 level 1 -> 真实等级 当成升级
+        if (not last_anonymized and
+                last_state.get("level") != profile.get("level") and
+                profile.get("level")):
+            events.append({
+                "type": "level_changed",
+                "old": last_state.get("level"),
+                "new": profile.get("level"),
+            })
 
     # 5. 新比赛检测
     last_match_id = state.get("last_match_id")
@@ -917,14 +970,14 @@ def check_theshy(client, cfg, state, verbose=False):
                 "position": latest.get("position"),
             })
 
-    # 6. 段位变化检测
+    # 6. 段位变化检测 (上次非屏蔽时才比较, 否则屏蔽->恢复会被误判成段位变化)
     last_league = last_state.get("league_stats_summary", [])
     cur_league = [
         {"game_type": ls.get("game_type"), "tier": ls.get("tier"),
          "division": ls.get("division"), "lp": ls.get("lp")}
         for ls in (profile.get("league_stats") or [])
     ]
-    if last_league and cur_league:
+    if last_league and cur_league and not last_anonymized and not anonymized:
         for cl, ll in zip(cur_league, last_league):
             if (cl.get("tier") != ll.get("tier") or
                 cl.get("division") != ll.get("division")):
@@ -938,7 +991,8 @@ def check_theshy(client, cfg, state, verbose=False):
 
     # 6.5 LP 变化检测 (主播模式下最重要的实时信号)
     # LP 变化必然意味着刚打完排位
-    if last_league and cur_league:
+    # 同样需要在两次都非屏蔽状态下比较
+    if last_league and cur_league and not last_anonymized and not anonymized:
         for cl, ll in zip(cur_league, last_league):
             if cl.get("tier") == ll.get("tier") and \
                cl.get("division") == ll.get("division") and \

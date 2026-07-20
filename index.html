@@ -705,7 +705,25 @@ async function refresh() {
 // ============================================================
 // 渲染
 // ============================================================
+
+// 主播模式匿名化数据检测 (与 monitor 端 is_anonymized 同样逻辑)
+// OP.GG 在玩家游戏中 (Streamer Mode) 会把 profile 屏蔽成空占位:
+// level=1, league_stats 全 null, previous_seasons 空, most_champions null
+function isAnonymized(profile) {
+  if (!profile) return false;
+  if (profile.level !== 1) return false;
+  const leagues = profile.league_stats || [];
+  if (leagues.length && !leagues.every(l => l.tier == null && l.lp == null)) return false;
+  if ((profile.previous_seasons || []).length) return false;
+  if (profile.most_champions != null) return false;
+  return true;
+}
+
 function deriveStatus(state, profile) {
+  // 主播模式屏蔽中: OP.GG updated_at 一直在刷新但数据全空, 不能判断在线状态
+  if (isAnonymized(profile)) {
+    return { level: 'unknown', text: '屏蔽中 (主播模式)' };
+  }
   const updated = (profile && profile.updated_at) || (state && state.profile && state.profile.updated_at);
   if (!updated) return { level: 'unknown', text: '无数据' };
   const ageSec = (Date.now() - new Date(updated).getTime()) / 1000;
@@ -717,6 +735,7 @@ function deriveStatus(state, profile) {
 function renderHero() {
   const { state, profile } = currentData;
   const p = profile || (state && state.profile) || {};
+  const anonymized = isAnonymized(profile);
 
   if (p.profile_image_url) {
     const img = document.getElementById('avatar');
@@ -733,9 +752,15 @@ function renderHero() {
   tag.className = `tag ${status.level}`;
   document.getElementById('status-text').textContent = status.text;
 
-  if (p.level != null) {
+  // 主播模式屏蔽时不显示 Lv 1 占位
+  if (anonymized) {
+    document.getElementById('level-tag').style.display = '';
+    document.getElementById('level-val').textContent = '? (屏蔽中)';
+  } else if (p.level != null) {
     document.getElementById('level-tag').style.display = '';
     document.getElementById('level-val').textContent = p.level;
+  } else {
+    document.getElementById('level-tag').style.display = 'none';
   }
 
   const lr = p.ladder_rank;
@@ -749,6 +774,16 @@ function renderRank() {
   const { profile } = currentData;
   if (!profile || !profile.league_stats) {
     document.getElementById('rank-grid').innerHTML = '<div class="empty">无段位数据</div>';
+    return;
+  }
+  // 主播模式屏蔽: OP.GG 返回匿名化空数据, 显示说明而不是误导性的「未定级 0W 0L」
+  if (isAnonymized(profile)) {
+    document.getElementById('rank-meta').textContent =
+      `更新于 ${fmtKst(profile.updated_at)} · ${ageString(profile.updated_at)}`;
+    document.getElementById('rank-grid').innerHTML =
+      '<div class="empty">⚠️ OP.GG 返回匿名化空数据 (主播模式屏蔽中)<br>' +
+      'TheShy 当前可能正在游戏中, 段位 / 等级 / 胜负 全部被 Riot API 屏蔽。<br>' +
+      '比赛结束后 5-15 分钟内 OP.GG 会自动恢复真实数据。</div>';
     return;
   }
   const ls = profile.league_stats.filter(l => l.game_type !== 'ARENA');
