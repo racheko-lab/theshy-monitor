@@ -67,7 +67,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           changed=0
-          for f in .theshy_opgg_state.json .theshy_events.json; do
+          for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json; do
             if [ -f "$f" ]; then
               git add "$f"
               if ! git diff --cached --quiet -- "$f"; then
