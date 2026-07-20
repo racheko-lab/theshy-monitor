@@ -578,10 +578,9 @@ def main():
     }
 
     if not (cfg["BARK_KEY"] or cfg["SERVERCHAN_KEY"] or cfg["DISCORD_WEBHOOK"]):
-        print("⚠️  未配置任何推送渠道!")
-        print("   至少配置一个: BARK_KEY / SERVERCHAN_KEY / DISCORD_WEBHOOK")
-        print("   参考 .env.example")
-        sys.exit(1)
+        # 没配推送渠道, 只警告不退出 (监控 state 仍写入供前端展示)
+        print("⚠️  未配置任何推送渠道 (BARK_KEY / SERVERCHAN_KEY / DISCORD_WEBHOOK)")
+        print("   状态文件仍会写入, 前端可正常显示\n")
 
     if args.test_notify:
         print("📤 测试通知...")
