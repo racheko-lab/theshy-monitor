@@ -1,7 +1,7 @@
 # TheShy 排位监控
 
 > 基于 OP.GG MCP API 的 TheShy 排位状态监控, GitHub Actions 自动部署。
-> TheShy 已开启 Riot Streamer Mode (2025-10 Patch 25.20+), 本项目已调整为「赛后感知模式」。
+> 监控账号: `The shy#asdf` (韩服, 퐁당가지토마토, summoner_id=42752430)
 
 🌐 **前端面板**: https://racheko-lab.github.io/theshy-monitor/
 📋 **运行历史**: https://github.com/racheko-lab/theshy-monitor/actions
@@ -10,45 +10,31 @@
 
 ---
 
-## ⚠️ 重要限制说明: 主播模式
+## ⚠️ 主播模式说明
 
-Riot 在 **Patch 25.20 (2025-10)** 推出了 Streamer Mode (主播模式),
-玩家可在客户端设置中开启三个开关:
-- Hide Other Player's Names (隐藏其他人名字)
-- Hide My Name (隐藏我的名字)
-- **Hide My Identifying Info** (最严: 隐藏名字+等级+称号+头像+段位边框)
+Riot 在 **Patch 25.20 (2025-10)** 推出了 Streamer Mode (主播模式), TheShy 已开启。
 
-TheShy 已开启主播模式。
+### 对本项目的影响
 
-### 对本项目的具体影响
+| 项目 | 状态 |
+|---|---|
+| **段位 / LP / 等级** | ✅ 正常获取 |
+| **历史赛季 / 历史段位** | ✅ 正常获取 |
+| **最近 20 场比赛** | ✅ 正常获取 (比赛结束后 5-15 分钟刷新) |
+| **最常玩英雄 / KDA / 胜率** | ✅ 正常获取 |
+| **LP 变化检测** | ✅ 可作为「刚打完排位」的实时信号 |
+| **「正在游戏中」实时状态** | ❌ Riot API 屏蔽, OP.GG 也拿不到 |
 
-| 项目 | 之前 | 现在 (主播模式) |
-|---|---|---|
-| 比赛开始时实时推送 | ✅ OP.GG 检测到 updated_at 刷新 | ❌ **不可能** (Riot API 完全屏蔽) |
-| 比赛结束后通知 | ✅ 延迟 5-15 分钟 | ✅ 延迟 5-15 分钟 (不变) |
-| 召唤师 profile / 段位 / 等级 | ✅ 实时 | ✅ 实时 (非游戏时段) |
-| Match history | ✅ 实时 | ✅ 比赛结束后立即可查 |
-| 最常玩英雄 / KDA / 胜率 | ✅ | ✅ (不受影响) |
-| LP 变化感知 | ✅ 段位变化时 | ✅ **现在作为主要实时信号** |
+主播模式只屏蔽「游戏进行中」的实时状态,
+**打完比赛后所有数据都能正常抓取**。
 
-### 本项目已做的调整
+### 推送时机
 
-1. **检测间隔从 10 分钟缩短到 5 分钟**, 更快捕捉「刚结束」的比赛
-2. **`became_active` / `opgg_updated` 事件不再推送通知** (主播模式下基本不触发, 即使触发也与游戏无关)
-3. **新增 `lp_changed` 事件**: LP 变化一定意味着刚打完排位, 是主播模式下最有价值的实时信号
-4. **`new_match` 通知文案增强**: 加上「(X 分钟前结束)」让用户判断是否还来得及看
-5. **前端加主播模式 pill + banner 说明**, 明确告知限制
-
-### 一个残酷的事实
-
-**主播模式让「第一时间知道主播开始排位」从根本上变得不可能**,
-不论用什么第三方工具 (OP.GG / Porofessor / Blitz / u.gg 都不行),
-因为 Riot API 在游戏进行中就是不返回数据给第三方。
-
-唯一能绕过的路径:
-1. **在 Riot 内部有权限的人** (不现实)
-2. **TheShy 直播间开播推送** (如果他直播打排位, B 站开播推送就够用)
-3. **OP.GG 收到 Riot 通知的瞬间** (OP.GG 也收不到)
+- 主播模式无法做到「比赛开始时」实时推送 (Riot API 完全屏蔽)
+- 比赛结束 5-15 分钟后, OP.GG 会刷新数据并触发:
+  - **new_match** 事件: 检测到新比赛 → 推送胜负 / KDA / 英雄
+  - **lp_changed** 事件: LP 变化 → 推送 ±LP
+  - **rank_changed** 事件: 段位升降
 
 参考:
 - [How to Use Streamer Mode in League of Legends](https://blog.loltheory.gg/lol-streamer-mode/)
@@ -62,8 +48,8 @@ TheShy 已开启主播模式。
 1. GitHub Actions 每 5 分钟调用一次 OP.GG 官方 MCP API (`https://mcp-api.op.gg/mcp`)
 2. 拉取 TheShy 的完整召唤师资料 (profile + league_stats + most_champions + matches)
 3. 检测以下事件:
-   - **new_match**: 检测到新比赛 (主要通知, 比赛结束后 5-15 分钟触发)
-   - **lp_changed**: LP 变化 (主播模式下最有价值的实时信号)
+   - **new_match**: 检测到新比赛 (主要通知)
+   - **lp_changed**: LP 变化
    - **rank_changed**: 段位升降
    - **level_changed**: 等级提升
 4. 推送通知到 Bark / Server酱 / Discord (任选)
