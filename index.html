@@ -136,6 +136,16 @@
     letter-spacing: 0;
   }
 
+  /* 折叠 section */
+  .section-collapse { margin-top: 24px; }
+  .section-title-collapse {
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .section-title-collapse::-webkit-details-marker { display: none; }
+  .section-title-collapse .meta { float: right; }
+
   /* Grid */
   .grid {
     display: grid;
@@ -504,14 +514,6 @@
     </div>
   </div>
 
-  <!-- 赛季信息 -->
-  <div class="section">
-    <div class="section-title">赛季历史 · Season History</div>
-    <div class="grid-3" id="season-grid">
-      <div class="loading"><span class="spinner"></span>加载中...</div>
-    </div>
-  </div>
-
   <!-- 最近比赛 -->
   <div class="section">
     <div class="section-title">
@@ -545,6 +547,14 @@
       <div class="empty">暂无事件</div>
     </div>
   </div>
+
+  <!-- 赛季历史 (折叠, 最底) -->
+  <details class="section-collapse">
+    <summary class="section-title section-title-collapse">赛季历史 · Season History <span class="meta">点击展开</span></summary>
+    <div class="grid-3" id="season-grid">
+      <div class="loading"><span class="spinner"></span>加载中...</div>
+    </div>
+  </details>
 
   <!-- Debug -->
   <details>
@@ -1159,10 +1169,10 @@ function renderDebug() {
 function renderAll() {
   renderHero();
   renderRank();
-  renderSeasons();
   renderMatches();
   renderMostChampions();
   renderEvents();
+  renderSeasons();
   renderDebug();
 }
 
