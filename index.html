@@ -493,17 +493,6 @@
     <button id="refresh-btn">立即刷新</button>
   </div>
 
-  <!-- 召唤师详情 -->
-  <div class="section">
-    <div class="section-title">
-      召唤师详情 · Summoner Info
-      <span class="meta" id="info-meta"></span>
-    </div>
-    <div class="grid-3" id="info-grid">
-      <div class="loading"><span class="spinner"></span>加载中...</div>
-    </div>
-  </div>
-
   <!-- 当前段位 -->
   <div class="section">
     <div class="section-title">
@@ -733,77 +722,6 @@ function renderHero() {
     document.getElementById('ladder-tag').style.display = '';
     document.getElementById('ladder-val').textContent = fmtRank(lr.rank, lr.total);
   }
-}
-
-// 召唤师详情: 顶层杂项字段 + 本赛季最高段位 + 4 次 LP 历史
-function renderSummonerInfo() {
-  const { profile } = currentData;
-  if (!profile) {
-    document.getElementById('info-grid').innerHTML = '<div class="empty">无召唤师数据</div>';
-    return;
-  }
-  document.getElementById('info-meta').textContent =
-    `更新于 ${fmtKst(profile.updated_at)} · ${ageString(profile.updated_at)}`;
-
-  const cards = [];
-
-  // 基础信息卡
-  const items = [];
-  if (profile.id) items.push(['召唤师 ID', profile.id]);
-  if (profile.summoner_id) items.push(['Summoner ID', profile.summoner_id.slice(0, 16) + '…']);
-  if (profile.acct_id) items.push(['Account ID', profile.acct_id.slice(0, 16) + '…']);
-  if (profile.puuid) items.push(['PUUID', profile.puuid.slice(0, 16) + '…']);
-  if (profile.game_name) items.push(['Riot ID', `${profile.game_name}#${profile.tagline}`]);
-  if (profile.internal_name) items.push(['Internal Name', profile.internal_name]);
-  if (profile.level != null) items.push(['等级', profile.level]);
-  if (profile.ladder_rank) items.push(['排名', fmtRank(profile.ladder_rank.rank, profile.ladder_rank.total)]);
-  if (profile.updated_at) items.push(['OP.GG 更新', fmtKst(profile.updated_at)]);
-  if (profile.renewable_at) items.push(['可刷新时间', fmtKst(profile.renewable_at)]);
-  if (profile.revision_at) items.push(['信息修改于', fmtKst(profile.revision_at)]);
-  items.push(['最近视频', `${profile.recent_videos_added_count || 0} 个`]);
-  items.push(['有集锦', profile.has_highlight === 'true' ? '是' : '否']);
-  cards.push(`
-    <div class="card">
-      <div class="card-header"><div class="card-title">基础信息</div></div>
-      ${items.map(([k, v]) => `<div class="kv"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('')}
-    </div>
-  `);
-
-  // 本赛季最高段位
-  const csh = profile.current_season_high_tiers || {};
-  const rankEntries = csh.rank_entries || [];
-  if (rankEntries.length) {
-    const parts = rankEntries.map(e => {
-      const ri = e.high_rank_info || {};
-      const gt = GAME_TYPES[e.game_type] || e.game_type;
-      const tier = ri.tier ? `${tierName(ri.tier)} ${ri.division ? (DIVISION_NAMES[ri.division] || ri.division) : ''} · ${ri.lp || 0} LP` : '未定级';
-      const when = ri.created_at ? ` (${fmtKst(ri.created_at).split(' ')[0]})` : '';
-      return `<div class="kv"><span class="k">${gt}</span><span class="v tier-${ri.tier}">${tier}${when}</span></div>`;
-    }).join('');
-    cards.push(`
-      <div class="card">
-        <div class="card-header"><div class="card-title">S${csh.season_id || '?'} 赛季最高</div></div>
-        ${parts}
-      </div>
-    `);
-  }
-
-  // LP 历史 (近 4-5 次)
-  const lp = profile.lp_histories || [];
-  if (lp.length) {
-    const parts = lp.map(h => {
-      const tier = h.tier ? `${tierName(h.tier)} ${h.division ? (DIVISION_NAMES[h.division] || h.division) : ''}` : '?';
-      return `<div class="kv"><span class="k">${fmtKst(h.created_at).split(' ')[0]}</span><span class="v tier-${h.tier}">${tier} · ${h.lp || 0} LP <span class="card-meta">elo ${h.elo_point || '-'}</span></span></div>`;
-    }).join('');
-    cards.push(`
-      <div class="card">
-        <div class="card-header"><div class="card-title">LP 历史 (近 ${lp.length} 次)</div></div>
-        ${parts}
-      </div>
-    `);
-  }
-
-  document.getElementById('info-grid').innerHTML = cards.join('');
 }
 
 function renderRank() {
@@ -1240,7 +1158,6 @@ function renderDebug() {
 
 function renderAll() {
   renderHero();
-  renderSummonerInfo();
   renderRank();
   renderSeasons();
   renderMatches();
