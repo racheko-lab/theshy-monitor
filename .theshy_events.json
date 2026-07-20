@@ -1,13 +1,7 @@
 [
   {
-    "type": "level_changed",
-    "old": null,
-    "new": 1,
-    "timestamp": "2026-07-21T06:01:27.029475+09:00"
-  },
-  {
-    "type": "error",
-    "msg": "{'code': -32600, 'message': '{\"game_name\":[\"The game name field is required.\"],\"region\":[\"The region field is required.\"]}'}",
-    "timestamp": "2026-07-21T05:58:16.250177+09:00"
+    "type": "system_initialized",
+    "msg": "TheShy 监控已部署到 GitHub Actions, 每 10 分钟检测一次",
+    "timestamp": "2026-07-21T06:01:27+09:00"
   }
 ]
