@@ -569,12 +569,13 @@ def main():
     load_dotenv()
     # 优先级: 已有环境变量 > .env 文件
     # (GitHub Actions 直接把 secrets 注入环境变量, 不会读 .env)
+    # 注意: 用 `or` 而不是默认值, 因为空字符串也要走默认
     cfg = {
-        "BARK_KEY": os.getenv("BARK_KEY", ""),
-        "SERVERCHAN_KEY": os.getenv("SERVERCHAN_KEY", ""),
-        "DISCORD_WEBHOOK": os.getenv("DISCORD_WEBHOOK", ""),
-        "THESHY_RIOT_ID": os.getenv("THESHY_RIOT_ID", "TheShy#KR1"),
-        "THESHY_REGION": os.getenv("THESHY_REGION", "KR"),
+        "BARK_KEY": os.getenv("BARK_KEY") or "",
+        "SERVERCHAN_KEY": os.getenv("SERVERCHAN_KEY") or "",
+        "DISCORD_WEBHOOK": os.getenv("DISCORD_WEBHOOK") or "",
+        "THESHY_RIOT_ID": os.getenv("THESHY_RIOT_ID") or "TheShy#KR1",
+        "THESHY_REGION": os.getenv("THESHY_REGION") or "KR",
     }
 
     if not (cfg["BARK_KEY"] or cfg["SERVERCHAN_KEY"] or cfg["DISCORD_WEBHOOK"]):

@@ -54,22 +54,13 @@ jobs:
           THESHY_REGION: ${{ secrets.THESHY_REGION }}
           FORCE_NOTIFY: ${{ github.event.inputs.force_notify }}
         run: |
-          # 默认参数
-          if [ -z "$THESHY_RIOT_ID" ]; then
-            echo "THESHY_RIOT_ID=TheShy#KR1" >> $GITHUB_ENV
-          fi
-          if [ -z "$THESHY_REGION" ]; then
-            echo "THESHY_REGION=KR" >> $GITHUB_ENV
-          fi
-
-          # 强制测试通知
+          # 强制测试通知模式
           if [ "$FORCE_NOTIFY" = "true" ]; then
             python3 theshy_opgg_monitor.py --test-notify
             exit 0
           fi
-
-          # 正常单次检测
-          python3 theshy_opgg_monitor.py --once
+          # 正常单次检测 (脚本内部会用默认值 TheShy#KR1 / KR)
+          python3 theshy_opgg_monitor.py --once --verbose
 
       - name: Commit state + events files
         run: |
