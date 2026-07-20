@@ -845,7 +845,12 @@ function renderSeasons() {
   }
   const seasons = Object.keys(allSeasons).sort((a, b) => b - a);
   if (seasons.length === 0) {
-    document.getElementById('season-grid').innerHTML = '<div class="empty">无历史赛季</div>';
+    if (isAnonymized(profile)) {
+      document.getElementById('season-grid').innerHTML =
+        '<div class="empty">⚠️ 主播模式屏蔽中, 历史赛季数据不可见</div>';
+    } else {
+      document.getElementById('season-grid').innerHTML = '<div class="empty">无历史赛季</div>';
+    }
     return;
   }
   document.getElementById('season-grid').innerHTML = seasons.map(sid => {
@@ -864,9 +869,16 @@ function renderSeasons() {
 }
 
 function renderMatches() {
-  const { matches } = currentData;
+  const { matches, profile } = currentData;
   if (!matches || matches.length === 0) {
-    document.getElementById('matches-list').innerHTML = '<div class="empty">暂无最近比赛 (OP.GG 还没记录到)</div>';
+    // 主播模式屏蔽时给出准确说明, 而不是误导性的「OP.GG 还没记录到」
+    if (isAnonymized(profile)) {
+      document.getElementById('matches-list').innerHTML =
+        '<div class="empty">⚠️ 主播模式屏蔽中, OP.GG 拿不到 matches 列表<br>' +
+        '比赛结束后 5-15 分钟 OP.GG 会自动恢复, 届时这里会显示最近 20 场。</div>';
+    } else {
+      document.getElementById('matches-list').innerHTML = '<div class="empty">暂无最近比赛 (OP.GG 还没记录到)</div>';
+    }
     return;
   }
   document.getElementById('matches-meta').textContent = `${matches.length} 场`;
@@ -915,7 +927,12 @@ function renderMostChampions() {
 
   if (tabs.length === 0) {
     document.getElementById('mc-tabs').innerHTML = '';
-    document.getElementById('mc-content').innerHTML = '<div class="empty">无英雄数据</div>';
+    if (isAnonymized(profile)) {
+      document.getElementById('mc-content').innerHTML =
+        '<div class="empty">⚠️ 主播模式屏蔽中, 最常玩英雄数据不可见</div>';
+    } else {
+      document.getElementById('mc-content').innerHTML = '<div class="empty">无英雄数据</div>';
+    }
     return;
   }
   if (mcTabIndex >= tabs.length) mcTabIndex = 0;
