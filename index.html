@@ -492,7 +492,8 @@
           <span class="dot"></span>
           <span id="status-text">加载中</span>
         </span>
-        <span id="level-tag" class="tag level" style="display:none;">Lv <span id="level-val">-</span></span>
+        <span id="tier-tag" class="tag" style="display:none;">段位 <span id="tier-val">-</span></span>
+        <span id="wr-tag" class="tag" style="display:none;">胜率 <span id="wr-val">-</span></span>
         <span id="ladder-tag" class="tag ladder" style="display:none;">排名 <span id="ladder-val">-</span></span>
       </div>
     </div>
@@ -513,17 +514,6 @@
       <span id="check-count">-</span> 次检测
     </div>
     <button id="refresh-btn">立即刷新</button>
-  </div>
-
-  <!-- 当前段位 -->
-  <div class="section">
-    <div class="section-title">
-      当前段位 · Ranked Tiers
-      <span class="meta" id="rank-meta"></span>
-    </div>
-    <div class="grid-3" id="rank-grid">
-      <div class="loading"><span class="spinner"></span>加载中...</div>
-    </div>
   </div>
 
   <!-- 最近比赛 -->
@@ -734,9 +724,21 @@ function renderHero() {
   tag.className = `tag ${status.level}`;
   document.getElementById('status-text').textContent = status.text;
 
-  if (p.level != null) {
-    document.getElementById('level-tag').style.display = '';
-    document.getElementById('level-val').textContent = p.level;
+  // 段位 + 胜率: 取第一个非 ARENA 的 league_stats
+  const ls = (p.league_stats || []).filter(l => l.game_type !== 'ARENA');
+  if (ls.length) {
+    const l = ls[0];
+    const tierStr = `${tierName(l.tier)} ${l.division ? (DIVISION_NAMES[l.division] || l.division) : ''} · ${l.lp ?? 0} LP`;
+    const tierTag = document.getElementById('tier-tag');
+    tierTag.style.display = '';
+    tierTag.className = `tag tier-${l.tier}`;
+    document.getElementById('tier-val').textContent = tierStr;
+
+    const play = l.play || (l.match_win || 0) + (l.match_lose || 0);
+    const wr = play ? ((l.match_win / play) * 100).toFixed(1) : 0;
+    document.getElementById('wr-tag').style.display = '';
+    document.getElementById('wr-val').textContent =
+      `${l.match_win ?? l.win ?? 0}W ${l.match_lose ?? l.lose ?? 0}L · ${wr}%`;
   }
 
   const lr = p.ladder_rank;
@@ -744,51 +746,6 @@ function renderHero() {
     document.getElementById('ladder-tag').style.display = '';
     document.getElementById('ladder-val').textContent = fmtRank(lr.rank, lr.total);
   }
-}
-
-function renderRank() {
-  const { profile } = currentData;
-  if (!profile || !profile.league_stats) {
-    document.getElementById('rank-grid').innerHTML = '<div class="empty">无段位数据</div>';
-    return;
-  }
-  const ls = profile.league_stats.filter(l => l.game_type !== 'ARENA');
-  if (ls.length === 0) {
-    document.getElementById('rank-grid').innerHTML = '<div class="empty">TheShy 暂未进行任何排位</div>';
-    return;
-  }
-  document.getElementById('rank-meta').textContent =
-    `更新于 ${fmtKst(profile.updated_at)} · ${ageString(profile.updated_at)}`;
-
-  document.getElementById('rank-grid').innerHTML = ls.map(l => {
-    const play = l.play || (l.match_win || 0) + (l.match_lose || 0);
-    const wr = play ? ((l.match_win/play)*100).toFixed(1) : 0;
-    const highLeaguesHtml = (l.high_leagues || []).map(h => {
-      return `<div>历史最高: ${h.key || '-'} · 当前 ${h.current_count} · 阈值 ${h.lp_threshold} · 晋级候选 ${h.promotion_candidate_count}</div>`;
-    }).join('');
-    return `
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">${GAME_TYPES[l.game_type] || l.game_type}</div>
-          <div class="card-meta">${l.is_hot_streak ? '🔥 连胜' : ''} ${l.is_veteran ? '老兵' : ''} ${l.is_fresh_blood ? '新血' : ''} ${l.is_inactive ? '休眠' : ''}</div>
-        </div>
-        <div class="tier-card">
-          ${l.tier_image_url ? `<img class="tier-img" src="${l.tier_image_url}" alt="">` : ''}
-          <div class="tier-info">
-            <div class="tier-name tier-${l.tier}">${tierName(l.tier)} ${l.division ? DIVISION_NAMES[l.division] || l.division : ''}</div>
-            <div class="tier-stats">
-              <span class="lp">${l.lp ?? 0} LP</span> ·
-              <span class="win">${l.match_win ?? l.win ?? 0}W</span> ·
-              <span class="lose">${l.match_lose ?? l.lose ?? 0}L</span> ·
-              <span class="wr">胜率 ${wr}%</span> ·
-              <span>总场 ${play}</span>
-            </div>
-            ${highLeaguesHtml ? `<div class="high-leagues">${highLeaguesHtml}</div>` : ''}
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
 }
 
 function renderSeasons() {
@@ -1180,7 +1137,6 @@ function renderDebug() {
 
 function renderAll() {
   renderHero();
-  renderRank();
   renderMatches();
   renderEvents();
   renderSeasons();
