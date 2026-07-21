@@ -771,9 +771,8 @@
 const params = new URLSearchParams(location.search);
 const REPO = params.get('repo') || 'racheko-lab/theshy-monitor';
 const BRANCH = params.get('branch') || 'main';
-const forceLocal = params.get('local') === '1' || location.port === '8000' || location.protocol === 'file:';
-const isLocal = forceLocal || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-const RAW = isLocal ? './' : `https://raw.githubusercontent.com/${REPO}/${BRANCH}/`;
+// 数据文件与 index.html 同目录，使用相对路径避免 CORS 问题
+const RAW = './';
 const FILES = {
   state:   RAW + '.theshy_opgg_state.json',
   events:  RAW + '.theshy_events.json',
