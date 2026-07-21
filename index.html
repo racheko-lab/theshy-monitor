@@ -1439,6 +1439,28 @@ function renderMatchDetail(m) {
   const blueGold = bs.gold_earned ?? 0;
   const redGold = rs.gold_earned ?? 0;
 
+  const meOnBlue = blueTeam.some(p => p.summoner_name === 'The shy' && p.summoner_tag === 'asdf');
+  const meOnRed = redTeam.some(p => p.summoner_name === 'The shy' && p.summoner_tag === 'asdf');
+
+  const topTeam = meOnRed ? redTeam : blueTeam;
+  const topGs = meOnRed ? rs : bs;
+  const topIsWin = meOnRed ? redIsWin : blueIsWin;
+  const topLabel = meOnRed ? '红方' : '蓝方';
+  const topKda = meOnRed ? redKda : blueKda;
+  const topBans = meOnRed ? teamRedStat.banned_champions_names : teamBlueStat.banned_champions_names;
+  const topBanIds = meOnRed ? teamRedStat.banned_champions : teamBlueStat.banned_champions;
+
+  const botTeam = meOnRed ? blueTeam : redTeam;
+  const botGs = meOnRed ? bs : rs;
+  const botIsWin = meOnRed ? blueIsWin : redIsWin;
+  const botLabel = meOnRed ? '蓝方' : '红方';
+  const botKda = meOnRed ? blueKda : redKda;
+  const botBans = meOnRed ? teamBlueStat.banned_champions_names : teamRedStat.banned_champions_names;
+  const botBanIds = meOnRed ? teamBlueStat.banned_champions : teamRedStat.banned_champions;
+
+  const topGold = topGs.gold_earned ?? 0;
+  const botGold = botGs.gold_earned ?? 0;
+
   const ati = m.average_tier_info;
   const avgTierStr = ati ? `${tierName(ati.tier)}${ati.division?DIVISION_NAMES[ati.division]||ati.division:''}` : '';
   const totalSec = m.game_length_second || 0;
@@ -1450,12 +1472,12 @@ function renderMatchDetail(m) {
         ${avgTierStr ? `<span class="g-dt-tier">${avgTierStr}</span>` : ''}
         <span class="g-dt-time">${gameTime}</span>
       </div>
-      ${teamHeaderHtml(blueIsWin, bs, '蓝方', blueKda, redGold)}
-      ${blueTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
-      ${banSection(teamBlueStat.banned_champions_names, teamBlueStat.banned_champions)}
-      ${teamHeaderHtml(redIsWin, rs, '红方', redKda, blueGold)}
-      ${redTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
-      ${banSection(teamRedStat.banned_champions_names, teamRedStat.banned_champions)}
+      ${teamHeaderHtml(topIsWin, topGs, topLabel, topKda, botGold)}
+      ${topTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
+      ${banSection(topBans, topBanIds)}
+      ${teamHeaderHtml(botIsWin, botGs, botLabel, botKda, topGold)}
+      ${botTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
+      ${banSection(botBans, botBanIds)}
     </div>
   `;
 }
