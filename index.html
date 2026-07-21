@@ -516,10 +516,13 @@
   .g-p-items { display: flex; gap: 1px; flex-shrink: 0; }
 
   .g-p-dmg-block { flex: 1; min-width: 120px; display: flex; align-items: center; gap: 6px; }
-  .g-p-dmg-bar { flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .g-p-dmg-bars { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 80px; }
+  .g-p-dmg-bar { height: 8px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .g-p-dmg-bar-taken { height: 4px; opacity: 0.5; }
   .g-dmg-bar-inner { height: 100%; border-radius: 2px; }
   .g-bar-win { background: linear-gradient(90deg, #58a6ff, #388bfd); }
   .g-bar-lose { background: linear-gradient(90deg, #f87171, #f85149); }
+  .g-bar-taken { background: var(--muted-2); }
   .g-p-dmg-text { font-size: 10px; color: var(--muted); font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums; }
 
   .g-bans-row { display: flex; align-items: center; gap: 8px; padding: 4px 12px 6px; }
@@ -614,7 +617,7 @@
     .th-gold { font-size: 9px; }
     .g-th-result { font-size: 10px; padding: 1px 8px; flex-shrink: 0; }
 
-    .g-p-row { padding: 3px 8px; gap: 3px; font-size: 10px; flex-wrap: nowrap; align-items: center; }
+    .g-p-row { padding: 3px 8px; gap: 3px; font-size: 10px; flex-wrap: wrap; align-items: center; }
     .g-p-champ { flex-shrink: 0; }
     .g-p-icon { width: 22px; height: 22px; border-radius: 3px; }
     .g-p-lv { font-size: 7px; padding: 0 1px; }
@@ -636,8 +639,20 @@
     .g-p-items { gap: 0; flex-shrink: 0; }
     .item-icon-sm { width: 14px; height: 14px; border-radius: 2px; }
 
-    /* Hide damage bar block entirely on mobile to save space */
-    .g-p-dmg-block { display: none !important; }
+    /* Damage block: full width on second line */
+    .g-p-dmg-block {
+      display: flex !important;
+      width: 100%;
+      flex: none;
+      min-width: 0;
+      gap: 4px;
+      padding: 1px 0 1px 0;
+      align-items: center;
+    }
+    .g-p-dmg-bars { flex: 1; min-width: 0; gap: 1px; }
+    .g-p-dmg-bar { height: 4px; border-radius: 1px; }
+    .g-p-dmg-bar-taken { height: 2px; }
+    .g-p-dmg-text { font-size: 8px; white-space: nowrap; flex-shrink: 0; }
 
     .g-bans-row { padding: 3px 8px 4px; gap: 4px; flex-wrap: nowrap; overflow: hidden; }
     .g-bans-label { font-size: 9px; flex-shrink: 0; }
@@ -664,6 +679,8 @@
     .g-p-icon { width: 20px; height: 20px; }
     .spell-icon-sm { width: 11px; height: 11px; }
     .g-p-spells-col img, .g-p-runes-col img { width: 11px !important; height: 11px !important; }
+    .g-p-dmg-text { font-size: 7px; }
+    .g-p-items { gap: 0; }
   }
 
   /* Toolbar */
@@ -1291,6 +1308,7 @@ function renderMatchDetail(m) {
   const redIsWin = redResult === 'WIN' || rs.is_win === true || rs.is_win === 'true';
 
   const maxDmg = Math.max(...parts.map(p => p.total_damage_dealt_to_champions || 0), 1);
+  const maxTaken = Math.max(...parts.map(p => p.total_damage_taken || 0), 1);
 
   function calcTeamKda(team) {
     let k=0,d=0,a=0;
@@ -1343,6 +1361,8 @@ function renderMatchDetail(m) {
   function participantRow(p, isMe) {
     const dmg = p.total_damage_dealt_to_champions || 0;
     const dmgPct = maxDmg ? (dmg / maxDmg * 100) : 0;
+    const taken = p.total_damage_taken || 0;
+    const takenPct = maxTaken ? (taken / maxTaken * 100) : 0;
     const cs = (p.minion_kill||0) + (p.neutral_minion_kill||0);
     const goldK = fmtGoldK(p.gold_earned||0);
     const kdaRatio = calcKdaStr(p.kill, p.death, p.assist);
@@ -1394,10 +1414,11 @@ function renderMatchDetail(m) {
         </div>
         <div class="g-p-items">${itemsHtml}</div>
         <div class="g-p-dmg-block">
-          <div class="g-p-dmg-bar">
-            <div class="g-dmg-bar-inner ${rowWin?'g-bar-win':'g-bar-lose'}" style="width:${dmgPct}%"></div>
+          <div class="g-p-dmg-bars">
+            <div class="g-p-dmg-bar g-p-dmg-bar-out"><div class="g-dmg-bar-inner ${rowWin?'g-bar-win':'g-bar-lose'}" style="width:${dmgPct}%"></div></div>
+            <div class="g-p-dmg-bar g-p-dmg-bar-taken"><div class="g-dmg-bar-inner g-bar-taken" style="width:${takenPct}%"></div></div>
           </div>
-          <div class="g-p-dmg-text">伤害${fmtNum(dmg)} CS${cs} ${goldK}</div>
+          <div class="g-p-dmg-text">输出${fmtNum(dmg)} · 承伤${fmtNum(taken)} · CS${cs} · ${goldK}</div>
         </div>
       </div>
     `;
