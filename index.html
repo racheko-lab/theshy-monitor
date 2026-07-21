@@ -343,298 +343,213 @@
   .event-item.lp-up .title { color: var(--green); }
   .event-item.lp-down .title { color: var(--red); }
 
-  /* Match list - 电竞GG堂风格 */
+  /* Match list - 电竞GG堂风格 1:1 */
   .g-match {
-    background: var(--card);
-    border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 0;
     margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: background 0.15s;
-    border-left: 4px solid var(--border);
+    overflow: hidden;
+    transition: none;
     position: relative;
+    border: none;
   }
-  .g-match.g-win-bg {
-    border-left-color: var(--accent);
-    background: linear-gradient(90deg, rgba(88,166,255,0.06) 0%, var(--card) 60%);
-  }
-  .g-match.g-lose-bg {
-    border-left-color: var(--red);
-    background: linear-gradient(90deg, rgba(248,81,73,0.06) 0%, var(--card) 60%);
-  }
-  .g-match:hover { background: var(--card-2); }
-  .g-match.g-win-bg:hover { background: linear-gradient(90deg, rgba(88,166,255,0.1) 0%, var(--card-2) 60%); }
-  .g-match.g-lose-bg:hover { background: linear-gradient(90deg, rgba(248,81,73,0.1) 0%, var(--card-2) 60%); }
+  .g-match:hover { filter: brightness(0.97); }
+  .g-match.g-win-bg { background: #eaf2fb; }
+  .g-match.g-lose-bg { background: #fbeaea; }
 
-  .g-champ-col { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-  .g-champ-wrap { position: relative; }
+  .g-match-row { padding: 8px 12px 6px; cursor: pointer; position: relative; }
+
+  .g-top-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .g-type-badge {
+    font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 12px; color: #fff;
+  }
+  .g-type-win { background: #2563eb; }
+  .g-type-lose { background: #dc2626; }
+  .g-time-str { font-size: 11px; color: #888; }
+
+  .g-main-row { display: flex; align-items: center; gap: 10px; }
+
+  .g-left-col { display: flex; gap: 8px; flex-shrink: 0; align-items: center; }
+  .g-champ-wrap { position: relative; flex-shrink: 0; }
   .g-champ-icon {
-    width: 48px; height: 48px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    display: block;
+    width: 48px; height: 48px; border-radius: 6px; display: block;
+    border: 2px solid rgba(255,255,255,0.7);
   }
   .g-champ-lv {
-    position: absolute;
-    bottom: -2px; right: -2px;
-    background: rgba(0,0,0,0.8);
-    color: #fff;
-    font-size: 10px;
-    padding: 1px 3px;
-    border-radius: 3px;
-    font-weight: 600;
-    min-width: 14px;
-    text-align: center;
+    position: absolute; bottom: -1px; right: -1px;
+    background: rgba(0,0,0,0.7); color: #fff;
+    font-size: 9px; padding: 1px 3px; border-radius: 3px; font-weight: 700; line-height: 1.2;
   }
-  .g-result-badge {
-    position: absolute;
-    top: -2px; left: -2px;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 1px 4px;
-    border-radius: 3px;
-    line-height: 1;
-  }
-  .g-win-badge { background: var(--accent); color: #fff; }
-  .g-lose-badge { background: var(--red); color: #fff; }
 
-  .g-spells { display: flex; flex-direction: column; gap: 2px; }
+  .g-spells-runes { display: flex; gap: 2px; flex-shrink: 0; }
+  .g-spells-col { display: flex; flex-direction: column; gap: 1px; }
+  .g-runes-col { display: flex; flex-direction: column; gap: 1px; }
   .spell-icon {
-    width: 22px; height: 22px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    display: block;
+    width: 22px; height: 22px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.6); display: block;
   }
   .spell-icon-sm {
-    width: 18px; height: 18px;
-    border-radius: 3px;
-    border: 1px solid var(--border-2);
+    width: 18px; height: 18px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1);
   }
 
-  .g-info-col { flex: 1; min-width: 0; }
-  .g-topline { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); margin-bottom: 2px; flex-wrap: wrap; }
-  .g-type { font-weight: 600; color: var(--text); font-size: 12px; }
-  .g-time { font-size: 11px; }
+  .g-stats-col { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; min-width: 80px; }
+  .g-badges { display: flex; gap: 3px; margin-bottom: 1px; flex-wrap: wrap; }
+  .g-kda-line { display: flex; align-items: baseline; gap: 1px; font-size: 16px; font-weight: 700; }
+  .g-kill-num { color: #2563eb; font-variant-numeric: tabular-nums; }
+  .g-death-num { color: #dc2626; font-variant-numeric: tabular-nums; }
+  .g-assist-num { color: #059669; font-variant-numeric: tabular-nums; }
+  .g-kda-sep { color: #aaa; font-weight: 400; font-size: 12px; margin: 0 1px; }
+  .g-kda-ratio { font-size: 10px; color: #888; }
 
-  .g-kda-line { display: flex; align-items: baseline; gap: 2px; font-size: 16px; font-weight: 700; }
-  .g-kda-num { font-variant-numeric: tabular-nums; color: var(--text-bright); }
-  .g-kda-num.g-death { color: var(--red); }
-  .g-kda-sep { color: var(--muted-2); font-weight: 400; margin: 0 1px; }
-  .g-kda-ratio { font-size: 11px; margin-left: 6px; font-weight: 600; }
+  .g-teams-col { flex: 1; display: flex; align-items: center; gap: 0; min-width: 0; }
+  .g-team-col { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+  .g-team-blue { align-items: flex-start; }
+  .g-team-red { align-items: flex-end; }
+  .g-vs-sep { font-size: 10px; color: #bbb; font-weight: 700; padding: 0 6px; flex-shrink: 0; }
+  .g-mini-row { display: flex; align-items: center; gap: 4px; max-width: 100%; }
+  .g-team-red .g-mini-row { flex-direction: row-reverse; }
+  .mini-champ { width: 18px; height: 18px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.6); display: block; flex-shrink: 0; }
+  .mini-name { font-size: 11px; color: #444; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px; }
+  .g-team-red .mini-name { text-align: right; }
+  .mini-me { color: #1976d2; font-weight: 700; }
 
-  .g-sub-line { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-  .g-items-col { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex-shrink: 0; }
+  .g-right-col { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
   .g-items { display: flex; gap: 2px; }
   .item-icon {
-    width: 26px; height: 26px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    background: var(--card-2);
+    width: 24px; height: 24px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.3);
   }
   .item-icon-sm {
-    width: 22px; height: 22px;
-    border-radius: 3px;
-    border: 1px solid var(--border-2);
-    background: var(--card-2);
+    width: 22px; height: 22px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);
   }
-  .g-mini-champs { display: flex; gap: 8px; align-items: center; }
-  .g-mini-team { display: flex; gap: 2px; }
-  .mini-champ {
-    width: 18px; height: 18px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-    display: block;
+  .item-empty {
+    background: rgba(0,0,0,0.03); border: 1px dashed rgba(0,0,0,0.1); display: inline-block;
   }
-  .g-mini-team.g-enemy { opacity: 0.75; }
-  .g-vs {
-    font-size: 9px;
-    color: var(--muted-2);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-  }
-  .g-arrow {
-    font-size: 10px;
-    color: var(--muted-2);
-    flex-shrink: 0;
-    margin-left: 4px;
-    transition: transform 0.2s;
+  .g-meta-line { display: flex; gap: 6px; align-items: center; font-size: 10px; color: #888; }
+  .g-length { font-weight: 600; color: #555; }
+  .g-avg { color: #999; }
+
+  .g-expand-arrow {
+    text-align: center; font-size: 10px; color: #aaa; padding-top: 2px; line-height: 1;
   }
 
-  /* 排名徽章 */
+  /* 排名徽章 - 椭圆风格 */
   .rank-badge {
-    display: inline-block;
-    background: rgba(139,148,158,0.2);
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 700;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-variant-numeric: tabular-nums;
+    display: inline-block; background: #888; color: #fff;
+    font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 10px;
+    font-variant-numeric: tabular-nums; line-height: 1.4;
   }
-  .rank-badge.mvp { background: rgba(255,155,58,0.2); color: var(--orange); }
-  .rank-badge.svp { background: rgba(88,166,255,0.2); color: var(--accent); }
+  .rank-badge.mvp { background: #f59e0b; }
+  .rank-badge.svp { background: #8b5cf6; }
+
+  .mk-badge {
+    display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 10px;
+    line-height: 1.4; background: #dc2626; color: #fff;
+  }
+  .op-score {
+    display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 10px;
+    background: rgba(5,150,105,0.12); color: #059669; margin-right: 2px;
+  }
 
   /* 展开详情 */
-  .g-match-detail {
-    background: var(--card-2);
-    border: 1px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    margin: -6px 0 6px;
-    overflow: hidden;
-  }
-  .g-detail-wrap { padding: 8px; }
-  .g-avg-tier { text-align: center; font-size: 12px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--border-2); margin-bottom: 4px; }
+  .g-match-detail { overflow: hidden; }
+  .g-detail-wrap { padding: 0 0 4px; }
 
-  .g-team-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 6px 10px;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 4px;
-    margin: 4px 0;
+  .g-detail-top {
+    display: flex; align-items: center; gap: 10px; padding: 6px 12px; font-size: 11px;
+    color: #888; border-top: 1px solid rgba(0,0,0,0.05);
   }
-  .g-th-win { background: rgba(88,166,255,0.12); color: var(--accent); }
-  .g-th-lose { background: rgba(248,81,73,0.1); color: var(--red); }
-  .g-th-side { min-width: 40px; }
-  .g-th-kills { font-size: 16px; font-variant-numeric: tabular-nums; }
-  .g-th-objs { font-size: 11px; font-weight: 400; color: var(--muted); flex: 1; display: flex; gap: 10px; }
-  .obj-icon {
-    font-size: 10px;
-    padding: 1px 5px;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.06);
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  .obj-gold { color: var(--yellow); background: rgba(210,153,34,0.12); }
-  .obj-fb { color: var(--red); background: rgba(248,81,73,0.12); font-weight: 600; }
-  .g-th-result { font-size: 11px; font-weight: 600; }
+  .g-dt-tier { font-weight: 600; color: #555; }
+
+  .g-th-wrap { padding: 6px 12px; }
+  .g-th-win { background: rgba(37,99,235,0.10); }
+  .g-th-lose { background: rgba(220,38,38,0.10); }
+  .g-th-row { display: flex; align-items: center; gap: 10px; }
+  .g-th-side { font-size: 12px; font-weight: 700; color: #555; min-width: 30px; }
+  .g-th-kda-line { font-size: 13px; font-variant-numeric: tabular-nums; color: #555; }
+  .g-th-k { color: #2563eb; font-weight: 700; }
+  .g-th-d { color: #dc2626; font-weight: 700; }
+  .g-th-a { color: #059669; font-weight: 700; }
+  .g-th-objs { flex: 1; display: flex; gap: 6px; font-size: 11px; color: #777; }
+  .th-obj { white-space: nowrap; }
+  .th-fb { color: #dc2626; font-weight: 600; }
+  .g-th-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .th-gold { font-size: 11px; font-weight: 600; }
+  .th-gold-up { color: #059669; }
+  .th-gold-down { color: #dc2626; }
+  .g-th-result { font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 10px; color: #fff; }
+  .th-win { background: #2563eb; }
+  .th-lose { background: #dc2626; }
 
   .g-p-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 8px;
-    font-size: 11px;
-    border-bottom: 1px solid var(--border-2);
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 12px; font-size: 11px;
   }
-  .g-p-row:last-child { border-bottom: none; }
-  .g-p-row.g-me { background: rgba(88,166,255,0.08); }
-  .g-p-win { border-left: 2px solid transparent; }
-  .g-p-lose { border-left: 2px solid transparent; }
-  .g-p-row.g-me.g-p-win { border-left-color: var(--accent); }
-  .g-p-row.g-me.g-p-lose { border-left-color: var(--red); }
+  .g-p-row.g-me { background: rgba(255,255,255,0.35); }
+  .g-p-win { background: rgba(59,130,246,0.04); }
+  .g-p-lose { background: rgba(239,68,68,0.04); }
 
   .g-p-champ { position: relative; flex-shrink: 0; }
-  .g-p-icon { width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--border); }
-  .g-p-lv { position: absolute; bottom: -1px; right: -1px; background: rgba(0,0,0,0.8); color: #fff; font-size: 9px; padding: 0 2px; border-radius: 2px; font-weight: 600; }
-  .g-p-spells { display: flex; flex-direction: column; gap: 1px; flex-shrink: 0; }
-  .g-p-name { min-width: 110px; max-width: 140px; flex-shrink: 1; }
-  .g-p-id {
-    font-weight: 600;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    gap: 3px;
-  }
-  .g-me-name { color: var(--accent); }
-  .g-p-pos { font-size: 10px; color: var(--muted); }
-  .g-p-kda { min-width: 80px; text-align: center; flex-shrink: 0; }
-  .g-kda-sm-wrap { font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
-  .g-kda-sm { color: var(--text-bright); }
-  .g-kda-sm-win { color: var(--text-bright); }
-  .g-kda-sm-lose { color: var(--text); }
-  .g-kda-sm-death { color: var(--red); }
-  .g-kda-sm-sep { color: var(--muted-2); font-weight: 400; margin: 0 1px; }
-  .g-kda-ratio-sm { display: block; font-size: 10px; color: var(--muted); font-weight: 400; }
-  .g-p-items { display: flex; gap: 1px; flex-shrink: 0; }
-  .item-empty {
-    background: rgba(255,255,255,0.03);
-    border: 1px dashed var(--border-2);
-    display: inline-block;
-  }
-  .g-p-dmg { flex: 1; min-width: 100px; }
-  .g-dmg-bar-wrap {
-    height: 4px;
-    background: var(--border-2);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 2px;
-  }
-  .g-taken-wrap {
-    height: 3px;
-    opacity: 0.5;
-    margin-bottom: 2px;
-  }
-  .g-dmg-bar { height: 100%; border-radius: 2px; }
-  .g-dmg-bar-out { height: 100%; }
-  .g-dmg-bar-taken { background: var(--muted-2); }
-  .g-dmg-win { background: var(--accent); }
-  .g-dmg-lose { background: var(--red); opacity: 0.7; }
-  .g-dmg-num { font-size: 10px; color: var(--muted); margin-top: 1px; }
-  .mk-badge {
-    display: inline-block;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 0 3px;
-    border-radius: 2px;
-    margin-left: 2px;
-    line-height: 14px;
-    vertical-align: middle;
-  }
-  .mk-2 { background: rgba(88,166,255,0.2); color: var(--accent); }
-  .mk-3 { background: rgba(188,140,255,0.2); color: var(--purple); }
-  .mk-4 { background: rgba(210,153,34,0.2); color: var(--yellow); }
-  .mk-5 { background: rgba(248,81,73,0.2); color: var(--red); }
-  .op-score {
-    display: inline-block;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 0 3px;
-    border-radius: 2px;
-    background: rgba(63,185,80,0.15);
-    color: var(--green);
-    margin-left: 2px;
-    line-height: 14px;
-    vertical-align: middle;
-  }
+  .g-p-icon { width: 32px; height: 32px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.1); }
+  .g-p-lv { position: absolute; bottom: -1px; right: -1px; background: rgba(0,0,0,0.7); color: #fff; font-size: 8px; padding: 0 2px; border-radius: 2px; font-weight: 700; line-height: 1.3; }
+  .g-p-spellsrunes { display: flex; gap: 1px; flex-shrink: 0; }
+  .g-p-spells-col { display: flex; flex-direction: column; gap: 1px; }
+  .g-p-runes-col { display: flex; flex-direction: column; gap: 1px; }
+  .g-p-spells-col img, .g-p-runes-col img { display: block; }
+  .g-spells-col img, .g-runes-col img { display: block; }
 
-  .g-bans { display: flex; gap: 4px; padding: 6px 8px; align-items: center; flex-wrap: wrap; border-top: 1px dashed var(--border-2); margin-top: 2px; }
-  .g-bans-label { font-size: 10px; color: var(--muted); margin-right: 4px; }
-  .ban-wrap { position: relative; }
-  .ban-icon { width: 20px; height: 20px; border-radius: 3px; border: 1px solid var(--border); opacity: 0.5; display: block; filter: grayscale(0.5); }
-  .ban-x {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--red);
-    font-size: 14px;
-    font-weight: 700;
-    text-shadow: 0 0 2px rgba(0,0,0,0.8);
-    pointer-events: none;
+  .g-p-info { flex-shrink: 1; min-width: 80px; max-width: 130px; }
+  .g-p-id {
+    font-weight: 600; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-size: 11px; display: flex; align-items: center; gap: 2px;
+  }
+  .g-me-name { color: #1976d2; font-weight: 700; }
+  .g-p-pos { font-size: 9px; color: #999; margin-top: 1px; }
+
+  .g-p-kda-block { flex-shrink: 0; min-width: 65px; text-align: center; }
+  .g-p-kda-nums { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .g-p-k { color: #2563eb; }
+  .g-p-d { color: #dc2626; }
+  .g-p-a { color: #059669; }
+  .g-p-sep { color: #bbb; font-weight: 400; margin: 0 1px; }
+  .g-p-kda-ratio { font-size: 9px; color: #999; margin-top: 1px; }
+
+  .g-p-items { display: flex; gap: 1px; flex-shrink: 0; }
+
+  .g-p-dmg-block { flex: 1; min-width: 120px; display: flex; align-items: center; gap: 6px; }
+  .g-p-dmg-bar { flex: 1; height: 10px; background: rgba(0,0,0,0.06); border-radius: 2px; overflow: hidden; }
+  .g-dmg-bar-inner { height: 100%; border-radius: 2px; }
+  .g-bar-win { background: linear-gradient(90deg, #60a5fa, #3b82f6); }
+  .g-bar-lose { background: linear-gradient(90deg, #f87171, #dc2626); }
+  .g-p-dmg-text { font-size: 10px; color: #666; font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  .g-bans-row { display: flex; align-items: center; gap: 8px; padding: 4px 12px 6px; }
+  .g-bans-label { font-size: 10px; color: #999; flex-shrink: 0; }
+  .g-bans-icons { display: flex; gap: 4px; }
+  .ban-wrap { position: relative; width: 22px; height: 22px; }
+  .ban-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1); display: block;
+    filter: grayscale(0.8); opacity: 0.6;
+  }
+  .ban-slash {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, transparent 45%, #ef4444 45%, #ef4444 55%, transparent 55%);
+    border-radius: 50%; pointer-events: none;
   }
 
   @media (max-width: 640px) {
-    .g-match { flex-wrap: wrap; gap: 6px; padding: 8px; }
-    .g-items-col { width: 100%; flex-direction: row-reverse; justify-content: space-between; align-items: center; }
+    .g-match-row { padding: 6px 8px 4px; }
+    .g-main-row { gap: 6px; flex-wrap: wrap; }
+    .g-teams-col { order: 10; width: 100%; }
+    .g-right-col { margin-left: auto; }
     .g-champ-icon { width: 40px; height: 40px; }
     .spell-icon { width: 18px; height: 18px; }
-    .item-icon { width: 22px; height: 22px; }
-    .g-p-name { min-width: 70px; max-width: 90px; }
-    .g-p-items { display: none; }
-    .g-p-dmg { display: none; }
+    .item-icon { width: 20px; height: 20px; }
+    .g-kda-line { font-size: 14px; }
+    .mini-name { max-width: 70px; font-size: 10px; }
+    .g-p-info { max-width: 80px; }
+    .g-p-dmg-block { display: none; }
+    .item-icon-sm { width: 18px; height: 18px; }
+    .g-th-objs { display: none; }
   }
 
   /* Toolbar */
@@ -897,7 +812,6 @@ function perkStyleIcon(id) { return id ? `${CD_OPGG}/perkStyle/${id}.png` : ''; 
 function runeIconHtml(rune, cls) {
   if (!rune) return '';
   const c = cls || 'spell-icon';
-  const isSm = c === 'spell-icon-sm';
   let primary = '';
   if (rune.primary_rune_id) {
     const pri = perkIcon(rune.primary_rune_id);
@@ -912,8 +826,7 @@ function runeIconHtml(rune, cls) {
   }
   if (rune.secondary_page_id && primary) {
     const sub = perkStyleIcon(rune.secondary_page_id);
-    const subCls = isSm ? 'sub-rune-sm' : 'sub-rune';
-    return `<span class="rune-wrap" style="position:relative;display:inline-block;">${primary}<img class="${subCls}" src="${sub}" alt="" onerror="${IMG_ERR}" style="position:absolute;bottom:-2px;right:-4px;width:${isSm?10:12}px;height:${isSm?10:12}px;border-radius:50%;border:1px solid var(--bg);background:var(--card-2);"></span>`;
+    return primary + `<img class="${c}" src="${sub}" alt="" onerror="${IMG_ERR}">`;
   }
   return primary;
 }
@@ -964,8 +877,10 @@ function ageString(iso) {
 function fmtNum(n, suffix = '') {
   if (n == null || isNaN(n)) return '-';
   n = Number(n);
-  if (n >= 10000) return (n/10000).toFixed(1) + 'w' + suffix;
-  if (n >= 1000) return (n/1000).toFixed(1) + 'k' + suffix;
+  const sign = n < 0 ? '-' : '';
+  const abs = Math.abs(n);
+  if (abs >= 10000) return sign + (abs/10000).toFixed(1) + 'w' + suffix;
+  if (abs >= 1000) return sign + (abs/1000).toFixed(1) + 'k' + suffix;
   return n + suffix;
 }
 
@@ -992,6 +907,12 @@ function calcKdaStr(k, d, a) {
   k = +k||0; d = +d||0; a = +a||0;
   if (d === 0) return k+a > 0 ? 'Perfect' : '0.00';
   return ((k+a)/d).toFixed(2);
+}
+
+function multiKillBadge(n) {
+  if (!n || n < 2) return '';
+  const labels = {2:'双杀',3:'三杀',4:'四杀',5:'五杀'};
+  return `<span class="mk-badge mk-${n}">${labels[n]||n+'杀'}</span>`;
 }
 
 function calcWr(w, p) {
@@ -1129,19 +1050,35 @@ function renderMatches() {
   document.getElementById('matches-meta').textContent = `${matches.length} 场 · 点击展开详情`;
   document.getElementById('matches-list').innerHTML = matches.map((m, idx) => {
     const win = m.result === 'WIN';
-    const mins = m.game_length_second ? Math.floor(m.game_length_second/60) : '-';
-    const me = getTheshyParticipant(m);
-    const mvp = m.op_score_rank === 1;
-    const svp = m.op_score_rank && !mvp && m.op_score_rank <= 3;
-    const rankBadge = mvp ? '<span class="rank-badge mvp">MVP</span>' :
-                      (m.op_score_rank === 2 ? '<span class="rank-badge svp">SVP</span>' :
-                      m.op_score_rank ? `<span class="rank-badge">${ordinal(m.op_score_rank)}</span>` : '');
+    const totalSec = m.game_length_second || 0;
+    const mins = Math.floor(totalSec/60);
+    const secs = totalSec%60;
+    const dateStr = fmtKst(m.created_at).replace(/^\d{2}\/\d{2}\s/, '');
+    const isMvp = m.op_score_rank === 1;
+    const isSvp = m.op_score_rank === 2;
+    const rankBadge = isMvp ? '<span class="rank-badge mvp">MVP</span>' :
+                      isSvp ? '<span class="rank-badge svp">SVP</span>' :
+                      m.op_score_rank ? `<span class="rank-badge">${ordinal(m.op_score_rank)}</span>` : '';
+    const mk = multiKillBadge(m.largest_multi_kill);
 
-    // 队友/对手小头像 (TheShy 所在队队友 + 对手, 各5个)
-    const teammates = (m.participants || []).filter(p => p.team_key === m.team_key && !(p.summoner_name === 'The shy' && p.summoner_tag === 'asdf'));
-    const enemies = (m.participants || []).filter(p => p.team_key !== m.team_key);
-    const allyHtml = teammates.map(p => `<img class="mini-champ" src="${champIcon(p.champion_id)}" title="${p.summoner_name}#${p.summoner_tag}" alt="" onerror="${IMG_ERR}">`).join('');
-    const enemyHtml = enemies.map(p => `<img class="mini-champ" src="${champIcon(p.champion_id)}" title="${p.summoner_name}#${p.summoner_tag}" alt="" onerror="${IMG_ERR}">`).join('');
+    const parts = m.participants || [];
+    const blueTeam = parts.filter(p => p.team_key === 'BLUE');
+    const redTeam = parts.filter(p => p.team_key === 'RED');
+
+    function miniPlayerRow(p) {
+      const isMe = p.summoner_name === 'The shy' && p.summoner_tag === 'asdf';
+      const name = p.summoner_name || '?';
+      const tag = p.summoner_tag ? `#${p.summoner_tag}` : '';
+      const pMk = multiKillBadge(p.largest_multi_kill);
+      const pMvp = p.op_score_rank === 1 ? '<span class="rank-badge mvp" style="font-size:9px;padding:1px 5px;">MVP</span>' :
+                   p.op_score_rank === 2 ? '<span class="rank-badge svp" style="font-size:9px;padding:1px 5px;">SVP</span>' : '';
+      return `<div class="g-mini-row">
+        <img class="mini-champ" src="${champIcon(p.champion_id)}" title="${name}${tag}" alt="" onerror="${IMG_ERR}">
+        <span class="mini-name ${isMe?'mini-me':''}">${pMvp}${name}${tag}${pMk ? ' ' : ''}${pMk}</span>
+      </div>`;
+    }
+    const blueHtml = blueTeam.map(miniPlayerRow).join('');
+    const redHtml = redTeam.map(miniPlayerRow).join('');
 
     const myItems = (m.items || []).slice(0, 7);
     while (myItems.length < 7) myItems.push(0);
@@ -1156,49 +1093,58 @@ function renderMatches() {
     const rune = m.rune || {};
     const runeHtml = runeIconHtml(rune, 'spell-icon');
 
+    const ati = m.average_tier_info;
+    const avgTierStr = ati ? `${tierName(ati.tier)}${ati.division?DIVISION_NAMES[ati.division]||ati.division:''}` : '';
+
     return `
-      <div class="g-match g-match-row ${win?'g-win-bg':'g-lose-bg'}" data-idx="${idx}" style="cursor:pointer;">
-        <div class="g-champ-col">
-          <div class="g-champ-wrap">
-            <img class="g-champ-icon" src="${champIcon(m.champion_id)}" alt="${m.champion||''}" onerror="${IMG_ERR}">
-            <span class="g-champ-lv">${m.champion_level||''}</span>
-            <span class="g-result-badge ${win?'g-win-badge':'g-lose-badge'}">${win?'胜':'负'}</span>
+      <div class="g-match ${win?'g-win-bg':'g-lose-bg'}">
+        <div class="g-match-row" data-idx="${idx}" style="cursor:pointer;">
+          <div class="g-top-bar">
+            <span class="g-type-badge ${win?'g-type-win':'g-type-lose'}">${GAME_TYPES[m.game_type]||m.game_type||'-'}</span>
+            <span class="g-time-str">${dateStr}</span>
           </div>
-          <div class="g-spells">
-            ${spellsHtml}
-            ${runeHtml}
+          <div class="g-main-row">
+            <div class="g-left-col">
+              <div class="g-hero-section">
+                <div class="g-champ-wrap">
+                  <img class="g-champ-icon" src="${champIcon(m.champion_id)}" alt="${m.champion||''}" onerror="${IMG_ERR}">
+                  <span class="g-champ-lv">${m.champion_level||''}</span>
+                </div>
+                <div class="g-spells-runes">
+                  <div class="g-spells-col">${spellsHtml}</div>
+                  <div class="g-runes-col">${runeHtml}</div>
+                </div>
+              </div>
+              <div class="g-stats-col">
+                <div class="g-badges">${rankBadge}${mk}</div>
+                <div class="g-kda-line">
+                  <span class="g-kill-num">${m.kill||0}</span>
+                  <span class="g-kda-sep">/</span>
+                  <span class="g-death-num">${m.death||0}</span>
+                  <span class="g-kda-sep">/</span>
+                  <span class="g-assist-num">${m.assist||0}</span>
+                </div>
+                <div class="g-kda-ratio">${calcKdaStr(m.kill,m.death,m.assist)} KDA</div>
+              </div>
+            </div>
+            <div class="g-teams-col">
+              <div class="g-team-col g-team-blue">${blueHtml}</div>
+              <div class="g-vs-sep">VS</div>
+              <div class="g-team-col g-team-red">${redHtml}</div>
+            </div>
+            <div class="g-right-col">
+              <div class="g-items">${itemsHtml}</div>
+              <div class="g-meta-line">
+                <span class="g-length">${mins}分${secs.toString().padStart(2,'0')}秒</span>
+                ${avgTierStr ? `<span class="g-avg">${avgTierStr}</span>` : ''}
+              </div>
+            </div>
           </div>
+          <div class="g-expand-arrow">▼</div>
         </div>
-        <div class="g-info-col">
-          <div class="g-topline">
-            <span class="g-type">${GAME_TYPES[m.game_type]||m.game_type||'-'}</span>
-            <span class="g-time">${fmtKst(m.created_at).split(' ')[1]||''} · ${mins}分钟</span>
-            ${rankBadge}
-          </div>
-          <div class="g-kda-line">
-            <span class="g-kda-num">${m.kill||0}</span>
-            <span class="g-kda-sep">/</span>
-            <span class="g-kda-num g-death">${m.death||0}</span>
-            <span class="g-kda-sep">/</span>
-            <span class="g-kda-num">${m.assist||0}</span>
-            <span class="g-kda-ratio pill kda">${m.kda} KDA</span>
-          </div>
-          <div class="g-sub-line">
-            CS ${(m.minion_kill||0)+(m.neutral_minion_kill||0)} · ${fmtNum(m.gold_earned)}金 · 伤害 ${fmtNum(m.total_damage_dealt_to_champions)}
-          </div>
+        <div class="g-match-detail" data-detail="${idx}" style="display:none;">
+          ${renderMatchDetail(m)}
         </div>
-        <div class="g-items-col">
-          <div class="g-items">${itemsHtml}</div>
-          <div class="g-mini-champs">
-            <div class="g-mini-team">${allyHtml}</div>
-            <span class="g-vs">VS</span>
-            <div class="g-mini-team g-enemy">${enemyHtml}</div>
-          </div>
-        </div>
-        <div class="g-arrow">▼</div>
-      </div>
-      <div class="g-match-detail" data-detail="${idx}" style="display:none;">
-        ${renderMatchDetail(m)}
       </div>
     `;
   }).join('');
@@ -1207,7 +1153,7 @@ function renderMatches() {
     row.onclick = () => {
       const idx = row.dataset.idx;
       const detail = document.querySelector(`#matches-list .g-match-detail[data-detail="${idx}"]`);
-      const arrow = row.querySelector('.g-arrow');
+      const arrow = row.querySelector('.g-expand-arrow');
       if (detail) {
         const isOpen = detail.style.display !== 'none';
         detail.style.display = isOpen ? 'none' : '';
@@ -1241,52 +1187,61 @@ function renderMatchDetail(m) {
   const redIsWin = redResult === 'WIN' || rs.is_win === true || rs.is_win === 'true';
 
   const maxDmg = Math.max(...parts.map(p => p.total_damage_dealt_to_champions || 0), 1);
-  const maxTaken = Math.max(...parts.map(p => p.total_damage_taken || 0), 1);
 
-  function teamHeaderHtml(isWin, gameStat, label) {
+  function calcTeamKda(team) {
+    let k=0,d=0,a=0;
+    team.forEach(p => { k+=p.kill||0; d+=p.death||0; a+=p.assist||0; });
+    return {k,d,a};
+  }
+
+  function fmtGoldK(n) {
+    if (!n) return '0';
+    if (n >= 1000) return (n/1000).toFixed(1) + 'k';
+    return n.toString();
+  }
+
+  function teamHeaderHtml(isWin, gameStat, label, teamKda, enemyGold) {
     const kills = gameStat.champion_kill ?? 0;
+    const deaths = gameStat.champion_death ?? teamKda.d;
+    const assists = gameStat.champion_assist ?? teamKda.a;
     const towers = gameStat.tower_kill ?? 0;
     const dragons = gameStat.dragon_kill ?? 0;
     const barons = gameStat.baron_kill ?? 0;
-    const inhibs = gameStat.inhibitor_kill ?? 0;
     const heralds = gameStat.rift_herald_kill ?? 0;
     const atakhans = gameStat.atakhan_kill ?? 0;
     const hordes = gameStat.horde_kill ?? 0;
     const firstBlood = gameStat.champion_first === true || gameStat.champion_first === 'true';
     const totalGold = gameStat.gold_earned ?? 0;
+    const goldDiff = enemyGold ? (totalGold - enemyGold) : 0;
     return `
-      <div class="g-team-header ${isWin?'g-th-win':'g-th-lose'}">
-        <span class="g-th-side">${label}</span>
-        <span class="g-th-kills">${kills}</span>
-        <span class="g-th-objs">
-          ${firstBlood ? '<span class="obj-icon obj-fb" title="一血">一血</span>' : ''}
-          ${towers ? `<span class="obj-icon" title="防御塔">塔 ${towers}</span>` : ''}
-          ${dragons ? `<span class="obj-icon" title="小龙">龙 ${dragons}</span>` : ''}
-          ${heralds ? `<span class="obj-icon" title="峡谷先锋">锋 ${heralds}</span>` : ''}
-          ${barons ? `<span class="obj-icon" title="纳什男爵">巴 ${barons}</span>` : ''}
-          ${atakhans ? `<span class="obj-icon" title="阿塔坎">阿 ${atakhans}</span>` : ''}
-          ${hordes ? `<span class="obj-icon" title="虚空巢虫">虫 ${hordes}</span>` : ''}
-          ${inhibs ? `<span class="obj-icon" title="水晶">晶 ${inhibs}</span>` : ''}
-          ${totalGold ? `<span class="obj-icon obj-gold">金 ${fmtNum(totalGold)}</span>` : ''}
-        </span>
-        <span class="g-th-result">${isWin?'胜利':'失败'}</span>
+      <div class="g-th-wrap ${isWin?'g-th-win':'g-th-lose'}">
+        <div class="g-th-row">
+          <span class="g-th-side">${label}</span>
+          <span class="g-th-kda-line"><b class="g-th-k">${kills}</b> / <b class="g-th-d">${deaths}</b> / <b class="g-th-a">${assists}</b></span>
+          <span class="g-th-objs">
+            ${firstBlood ? '<span class="th-obj th-fb" title="一血">一血</span>' : ''}
+            ${towers ? `<span class="th-obj" title="防御塔">塔${towers}</span>` : ''}
+            ${dragons ? `<span class="th-obj" title="小龙">龙${dragons}</span>` : ''}
+            ${heralds ? `<span class="th-obj" title="峡谷先锋">锋${heralds}</span>` : ''}
+            ${barons ? `<span class="th-obj" title="纳什男爵">巴${barons}</span>` : ''}
+            ${atakhans ? `<span class="th-obj" title="阿塔坎">阿${atakhans}</span>` : ''}
+            ${hordes ? `<span class="th-obj" title="虚空巢虫">虫${hordes}</span>` : ''}
+          </span>
+          <span class="g-th-right">
+            ${goldDiff !== 0 ? `<span class="th-gold ${goldDiff>0?'th-gold-up':'th-gold-down'}">${goldDiff>0?'+':''}${fmtNum(goldDiff)}</span>` : ''}
+            <span class="g-th-result ${isWin?'th-win':'th-lose'}">${isWin?'胜利':'失败'}</span>
+          </span>
+        </div>
       </div>
     `;
   }
 
-  function multiKillBadge(n) {
-    if (!n || n < 2) return '';
-    const labels = {2:'双杀',3:'三杀',4:'四杀',5:'五杀'};
-    return `<span class="mk-badge mk-${n}">${labels[n]||n+'杀'}</span>`;
-  }
-
   function participantRow(p, isMe) {
     const dmg = p.total_damage_dealt_to_champions || 0;
-    const taken = p.total_damage_taken || 0;
     const dmgPct = maxDmg ? (dmg / maxDmg * 100) : 0;
-    const takenPct = maxTaken ? (taken / maxTaken * 100) : 0;
     const cs = (p.minion_kill||0) + (p.neutral_minion_kill||0);
-    const kdaRatio = p.kda || calcKdaStr(p.kill, p.death, p.assist);
+    const goldK = fmtGoldK(p.gold_earned||0);
+    const kdaRatio = calcKdaStr(p.kill, p.death, p.assist);
     const isMvp = p.op_score_rank === 1;
     const isSvp = p.op_score_rank === 2;
     const opScore = p.op_score;
@@ -1303,36 +1258,42 @@ function renderMatchDetail(m) {
     }).join('');
     const spellsHtml = (p.spells||[]).map(s => `<img class="spell-icon-sm" src="${spellIcon(s)}" alt="" onerror="${IMG_ERR}">`).join('');
     const pr = p.rune || {};
-    const runeHtml = runeIconHtml(pr, 'spell-icon-sm');
+    const priRuneHtml = runeIconHtml(pr, 'spell-icon-sm');
     const name = p.summoner_name || '?';
     const tag = p.summoner_tag ? `#${p.summoner_tag}` : '';
     const rowWin = p.result === 'WIN';
     const mk = multiKillBadge(p.largest_multi_kill);
-    const opScoreStr = opScore ? `<span class="op-score" title="OP评分">${Number(opScore).toFixed(1)}</span>` : '';
+    const opScoreStr = opScore ? `<span class="op-score">${Number(opScore).toFixed(1)}</span>` : '';
     return `
       <div class="g-p-row ${isMe?'g-me':''} ${rowWin?'g-p-win':'g-p-lose'}">
         <div class="g-p-champ">
           <img class="g-p-icon" src="${champIcon(p.champion_id)}" alt="${p.champion_name||''}" onerror="${IMG_ERR}">
           <span class="g-p-lv">${p.champion_level||''}</span>
         </div>
-        <div class="g-p-spells">${spellsHtml}${runeHtml}</div>
-        <div class="g-p-name">
-          <div class="g-p-id ${isMe?'g-me-name':''}">${rankBadge} ${name}${tag} ${mk} ${opScoreStr}</div>
+        <div class="g-p-spellsrunes">
+          <div class="g-p-spells-col">${spellsHtml}</div>
+          <div class="g-p-runes-col">${priRuneHtml}</div>
+        </div>
+        <div class="g-p-info">
+          <div class="g-p-id ${isMe?'g-me-name':''}">${rankBadge}${opScoreStr} ${name}${tag}${mk?' ':''}${mk}</div>
           <div class="g-p-pos">${POSITIONS[p.position]||p.position||''}</div>
         </div>
-        <div class="g-p-kda">
-          <span class="g-kda-sm-wrap"><span class="g-kda-sm ${rowWin?'g-kda-sm-win':'g-kda-sm-lose'}">${p.kill||0}</span><span class="g-kda-sm-sep">/</span><span class="g-kda-sm g-kda-sm-death">${p.death||0}</span><span class="g-kda-sm-sep">/</span><span class="g-kda-sm ${rowWin?'g-kda-sm-win':'g-kda-sm-lose'}">${p.assist||0}</span></span>
-          <span class="g-kda-ratio-sm">${kdaRatio}</span>
+        <div class="g-p-kda-block">
+          <div class="g-p-kda-nums">
+            <span class="g-p-k">${p.kill||0}</span>
+            <span class="g-p-sep">/</span>
+            <span class="g-p-d">${p.death||0}</span>
+            <span class="g-p-sep">/</span>
+            <span class="g-p-a">${p.assist||0}</span>
+          </div>
+          <div class="g-p-kda-ratio">${kdaRatio} KDA</div>
         </div>
         <div class="g-p-items">${itemsHtml}</div>
-        <div class="g-p-dmg">
-          <div class="g-dmg-bar-wrap">
-            <div class="g-dmg-bar g-dmg-bar-out ${rowWin?'g-dmg-win':'g-dmg-lose'}" style="width:${dmgPct}%"></div>
+        <div class="g-p-dmg-block">
+          <div class="g-p-dmg-bar">
+            <div class="g-dmg-bar-inner ${rowWin?'g-bar-win':'g-bar-lose'}" style="width:${dmgPct}%"></div>
           </div>
-          <div class="g-dmg-bar-wrap g-taken-wrap">
-            <div class="g-dmg-bar g-dmg-bar-taken" style="width:${takenPct}%"></div>
-          </div>
-          <div class="g-dmg-num">输出 ${fmtNum(dmg)} · 承伤 ${fmtNum(taken)} · CS ${cs} · ${fmtNum(p.gold_earned)}金</div>
+          <div class="g-p-dmg-text">伤害${fmtNum(dmg)} CS${cs} ${goldK}</div>
         </div>
       </div>
     `;
@@ -1340,23 +1301,34 @@ function renderMatchDetail(m) {
 
   function banSection(bans, banIds) {
     if (!bans || !bans.length) return '';
-    return `<div class="g-bans">
-      <span class="g-bans-label">禁用:</span>
-      ${bans.map((n,i) => `<div class="ban-wrap"><img class="ban-icon" src="${champIcon(banIds[i])}" title="${n}" alt="${n}" onerror="${IMG_ERR}"><span class="ban-x">✕</span></div>`).join('')}
+    return `<div class="g-bans-row">
+      <span class="g-bans-label">禁用</span>
+      <div class="g-bans-icons">
+        ${bans.map((n,i) => `<div class="ban-wrap"><img class="ban-icon" src="${champIcon(banIds[i])}" title="${n}" alt="${n}" onerror="${IMG_ERR}"><span class="ban-slash"></span></div>`).join('')}
+      </div>
     </div>`;
   }
 
+  const blueKda = calcTeamKda(blueTeam);
+  const redKda = calcTeamKda(redTeam);
+  const blueGold = bs.gold_earned ?? 0;
+  const redGold = rs.gold_earned ?? 0;
+
   const ati = m.average_tier_info;
-  const avgTierStr = ati ? `${tierName(ati.tier)} ${ati.division?DIVISION_NAMES[ati.division]||ati.division:''}` : '';
-  const gameTime = m.game_length_second ? `${Math.floor(m.game_length_second/60)}分${m.game_length_second%60}秒` : '';
+  const avgTierStr = ati ? `${tierName(ati.tier)}${ati.division?DIVISION_NAMES[ati.division]||ati.division:''}` : '';
+  const totalSec = m.game_length_second || 0;
+  const gameTime = `${Math.floor(totalSec/60)}分${(totalSec%60).toString().padStart(2,'0')}秒`;
 
   return `
     <div class="g-detail-wrap">
-      ${avgTierStr ? `<div class="g-avg-tier">平均段位: ${avgTierStr} · 时长: ${gameTime}</div>` : ''}
-      ${teamHeaderHtml(blueIsWin, bs, '蓝方')}
+      <div class="g-detail-top">
+        ${avgTierStr ? `<span class="g-dt-tier">${avgTierStr}</span>` : ''}
+        <span class="g-dt-time">${gameTime}</span>
+      </div>
+      ${teamHeaderHtml(blueIsWin, bs, '蓝方', blueKda, redGold)}
       ${blueTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
       ${banSection(teamBlueStat.banned_champions_names, teamBlueStat.banned_champions)}
-      ${teamHeaderHtml(redIsWin, rs, '红方')}
+      ${teamHeaderHtml(redIsWin, rs, '红方', redKda, blueGold)}
       ${redTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
       ${banSection(teamRedStat.banned_champions_names, teamRedStat.banned_champions)}
     </div>
