@@ -842,17 +842,34 @@ const POSITIONS = {
 };
 
 // ============================================================
-// 图标 CDN (使用 OPGG 静态资源 + DataDragon)
+// 图标 CDN (使用 CommunityDragon + OPGG + DataDragon)
 // ============================================================
-const DD_VER = '16.10.1';
+const DD_VER = '16.14.1';
 const CD_DD = `https://ddragon.leagueoflegends.com/cdn/${DD_VER}`;
+const CD_CD = 'https://cdn.communitydragon.org/latest';
 const CD_OPGG = 'https://opgg-static.akamaized.net/images/lol';
 
-const IMG_ERR = "this.style.opacity=0.3;this.style.filter='grayscale(1)';";
-function champIcon(id) { return id ? `${CD_OPGG}/champion/${id}.png` : ''; }
+const IMG_ERR = "this.style.opacity=0.3;this.style.filter='grayscale(1)';this.onerror=null;";
+function champIcon(id) { return id ? `${CD_CD}/champion/${id}/square` : ''; }
 function itemIcon(id) { return id ? `${CD_DD}/img/item/${id}.png` : ''; }
 function perkIcon(id) { return id ? `${CD_OPGG}/perk/${id}.png` : ''; }
 function perkStyleIcon(id) { return id ? `${CD_OPGG}/perkStyle/${id}.png` : ''; }
+function runeIconHtml(rune, cls) {
+  if (!rune) return '';
+  const c = cls || 'spell-icon';
+  if (rune.primary_rune_id) {
+    const pri = perkIcon(rune.primary_rune_id);
+    const fb = rune.primary_page_id ? perkStyleIcon(rune.primary_page_id) : '';
+    if (fb) {
+      return `<img class="${c}" src="${pri}" alt="" onerror="this.onerror=null;this.src='${fb}';this.onerror=function(){this.style.opacity=0.3;this.style.filter='grayscale(1)';this.onerror=null;};">`;
+    }
+    return `<img class="${c}" src="${pri}" alt="" onerror="${IMG_ERR}">`;
+  }
+  if (rune.primary_page_id) {
+    return `<img class="${c}" src="${perkStyleIcon(rune.primary_page_id)}" alt="" onerror="${IMG_ERR}">`;
+  }
+  return '';
+}
 
 const SUMMONER_SPELL_FILES = {
   1:'SummonerBoost', 3:'SummonerExhaust', 4:'SummonerFlash', 6:'SummonerHaste',
@@ -1086,7 +1103,7 @@ function renderMatches() {
 
     const spellsHtml = (m.spells || []).map(s => `<img class="spell-icon" src="${spellIcon(s)}" title="${SUMMONER_SPELLS[s]||''}" alt="" onerror="${IMG_ERR}">`).join('');
     const rune = m.rune || {};
-    const runeHtml = rune.primary_rune_id ? `<img class="spell-icon" src="${perkIcon(rune.primary_rune_id)}" title="${RUNE_PAGES[rune.primary_page_id]||''}" alt="" onerror="${IMG_ERR}">` : (rune.primary_page_id ? `<img class="spell-icon" src="${perkStyleIcon(rune.primary_page_id)}" title="${RUNE_PAGES[rune.primary_page_id]||''}" alt="" onerror="${IMG_ERR}">` : '');
+    const runeHtml = runeIconHtml(rune, 'spell-icon');
 
     return `
       <div class="g-match g-match-row ${win?'g-win-bg':'g-lose-bg'}" data-idx="${idx}" style="cursor:pointer;">
@@ -1221,7 +1238,7 @@ function renderMatchDetail(m) {
     }).join('');
     const spellsHtml = (p.spells||[]).map(s => `<img class="spell-icon-sm" src="${spellIcon(s)}" alt="" onerror="${IMG_ERR}">`).join('');
     const pr = p.rune || {};
-    const runeHtml = pr.primary_rune_id ? `<img class="spell-icon-sm" src="${perkIcon(pr.primary_rune_id)}" alt="" onerror="${IMG_ERR}">` : (pr.primary_page_id ? `<img class="spell-icon-sm" src="${perkStyleIcon(pr.primary_page_id)}" alt="" onerror="${IMG_ERR}">` : '');
+    const runeHtml = runeIconHtml(pr, 'spell-icon-sm');
     const name = p.summoner_name || '?';
     const tag = p.summoner_tag ? `#${p.summoner_tag}` : '';
     const rowWin = p.result === 'WIN';
