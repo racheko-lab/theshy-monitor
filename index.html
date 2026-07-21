@@ -538,19 +538,132 @@
   }
 
   @media (max-width: 640px) {
+    body { padding: 8px; }
+    .hero { padding: 16px; gap: 12px; margin-bottom: 10px; }
+    .hero-avatar { width: 64px; height: 64px; }
+    .hero h1 { font-size: 20px; }
+    .section-title { font-size: 13px; }
+
+    /* Match card - mobile layout */
+    .g-match { margin-bottom: 4px; border-radius: 6px; border-left-width: 3px; }
     .g-match-row { padding: 6px 8px 4px; }
-    .g-main-row { gap: 6px; flex-wrap: wrap; }
-    .g-teams-col { order: 10; width: 100%; }
-    .g-right-col { margin-left: auto; }
-    .g-champ-icon { width: 40px; height: 40px; }
-    .spell-icon { width: 18px; height: 18px; }
-    .item-icon { width: 20px; height: 20px; }
-    .g-kda-line { font-size: 14px; }
-    .mini-name { max-width: 70px; font-size: 10px; }
-    .g-p-info { max-width: 80px; }
-    .g-p-dmg-block { display: none; }
-    .item-icon-sm { width: 18px; height: 18px; }
+    .g-top-bar { margin-bottom: 4px; }
+    .g-time-str { font-size: 10px; }
+
+    /* Main row: stack vertically */
+    .g-main-row {
+      flex-wrap: wrap;
+      gap: 4px 6px;
+    }
+
+    /* Left: champ + spells/runes + KDA */
+    .g-left-col { gap: 6px; }
+    .g-champ-icon { width: 36px; height: 36px; border-radius: 4px; border-width: 1px; }
+    .g-champ-lv { font-size: 8px; padding: 0 2px; }
+    .spell-icon { width: 16px; height: 16px; border-width: 1px; }
+    .g-spells-runes { gap: 1px; }
+    .g-spells-col, .g-runes-col { gap: 1px; }
+
+    /* Stats: KDA smaller */
+    .g-stats-col { min-width: 56px; gap: 1px; }
+    .g-badges { gap: 2px; margin-bottom: 0; }
+    .g-badges .rank-badge, .g-badges .mk-badge { font-size: 8px; padding: 0 4px; line-height: 1.3; }
+    .g-kda-line { font-size: 13px; gap: 0; }
+    .g-kda-sep { font-size: 10px; margin: 0 1px; }
+    .g-kda-ratio { font-size: 9px; }
+
+    /* Right: items */
+    .g-right-col { gap: 2px; margin-left: auto; }
+    .g-items { gap: 1px; }
+    .item-icon { width: 20px; height: 20px; border-radius: 2px; }
+    .g-meta-line { gap: 4px; font-size: 9px; }
+    .g-length { font-size: 9px; }
+
+    /* Teams: full width below champ+items row */
+    .g-teams-col {
+      order: 10;
+      width: 100%;
+      gap: 4px;
+      padding-top: 2px;
+      border-top: 1px solid var(--border-2);
+    }
+    .g-team-col { gap: 0; flex: 1; }
+    .g-vs-sep { font-size: 9px; padding: 0 4px; }
+    .g-mini-row { gap: 2px; }
+    .mini-champ { width: 14px; height: 14px; border-radius: 2px; border-width: 1px; }
+    .mini-name {
+      font-size: 9px;
+      max-width: 58px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .g-mini-row .rank-badge { display: none; }
+    .g-mini-row .mk-badge { display: none; }
+
+    /* Expand arrow */
+    .g-expand-arrow { font-size: 9px; padding-top: 1px; }
+
+    /* Detail view - compact */
+    .g-detail-top { padding: 4px 8px; font-size: 10px; gap: 6px; }
+    .g-th-wrap { padding: 4px 8px; }
+    .g-th-row { gap: 6px; flex-wrap: nowrap; overflow: hidden; }
+    .g-th-side { font-size: 10px; min-width: 24px; flex-shrink: 0; }
+    .g-th-kda-line { font-size: 11px; flex-shrink: 0; }
     .g-th-objs { display: none; }
+    .g-th-right { gap: 4px; flex-shrink: 0; margin-left: auto; }
+    .th-gold { font-size: 9px; }
+    .g-th-result { font-size: 10px; padding: 1px 8px; flex-shrink: 0; }
+
+    .g-p-row { padding: 3px 8px; gap: 3px; font-size: 10px; flex-wrap: nowrap; align-items: center; }
+    .g-p-champ { flex-shrink: 0; }
+    .g-p-icon { width: 22px; height: 22px; border-radius: 3px; }
+    .g-p-lv { font-size: 7px; padding: 0 1px; }
+    .g-p-spellsrunes { gap: 1px; flex-shrink: 0; }
+    .g-p-spells-col, .g-p-runes-col { gap: 0; }
+    .spell-icon-sm { width: 12px; height: 12px; border-width: 1px; border-radius: 2px; }
+    .g-p-spells-col img, .g-p-runes-col img { width: 12px !important; height: 12px !important; border-radius: 2px; }
+
+    .g-p-info { min-width: 0; flex: 1; overflow: hidden; }
+    .g-p-id { font-size: 10px; gap: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+    .g-p-id .rank-badge { font-size: 7px; padding: 0 3px; line-height: 1.3; }
+    .g-p-id .op-score { font-size: 7px; padding: 0 2px; margin-right: 1px; }
+    .g-p-pos { font-size: 8px; }
+
+    .g-p-kda-block { min-width: 38px; flex-shrink: 0; text-align: right; }
+    .g-p-kda-nums { font-size: 10px; }
+    .g-p-kda-ratio { display: none; }
+
+    .g-p-items { gap: 0; flex-shrink: 0; }
+    .item-icon-sm { width: 14px; height: 14px; border-radius: 2px; }
+
+    /* Hide damage bar block entirely on mobile to save space */
+    .g-p-dmg-block { display: none !important; }
+
+    .g-bans-row { padding: 3px 8px 4px; gap: 4px; flex-wrap: nowrap; overflow: hidden; }
+    .g-bans-label { font-size: 9px; flex-shrink: 0; }
+    .g-bans-icons { gap: 2px; flex-wrap: wrap; }
+    .ban-wrap { width: 16px; height: 16px; }
+    .ban-icon { width: 16px; height: 16px; }
+
+    /* Hero & other sections */
+    .hero { flex-direction: column; text-align: center; }
+    .hero-tags { justify-content: center; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .champ-table { font-size: 10px; }
+    .champ-table th, .champ-table td { padding: 4px 2px; }
+    .toolbar { font-size: 11px; }
+    .toolbar button { padding: 4px 10px; font-size: 11px; }
+  }
+
+  /* Extra small screens (<=380px) */
+  @media (max-width: 380px) {
+    .mini-name { max-width: 46px; font-size: 8px; }
+    .item-icon { width: 17px; height: 17px; }
+    .g-p-info { min-width: 0; }
+    .item-icon-sm { width: 13px; height: 13px; }
+    .g-p-icon { width: 20px; height: 20px; }
+    .spell-icon-sm { width: 11px; height: 11px; }
+    .g-p-spells-col img, .g-p-runes-col img { width: 11px !important; height: 11px !important; }
   }
 
   /* Toolbar */
@@ -660,15 +773,6 @@
     word-break: break-all;
     max-height: 200px;
     overflow-y: auto;
-  }
-
-  @media (max-width: 640px) {
-    .hero { flex-direction: column; text-align: center; }
-    .hero-avatar { width: 72px; height: 72px; }
-    .hero-tags { justify-content: center; }
-    .grid-3 { grid-template-columns: 1fr; }
-    .champ-table { font-size: 11px; }
-    .champ-table th, .champ-table td { padding: 6px 4px; }
   }
 </style>
 </head>
