@@ -80,7 +80,7 @@ jobs:
             done
           done
           if [ "$changed" = "1" ]; then
-            git commit -m "chore: update theshy state (multi-account) [skip ci]"
+            git commit -m "chore: update theshy state (multi-account)"
             git pull --rebase origin main || true
             git push || echo "push 失败, 下次 cron 会重试"
             echo "State committed"

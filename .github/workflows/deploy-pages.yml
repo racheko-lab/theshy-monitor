@@ -3,9 +3,6 @@ name: Deploy Frontend to Pages
 on:
   push:
     branches: [main]
-    paths:
-      - 'index.html'
-      - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
 permissions:
