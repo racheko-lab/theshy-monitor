@@ -12,6 +12,7 @@ import sys
 import json
 import time
 import re
+import shutil
 import argparse
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -31,11 +32,24 @@ OPGG_HEADERS = {
 }
 KST = timezone(timedelta(hours=9))
 
-STATE_FILE = Path(__file__).parent / ".theshy_opgg_state.json"
-EVENTS_FILE = Path(__file__).parent / ".theshy_events.json"
-PROFILE_FILE = Path(__file__).parent / ".theshy_profile.json"   # 完整 profile 数据
-MATCHES_FILE = Path(__file__).parent / ".theshy_matches.json"   # 最近比赛数据
+BASE_DIR = Path(__file__).parent
+
+# 多账号监控列表: (slug, game_name, tag_line, region, label)
+# slug 用于文件名, label 用于前端显示
+DEFAULT_ACCOUNTS = [
+    ("main",   "The shy", "asdf", "KR", "The shy#asdf"),
+    ("smurf",  "은여하",   "1103", "KR", "은여하#1103"),
+]
+
+# 全局事件/状态文件
+EVENTS_FILE = BASE_DIR / ".theshy_events.json"
+COMBINED_DATA_FILE = BASE_DIR / ".theshy_data.json"
 MAX_EVENTS = 100
+
+# 旧版单账号文件 (为前端兼容保留, 主账号写这些)
+LEGACY_STATE_FILE = BASE_DIR / ".theshy_opgg_state.json"
+LEGACY_PROFILE_FILE = BASE_DIR / ".theshy_profile.json"
+LEGACY_MATCHES_FILE = BASE_DIR / ".theshy_matches.json"
 
 DEFAULT_INTERVAL = 180  # 本地运行用, GitHub Actions 用 --once 模式
 
@@ -413,28 +427,37 @@ def save_json(path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2, default=str))
 
 
-def load_state():
-    if STATE_FILE.exists():
+def load_json(path, default=None):
+    if path.exists():
         try:
-            return json.loads(STATE_FILE.read_text())
+            return json.loads(path.read_text())
         except Exception:
-            return {}
+            pass
+    return default if default is not None else {}
+
+
+LEGACY_STATE_FILE = BASE_DIR / ".theshy_opgg_state.json"
+
+
+def load_state(slug="main"):
+    new_path = BASE_DIR / f".theshy_state_{slug}.json"
+    if new_path.exists():
+        return load_json(new_path, {})
+    if slug == "main" and LEGACY_STATE_FILE.exists():
+        data = load_json(LEGACY_STATE_FILE, {})
+        save_json(new_path, data)
+        return data
     return {}
 
 
-def save_state(state):
-    save_json(STATE_FILE, state)
+def save_state(slug, state):
+    save_json(BASE_DIR / f".theshy_state_{slug}.json", state)
 
 
 def append_event(event):
-    events = []
-    if EVENTS_FILE.exists():
-        try:
-            events = json.loads(EVENTS_FILE.read_text())
-            if not isinstance(events, list):
-                events = []
-        except Exception:
-            events = []
+    events = load_json(EVENTS_FILE, [])
+    if not isinstance(events, list):
+        events = []
     event = {**event, "timestamp": datetime.now(KST).isoformat()}
     events.insert(0, event)
     events = events[:MAX_EVENTS]
@@ -828,43 +851,38 @@ def _find_key(obj, key):
 
 
 # ============================================================
-# 检测主函数
+# 检测主函数 (单账号)
 # ============================================================
-def check_theshy(client, cfg, state, verbose=False):
+def check_account(client, game_name, tag_line, region, slug, label, state, verbose=False):
+    """检测单个账号, 返回 (events_list, updated_state, profile, matches_list)"""
     events = []
-    riot_id = cfg.get("THESHY_RIOT_ID", "The shy#asdf").split("#")
-    game_name = riot_id[0]
-    tag_line = riot_id[1] if len(riot_id) > 1 else "KR1"
-    region = cfg.get("THESHY_REGION", "KR")
 
     # 1. profile
     resp = client.get_summoner_profile(game_name, tag_line, region)
     if "error" in resp:
-        return [{"type": "error", "msg": str(resp["error"])}], state
+        err = {"type": "error", "account": label, "msg": str(resp["error"])}
+        return [err], state, None, []
 
     parsed = parse_repr(resp.get("text", ""))
     profile = normalize_summoner(parsed)
 
     if verbose:
-        print(f"  name={profile.get('name')} level={profile.get('level')} "
+        print(f"  [{slug}] name={profile.get('game_name')} level={profile.get('level')} "
               f"updated_at={profile.get('updated_at')}")
 
-    # 完整 profile 存文件 (前端读)
-    save_json(PROFILE_FILE, profile)
-
     # 2. matches
+    matches_file = BASE_DIR / f".theshy_matches_{slug}.json"
     matches_resp = client.list_matches(game_name, tag_line, region, limit=20)
     matches_text = matches_resp.get("text", "")
     matches_parsed = parse_repr(matches_text) if matches_text else None
     matches_list = _extract_matches(matches_parsed)
 
     # 2.5 拉取比赛详情 (participants/10人阵容), 缓存已有详情跳过
-    existing_matches = []
-    try:
-        if MATCHES_FILE.exists():
-            existing_matches = json.loads(MATCHES_FILE.read_text())
-    except Exception:
-        pass
+    if not matches_file.exists() and slug == "main" and LEGACY_MATCHES_FILE.exists():
+        shutil.copy(LEGACY_MATCHES_FILE, matches_file)
+    existing_matches = load_json(matches_file, [])
+    if not isinstance(existing_matches, list):
+        existing_matches = []
     existing_map = {m.get("id"): m for m in existing_matches if m.get("id")}
     detail_count = 0
     for m in matches_list:
@@ -895,12 +913,17 @@ def check_theshy(client, cfg, state, verbose=False):
                     time.sleep(0.3)
         except Exception as e:
             if verbose:
-                print(f"  detail fail for {mid[:16]}: {e}")
+                print(f"  [{slug}] detail fail for {mid[:16]}: {e}")
 
-    save_json(MATCHES_FILE, matches_list)
+    # 附加账号标识到每场比赛
+    for m in matches_list:
+        m["_account_slug"] = slug
+        m["_account_label"] = label
+
+    save_json(matches_file, matches_list)
 
     if verbose:
-        print(f"  matches: {len(matches_list)} 场 (新增详情 {detail_count})")
+        print(f"  [{slug}] matches: {len(matches_list)} 场 (新增详情 {detail_count})")
 
     # 3. 判断活跃
     updated_at = profile.get("updated_at")
@@ -913,7 +936,7 @@ def check_theshy(client, cfg, state, verbose=False):
                 upd_dt = upd_dt.replace(tzinfo=KST)
             age_sec = (now - upd_dt.astimezone(KST)).total_seconds()
             if verbose:
-                print(f"  updated_at age={age_sec:.0f}s")
+                print(f"  [{slug}] updated_at age={age_sec:.0f}s")
             if 0 <= age_sec < 300:
                 is_active = True
         except Exception:
@@ -927,6 +950,8 @@ def check_theshy(client, cfg, state, verbose=False):
     if last_updated and updated_at and last_updated != updated_at:
         events.append({
             "type": "opgg_updated",
+            "account": label,
+            "slug": slug,
             "updated_at": updated_at,
             "level": profile.get("level"),
             "is_active": is_active,
@@ -935,6 +960,8 @@ def check_theshy(client, cfg, state, verbose=False):
     if is_active and not last_active:
         events.append({
             "type": "became_active",
+            "account": label,
+            "slug": slug,
             "updated_at": updated_at,
             "level": profile.get("level"),
         })
@@ -942,6 +969,8 @@ def check_theshy(client, cfg, state, verbose=False):
     if last_state.get("level") != profile.get("level") and profile.get("level"):
         events.append({
             "type": "level_changed",
+            "account": label,
+            "slug": slug,
             "old": last_state.get("level"),
             "new": profile.get("level"),
         })
@@ -954,6 +983,8 @@ def check_theshy(client, cfg, state, verbose=False):
         if mid and mid != last_match_id:
             events.append({
                 "type": "new_match",
+                "account": label,
+                "slug": slug,
                 "match_id": mid,
                 "game_type": latest.get("game_type"),
                 "champion": latest.get("champion"),
@@ -980,14 +1011,15 @@ def check_theshy(client, cfg, state, verbose=False):
                 cl.get("division") != ll.get("division")):
                 events.append({
                     "type": "rank_changed",
+                    "account": label,
+                    "slug": slug,
                     "game_type": cl.get("game_type"),
                     "old": f"{ll.get('tier')} {ll.get('division')}",
                     "new": f"{cl.get('tier')} {cl.get('division')}",
                 })
                 break
 
-    # 6.5 LP 变化检测 (主播模式下最有价值的实时信号)
-    # LP 变化必然意味着刚打完排位
+    # 6.5 LP 变化检测
     if last_league and cur_league:
         for cl, ll in zip(cur_league, last_league):
             if cl.get("tier") == ll.get("tier") and \
@@ -999,6 +1031,8 @@ def check_theshy(client, cfg, state, verbose=False):
                     if delta != 0:
                         events.append({
                             "type": "lp_changed",
+                            "account": label,
+                            "slug": slug,
                             "game_type": cl.get("game_type"),
                             "old_lp": ll.get("lp"),
                             "new_lp": cl.get("lp"),
@@ -1026,8 +1060,50 @@ def check_theshy(client, cfg, state, verbose=False):
         state["last_match_id"] = matches_list[0].get("id")
     state["last_check"] = datetime.now(KST).isoformat()
     state["matches_count"] = len(matches_list)
+    state["slug"] = slug
+    state["label"] = label
 
-    return events, state
+    return events, state, profile, matches_list
+
+
+def check_theshy(client, cfg, state, verbose=False):
+    """兼容旧接口: 检测主账号 (第一个配置)"""
+    # 从配置或环境变量读取账号列表
+    accounts = _parse_accounts_config(cfg)
+    if not accounts:
+        accounts = DEFAULT_ACCOUNTS
+    slug, game_name, tag_line, region, label = accounts[0]
+    events, new_state, profile, matches = check_account(
+        client, game_name, tag_line, region, slug, label, state, verbose)
+    # 旧接口只返回 events 和 state
+    return events, new_state
+
+
+def _parse_accounts_config(cfg):
+    """从环境变量/配置解析账号列表
+    格式: THESHY_ACCOUNTS=slug1:name1#tag1:region1,slug2:name2#tag2:region2
+    若未设置则使用 DEFAULT_ACCOUNTS
+    """
+    accounts_str = cfg.get("THESHY_ACCOUNTS", "").strip()
+    if not accounts_str:
+        return None
+    accounts = []
+    for part in accounts_str.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        segs = part.split(":")
+        if len(segs) >= 2:
+            slug = segs[0]
+            riot_id = segs[1]
+            region = segs[2] if len(segs) > 2 else "KR"
+            if "#" in riot_id:
+                gn, tl = riot_id.split("#", 1)
+            else:
+                gn, tl = riot_id, "KR1"
+            label = f"{gn}#{tl}"
+            accounts.append((slug, gn, tl, region, label))
+    return accounts if accounts else None
 
 
 def _extract_game_detail(parsed):
@@ -1185,37 +1261,34 @@ def handle_event(event, cfg):
     主要依赖 new_match 事件 (比赛结束后 OP.GG 才能拉到) 作为通知触发器。
     """
     et = event["type"]
+    acct_label = event.get("account", "")
+    acct_prefix = f"[{acct_label}] " if acct_label else ""
+
     if et == "became_active":
-        # 主播模式下几乎不会触发, 即使触发也只是 OP.GG 主动刷新
-        # 不再推送, 但事件仍然记录到 events.json 供前端展示
         return []
     if et == "opgg_updated":
-        # 不再推送 OP.GG 更新事件 (主播模式下基本是 OP.GG 定期刷新, 与游戏无关)
         return []
     if et == "level_changed":
         return notify("📈 TheShy 升级",
-                      f"等级: {event['old']} → {event['new']}", cfg)
+                      f"{acct_prefix}等级: {event['old']} → {event['new']}", cfg)
     if et == "lp_changed":
-        # LP 变化是主播模式下最有价值的实时信号之一
-        # 因为 LP 变化一定意味着刚结束排位
         delta = event.get('delta', 0)
         sign = "+" if delta >= 0 else ""
         arrow = "📈" if delta >= 0 else "📉"
         return notify(
-            f"{arrow} TheShy 排位 LP 变化 {sign}{delta}",
+            f"{arrow} TheShy LP 变化 {sign}{delta} {acct_prefix}",
             f"{event['game_type']}: {event['old_lp']} → {event['new_lp']} LP\n"
             f"段位: {event['tier']} {event['division']}\n"
             f"变化: {sign}{delta} LP\n"
+            f"账号: {acct_label}\n"
             f"⚠️ 主播模式下无法预知比赛开始, 仅在赛后才能感知",
             cfg,
         )
     if et == "new_match":
-        # 主力通知: TheShy 刚打完一场排位
         type_map = {"SOLORANKED": "单双排", "FLEXRANKED": "灵活组排",
                     "NORMAL": "匹配", "ARAM": "大乱斗"}
         gt = type_map.get(event["game_type"], event["game_type"])
         win = event.get("result") == "WIN"
-        # 计算比赛结束到现在多久 (KST)
         ago = ""
         if event.get("created_at"):
             try:
@@ -1230,8 +1303,9 @@ def handle_event(event, cfg):
             except Exception:
                 pass
         title_emoji = "🏆" if win else "💔"
-        title = f"{title_emoji} TheShy 刚打完{gt} · {'胜' if win else '败'}"
+        title = f"{title_emoji} TheShy 刚打完{gt} · {'胜' if win else '败'} {acct_prefix}"
         body = (
+            f"账号: {acct_label}\n"
             f"英雄: {event.get('champion', '?')}\n"
             f"KDA: {event.get('kda', '?')} "
             f"({event.get('kill', 0)}/{event.get('death', 0)}/{event.get('assist', 0)})\n"
@@ -1242,18 +1316,92 @@ def handle_event(event, cfg):
         return notify(title, body, cfg)
     if et == "rank_changed":
         return notify("🏆 TheShy 段位变化!",
-                      f"{event['game_type']}: {event['old']} → {event['new']}\n"
+                      f"{acct_prefix}{event['game_type']}: {event['old']} → {event['new']}\n"
+                      f"账号: {acct_label}\n"
                       f"⚠️ 主播模式下, 段位变化通常需要等下一场比赛结束才能感知", cfg)
     if et == "error":
-        return notify("⚠️ OP.GG 监控错误", event.get("msg", "未知错误"), cfg)
+        acct_info = f" ({event.get('account','')})" if event.get("account") else ""
+        return notify("⚠️ OP.GG 监控错误",
+                      f"{event.get('msg', '未知错误')}{acct_info}", cfg)
     return []
 
 
 # ============================================================
 # 主入口
 # ============================================================
+def run_all_accounts(client, cfg, accounts, verbose=False):
+    """遍历所有账号进行检测, 返回合并的数据和事件列表"""
+    all_events = []
+    accounts_data = []
+
+    for slug, game_name, tag_line, region, label in accounts:
+        if verbose:
+            print(f"\n--- 检测账号: {label} ({slug}) @ {region} ---")
+        state = load_state(slug)
+        try:
+            events, new_state, profile, matches = check_account(
+                client, game_name, tag_line, region, slug, label, state, verbose=verbose
+            )
+            save_state(slug, new_state)
+            all_events.extend(events)
+
+            accounts_data.append({
+                "slug": slug,
+                "label": label,
+                "game_name": game_name,
+                "tag_line": tag_line,
+                "region": region,
+                "profile": profile,
+                "matches": matches,
+                "state": {
+                    "is_active": new_state.get("is_active", False),
+                    "last_check": new_state.get("last_check"),
+                    "last_match_id": new_state.get("last_match_id"),
+                    "matches_count": new_state.get("matches_count", 0),
+                },
+            })
+
+            # 第一个账号写入旧版单账号文件以兼容
+            if slug == accounts[0][0]:
+                if profile:
+                    save_json(LEGACY_PROFILE_FILE, profile)
+                if matches:
+                    save_json(LEGACY_MATCHES_FILE, matches)
+                save_json(LEGACY_STATE_FILE, new_state)
+
+        except Exception as e:
+            import traceback
+            print(f"❌ [{slug}] 检测异常: {e}")
+            if verbose:
+                traceback.print_exc()
+            all_events.append({
+                "type": "error",
+                "account": label,
+                "slug": slug,
+                "msg": str(e),
+            })
+            accounts_data.append({
+                "slug": slug,
+                "label": label,
+                "game_name": game_name,
+                "tag_line": tag_line,
+                "region": region,
+                "profile": None,
+                "matches": [],
+                "state": {"is_active": False, "error": str(e)},
+            })
+
+    # 写入合并数据文件供前端使用
+    combined = {
+        "accounts": accounts_data,
+        "last_update": datetime.now(KST).isoformat(),
+    }
+    save_json(COMBINED_DATA_FILE, combined)
+    return all_events, accounts_data
+
+
 def main():
-    parser = argparse.ArgumentParser(description="TheShy 排位监控 (OP.GG 完整数据)")
+    parser = argparse.ArgumentParser(description="TheShy 排位监控 (OP.GG 完整数据, 多账号)")
     parser.add_argument("--once", action="store_true", help="只检测一次")
     parser.add_argument("--interval", type=int, default=DEFAULT_INTERVAL)
     parser.add_argument("--test-notify", action="store_true", help="测试通知")
@@ -1267,7 +1415,10 @@ def main():
         "DISCORD_WEBHOOK": os.getenv("DISCORD_WEBHOOK") or "",
         "THESHY_RIOT_ID": os.getenv("THESHY_RIOT_ID") or "The shy#asdf",
         "THESHY_REGION": os.getenv("THESHY_REGION") or "KR",
+        "THESHY_ACCOUNTS": os.getenv("THESHY_ACCOUNTS") or "",
     }
+
+    accounts = _parse_accounts_config(cfg) or DEFAULT_ACCOUNTS
 
     if not (cfg["BARK_KEY"] or cfg["SERVERCHAN_KEY"] or cfg["DISCORD_WEBHOOK"]):
         print("⚠️  未配置推送渠道, 状态文件仍会写入供前端展示\n")
@@ -1280,20 +1431,20 @@ def main():
         return
 
     client = OpggClient(verbose=args.verbose)
-    state = load_state()
 
-    print(f"🚀 TheShy 监控启动 (OP.GG 数据源)")
-    print(f"   目标: {cfg['THESHY_RIOT_ID']} @ {cfg['THESHY_REGION']}")
+    print(f"🚀 TheShy 监控启动 (OP.GG 数据源, 多账号模式)")
+    for slug, gn, tl, reg, lbl in accounts:
+        print(f"   - {lbl} ({slug}) @ {reg}")
     print(f"   推送: {[k for k in ['BARK_KEY','SERVERCHAN_KEY','DISCORD_WEBHOOK'] if cfg.get(k)]}\n")
 
     while True:
         try:
             now = kst_now().strftime("%H:%M:%S")
-            print(f"[{now}] 检测中...")
-            events, state = check_theshy(client, cfg, state, verbose=args.verbose)
-            save_state(state)
+            print(f"[{now}] 检测所有账号...")
+            all_events, accounts_data = run_all_accounts(
+                client, cfg, accounts, verbose=args.verbose)
 
-            for ev in events:
+            for ev in all_events:
                 if args.verbose:
                     print(f"  📨 事件: {ev}")
                 append_event(ev)
@@ -1301,8 +1452,9 @@ def main():
                 for ch, ok in results:
                     print(f"    {ch}: {'✅' if ok else '❌'}")
 
-            if not events:
-                print(f"  无变化 (updated_at={state.get('profile',{}).get('updated_at','?')})")
+            if not all_events:
+                active_slugs = [a["slug"] for a in accounts_data if a["state"].get("is_active")]
+                print(f"  无变化 (活跃账号: {active_slugs if active_slugs else '无'})")
 
             if args.once:
                 return
@@ -1312,7 +1464,7 @@ def main():
             return
         except Exception as e:
             import traceback
-            print(f"❌ 异常: {e}")
+            print(f"❌ 全局异常: {e}")
             if args.verbose:
                 traceback.print_exc()
             if args.once:

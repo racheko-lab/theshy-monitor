@@ -68,18 +68,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           changed=0
-          for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json; do
-            if [ -f "$f" ]; then
-              git add "$f"
-              if ! git diff --cached --quiet -- "$f"; then
-                changed=1
+          # 旧版兼容文件 + 多账号数据文件
+          for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_data.json .theshy_state_*.json .theshy_matches_*.json; do
+            for f2 in $f; do
+              if [ -f "$f2" ]; then
+                git add "$f2"
+                if ! git diff --cached --quiet -- "$f2"; then
+                  changed=1
+                fi
               fi
-            fi
+            done
           done
           if [ "$changed" = "1" ]; then
-            git commit -m "chore: update theshy state [skip ci]"
-            # 并发时 (cron 与 push 触发的两个 run), 远端可能已有新 commit
-            # pull --rebase 处理冲突, push 失败时降级到下次重试
+            git commit -m "chore: update theshy state (multi-account) [skip ci]"
             git pull --rebase origin main || true
             git push || echo "push 失败, 下次 cron 会重试"
             echo "State committed"

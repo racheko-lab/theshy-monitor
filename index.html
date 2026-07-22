@@ -342,6 +342,16 @@
   .event-item.rank .title { color: var(--purple); }
   .event-item.lp-up .title { color: var(--green); }
   .event-item.lp-down .title { color: var(--red); }
+  .ev-acct {
+    display: inline-block;
+    background: rgba(99,102,241,0.15);
+    color: var(--accent);
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-weight: 500;
+  }
 
   /* Match list - 电竞GG堂布局 + 深色主题 */
   .g-match {
@@ -683,6 +693,51 @@
     .g-p-items { gap: 0; }
   }
 
+  /* Account Tabs */
+  .account-tabs {
+    display: flex;
+    gap: 6px;
+    margin: 10px 0 6px 0;
+    flex-wrap: wrap;
+  }
+  .acct-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--muted);
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .acct-tab:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+  .acct-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .acct-tab .acct-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #555;
+    flex-shrink: 0;
+  }
+  .acct-tab .acct-dot.live {
+    background: #4ade80;
+    box-shadow: 0 0 6px #4ade80;
+  }
+  .acct-tab .acct-lp {
+    font-size: 11px;
+    opacity: 0.75;
+  }
+
   /* Toolbar */
   .toolbar {
     display: flex;
@@ -813,6 +868,9 @@
     </div>
   </div>
 
+  <!-- Account Tabs -->
+  <div class="account-tabs" id="account-tabs"></div>
+
   <!-- Toolbar -->
   <div class="toolbar">
     <div>
@@ -896,6 +954,7 @@ const BRANCH = params.get('branch') || 'main';
 // 数据文件与 index.html 同目录，使用相对路径避免 CORS 问题
 const RAW = './';
 const FILES = {
+  data:    RAW + '.theshy_data.json',
   state:   RAW + '.theshy_opgg_state.json',
   events:  RAW + '.theshy_events.json',
   profile: RAW + '.theshy_profile.json',
@@ -1024,6 +1083,15 @@ function fmtRank(rank, total) {
   return fmt(rank);
 }
 
+function isMePlayer(p) {
+  if (!p) return false;
+  const acct = currentData && currentData.account;
+  if (acct) {
+    return p.summoner_name === acct.game_name && p.summoner_tag === acct.tag_line;
+  }
+  return p.summoner_name === 'The shy' && p.summoner_tag === 'asdf';
+}
+
 function calcKdaStr(k, d, a) {
   k = +k||0; d = +d||0; a = +a||0;
   if (d === 0) return k+a > 0 ? 'Perfect' : '0.00';
@@ -1052,20 +1120,93 @@ async function fetchJson(url) {
   return r.json();
 }
 
+let allData = null;       // combined data from .theshy_data.json
+let currentSlug = null;   // currently selected account slug
 let currentData = { state: null, events: [], profile: null, matches: [] };
+
+function selectAccount(slug) {
+  if (!allData || !allData.accounts) return;
+  const acct = allData.accounts.find(a => a.slug === slug) || allData.accounts[0];
+  if (!acct) return;
+  currentSlug = acct.slug;
+  currentData = {
+    state: { profile: acct.profile, is_active: acct.state && acct.state.is_active, last_check: acct.state && acct.state.last_check },
+    events: allData.events || [],
+    profile: acct.profile,
+    matches: acct.matches || [],
+    account: acct,
+  };
+  renderAccountTabs();
+  renderAll();
+}
+
+function renderAccountTabs() {
+  const container = document.getElementById('account-tabs');
+  if (!allData || !allData.accounts || allData.accounts.length <= 1) {
+    container.innerHTML = '';
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = '';
+  container.innerHTML = allData.accounts.map(a => {
+    const isActive = a.slug === currentSlug;
+    const isLive = a.state && a.state.is_active;
+    // Get solo queue LP for display
+    let lpStr = '';
+    if (a.profile && a.profile.league_stats) {
+      const solo = a.profile.league_stats.find(l => l.game_type === 'SOLORANKED' && l.tier);
+      if (solo) lpStr = `${tierName(solo.tier)}${solo.lp != null ? ' ' + solo.lp + 'LP' : ''}`;
+    }
+    return `<div class="acct-tab${isActive ? ' active' : ''}" data-slug="${a.slug}">
+      <span class="acct-dot${isLive ? ' live' : ''}"></span>
+      <span>${a.label}</span>
+      ${lpStr ? `<span class="acct-lp">${lpStr}</span>` : ''}
+    </div>`;
+  }).join('');
+  container.querySelectorAll('.acct-tab').forEach(el => {
+    el.addEventListener('click', () => selectAccount(el.dataset.slug));
+  });
+}
 
 async function refresh() {
   const fetchEl = document.getElementById('last-fetch');
   fetchEl.textContent = '刷新中...';
   try {
-    const [state, events, profile, matches] = await Promise.all([
-      fetchJson(FILES.state).catch(() => null),
-      fetchJson(FILES.events).catch(() => null),
-      fetchJson(FILES.profile).catch(() => null),
-      fetchJson(FILES.matches).catch(() => null),
-    ]);
-    currentData = { state, events: events || [], profile, matches: matches || [] };
-    renderAll();
+    // Try combined data file first (multi-account mode)
+    let data = null;
+    let state = null, events = null, profile = null, matches = null;
+    try {
+      data = await fetchJson(FILES.data);
+    } catch (e) {
+      // Fallback to legacy single-account files
+    }
+
+    if (data && data.accounts && data.accounts.length) {
+      // Multi-account mode
+      // Also load global events
+      events = await fetchJson(FILES.events).catch(() => []);
+      allData = { ...data, events: events || [] };
+      // Pick account to show: prefer currently selected, then the live one, then first
+      let targetSlug = currentSlug;
+      if (!targetSlug || !allData.accounts.find(a => a.slug === targetSlug)) {
+        const liveAcct = allData.accounts.find(a => a.state && a.state.is_active);
+        targetSlug = liveAcct ? liveAcct.slug : allData.accounts[0].slug;
+      }
+      selectAccount(targetSlug);
+    } else {
+      // Legacy single-account mode (fallback)
+      [state, events, profile, matches] = await Promise.all([
+        fetchJson(FILES.state).catch(() => null),
+        fetchJson(FILES.events).catch(() => null),
+        fetchJson(FILES.profile).catch(() => null),
+        fetchJson(FILES.matches).catch(() => null),
+      ]);
+      allData = null;
+      currentSlug = 'main';
+      currentData = { state, events: events || [], profile, matches: matches || [], account: null };
+      renderAccountTabs();
+      renderAll();
+    }
     fetchEl.textContent = `最后刷新: ${new Date().toLocaleTimeString('zh-CN')}`;
   } catch (e) {
     fetchEl.textContent = `刷新失败: ${e.message}`;
@@ -1093,7 +1234,7 @@ function renderHero() {
     img.src = p.profile_image_url;
     img.style.display = '';
   }
-  document.getElementById('hero-name').textContent = p.name || p.game_name || 'TheShy';
+  document.getElementById('hero-name').textContent = p.game_name || p.name || (currentData.account && currentData.account.game_name) || 'TheShy';
 
   const status = deriveStatus(state, profile);
   const tag = document.getElementById('status-tag');
@@ -1187,7 +1328,7 @@ function renderMatches() {
     const redTeam = parts.filter(p => p.team_key === 'RED');
 
     function miniPlayerRow(p) {
-      const isMe = p.summoner_name === 'The shy' && p.summoner_tag === 'asdf';
+      const isMe = isMePlayer(p);
       const name = p.summoner_name || '?';
       const tag = p.summoner_tag ? `#${p.summoner_tag}` : '';
       const pMk = multiKillBadge(p.largest_multi_kill);
@@ -1286,7 +1427,7 @@ function renderMatches() {
 
 function getTheshyParticipant(m) {
   const parts = m.participants || [];
-  const me = parts.find(p => p.summoner_name === 'The shy' && p.summoner_tag === 'asdf');
+  const me = parts.find(p => isMePlayer(p));
   return me || { champion_id: m.champion_id, champion_name: m.champion, team_key: m.team_key, kill: m.kill, death: m.death, assist: m.assist };
 }
 
@@ -1439,8 +1580,8 @@ function renderMatchDetail(m) {
   const blueGold = bs.gold_earned ?? 0;
   const redGold = rs.gold_earned ?? 0;
 
-  const meOnBlue = blueTeam.some(p => p.summoner_name === 'The shy' && p.summoner_tag === 'asdf');
-  const meOnRed = redTeam.some(p => p.summoner_name === 'The shy' && p.summoner_tag === 'asdf');
+  const meOnBlue = blueTeam.some(p => isMePlayer(p));
+  const meOnRed = redTeam.some(p => isMePlayer(p));
 
   const topTeam = meOnRed ? redTeam : blueTeam;
   const topGs = meOnRed ? rs : bs;
@@ -1473,10 +1614,10 @@ function renderMatchDetail(m) {
         <span class="g-dt-time">${gameTime}</span>
       </div>
       ${teamHeaderHtml(topIsWin, topGs, topLabel, topKda, botGold)}
-      ${topTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
+      ${topTeam.map(p => participantRow(p, isMePlayer(p))).join('')}
       ${banSection(topBans, topBanIds)}
       ${teamHeaderHtml(botIsWin, botGs, botLabel, botKda, topGold)}
-      ${botTeam.map(p => participantRow(p, p.summoner_name==='The shy'&&p.summoner_tag==='asdf')).join('')}
+      ${botTeam.map(p => participantRow(p, isMePlayer(p))).join('')}
       ${banSection(botBans, botBanIds)}
     </div>
   `;
@@ -1756,35 +1897,37 @@ function renderEvents() {
     let icon = '📨';
     let title = ev.type;
     let meta = fmtKst(ev.timestamp, true);
+    const acctTag = ev.account ? `<span class="ev-acct">${ev.account}</span>` : '';
     if (ev.type === 'became_active' || ev.type === 'opgg_updated') {
       cls += ' active';
       icon = '🔥';
       title = 'TheShy 可能开始排位了';
-      meta = `OP.GG 更新: ${fmtKst(ev.updated_at)} · ${ageString(ev.updated_at)}`;
+      meta = `${acctTag}OP.GG 更新: ${fmtKst(ev.updated_at)} · ${ageString(ev.updated_at)}`;
     } else if (ev.type === 'new_match') {
       cls += ev.result === 'WIN' ? ' match-win' : ' match-lose';
       icon = ev.result === 'WIN' ? '🏆' : '💔';
       title = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${ev.champion} · ${ev.result}`;
-      meta = `KDA ${ev.kda} (${ev.kill}/${ev.death}/${ev.assist}) · ${fmtKst(ev.created_at)}`;
+      meta = `${acctTag}KDA ${ev.kda} (${ev.kill}/${ev.death}/${ev.assist}) · ${fmtKst(ev.created_at)}`;
     } else if (ev.type === 'level_changed') {
       cls += ' level';
       icon = '📈';
       title = `等级 ${ev.old ?? '-'} → ${ev.new}`;
+      meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
     } else if (ev.type === 'rank_changed') {
       cls += ' rank';
       icon = '🏆';
       title = `段位变化: ${ev.old} → ${ev.new}`;
-      meta = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${fmtKst(ev.timestamp)}`;
+      meta = `${acctTag}${GAME_TYPES[ev.game_type]||ev.game_type} · ${fmtKst(ev.timestamp)}`;
     } else if (ev.type === 'lp_changed') {
       const sign = ev.delta >= 0 ? '+' : '';
       cls += ev.delta >= 0 ? ' lp-up' : ' lp-down';
       icon = ev.delta >= 0 ? '📈' : '📉';
       title = `LP ${ev.old_lp} → ${ev.new_lp} (${sign}${ev.delta})`;
-      meta = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${tierName(ev.tier)} ${ev.division ? (DIVISION_NAMES[ev.division]||ev.division) : ''} · ${fmtKst(ev.timestamp)}`;
+      meta = `${acctTag}${GAME_TYPES[ev.game_type]||ev.game_type} · ${tierName(ev.tier)} ${ev.division ? (DIVISION_NAMES[ev.division]||ev.division) : ''} · ${fmtKst(ev.timestamp)}`;
     } else if (ev.type === 'error') {
       icon = '⚠️';
       title = '监控错误';
-      meta = ev.msg || '';
+      meta = `${acctTag}${ev.msg || ''}`;
     } else if (ev.type === 'system_initialized') {
       icon = '🚀';
       title = ev.msg || '监控启动';
