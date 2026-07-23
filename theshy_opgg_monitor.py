@@ -957,15 +957,6 @@ def check_account(client, game_name, tag_line, region, slug, label, state, verbo
             "is_active": is_active,
         })
 
-    if is_active and not last_active:
-        events.append({
-            "type": "became_active",
-            "account": label,
-            "slug": slug,
-            "updated_at": updated_at,
-            "level": profile.get("level"),
-        })
-
     if last_state.get("level") != profile.get("level") and profile.get("level"):
         events.append({
             "type": "level_changed",
@@ -977,11 +968,14 @@ def check_account(client, game_name, tag_line, region, slug, label, state, verbo
 
     # 5. 新比赛检测
     last_match_id = state.get("last_match_id")
+    has_new_match = False
+    new_match_event = None
     if matches_list:
         latest = matches_list[0]
         mid = latest.get("id")
         if mid and mid != last_match_id:
-            events.append({
+            has_new_match = True
+            new_match_event = {
                 "type": "new_match",
                 "account": label,
                 "slug": slug,
@@ -996,7 +990,31 @@ def check_account(client, game_name, tag_line, region, slug, label, state, verbo
                 "created_at": latest.get("created_at"),
                 "game_length_second": latest.get("game_length_second"),
                 "position": latest.get("position"),
-            })
+            }
+            events.append(new_match_event)
+
+    # 4.5 开始活跃检测 (仅在没有新比赛时通知, 避免与赛后通知重复)
+    # 添加30分钟冷却, 防止游戏中OP.GG多次刷新导致重复通知
+    last_active_notify = state.get("last_active_notify")
+    active_cd_ok = True
+    if last_active_notify:
+        try:
+            last_dt = datetime.fromisoformat(last_active_notify)
+            if last_dt.tzinfo is None:
+                last_dt = last_dt.replace(tzinfo=KST)
+            if (datetime.now(KST) - last_dt).total_seconds() < 1800:
+                active_cd_ok = False
+        except Exception:
+            pass
+    if is_active and not last_active and not has_new_match and active_cd_ok:
+        events.append({
+            "type": "became_active",
+            "account": label,
+            "slug": slug,
+            "updated_at": updated_at,
+            "level": profile.get("level"),
+        })
+        state["last_active_notify"] = datetime.now(KST).isoformat()
 
     # 6. 段位变化检测
     last_league = last_state.get("league_stats_summary", [])
@@ -1265,23 +1283,27 @@ def handle_event(event, cfg):
     acct_prefix = f"[{acct_label}] " if acct_label else ""
 
     if et == "became_active":
-        return []
+        return notify(
+            f"🎮 {acct_label} 可能开始排位了",
+            f"账号: {acct_label}\n"
+            f"OP.GG 数据已刷新 (updated_at: {fmt_kst(event.get('updated_at'))})\n"
+            f"⚠️ 主播模式下无法获取实时对局信息, 比赛结束后会推送战绩",
+            cfg,
+        )
     if et == "opgg_updated":
         return []
     if et == "level_changed":
-        return notify("📈 TheShy 升级",
-                      f"{acct_prefix}等级: {event['old']} → {event['new']}", cfg)
+        return notify(f"📈 {acct_label} 升级",
+                      f"等级: {event['old']} → {event['new']}", cfg)
     if et == "lp_changed":
         delta = event.get('delta', 0)
         sign = "+" if delta >= 0 else ""
         arrow = "📈" if delta >= 0 else "📉"
         return notify(
-            f"{arrow} TheShy LP 变化 {sign}{delta} {acct_prefix}",
+            f"{arrow} {acct_label} LP {sign}{delta}",
             f"{event['game_type']}: {event['old_lp']} → {event['new_lp']} LP\n"
             f"段位: {event['tier']} {event['division']}\n"
-            f"变化: {sign}{delta} LP\n"
-            f"账号: {acct_label}\n"
-            f"⚠️ 主播模式下无法预知比赛开始, 仅在赛后才能感知",
+            f"变化: {sign}{delta} LP",
             cfg,
         )
     if et == "new_match":
@@ -1303,9 +1325,8 @@ def handle_event(event, cfg):
             except Exception:
                 pass
         title_emoji = "🏆" if win else "💔"
-        title = f"{title_emoji} TheShy 刚打完{gt} · {'胜' if win else '败'} {acct_prefix}"
+        title = f"{title_emoji} {acct_label} 刚打完{gt} · {'胜' if win else '败'}"
         body = (
-            f"账号: {acct_label}\n"
             f"英雄: {event.get('champion', '?')}\n"
             f"KDA: {event.get('kda', '?')} "
             f"({event.get('kill', 0)}/{event.get('death', 0)}/{event.get('assist', 0)})\n"
@@ -1315,10 +1336,8 @@ def handle_event(event, cfg):
         )
         return notify(title, body, cfg)
     if et == "rank_changed":
-        return notify("🏆 TheShy 段位变化!",
-                      f"{acct_prefix}{event['game_type']}: {event['old']} → {event['new']}\n"
-                      f"账号: {acct_label}\n"
-                      f"⚠️ 主播模式下, 段位变化通常需要等下一场比赛结束才能感知", cfg)
+        return notify(f"🏆 {acct_label} 段位变化!",
+                      f"{event['game_type']}: {event['old']} → {event['new']}", cfg)
     if et == "error":
         acct_info = f" ({event.get('account','')})" if event.get("account") else ""
         return notify("⚠️ OP.GG 监控错误",

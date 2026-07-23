@@ -29,6 +29,8 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: write
+    outputs:
+      should_deploy: ${{ steps.run_monitor.outputs.should_deploy }}
 
     steps:
       - name: Checkout
@@ -47,6 +49,7 @@ jobs:
         run: pip install -r requirements_opgg.txt
 
       - name: Run monitor
+        id: run_monitor
         env:
           BARK_KEY: ${{ secrets.BARK_KEY }}
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
@@ -55,20 +58,22 @@ jobs:
           THESHY_REGION: ${{ secrets.THESHY_REGION }}
           FORCE_NOTIFY: ${{ github.event.inputs.force_notify }}
         run: |
-          # 强制测试通知模式
+          # 强制测试通知模式 - 不提交数据也不部署
           if [ "$FORCE_NOTIFY" = "true" ]; then
             python3 theshy_opgg_monitor.py --test-notify
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          # 正常单次检测 (脚本内部会用默认值 TheShy#KR1 / KR)
+          # 正常单次检测
           python3 theshy_opgg_monitor.py --once --verbose
+          echo "should_deploy=true" >> $GITHUB_OUTPUT
 
       - name: Commit state + events files
+        if: ${{ !github.event.inputs.force_notify }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           changed=0
-          # 旧版兼容文件 + 多账号数据文件
           for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_data.json .theshy_state_*.json .theshy_matches_*.json; do
             for f2 in $f; do
               if [ -f "$f2" ]; then
@@ -87,3 +92,29 @@ jobs:
           else
             echo "No state changes"
           fi
+
+      - name: Upload site artifact
+        if: ${{ !github.event.inputs.force_notify && steps.run_monitor.outputs.should_deploy == 'true' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+  deploy:
+    needs: monitor
+    if: ${{ !github.event.inputs.force_notify && needs.monitor.outputs.should_deploy == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
