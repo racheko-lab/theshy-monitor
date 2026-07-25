@@ -59,6 +59,15 @@ LPL_MATCHES = [
 
 MATCH_REMINDER_STATE_FILE = BASE_DIR / ".theshy_match_reminders.json"
 
+BILIBILI_ROOM_ID = 6
+BILIBILI_LIVE_STATE_FILE = BASE_DIR / ".theshy_bilibili_state.json"
+BILIBILI_API = "https://api.live.bilibili.com/room/v1/Room/get_info"
+BILIBILI_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "Referer": "https://live.bilibili.com/",
+}
+
 # 旧版单账号文件 (为前端兼容保留, 主账号写这些)
 LEGACY_STATE_FILE = BASE_DIR / ".theshy_opgg_state.json"
 LEGACY_PROFILE_FILE = BASE_DIR / ".theshy_profile.json"
@@ -1508,6 +1517,125 @@ def check_lpl_matches(cfg, verbose=False):
     return notifications_sent
 
 
+# ============================================================
+# B站直播间监控 (房间6 - LPL官方赛事直播)
+# ============================================================
+def check_bilibili_live(cfg, verbose=False):
+    notifications_sent = []
+    prev_state = load_json(BILIBILI_LIVE_STATE_FILE, {})
+
+    try:
+        resp = requests.get(BILIBILI_API, params={"room_id": BILIBILI_ROOM_ID},
+                            headers=BILIBILI_HEADERS, timeout=10)
+        data = resp.json()
+        if data.get("code") != 0:
+            if verbose:
+                print(f"  B站API返回错误: {data.get('msg','')}")
+            return notifications_sent
+    except Exception as e:
+        if verbose:
+            print(f"  B站API请求失败: {e}")
+        return notifications_sent
+
+    d = data.get("data", {})
+    live_status = d.get("live_status", 0)
+    title = d.get("title", "")
+    live_time = d.get("live_time", "")
+    room_id = d.get("room_id", BILIBILI_ROOM_ID)
+
+    now_cst = datetime.now(CST)
+    cur_state = {
+        "live_status": live_status,
+        "title": title,
+        "live_time": live_time,
+        "last_check": now_cst.isoformat(),
+    }
+
+    if verbose:
+        status_map = {0: "未开播", 1: "🔴直播中", 2: "🔄轮播"}
+        print(f"  B站房间{BILIBILI_ROOM_ID}: {status_map.get(live_status,'?')} | {title}")
+
+    prev_live_status = prev_state.get("live_status", 0)
+    prev_title = prev_state.get("title", "")
+    ig_match_live_notified = prev_state.get("ig_match_live_notified", False)
+    notified_live_time = prev_state.get("notified_live_time", "")
+
+    is_live = (live_status == 1)
+    is_replay = (live_status == 2)
+
+    def _has_team(text, team):
+        idx = text.find(team)
+        while idx != -1:
+            before = text[idx - 1] if idx > 0 else " "
+            after = text[idx + len(team)] if idx + len(team) < len(text) else " "
+            if not (before.isalpha() or after.isalpha()):
+                return True
+            idx = text.find(team, idx + 1)
+        return False
+
+    is_ig_match = False
+    has_preview_kw = any(kw in title for kw in ["预告", "回放", "重播", "录播", "精彩集锦", "预告：", "预热"])
+    if is_live and not has_preview_kw:
+        has_vs = (" vs " in title.lower() or "VS" in title or "对阵" in title)
+        if has_vs and _has_team(title, "IG"):
+            lpl_teams = [
+                "WBG", "LNG", "NIP", "JDG", "BLG", "TES", "AL", "TT", "WE",
+                "LGD", "EDG", "RNG", "FPX", "OMG", "V5", "RA", "UP",
+            ]
+            other_teams = [t for t in lpl_teams if _has_team(title, t)]
+            if other_teams:
+                is_ig_match = True
+
+    if is_live and is_ig_match:
+        should_notify = False
+        if not ig_match_live_notified:
+            should_notify = True
+        elif notified_live_time != live_time and live_time and live_time != "0000-00-00 00:00:00":
+            should_notify = True
+        elif prev_title != title and ig_match_live_notified:
+            pass
+
+        if should_notify:
+            room_url = f"https://live.bilibili.com/{BILIBILI_ROOM_ID}"
+            notif_title = f"📺 B站直播: IG比赛已开播!"
+            notif_body = (
+                f"房间: LPL官方赛事直播间 (房间号{BILIBILI_ROOM_ID})\n"
+                f"标题: {title}\n"
+                f"直播时间: {live_time}\n"
+                f"链接: {room_url}\n"
+                f"🎮 TheShy 比赛直播中, 快去看!"
+            )
+            results = notify(notif_title, notif_body, cfg)
+            for ch, ok in results:
+                if verbose:
+                    print(f"  B站IG直播提醒 {ch}: {'✅' if ok else '❌'}")
+            notifications_sent.append(("ig_live_start", title))
+            cur_state["ig_match_live_notified"] = True
+            cur_state["notified_live_time"] = live_time
+            cur_state["notified_title"] = title
+            cur_state["notified_at"] = now_cst.isoformat()
+        else:
+            cur_state["ig_match_live_notified"] = ig_match_live_notified
+            cur_state["notified_live_time"] = notified_live_time
+            cur_state["notified_title"] = prev_state.get("notified_title", "")
+    elif is_live and not is_ig_match and ig_match_live_notified:
+        cur_state["ig_match_live_notified"] = False
+        if verbose:
+            print("  IG比赛直播已结束(切换到其他比赛)")
+    elif not is_live and ig_match_live_notified:
+        cur_state["ig_match_live_notified"] = False
+        if prev_live_status == 1:
+            if verbose:
+                print("  直播已下播")
+    else:
+        cur_state["ig_match_live_notified"] = ig_match_live_notified
+        cur_state["notified_live_time"] = notified_live_time
+
+    cur_state["is_ig_live"] = is_live and is_ig_match
+    save_json(BILIBILI_LIVE_STATE_FILE, cur_state)
+    return notifications_sent
+
+
 def main():
     parser = argparse.ArgumentParser(description="TheShy 排位监控 (OP.GG 完整数据, 多账号)")
     parser.add_argument("--once", action="store_true", help="只检测一次")
@@ -1543,6 +1671,7 @@ def main():
     print(f"🚀 TheShy 监控启动 (OP.GG 数据源, 多账号模式)")
     for slug, gn, tl, reg, lbl in accounts:
         print(f"   - {lbl} ({slug}) @ {reg}")
+    print(f"   📺 B站LPL官方直播间: 房间{BILIBILI_ROOM_ID} (IG比赛开播通知)")
     print(f"   推送: {[k for k in ['BARK_KEY','SERVERCHAN_KEY','DISCORD_WEBHOOK'] if cfg.get(k)]}\n")
 
     while True:
@@ -1574,6 +1703,16 @@ def main():
                     "team_b": m["team_b"],
                     "stage": m["stage"],
                     "match_time": f"{m['date']} {m['time']} CST",
+                })
+
+            bili_notifs = check_bilibili_live(cfg, verbose=args.verbose)
+            for kind, room_title in bili_notifs:
+                print(f"  📺 B站直播提醒已发送: {kind} - {room_title}")
+                append_event({
+                    "type": "bilibili_live",
+                    "kind": kind,
+                    "title": room_title,
+                    "room_id": BILIBILI_ROOM_ID,
                 })
 
             if args.once:
