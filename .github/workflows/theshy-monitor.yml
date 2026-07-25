@@ -74,7 +74,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           changed=0
-          for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_data.json .theshy_state_*.json .theshy_matches_*.json; do
+          for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_data.json .theshy_match_reminders.json .theshy_state_*.json .theshy_matches_*.json; do
             for f2 in $f; do
               if [ -f "$f2" ]; then
                 git add "$f2"

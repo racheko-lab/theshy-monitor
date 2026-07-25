@@ -46,6 +46,19 @@ EVENTS_FILE = BASE_DIR / ".theshy_events.json"
 COMBINED_DATA_FILE = BASE_DIR / ".theshy_data.json"
 MAX_EVENTS = 100
 
+CST = timezone(timedelta(hours=8))
+
+LPL_MATCHES = [
+    {"date": "2026-07-25", "time": "17:00", "team_a": "IG", "team_b": "WBG", "stage": "2026 LPL 第三赛段"},
+    {"date": "2026-08-02", "time": "17:00", "team_a": "LNG", "team_b": "IG", "stage": "2026 LPL 第三赛段"},
+    {"date": "2026-08-06", "time": "17:00", "team_a": "IG", "team_b": "NIP", "stage": "2026 LPL 第三赛段"},
+    {"date": "2026-08-09", "time": "15:00", "team_a": "IG", "team_b": "LNG", "stage": "2026 LPL 第三赛段"},
+    {"date": "2026-08-16", "time": "17:00", "team_a": "WBG", "team_b": "IG", "stage": "2026 LPL 第三赛段"},
+    {"date": "2026-08-22", "time": "17:00", "team_a": "NIP", "team_b": "IG", "stage": "2026 LPL 第三赛段"},
+]
+
+MATCH_REMINDER_STATE_FILE = BASE_DIR / ".theshy_match_reminders.json"
+
 # 旧版单账号文件 (为前端兼容保留, 主账号写这些)
 LEGACY_STATE_FILE = BASE_DIR / ".theshy_opgg_state.json"
 LEGACY_PROFILE_FILE = BASE_DIR / ".theshy_profile.json"
@@ -1419,6 +1432,82 @@ def run_all_accounts(client, cfg, accounts, verbose=False):
     return all_events, accounts_data
 
 
+# ============================================================
+# LPL 赛程提醒
+# ============================================================
+def check_lpl_matches(cfg, verbose=False):
+    now_cst = datetime.now(CST)
+    reminders = load_json(MATCH_REMINDER_STATE_FILE, {})
+    notifications_sent = []
+
+    for match in LPL_MATCHES:
+        match_id = f"{match['date']}_{match['time']}_{match['team_a']}_vs_{match['team_b']}"
+        match_dt = datetime.strptime(f"{match['date']} {match['time']}", "%Y-%m-%d %H:%M").replace(tzinfo=CST)
+        minutes_until = (match_dt - now_cst).total_seconds() / 60
+
+        if minutes_until < -120:
+            continue
+
+        key_pre = f"{match_id}_pre"
+        key_start = f"{match_id}_start"
+        ta, tb = match["team_a"], match["team_b"]
+        opp = tb if ta == "IG" else ta
+        ig_match = "IG" in (ta, tb)
+
+        if not reminders.get(key_pre):
+            if 15 <= minutes_until <= 45:
+                title = f"🏟️ 即将开赛: {ta} vs {tb}"
+                mins = int(minutes_until)
+                body = (
+                    f"赛事: {match['stage']}\n"
+                    f"对阵: {ta} vs {tb}\n"
+                    f"时间: 今天 {match['time']} CST (约{mins}分钟后)\n"
+                )
+                if ig_match:
+                    body += "⚔️ TheShy 上场, 准备看比赛!"
+                results = notify(title, body, cfg)
+                for ch, ok in results:
+                    if verbose:
+                        print(f"  赛前提醒 {ch}: {'✅' if ok else '❌'}")
+                reminders[key_pre] = now_cst.isoformat()
+                notifications_sent.append(("pre", match))
+            elif 0 <= minutes_until < 15:
+                title = f"🏟️ 马上开赛: {ta} vs {tb}"
+                mins = max(1, int(minutes_until))
+                body = (
+                    f"赛事: {match['stage']}\n"
+                    f"对阵: {ta} vs {tb}\n"
+                    f"时间: 今天 {match['time']} CST (约{mins}分钟后!)\n"
+                )
+                if ig_match:
+                    body += "⚔️ TheShy 上场!"
+                results = notify(title, body, cfg)
+                for ch, ok in results:
+                    if verbose:
+                        print(f"  紧急赛前提醒 {ch}: {'✅' if ok else '❌'}")
+                reminders[key_pre] = now_cst.isoformat()
+                notifications_sent.append(("pre_urgent", match))
+
+        if -15 <= minutes_until <= 10 and not reminders.get(key_start):
+            title = f"🔴 正在比赛: {ta} vs {tb}"
+            body = (
+                f"赛事: {match['stage']}\n"
+                f"对阵: {ta} vs {tb}\n"
+                f"时间: {match['date']} {match['time']} CST\n"
+            )
+            if ig_match:
+                body += "🎮 TheShy 加油!"
+            results = notify(title, body, cfg)
+            for ch, ok in results:
+                if verbose:
+                    print(f"  开赛提醒 {ch}: {'✅' if ok else '❌'}")
+            reminders[key_start] = now_cst.isoformat()
+            notifications_sent.append(("start", match))
+
+    save_json(MATCH_REMINDER_STATE_FILE, reminders)
+    return notifications_sent
+
+
 def main():
     parser = argparse.ArgumentParser(description="TheShy 排位监控 (OP.GG 完整数据, 多账号)")
     parser.add_argument("--once", action="store_true", help="只检测一次")
@@ -1474,6 +1563,18 @@ def main():
             if not all_events:
                 active_slugs = [a["slug"] for a in accounts_data if a["state"].get("is_active")]
                 print(f"  无变化 (活跃账号: {active_slugs if active_slugs else '无'})")
+
+            match_notifs = check_lpl_matches(cfg, verbose=args.verbose)
+            for kind, m in match_notifs:
+                print(f"  🏆 LPL提醒已发送: {kind} - {m['team_a']} vs {m['team_b']}")
+                append_event({
+                    "type": "lpl_match",
+                    "kind": kind,
+                    "team_a": m["team_a"],
+                    "team_b": m["team_b"],
+                    "stage": m["stage"],
+                    "match_time": f"{m['date']} {m['time']} CST",
+                })
 
             if args.once:
                 return
