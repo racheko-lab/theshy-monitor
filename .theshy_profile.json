@@ -9,27 +9,27 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 294,
-  "updated_at": "2026-07-29T15:40:05+09:00",
-  "renewable_at": "2026-07-29T15:42:05+09:00",
-  "revision_at": "2026-07-21T05:06:41+09:00",
+  "updated_at": "2026-07-29T18:42:42+09:00",
+  "renewable_at": "2026-07-29T18:44:42+09:00",
+  "revision_at": "2026-07-29T18:14:54+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 677,
-    "total": 2795267
+    "rank": 642,
+    "total": 2795488
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1497,
+      "lp": 1516,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-      "win": 98,
+      "win": 99,
       "lose": 61,
-      "play": 158,
-      "match_win": 98,
+      "play": 159,
+      "match_win": 99,
       "match_lose": 60,
       "is_hot_streak": "false",
       "is_fresh_blood": "false",
@@ -516,7 +516,7 @@
           "_class": "RankInfo",
           "tier": "GRANDMASTER",
           "division": 1,
-          "lp": 1500,
+          "lp": 1516,
           "win": null,
           "lose": null,
           "elo": null,
@@ -526,6 +526,13 @@
     ]
   },
   "lp_histories": [
+    {
+      "created_at": "2026-07-29T18:21:04+09:00",
+      "elo_point": 3588,
+      "tier": "GRANDMASTER",
+      "division": 1,
+      "lp": 1516
+    },
     {
       "created_at": "2026-07-21T02:43:39+09:00",
       "elo_point": 3568,
@@ -545,8 +552,8 @@
     "game_type": "RANKED",
     "season_id": 33,
     "year": null,
-    "play": 158,
-    "win": 98,
+    "play": 159,
+    "win": 99,
     "lose": 60,
     "champion_stats": [
       {
@@ -794,8 +801,8 @@
   "ranked_most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
-    "play": 158,
-    "win": 98,
+    "play": 159,
+    "win": 99,
     "lose": 60,
     "my_champion_stats": [
       {
@@ -1460,5 +1467,15 @@
       }
     ]
   },
-  "recent_champion_stats": []
+  "recent_champion_stats": [
+    {
+      "champion_name": "麦林炮手",
+      "id": 18,
+      "play": 1,
+      "win": 1,
+      "kill": 8,
+      "death": 8,
+      "assist": 6
+    }
+  ]
 }
