@@ -4,6 +4,53 @@
     "account": "은여하#1103",
     "slug": "smurf",
     "game_type": "SOLORANKED",
+    "old_lp": 1763,
+    "new_lp": 1781,
+    "delta": 18,
+    "tier": "GRANDMASTER",
+    "division": 1,
+    "timestamp": "2026-07-31T04:46:00.005779+09:00"
+  },
+  {
+    "type": "new_match",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "match_id": "qfvdWpGbi21S1EjUPK9Y59Ab9mBhODjP_NnCLmfGjKY=",
+    "game_type": "SOLORANKED",
+    "champion": "未来守护者",
+    "result": "WIN",
+    "kda": "1.43",
+    "kill": 3,
+    "death": 7,
+    "assist": 7,
+    "created_at": "2026-07-31T03:17:43+09:00",
+    "game_length_second": 1902,
+    "position": "TOP",
+    "timestamp": "2026-07-31T04:45:58.977874+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-07-31T04:40:00+09:00",
+    "level": 91,
+    "is_active": false,
+    "timestamp": "2026-07-31T04:45:58.976951+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-07-31T04:40:31+09:00",
+    "level": 294,
+    "is_active": false,
+    "timestamp": "2026-07-31T04:45:58.975998+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "game_type": "SOLORANKED",
     "old_lp": 1727,
     "new_lp": 1763,
     "delta": 36,
@@ -968,40 +1015,5 @@
     "level": 294,
     "is_active": false,
     "timestamp": "2026-07-27T21:00:44.918877+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-27T08:22:45+09:00",
-    "level": 89,
-    "is_active": false,
-    "timestamp": "2026-07-27T08:34:52.096716+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-27T08:28:42+09:00",
-    "level": 294,
-    "is_active": false,
-    "timestamp": "2026-07-27T08:34:52.095904+09:00"
-  },
-  {
-    "type": "became_active",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-27T04:59:38+09:00",
-    "level": 89,
-    "timestamp": "2026-07-27T04:59:49.533211+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-27T04:59:38+09:00",
-    "level": 89,
-    "is_active": true,
-    "timestamp": "2026-07-27T04:59:49.532329+09:00"
   }
 ]
