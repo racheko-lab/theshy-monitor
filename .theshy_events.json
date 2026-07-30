@@ -4,6 +4,53 @@
     "account": "은여하#1103",
     "slug": "smurf",
     "game_type": "SOLORANKED",
+    "old_lp": 1727,
+    "new_lp": 1763,
+    "delta": 36,
+    "tier": "GRANDMASTER",
+    "division": 1,
+    "timestamp": "2026-07-31T03:04:14.637187+09:00"
+  },
+  {
+    "type": "new_match",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "match_id": "qfvdWpGbi20PpkHbWleHO2DvcqtCcHpmlF8t8v_bgTM=",
+    "game_type": "SOLORANKED",
+    "champion": "铁血狼母",
+    "result": "WIN",
+    "kda": "1.14",
+    "kill": 5,
+    "death": 7,
+    "assist": 3,
+    "created_at": "2026-07-31T02:21:13+09:00",
+    "game_length_second": 1605,
+    "position": "ADC",
+    "timestamp": "2026-07-31T03:04:13.580598+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-07-31T03:00:22+09:00",
+    "level": 91,
+    "is_active": true,
+    "timestamp": "2026-07-31T03:04:13.579683+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-07-31T02:38:02+09:00",
+    "level": 294,
+    "is_active": false,
+    "timestamp": "2026-07-31T03:04:13.578667+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "game_type": "SOLORANKED",
     "old_lp": 1731,
     "new_lp": 1727,
     "delta": -4,
@@ -956,40 +1003,5 @@
     "level": 89,
     "is_active": true,
     "timestamp": "2026-07-27T04:59:49.532329+09:00"
-  },
-  {
-    "type": "became_active",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-27T04:55:07+09:00",
-    "level": 294,
-    "timestamp": "2026-07-27T04:59:48.672834+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-27T04:55:07+09:00",
-    "level": 294,
-    "is_active": true,
-    "timestamp": "2026-07-27T04:59:48.672155+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-27T00:33:08+09:00",
-    "level": 89,
-    "is_active": false,
-    "timestamp": "2026-07-27T00:44:32.252688+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-27T00:22:19+09:00",
-    "level": 294,
-    "is_active": false,
-    "timestamp": "2026-07-27T00:44:32.251950+09:00"
   }
 ]
