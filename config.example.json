@@ -27,6 +27,10 @@
     "room_id": 6,
     "notify_on_ig_match": true
   },
+  "hupu": {
+    "team": "IG",
+    "notify_on_rating": true
+  },
   "notifications": {
     "quiet_hours": {
       "start": "",
@@ -41,7 +45,8 @@
       "losing_streak": true,
       "highlight": true,
       "lpl_match": true,
-      "bilibili_live": true
+      "bilibili_live": true,
+      "hupu_rating": true
     }
   }
 }

@@ -77,7 +77,7 @@ jobs:
         run: |
           changed=0
           # 保存改动前的data文件哈希用于比较
-          for f in .theshy_data.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_match_reminders.json .theshy_bilibili_state.json .theshy_streak_state.json; do
+          for f in .theshy_data.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_match_reminders.json .theshy_bilibili_state.json .theshy_streak_state.json .theshy_hupu_ratings.json; do
             if [ -f "$f" ]; then
               if git diff --quiet -- "$f" 2>/dev/null; then
                 : # no change
@@ -103,7 +103,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_data.json .theshy_match_reminders.json .theshy_bilibili_state.json .theshy_streak_state.json .theshy_state_*.json .theshy_matches_*.json; do
+          for f in .theshy_opgg_state.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_data.json .theshy_match_reminders.json .theshy_bilibili_state.json .theshy_streak_state.json .theshy_hupu_ratings.json .theshy_state_*.json .theshy_matches_*.json; do
             for f2 in $f; do
               if [ -f "$f2" ]; then
                 git add "$f2"

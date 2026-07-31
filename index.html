@@ -788,6 +788,92 @@
   }
   .bili-link:hover { opacity: 0.85; }
 
+  /* 虎扑评分卡片 */
+  .hupu-section {
+    margin-bottom: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .hupu-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(234, 88, 12, 0.05));
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  .hupu-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    background: #f97316;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .hupu-list { padding: 6px 0; }
+  .hupu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--text);
+    transition: background 0.15s;
+  }
+  .hupu-item:hover { background: rgba(0,0,0,0.15); }
+  .hupu-score-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background: rgba(249, 115, 22, 0.12);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    border-radius: 4px;
+    font-weight: 600;
+    color: #f97316;
+    font-size: 11px;
+    flex-shrink: 0;
+    min-width: 36px;
+    justify-content: center;
+  }
+  .hupu-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .hupu-title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .hupu-title a:hover { color: var(--accent); }
+  .hupu-time { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+  .hupu-empty {
+    padding: 14px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .hupu-more {
+    display: block;
+    text-align: center;
+    padding: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    border-top: 1px solid var(--border);
+  }
+  .hupu-more:hover { color: var(--accent); }
+
   /* 今日战绩汇总 */
   .daily-stats {
     display: none;
@@ -988,6 +1074,17 @@
     <a href="https://live.bilibili.com/6" target="_blank" class="bili-link" id="bili-link" style="display:none;">去观看 →</a>
   </div>
 
+  <!-- 虎扑LPL评分 -->
+  <div class="hupu-section" id="hupu-section" style="display:none;">
+    <div class="hupu-header">
+      <span class="hupu-logo">虎扑</span>
+      <span id="hupu-header-text">LPL比赛评分</span>
+      <span style="margin-left:auto; font-size:11px; color:var(--muted); font-weight:400;" id="hupu-last-check"></span>
+    </div>
+    <div class="hupu-list" id="hupu-list"></div>
+    <a href="https://bbs.hupu.com/lol" target="_blank" class="hupu-more">查看更多LPL讨论 →</a>
+  </div>
+
   <!-- 今日战绩汇总 -->
   <div class="daily-stats" id="daily-stats"></div>
 
@@ -1032,6 +1129,7 @@
       <button class="ev-filter-btn" data-filter="streak">连胜/高光</button>
       <button class="ev-filter-btn" data-filter="lpl">LPL赛程</button>
       <button class="ev-filter-btn" data-filter="bilibili">B站直播</button>
+      <button class="ev-filter-btn" data-filter="hupu">虎扑评分</button>
     </div>
     <div class="events" id="events-list">
       <div class="empty">暂无事件</div>
@@ -1069,6 +1167,7 @@
     <a href="https://mcp-api.op.gg/mcp" target="_blank">OP.GG MCP</a> ·
     <a href="https://www.op.gg/summoners/kr/TheShy" target="_blank" id="footer-opgg">OP.GG</a> ·
     <a href="https://live.bilibili.com/6" target="_blank">B站LPL直播</a> ·
+    <a href="https://bbs.hupu.com/lol" target="_blank">虎扑LOL</a> ·
     <a href="https://github.com/racheko-lab/theshy-monitor" target="_blank">GitHub 源码</a>
   </footer>
 </div>
@@ -2041,6 +2140,7 @@ function eventCategory(ev) {
   if (t === 'winning_streak' || t === 'losing_streak' || t === 'highlight') return 'streak';
   if (t === 'lpl_match') return 'lpl';
   if (t === 'bilibili_live') return 'bilibili';
+  if (t === 'hupu_rating') return 'hupu';
   return 'other';
 }
 
@@ -2130,6 +2230,10 @@ function renderEvents() {
         title = 'B站直播更新';
       }
       meta = `${ev.title||''} · 房间${ev.room_id||6} · ${fmtKst(ev.timestamp, true)}`;
+    } else if (ev.type === 'hupu_rating') {
+      icon = '🏆';
+      title = '虎扑评分: IG比赛已出评分';
+      meta = `${ev.title||''} · ${fmtKst(ev.timestamp, true)}`;
     } else if (ev.type === 'error') {
       icon = '⚠️';
       title = '监控错误';
@@ -2219,6 +2323,64 @@ function renderDailyStats() {
   `;
 }
 
+function renderHupuRatings() {
+  const section = document.getElementById('hupu-section');
+  const list = document.getElementById('hupu-list');
+  const headerText = document.getElementById('hupu-header-text');
+  const lastCheck = document.getElementById('hupu-last-check');
+
+  if (!allData || !allData.hupu_ratings) {
+    section.style.display = 'none';
+    return;
+  }
+  const hupu = allData.hupu_ratings;
+  const matches = hupu.matches || [];
+  if (!matches.length) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+  headerText.textContent = `虎扑${hupu.team || 'LPL'}比赛评分`;
+  if (hupu.last_check) {
+    const t = new Date(hupu.last_check);
+    lastCheck.textContent = isNaN(t) ? '' : `更新于 ${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
+  } else {
+    lastCheck.textContent = '';
+  }
+
+  // 清理标题: 去掉[赛后]前缀, 截取主要信息
+  function cleanTitle(title) {
+    return title.replace(/^\[赛后\]\s*/, '').replace(/：.*$/, match => {
+      // 保留冒号后的部分但截断过长
+      if (match.length > 30) return match.substring(0, 28) + '...';
+      return match;
+    });
+  }
+
+  function timeAgo(isoStr) {
+    if (!isoStr) return '';
+    const t = new Date(isoStr);
+    if (isNaN(t)) return '';
+    const diff = Date.now() - t.getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return '刚刚';
+    if (mins < 60) return `${mins}分钟前`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}小时前`;
+    return `${Math.floor(hours/24)}天前`;
+  }
+
+  list.innerHTML = matches.slice(0, 5).map(m => `
+    <div class="hupu-item">
+      ${m.score ? `<span class="hupu-score-badge">${m.score}</span>` : '<span class="hupu-score-badge" style="background:rgba(148,163,184,0.1); border-color:rgba(148,163,184,0.2); color:var(--muted);">评分</span>'}
+      <div class="hupu-title">
+        <a href="${m.url}" target="_blank" title="${m.title}">${cleanTitle(m.title)}</a>
+      </div>
+      <span class="hupu-time">${timeAgo(m.found_at)}</span>
+    </div>
+  `).join('');
+}
+
 function renderDebug() {
   const { state, profile, matches } = currentData;
   const dbg = document.getElementById('debug');
@@ -2240,6 +2402,7 @@ function renderDebug() {
 function renderAll() {
   renderHero();
   renderBilibiliBar();
+  renderHupuRatings();
   renderDailyStats();
   renderMatches();
   renderEvents();

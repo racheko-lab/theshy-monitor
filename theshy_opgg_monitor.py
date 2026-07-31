@@ -68,6 +68,17 @@ BILIBILI_HEADERS = {
     "Referer": "https://live.bilibili.com/",
 }
 
+# 虎扑LPL比赛评分
+HUPU_LOL_URL = "https://bbs.hupu.com/lol"
+HUPU_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+}
+HUPU_RATINGS_STATE_FILE = BASE_DIR / ".theshy_hupu_ratings.json"
+HUPU_TEAM = "IG"  # 监控的战队
+
 # 旧版单账号文件 (为前端兼容保留, 主账号写这些)
 LEGACY_STATE_FILE = BASE_DIR / ".theshy_opgg_state.json"
 LEGACY_PROFILE_FILE = BASE_DIR / ".theshy_profile.json"
@@ -1679,6 +1690,127 @@ def check_bilibili_live(cfg, verbose=False):
     return notifications_sent, cur_state
 
 
+# ============================================================
+# 虎扑LPL比赛评分采集
+# ============================================================
+def check_hupu_ratings(cfg, verbose=False):
+    """抓取虎扑LOL区最近的赛后帖, 返回IG相关比赛评分帖信息"""
+    notifications_sent = []
+    prev_state = load_json(HUPU_RATINGS_STATE_FILE, {"matches": [], "notified_ids": []})
+    notified_ids = set(prev_state.get("notified_ids", []))
+    cur_matches = []
+
+    try:
+        resp = requests.get(HUPU_LOL_URL, headers=HUPU_HEADERS, timeout=15)
+        resp.encoding = "utf-8"
+        html = resp.text
+    except Exception as e:
+        if verbose:
+            print(f"  虎扑请求失败: {e}")
+        return notifications_sent, prev_state
+
+    import re as _re
+    # 提取帖子列表: 匹配标题和链接 (虎扑帖子链接格式: /641445465.html)
+    # 虎扑帖子链接通常是 <a href="/xxxxx.html" ... class="p-title">标题</a>
+    post_pattern = _re.compile(
+        r'<a[^>]+href="(/\d{6,}\.html)"[^>]*class="p-title"[^>]*>([^<]*赛后[^<]*)</a>',
+        _re.IGNORECASE
+    )
+    posts = post_pattern.findall(html)
+
+    # 备用: 更宽松的匹配
+    if not posts:
+        post_pattern2 = _re.compile(
+            r'href="(/\d{6,}\.html)"[^>]*>([^<]*\[赛后\][^<]*)</a>',
+            _re.IGNORECASE
+        )
+        posts = post_pattern2.findall(html)
+
+    now_cst = datetime.now(CST)
+    team_name = cfg.get("HUPU_TEAM", HUPU_TEAM)
+
+    for href, title in posts:
+        title = title.strip()
+        if not title:
+            continue
+        post_id = href.strip("/").replace(".html", "")
+        post_url = f"https://bbs.hupu.com{href}"
+
+        # 检查是否是IG比赛
+        # 战队名边界匹配
+        def _has_team(text, team):
+            idx = text.find(team)
+            while idx != -1:
+                before = text[idx - 1] if idx > 0 else " "
+                after = text[idx + len(team)] if idx + len(team) < len(text) else " "
+                if not (before.isalpha() or after.isalpha()):
+                    return True
+                idx = text.find(team, idx + 1)
+            return False
+
+        if not _has_team(title, team_name):
+            continue
+
+        # 解析比分和战队
+        # 标题格式: [赛后]IG 2-1 WBG：xxx
+        score_match = _re.search(r'(\d+)\s*[-:：]\s*(\d+)', title)
+        team_a = team_b = score = ""
+        if score_match:
+            score = f"{score_match.group(1)}-{score_match.group(2)}"
+            # 尝试提取双方战队
+            for t in ["WBG", "LNG", "NIP", "JDG", "BLG", "TES", "AL", "TT", "WE",
+                      "LGD", "EDG", "RNG", "FPX", "OMG", "V5", "RA", "UP", "IG"]:
+                if t != team_name and _has_team(title, t):
+                    team_b = t
+                    break
+            team_a = team_name
+
+        match_info = {
+            "id": post_id,
+            "title": title,
+            "url": post_url,
+            "score": score,
+            "team_a": team_a,
+            "team_b": team_b,
+            "found_at": now_cst.isoformat(),
+        }
+        cur_matches.append(match_info)
+
+        # IG比赛新赛后帖通知
+        if post_id not in notified_ids:
+            notif_title = f"🏆 虎扑评分: {team_name}比赛已出评分"
+            notif_body = (
+                f"标题: {title}\n"
+                f"比分: {score or '见详情'}\n"
+                f"链接: {post_url}\n"
+                f"点击去虎扑看JR评分!"
+            )
+            results = notify(notif_title, notif_body, cfg)
+            for ch, ok in results:
+                if verbose:
+                    print(f"  虎扑IG比赛评分提醒 {ch}: {'✅' if ok else '❌'}")
+            notifications_sent.append(("hupu_rating", title))
+            notified_ids.add(post_id)
+
+    if verbose:
+        ig_count = len(cur_matches)
+        print(f"  虎扑评分: 发现{ig_count}个{team_name}赛后帖")
+
+    # 保留最近20条记录, 最近100个通知ID
+    prev_matches = prev_state.get("matches", [])
+    all_matches = cur_matches + [m for m in prev_matches if m["id"] not in {x["id"] for x in cur_matches}]
+    all_matches = all_matches[:20]
+
+    cur_state = {
+        "matches": all_matches,
+        "notified_ids": list(notified_ids)[-100:],
+        "team": team_name,
+        "last_check": now_cst.isoformat(),
+    }
+    save_json(HUPU_RATINGS_STATE_FILE, cur_state)
+    return notifications_sent, cur_state
+
+
 def is_quiet_hours(cfg):
     """检查当前是否在勿扰时段"""
     qs = cfg.get("QUIET_START", "").strip()
@@ -1975,7 +2107,17 @@ def main():
                     "room_id": BILIBILI_ROOM_ID,
                 })
 
-            # 更新合并数据文件，添加B站状态和今日统计
+            # 虎扑LPL比赛评分
+            hupu_notifs, hupu_state = check_hupu_ratings(cfg, verbose=args.verbose)
+            for kind, post_title in hupu_notifs:
+                print(f"  🏆 虎扑评分提醒已发送: {post_title}")
+                append_event({
+                    "type": "hupu_rating",
+                    "kind": kind,
+                    "title": post_title,
+                })
+
+            # 更新合并数据文件，添加B站状态、虎扑评分和今日统计
             daily_stats = compute_daily_stats(accounts_data)
             combined = load_json(COMBINED_DATA_FILE, {})
             combined["bilibili"] = {
@@ -1986,6 +2128,11 @@ def main():
                 "room_id": bili_state.get("room_id", BILIBILI_ROOM_ID),
                 "last_check": bili_state.get("last_check", ""),
                 "notified_title": bili_state.get("notified_title", ""),
+            }
+            combined["hupu_ratings"] = {
+                "team": hupu_state.get("team", HUPU_TEAM),
+                "matches": hupu_state.get("matches", []),
+                "last_check": hupu_state.get("last_check", ""),
             }
             combined["daily_stats"] = daily_stats
             combined["quiet_hours"] = {
