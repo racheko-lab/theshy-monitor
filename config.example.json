@@ -1,0 +1,47 @@
+{
+  "accounts": [
+    {
+      "slug": "main",
+      "game_name": "The shy",
+      "tag_line": "asdf",
+      "region": "KR",
+      "label": "The shy#asdf"
+    },
+    {
+      "slug": "smurf",
+      "game_name": "은여하",
+      "tag_line": "1103",
+      "region": "KR",
+      "label": "은여하#1103"
+    }
+  ],
+  "lpl": {
+    "team": "IG",
+    "matches": [
+      {"date": "2025-07-22", "time": "17:00", "team_a": "IG", "team_b": "WBG", "stage": "常规赛"},
+      {"date": "2025-07-25", "time": "19:00", "team_a": "IG", "team_b": "LNG", "stage": "常规赛"},
+      {"date": "2025-07-28", "time": "17:00", "team_a": "IG", "team_b": "NIP", "stage": "常规赛"}
+    ]
+  },
+  "bilibili": {
+    "room_id": 6,
+    "notify_on_ig_match": true
+  },
+  "notifications": {
+    "quiet_hours": {
+      "start": "",
+      "end": ""
+    },
+    "events": {
+      "new_match": true,
+      "became_active": true,
+      "lp_changed": true,
+      "rank_changed": true,
+      "winning_streak": true,
+      "losing_streak": true,
+      "highlight": true,
+      "lpl_match": true,
+      "bilibili_live": true
+    }
+  }
+}

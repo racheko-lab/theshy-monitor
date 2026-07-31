@@ -299,29 +299,6 @@ def _split_top_level(s):
     return [p.strip() for p in parts if p.strip()]
 
 
-def _parse_call_args(body):
-    """解析 ClassName(arg1, arg2, key=val) 的参数"""
-    parts = _split_top_level(body)
-    args = []
-    kwargs = {}
-    for p in parts:
-        # key=value 形式
-        m = re.match(r'^(\w+)=(.*)$', p, re.DOTALL)
-        if m:
-            kwargs[m.group(1)] = parse_repr(m.group(2).strip())
-        else:
-            args.append(parse_repr(p))
-    return args, kwargs
-
-
-def _parse_list_body(body):
-    """解析 [item1, item2, ...] 的 body"""
-    if not body.strip():
-        return []
-    parts = _split_top_level(body)
-    return [parse_repr(p) for p in parts]
-
-
 # ============================================================
 # OP.GG MCP 客户端
 # ============================================================
@@ -381,11 +358,15 @@ class OpggClient:
 def html_to_text(html):
     if not html:
         return ""
-    text = re.sub(r'<br\s*/?>', '\n', html, flags=re.IGNORECASE)
-    text = re.sub(r'</p>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'(?i)<br\s*/?>|</p>|</div>|</tr>|</li>', '\n', html)
+    text = re.sub(r'(?i)<tr[^>]*>|<li[^>]*>|<p[^>]*>|<div[^>]*>', '', text)
     text = re.sub(r'<[^>]+>', '', text)
-    text = re.sub(r'&nbsp;', ' ', text)
-    text = re.sub(r'&amp;', '&', text)
+    text = (text.replace("&amp;", "&")
+                .replace("&lt;", "<")
+                .replace("&gt;", ">")
+                .replace("&quot;", '"')
+                .replace("&#39;", "'")
+                .replace("&nbsp;", " "))
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text.strip()
 
@@ -1304,6 +1285,10 @@ def handle_event(event, cfg):
     acct_label = event.get("account", "")
     acct_prefix = f"[{acct_label}] " if acct_label else ""
 
+    # 勿扰模式下，除了高优先级事件外其他静默
+    if is_quiet_hours(cfg) and et not in ("error",):
+        return []
+
     if et == "became_active":
         return notify(
             f"🎮 {acct_label} 可能开始排位了",
@@ -1360,6 +1345,42 @@ def handle_event(event, cfg):
     if et == "rank_changed":
         return notify(f"🏆 {acct_label} 段位变化!",
                       f"{event['game_type']}: {event['old']} → {event['new']}", cfg)
+    if et == "winning_streak":
+        streak = event["streak"]
+        return notify(
+            f"🔥 {acct_label} {streak}连胜!",
+            f"账号: {acct_label}\n"
+            f"状态: 🔥 {streak}连胜中!\n"
+            f"继续冲分!",
+            cfg,
+        )
+    if et == "losing_streak":
+        streak = event["streak"]
+        return notify(
+            f"💔 {acct_label} {streak}连败...",
+            f"账号: {acct_label}\n"
+            f"状态: {streak}连败中...\n"
+            f"别送了休息一下吧!",
+            cfg,
+        )
+    if et == "highlight":
+        m = event["match"]
+        highlights = []
+        if event.get("is_mvp"):
+            highlights.append("⭐ MVP!")
+        if event.get("is_penta"):
+            highlights.append("💥 五杀!")
+        if event.get("is_quadra"):
+            highlights.append("💥 四杀!")
+        win = m.get("result") == "WIN"
+        return notify(
+            f"✨ {acct_label} 高光时刻! {' '.join(highlights)}",
+            f"英雄: {m.get('champion', '?')}\n"
+            f"KDA: {m.get('kda', '?')} ({m.get('kill',0)}/{m.get('death',0)}/{m.get('assist',0)})\n"
+            f"战绩: {'胜' if win else '败'}\n"
+            f"精彩操作!",
+            cfg,
+        )
     if et == "error":
         acct_info = f" ({event.get('account','')})" if event.get("account") else ""
         return notify("⚠️ OP.GG 监控错误",
@@ -1531,11 +1552,15 @@ def check_bilibili_live(cfg, verbose=False):
         if data.get("code") != 0:
             if verbose:
                 print(f"  B站API返回错误: {data.get('msg','')}")
-            return notifications_sent
+            cur_state = dict(prev_state)
+            cur_state["last_check"] = datetime.now(CST).isoformat()
+            return notifications_sent, cur_state
     except Exception as e:
         if verbose:
             print(f"  B站API请求失败: {e}")
-        return notifications_sent
+        cur_state = dict(prev_state)
+        cur_state["last_check"] = datetime.now(CST).isoformat()
+        return notifications_sent, cur_state
 
     d = data.get("data", {})
     live_status = d.get("live_status", 0)
@@ -1548,6 +1573,7 @@ def check_bilibili_live(cfg, verbose=False):
         "live_status": live_status,
         "title": title,
         "live_time": live_time,
+        "room_id": room_id,
         "last_check": now_cst.isoformat(),
     }
 
@@ -1557,8 +1583,10 @@ def check_bilibili_live(cfg, verbose=False):
 
     prev_live_status = prev_state.get("live_status", 0)
     prev_title = prev_state.get("title", "")
+    prev_is_ig_live = prev_state.get("is_ig_live", False)
     ig_match_live_notified = prev_state.get("ig_match_live_notified", False)
     notified_live_time = prev_state.get("notified_live_time", "")
+    notified_title = prev_state.get("notified_title", "")
 
     is_live = (live_status == 1)
     is_replay = (live_status == 2)
@@ -1586,14 +1614,13 @@ def check_bilibili_live(cfg, verbose=False):
             if other_teams:
                 is_ig_match = True
 
+    # IG比赛开播通知
     if is_live and is_ig_match:
         should_notify = False
         if not ig_match_live_notified:
             should_notify = True
         elif notified_live_time != live_time and live_time and live_time != "0000-00-00 00:00:00":
             should_notify = True
-        elif prev_title != title and ig_match_live_notified:
-            pass
 
         if should_notify:
             room_url = f"https://live.bilibili.com/{BILIBILI_ROOM_ID}"
@@ -1617,23 +1644,179 @@ def check_bilibili_live(cfg, verbose=False):
         else:
             cur_state["ig_match_live_notified"] = ig_match_live_notified
             cur_state["notified_live_time"] = notified_live_time
-            cur_state["notified_title"] = prev_state.get("notified_title", "")
-    elif is_live and not is_ig_match and ig_match_live_notified:
+            cur_state["notified_title"] = notified_title
+    # IG比赛直播结束通知（下播或切换到非IG比赛）
+    elif prev_is_ig_live and ig_match_live_notified:
+        room_url = f"https://live.bilibili.com/{BILIBILI_ROOM_ID}"
+        notif_title = "📺 B站直播: IG比赛直播已结束"
+        reason = "直播已下播" if not is_live else "已切换到其他比赛"
+        notif_body = (
+            f"房间: LPL官方赛事直播间 (房间号{BILIBILI_ROOM_ID})\n"
+            f"上一场: {notified_title or '未知'}\n"
+            f"状态: {reason}\n"
+            f"当前标题: {title or '未开播'}"
+        )
+        results = notify(notif_title, notif_body, cfg)
+        for ch, ok in results:
+            if verbose:
+                print(f"  B站IG直播结束提醒 {ch}: {'✅' if ok else '❌'}")
+        notifications_sent.append(("ig_live_end", notified_title or title))
         cur_state["ig_match_live_notified"] = False
         if verbose:
-            print("  IG比赛直播已结束(切换到其他比赛)")
+            print(f"  IG比赛直播已结束: {reason}")
     elif not is_live and ig_match_live_notified:
-        cur_state["ig_match_live_notified"] = False
         if prev_live_status == 1:
             if verbose:
                 print("  直播已下播")
+        cur_state["ig_match_live_notified"] = False
     else:
         cur_state["ig_match_live_notified"] = ig_match_live_notified
         cur_state["notified_live_time"] = notified_live_time
+        cur_state["notified_title"] = notified_title
 
     cur_state["is_ig_live"] = is_live and is_ig_match
     save_json(BILIBILI_LIVE_STATE_FILE, cur_state)
-    return notifications_sent
+    return notifications_sent, cur_state
+
+
+def is_quiet_hours(cfg):
+    """检查当前是否在勿扰时段"""
+    qs = cfg.get("QUIET_START", "").strip()
+    qe = cfg.get("QUIET_END", "").strip()
+    if not qs or not qe:
+        return False
+    try:
+        now = datetime.now().time()
+        sh, sm = map(int, qs.split(":"))
+        eh, em = map(int, qe.split(":"))
+        start = datetime.strptime(qs, "%H:%M").time()
+        end = datetime.strptime(qe, "%H:%M").time()
+        if start < end:
+            return start <= now <= end
+        else:
+            return now >= start or now <= end
+    except Exception:
+        return False
+
+
+def compute_daily_stats(accounts_data):
+    """计算今日战绩统计"""
+    stats = {}
+    for acc in accounts_data:
+        slug = acc["slug"]
+        label = acc["label"]
+        matches = acc.get("matches") or []
+        today_cst = datetime.now(CST).strftime("%Y-%m-%d")
+        today_matches = []
+        win = lose = 0
+        total_lp_delta = 0
+        streak = 0
+        streak_type = None
+        cur_streak = 0
+        cur_type = None
+        for m in matches:
+            created = m.get("created_at", "")
+            if not created:
+                continue
+            try:
+                dt = datetime.fromisoformat(created)
+                if dt.tzinfo is None:
+                    dt = dt.replace(tzinfo=KST)
+                m_date = dt.astimezone(CST).strftime("%Y-%m-%d")
+            except Exception:
+                continue
+            if m_date != today_cst:
+                break
+            today_matches.append(m)
+            if m.get("result") == "WIN":
+                win += 1
+            elif m.get("result") == "LOSE":
+                lose += 1
+            if cur_type is None:
+                cur_type = m.get("result")
+                cur_streak = 1
+            elif m.get("result") == cur_type:
+                cur_streak += 1
+            else:
+                if cur_streak > streak:
+                    streak = cur_streak
+                    streak_type = cur_type
+                cur_type = m.get("result")
+                cur_streak = 1
+        if cur_streak > streak:
+            streak = cur_streak
+            streak_type = cur_type
+        stats[slug] = {
+            "label": label,
+            "today_matches": len(today_matches),
+            "win": win,
+            "lose": lose,
+            "win_rate": f"{win/(win+lose)*100:.0f}%" if (win+lose) > 0 else "0%",
+            "streak": streak,
+            "streak_type": streak_type,
+        }
+    return stats
+
+
+def detect_streak_events(accounts_data, prev_states, cfg):
+    """检测连胜/连败、高光时刻事件"""
+    events = []
+    for acc in accounts_data:
+        slug = acc["slug"]
+        label = acc["label"]
+        matches = acc.get("matches") or []
+        if not matches:
+            continue
+        # 从最近的比赛往前找连胜/连败
+        results = []
+        for m in matches[:10]:
+            r = m.get("result")
+            if r in ("WIN", "LOSE"):
+                results.append(r)
+        if not results:
+            continue
+        # 计算当前连胜/连败
+        streak = 1
+        streak_type = results[0]
+        for r in results[1:]:
+            if r == streak_type:
+                streak += 1
+            else:
+                break
+        prev_streak = prev_states.get(slug, {}).get("streak", 0)
+        prev_type = prev_states.get(slug, {}).get("streak_type")
+        # 连胜/连败达到3场及以上通知
+        if streak >= 3 and (streak > prev_streak or streak_type != prev_type):
+            if streak == 3 or streak % 2 == 0 or streak >= 5:
+                etype = "winning_streak" if streak_type == "WIN" else "losing_streak"
+                emoji = "🔥" if streak_type == "WIN" else "💔"
+                events.append({
+                    "type": etype,
+                    "account": label,
+                    "slug": slug,
+                    "streak": streak,
+                    "matches": matches[:streak],
+                })
+        # 高光时刻检测
+        latest = matches[0]
+        multi_kill = latest.get("largest_multi_kill", 0)
+        op_rank = latest.get("op_score_rank")
+        is_mvp = (op_rank == 1)
+        is_penta = (multi_kill == 5)
+        is_quadra = (multi_kill == 4)
+        prev_highlight = prev_states.get(slug, {}).get("last_highlight_match")
+        if latest.get("id") != prev_highlight:
+            if is_penta or is_quadra or is_mvp:
+                events.append({
+                    "type": "highlight",
+                    "account": label,
+                    "slug": slug,
+                    "match": latest,
+                    "is_mvp": is_mvp,
+                    "is_penta": is_penta,
+                    "is_quadra": is_quadra,
+                })
+    return events
 
 
 def main():
@@ -1652,12 +1835,57 @@ def main():
         "THESHY_RIOT_ID": os.getenv("THESHY_RIOT_ID") or "The shy#asdf",
         "THESHY_REGION": os.getenv("THESHY_REGION") or "KR",
         "THESHY_ACCOUNTS": os.getenv("THESHY_ACCOUNTS") or "",
+        "QUIET_START": os.getenv("QUIET_START", "") or "",
+        "QUIET_END": os.getenv("QUIET_END", "") or "",
     }
+
+    # 支持 config.json 配置文件 (优先级高于.env)
+    config_file = BASE_DIR / "config.json"
+    file_accounts = None
+    file_matches = None
+    if config_file.exists():
+        try:
+            with open(config_file, "r", encoding="utf-8") as f:
+                file_cfg = json.load(f)
+            # 通知渠道
+            if file_cfg.get("notifications"):
+                ncfg = file_cfg["notifications"]
+                if ncfg.get("quiet_hours"):
+                    cfg["QUIET_START"] = ncfg["quiet_hours"].get("start", "") or ""
+                    cfg["QUIET_END"] = ncfg["quiet_hours"].get("end", "") or ""
+            # 账号配置
+            if file_cfg.get("accounts"):
+                acc_parts = []
+                for a in file_cfg["accounts"]:
+                    slug = a.get("slug", "main")
+                    gn = a.get("game_name", "The shy")
+                    tl = a.get("tag_line", "asdf")
+                    reg = a.get("region", "KR")
+                    lbl = a.get("label", f"{gn}#{tl}")
+                    acc_parts.append(f"{slug}:{gn}:{tl}:{reg}:{lbl}")
+                file_accounts = acc_parts
+                cfg["THESHY_ACCOUNTS"] = ",".join(acc_parts)
+            # LPL赛程
+            if file_cfg.get("lpl") and file_cfg["lpl"].get("matches"):
+                file_matches = file_cfg["lpl"]["matches"]
+            if args.verbose:
+                print(f"  已加载 config.json 配置")
+        except Exception as e:
+            print(f"⚠️  config.json 加载失败: {e}")
+
+    # 如果 config.json 指定了赛程，覆盖硬编码
+    if file_matches is not None:
+        import sys as _sys
+        _this_module = _sys.modules[__name__]
+        _this_module.LPL_MATCHES = file_matches
 
     accounts = _parse_accounts_config(cfg) or DEFAULT_ACCOUNTS
 
     if not (cfg["BARK_KEY"] or cfg["SERVERCHAN_KEY"] or cfg["DISCORD_WEBHOOK"]):
         print("⚠️  未配置推送渠道, 状态文件仍会写入供前端展示\n")
+
+    if cfg["QUIET_START"] and cfg["QUIET_END"]:
+        print(f"   🤫 勿扰时段: {cfg['QUIET_START']} - {cfg['QUIET_END']}")
 
     if args.test_notify:
         print("📤 测试通知...")
@@ -1667,6 +1895,7 @@ def main():
         return
 
     client = OpggClient(verbose=args.verbose)
+    streak_state_file = BASE_DIR / ".theshy_streak_state.json"
 
     print(f"🚀 TheShy 监控启动 (OP.GG 数据源, 多账号模式)")
     for slug, gn, tl, reg, lbl in accounts:
@@ -1681,6 +1910,12 @@ def main():
             all_events, accounts_data = run_all_accounts(
                 client, cfg, accounts, verbose=args.verbose)
 
+            # 检测连胜/连败和高光事件
+            prev_streak_state = load_json(streak_state_file, {})
+            streak_events = detect_streak_events(accounts_data, prev_streak_state, cfg)
+            for ev in streak_events:
+                all_events.append(ev)
+
             for ev in all_events:
                 if args.verbose:
                     print(f"  📨 事件: {ev}")
@@ -1688,6 +1923,31 @@ def main():
                 results = handle_event(ev, cfg)
                 for ch, ok in results:
                     print(f"    {ch}: {'✅' if ok else '❌'}")
+
+            # 更新连胜状态
+            new_streak_state = {}
+            for acc in accounts_data:
+                slug = acc["slug"]
+                matches = acc.get("matches") or []
+                results = []
+                for m in matches[:10]:
+                    r = m.get("result")
+                    if r in ("WIN", "LOSE"):
+                        results.append(r)
+                if results:
+                    streak = 1
+                    st = results[0]
+                    for r in results[1:]:
+                        if r == st:
+                            streak += 1
+                        else:
+                            break
+                    new_streak_state[slug] = {
+                        "streak": streak,
+                        "streak_type": st,
+                        "last_highlight_match": matches[0].get("id") if matches else None,
+                    }
+            save_json(streak_state_file, new_streak_state)
 
             if not all_events:
                 active_slugs = [a["slug"] for a in accounts_data if a["state"].get("is_active")]
@@ -1705,7 +1965,7 @@ def main():
                     "match_time": f"{m['date']} {m['time']} CST",
                 })
 
-            bili_notifs = check_bilibili_live(cfg, verbose=args.verbose)
+            bili_notifs, bili_state = check_bilibili_live(cfg, verbose=args.verbose)
             for kind, room_title in bili_notifs:
                 print(f"  📺 B站直播提醒已发送: {kind} - {room_title}")
                 append_event({
@@ -1714,6 +1974,27 @@ def main():
                     "title": room_title,
                     "room_id": BILIBILI_ROOM_ID,
                 })
+
+            # 更新合并数据文件，添加B站状态和今日统计
+            daily_stats = compute_daily_stats(accounts_data)
+            combined = load_json(COMBINED_DATA_FILE, {})
+            combined["bilibili"] = {
+                "is_live": bili_state.get("live_status") == 1,
+                "is_ig_live": bili_state.get("is_ig_live", False),
+                "title": bili_state.get("title", ""),
+                "live_time": bili_state.get("live_time", ""),
+                "room_id": bili_state.get("room_id", BILIBILI_ROOM_ID),
+                "last_check": bili_state.get("last_check", ""),
+                "notified_title": bili_state.get("notified_title", ""),
+            }
+            combined["daily_stats"] = daily_stats
+            combined["quiet_hours"] = {
+                "enabled": bool(cfg.get("QUIET_START") and cfg.get("QUIET_END")),
+                "is_quiet": is_quiet_hours(cfg),
+                "start": cfg.get("QUIET_START", ""),
+                "end": cfg.get("QUIET_END", ""),
+            }
+            save_json(COMBINED_DATA_FILE, combined)
 
             if args.once:
                 return

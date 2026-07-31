@@ -1,106 +1,121 @@
-# TheShy 排位监控
+# TheShy 韩服排位监控
 
-> 基于 OP.GG MCP API 的 TheShy 排位状态监控, GitHub Actions 自动部署。
-> 监控账号: `The shy#asdf` (韩服, 퐁당가지토마토, summoner_id=42752430)
+> 每 5 分钟自动检测 TheShy（及其他账号）的 OP.GG 数据，排位状态变化时推送通知，比赛结束推送战绩，LPL 赛前提醒，IG比赛B站开播通知。
 
-🌐 **前端面板**: https://racheko-lab.github.io/theshy-monitor/
-📋 **运行历史**: https://github.com/racheko-lab/theshy-monitor/actions
-📊 **状态 JSON**: https://raw.githubusercontent.com/racheko-lab/theshy-monitor/main/.theshy_opgg_state.json
-📜 **事件 JSON**: https://raw.githubusercontent.com/racheko-lab/theshy-monitor/main/.theshy_events.json
+## ✨ 功能特性
 
----
+- 🔍 **多账号监控**：支持同时监控多个韩服账号（The shy#asdf、은여하#1103 等）
+- 📊 **完整比赛数据**：KDA、装备、符文、输出/承伤占比、双方阵容、禁用英雄、资源控制（龙/塔/男爵/先锋/阿塔坎/虚空巢虫）
+- 🏆 **段位/LP变化通知**：实时追踪段位和LP变动
+- 🎮 **比赛结果推送**：比赛结束自动推送胜负、英雄、KDA、时长
+- 🔥 **连胜/连败提醒**：3连胜及以上、连败提醒
+- ✨ **高光时刻通知**：MVP、四杀、五杀时特殊通知
+- 🏟️ **LPL赛程提醒**：IG比赛前30分钟和开赛时提醒
+- 📺 **B站直播通知**：LPL官方直播间（房间6）IG比赛开播/下播通知（自动过滤重播/预告）
+- 🌐 **GitHub Pages 网页**：展示实时状态、近期战绩、英雄统计、事件历史
+- 🤫 **勿扰模式**：设置免打扰时段，夜间不被推送吵醒
+- 📱 **移动端适配**：响应式设计，手机浏览器也能查看
 
-## ⚠️ 主播模式说明
+## 📦 部署
 
-Riot 在 **Patch 25.20 (2025-10)** 推出了 Streamer Mode (主播模式), TheShy 已开启。
+### Fork 后 GitHub Actions 自动部署（推荐）
 
-### 对本项目的影响
+1. Fork 本仓库
+2. 在仓库 Settings → Secrets and variables → Actions 中添加以下 Secret：
 
-| 项目 | 状态 |
-|---|---|
-| **段位 / LP / 等级** | ✅ 正常获取 |
-| **历史赛季 / 历史段位** | ✅ 正常获取 |
-| **最近 20 场比赛** | ✅ 正常获取 (比赛结束后 5-15 分钟刷新) |
-| **最常玩英雄 / KDA / 胜率** | ✅ 正常获取 |
-| **LP 变化检测** | ✅ 可作为「刚打完排位」的实时信号 |
-| **「正在游戏中」实时状态** | ❌ Riot API 屏蔽, OP.GG 也拿不到 |
+| Secret | 说明 | 必填 |
+|--------|------|------|
+| `BARK_KEY` | Bark 推送 Key（iOS 推荐） | 至少填一个 |
+| `SERVERCHAN_KEY` | Server酱 SendKey | 至少填一个 |
+| `DISCORD_WEBHOOK` | Discord Webhook URL | 至少填一个 |
+| `THESHY_ACCOUNTS` | 多账号配置，格式见下 | 否（默认监控 The shy#asdf 和 은여하#1103） |
+| `QUIET_START` | 勿扰开始时间，如 `23:00` | 否 |
+| `QUIET_END` | 勿扰结束时间，如 `08:00` | 否 |
 
-主播模式只屏蔽「游戏进行中」的实时状态,
-**打完比赛后所有数据都能正常抓取**。
+**多账号配置格式**：逗号分隔，每个账号格式为 `slug:game_name:tag_line:region:label`
 
-### 推送时机
-
-- 主播模式无法做到「比赛开始时」实时推送 (Riot API 完全屏蔽)
-- 比赛结束 5-15 分钟后, OP.GG 会刷新数据并触发:
-  - **new_match** 事件: 检测到新比赛 → 推送胜负 / KDA / 英雄
-  - **lp_changed** 事件: LP 变化 → 推送 ±LP
-  - **rank_changed** 事件: 段位升降
-
-参考:
-- [How to Use Streamer Mode in League of Legends](https://blog.loltheory.gg/lol-streamer-mode/)
-- [Anonymizing Your Riot ID - Riot Support](https://support.riotgames.com/en-us/league-of-legends/gameplay/anonymizing-your-riot-id)
-- [In-game info not showing while playing - OP.GG Help](https://help.op.gg/hc/en-us/articles/55948777310873-In-game-info-not-showing-while-playing)
-
----
-
-## 工作原理
-
-1. GitHub Actions 每 5 分钟调用一次 OP.GG 官方 MCP API (`https://mcp-api.op.gg/mcp`)
-2. 拉取 TheShy 的完整召唤师资料 (profile + league_stats + most_champions + matches)
-3. 检测以下事件:
-   - **new_match**: 检测到新比赛 (主要通知)
-   - **lp_changed**: LP 变化
-   - **rank_changed**: 段位升降
-   - **level_changed**: 等级提升
-4. 推送通知到 Bark / Server酱 / Discord (任选)
-5. 自动 commit 状态文件回 main 分支
-6. 前端网页读取 JSON 文件展示实时状态
-
-## 优势
-
-- **零成本**: GitHub Actions 公开仓库无限免费, OP.GG MCP 完全免费
-- **零维护**: 不用服务器, 不用 API key, 不用每天续期
-- **完全开源**: 代码 + 状态 + 事件历史全部可见
-- **完整数据**: 前端展示段位 / 赛季历史 / 最近比赛 / 最常玩英雄 / KDA / 多杀 / MVP / 视野等
-
-## 本地运行
-
-```bash
-pip install -r requirements_opgg.txt
-export BARK_KEY=your_bark_key   # 可选
-python3 theshy_opgg_monitor.py --once --verbose
-
-# 测试通知
-python3 theshy_opgg_monitor.py --test-notify
-
-# 常驻监控 (本地)
-python3 theshy_opgg_monitor.py
+示例：
+```
+main:The shy:asdf:KR:The shy#asdf,smurf:은여하:1103:KR:은여하#1103
 ```
 
-## 文件说明
+3. 在仓库 Settings → Pages → Source 选择 **GitHub Actions**
+4. 开启 Actions（如果是 Fork 的，去 Actions 页面点 "I understand my workflows, go ahead and enable them"）
+5. 等待 5 分钟左右，第一次 Actions 跑完后就能在 `https://<你的用户名>.github.io/theshy-monitor/` 看到页面
 
-| 文件 | 用途 |
-|---|---|
-| `theshy_opgg_monitor.py` | 主监控脚本 (含 OP.GG repr 解析器) |
-| `index.html` | 前端面板 (单文件, 无依赖) |
-| `requirements_opgg.txt` | Python 依赖 |
-| `.env_opgg.example` | 配置模板 |
-| `.theshy_opgg_state.json` | 状态持久化 (脚本自动写) |
-| `.theshy_events.json` | 事件历史 (前端读取) |
-| `.theshy_profile.json` | 完整召唤师 profile (前端读取) |
-| `.theshy_matches.json` | 最近 20 场比赛 (前端读取) |
-| `.github/workflows/theshy-monitor.yml` | 监控 workflow |
-| `.github/workflows/deploy-pages.yml` | 前端部署 workflow |
+### 可选：使用 config.json 配置
 
-## 实际响应时间
+复制 `config.example.json` 为 `config.json`，可以配置：
+- 自定义监控账号列表
+- 自定义LPL赛程（覆盖硬编码）
+- 通知开关和勿扰时段
 
-主播模式下, 从 TheShy 一场比赛结束到你收到通知:
-- OP.GG 后端刷新延迟: 1-3 分钟
-- GitHub Actions cron 触发延迟: 5-15 分钟
-- **总延迟: 6-18 分钟**
+注意：`config.json` 已在 `.gitignore` 中，本地配置不会被提交。
 
-即 TheShy 打完比赛后, 你大约在 6-18 分钟内收到 Bark 推送。
+## 🖥️ 本地运行
 
-## License
+```bash
+git clone https://github.com/racheko-lab/theshy-monitor.git
+cd theshy-monitor
+pip install -r requirements.txt
+cp .env.example .env
+# 编辑 .env 填入你的 BARK_KEY 等配置
+python theshy_opgg_monitor.py --verbose
+# 或者只跑一次（适合调试）
+python theshy_opgg_monitor.py --once --verbose
+# 测试通知是否配置正确
+python theshy_opgg_monitor.py --test-notify
+```
+
+## 📁 项目结构
+
+```
+.
+├── theshy_opgg_monitor.py    # 主程序：OP.GG 数据采集 + 事件检测 + 通知发送
+├── index.html                # 前端展示页面（GitHub Pages）
+├── requirements.txt          # Python 依赖
+├── .env.example              # 环境变量模板
+├── config.example.json       # 配置文件模板（可选）
+└── .github/workflows/
+    └── theshy-monitor.yml    # GitHub Actions：每 5 分钟检测 + 自动部署 Pages
+```
+
+## 🔔 通知事件类型
+
+| 事件 | 触发条件 |
+|------|---------|
+| 比赛结果 | 排位/匹配/大乱斗对局结束 |
+| LP变化 | 单双排/灵活组排LP变动 |
+| 段位变化 | 晋升/掉段 |
+| 等级变化 | 召唤师等级提升 |
+| 连胜 | 3连胜及以上（3/5/7连胜时提醒） |
+| 连败 | 3连败及以上 |
+| 高光时刻 | MVP、四杀、五杀 |
+| LPL提醒 | IG比赛前30分钟、比赛开始时 |
+| B站直播 | LPL官方直播间IG比赛开播/结束 |
+| 错误 | API请求失败等异常情况 |
+
+## ⚙️ 推送渠道配置
+
+### Bark (iOS)
+1. App Store 下载 Bark App
+2. 复制推送 URL 末尾的字符串（如 `https://api.day.app/xxxxxxxxxx/` 中的 `xxxxxxxxxx`）
+3. 填入 `BARK_KEY` Secret
+
+### Server酱
+1. 访问 https://sct.ftqq.com/ 登录获取 SendKey
+2. 填入 `SERVERCHAN_KEY` Secret（免费版每天5条）
+
+### Discord
+1. 在服务器频道设置 → 整合 → Webhook → 新建Webhook
+2. 复制Webhook URL填入 `DISCORD_WEBHOOK` Secret
+
+## 📄 数据源
+
+- [OP.GG](https://op.gg) - 召唤师数据、比赛记录
+- [Bilibili API](https://live.bilibili.com) - 直播状态
+- CommunityDragon/DataDragon - 英雄/装备/符文图标
+
+## 📜 License
 
 MIT

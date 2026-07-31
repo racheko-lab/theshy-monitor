@@ -10,8 +10,11 @@ venv/
 .env
 .env.local
 
+# 个人配置文件 (使用 config.example.json 作为模板, 复制为 config.json 后修改)
+config.json
+
 # Local state (本地运行的状态文件, GitHub Actions 会自己管)
-# 注意: 不要忽略 .theshy_opgg_state.json, 因为 GitHub Actions 需要它
+# 注意: 不要忽略 .theshy_*.json, 因为 GitHub Actions 需要它
 # 如果本地测试不想 commit, 临时取消下一行注释:
 # .theshy_opgg_state.json
 

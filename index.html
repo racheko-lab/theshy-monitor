@@ -738,6 +738,113 @@
     opacity: 0.75;
   }
 
+  /* B站直播状态条 */
+  .bili-bar {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, rgba(251, 114, 153, 0.12), rgba(239, 68, 68, 0.08));
+    border: 1px solid rgba(251, 114, 153, 0.3);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .bili-bar.show { display: flex; }
+  .bili-bar.live {
+    background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(251,114,153,0.1));
+    border-color: rgba(239,68,68,0.4);
+  }
+  .bili-live-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulse 1s infinite;
+    flex-shrink: 0;
+  }
+  .bili-text { flex: 1; min-width: 0; }
+  .bili-title {
+    font-weight: 600;
+    color: var(--text-bright);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bili-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .bili-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    background: #fb7299;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+  .bili-link:hover { opacity: 0.85; }
+
+  /* 今日战绩汇总 */
+  .daily-stats {
+    display: none;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .daily-stats.show { display: flex; }
+  .ds-card {
+    flex: 1;
+    min-width: 140px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .ds-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .ds-value { font-size: 20px; font-weight: 700; color: var(--text-bright); }
+  .ds-win { color: var(--green); }
+  .ds-lose { color: var(--red); }
+  .ds-wr { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .ds-streak {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .ds-streak.win { background: rgba(63,185,80,0.15); color: var(--green); }
+  .ds-streak.lose { background: rgba(248,81,73,0.15); color: var(--red); }
+
+  /* 事件筛选 */
+  .ev-filter {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .ev-filter-btn {
+    padding: 3px 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .ev-filter-btn:hover { border-color: var(--accent); color: var(--text); }
+  .ev-filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
   /* Toolbar */
   .toolbar {
     display: flex;
@@ -871,6 +978,19 @@
   <!-- Account Tabs -->
   <div class="account-tabs" id="account-tabs"></div>
 
+  <!-- B站直播状态 -->
+  <div class="bili-bar" id="bili-bar">
+    <span class="bili-live-dot" id="bili-dot" style="display:none;"></span>
+    <div class="bili-text">
+      <div class="bili-title" id="bili-title"></div>
+      <div class="bili-meta" id="bili-meta"></div>
+    </div>
+    <a href="https://live.bilibili.com/6" target="_blank" class="bili-link" id="bili-link" style="display:none;">去观看 →</a>
+  </div>
+
+  <!-- 今日战绩汇总 -->
+  <div class="daily-stats" id="daily-stats"></div>
+
   <!-- Toolbar -->
   <div class="toolbar">
     <div>
@@ -904,6 +1024,14 @@
     <div class="section-title">
       事件历史 · Event Log
       <span class="meta" id="events-meta"></span>
+    </div>
+    <div class="ev-filter" id="ev-filter">
+      <button class="ev-filter-btn active" data-filter="all">全部</button>
+      <button class="ev-filter-btn" data-filter="match">比赛</button>
+      <button class="ev-filter-btn" data-filter="rank">段位/LP</button>
+      <button class="ev-filter-btn" data-filter="streak">连胜/高光</button>
+      <button class="ev-filter-btn" data-filter="lpl">LPL赛程</button>
+      <button class="ev-filter-btn" data-filter="bilibili">B站直播</button>
     </div>
     <div class="events" id="events-list">
       <div class="empty">暂无事件</div>
@@ -939,7 +1067,8 @@
   <footer>
     数据源:
     <a href="https://mcp-api.op.gg/mcp" target="_blank">OP.GG MCP</a> ·
-    <a href="https://www.op.gg/summoners/kr/TheShy" target="_blank">OP.GG TheShy</a> ·
+    <a href="https://www.op.gg/summoners/kr/TheShy" target="_blank" id="footer-opgg">OP.GG</a> ·
+    <a href="https://live.bilibili.com/6" target="_blank">B站LPL直播</a> ·
     <a href="https://github.com/racheko-lab/theshy-monitor" target="_blank">GitHub 源码</a>
   </footer>
 </div>
@@ -1123,6 +1252,7 @@ async function fetchJson(url) {
 let allData = null;       // combined data from .theshy_data.json
 let currentSlug = null;   // currently selected account slug
 let currentData = { state: null, events: [], profile: null, matches: [] };
+let eventFilter = 'all';  // event filter category
 
 function selectAccount(slug) {
   if (!allData || !allData.accounts) return;
@@ -1136,6 +1266,15 @@ function selectAccount(slug) {
     matches: acct.matches || [],
     account: acct,
   };
+  // Update footer OP.GG link
+  const reg = (acct.region || 'kr').toLowerCase();
+  const gn = encodeURIComponent(acct.game_name || 'TheShy');
+  const tl = acct.tag_line || 'asdf';
+  const opggLink = document.getElementById('footer-opgg');
+  if (opggLink) {
+    opggLink.href = `https://www.op.gg/summoners/${reg}/${gn}-${tl}`;
+    opggLink.textContent = `OP.GG ${acct.label || ''}`;
+  }
   renderAccountTabs();
   renderAll();
 }
@@ -1607,11 +1746,21 @@ function renderMatchDetail(m) {
   const totalSec = m.game_length_second || 0;
   const gameTime = `${Math.floor(totalSec/60)}分${(totalSec%60).toString().padStart(2,'0')}秒`;
 
+  // Build OP.GG match link for current account
+  const acct = currentData.account || {};
+  const reg = (acct.region || 'kr').toLowerCase();
+  const gn = encodeURIComponent(acct.game_name || 'TheShy');
+  const tl = acct.tag_line || 'asdf';
+  const opggMatchUrl = `https://www.op.gg/summoners/${reg}/${gn}-${tl}/matches/${m.id||''}`;
+
   return `
     <div class="g-detail-wrap">
       <div class="g-detail-top">
         ${avgTierStr ? `<span class="g-dt-tier">${avgTierStr}</span>` : ''}
         <span class="g-dt-time">${gameTime}</span>
+        <span style="margin-left:auto;">
+          <a href="${opggMatchUrl}" target="_blank" style="color:var(--accent); text-decoration:none; font-size:11px; margin-left:8px;">在OP.GG查看 →</a>
+        </span>
       </div>
       ${teamHeaderHtml(topIsWin, topGs, topLabel, topKda, botGold)}
       ${topTeam.map(p => participantRow(p, isMePlayer(p))).join('')}
@@ -1885,13 +2034,30 @@ function renderRecentChampTable(rcs) {
   `;
 }
 
+function eventCategory(ev) {
+  const t = ev.type;
+  if (t === 'new_match' || t === 'became_active') return 'match';
+  if (t === 'lp_changed' || t === 'rank_changed' || t === 'level_changed') return 'rank';
+  if (t === 'winning_streak' || t === 'losing_streak' || t === 'highlight') return 'streak';
+  if (t === 'lpl_match') return 'lpl';
+  if (t === 'bilibili_live') return 'bilibili';
+  return 'other';
+}
+
 function renderEvents() {
-  const { events } = currentData;
+  let events = currentData.events || [];
+  // Apply filter
+  if (eventFilter !== 'all') {
+    events = events.filter(ev => eventCategory(ev) === eventFilter);
+  }
   if (!events || events.length === 0) {
-    document.getElementById('events-list').innerHTML = '<div class="empty">暂无事件 (TheShy 上线/打完排位会出现在这里)</div>';
+    const allCount = (currentData.events || []).length;
+    document.getElementById('events-list').innerHTML = `<div class="empty">${eventFilter === 'all' ? '暂无事件' : '该分类下暂无事件'}${allCount ? ` (共${allCount}条)` : ''}</div>`;
+    document.getElementById('events-meta').textContent = `${allCount} 条`;
     return;
   }
-  document.getElementById('events-meta').textContent = `${events.length} 条`;
+  const totalCount = (currentData.events || []).length;
+  document.getElementById('events-meta').textContent = `${events.length}/${totalCount} 条`;
   document.getElementById('events-list').innerHTML = events.slice(0, 100).map(ev => {
     let cls = 'event-item';
     let icon = '📨';
@@ -1901,12 +2067,12 @@ function renderEvents() {
     if (ev.type === 'became_active' || ev.type === 'opgg_updated') {
       cls += ' active';
       icon = '🔥';
-      title = 'TheShy 可能开始排位了';
+      title = '可能开始排位了';
       meta = `${acctTag}OP.GG 更新: ${fmtKst(ev.updated_at)} · ${ageString(ev.updated_at)}`;
     } else if (ev.type === 'new_match') {
       cls += ev.result === 'WIN' ? ' match-win' : ' match-lose';
       icon = ev.result === 'WIN' ? '🏆' : '💔';
-      title = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${ev.champion} · ${ev.result}`;
+      title = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${ev.champion} · ${ev.result === 'WIN' ? '胜利' : '失败'}`;
       meta = `${acctTag}KDA ${ev.kda} (${ev.kill}/${ev.death}/${ev.assist}) · ${fmtKst(ev.created_at)}`;
     } else if (ev.type === 'level_changed') {
       cls += ' level';
@@ -1924,6 +2090,46 @@ function renderEvents() {
       icon = ev.delta >= 0 ? '📈' : '📉';
       title = `LP ${ev.old_lp} → ${ev.new_lp} (${sign}${ev.delta})`;
       meta = `${acctTag}${GAME_TYPES[ev.game_type]||ev.game_type} · ${tierName(ev.tier)} ${ev.division ? (DIVISION_NAMES[ev.division]||ev.division) : ''} · ${fmtKst(ev.timestamp)}`;
+    } else if (ev.type === 'winning_streak') {
+      cls += ' match-win';
+      icon = '🔥';
+      title = `${ev.streak}连胜!`;
+      meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
+    } else if (ev.type === 'losing_streak') {
+      cls += ' match-lose';
+      icon = '💔';
+      title = `${ev.streak}连败...`;
+      meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
+    } else if (ev.type === 'highlight') {
+      const hl = [];
+      if (ev.is_mvp) hl.push('⭐MVP');
+      if (ev.is_penta) hl.push('💥五杀');
+      if (ev.is_quadra) hl.push('💥四杀');
+      icon = '✨';
+      cls += ' rank';
+      title = `高光时刻! ${hl.join(' ')}`;
+      const m = ev.match || {};
+      meta = `${acctTag}${m.champion||'?'} · KDA ${m.kda||'?'} · ${fmtKst(ev.timestamp, true)}`;
+    } else if (ev.type === 'lpl_match') {
+      icon = '🏟️';
+      title = ev.kind === 'pre' ? `即将开赛: ${ev.team_a} vs ${ev.team_b}` :
+              ev.kind === 'start' ? `比赛开始: ${ev.team_a} vs ${ev.team_b}` :
+              `LPL: ${ev.team_a} vs ${ev.team_b}`;
+      meta = `${ev.stage||''} · ${ev.match_time||''}`;
+    } else if (ev.type === 'bilibili_live') {
+      if (ev.kind === 'ig_live_start') {
+        cls += ' active';
+        icon = '📺';
+        title = 'B站直播: IG比赛已开播!';
+      } else if (ev.kind === 'ig_live_end') {
+        icon = '📺';
+        cls += ' lp-down';
+        title = 'B站直播: IG比赛直播已结束';
+      } else {
+        icon = '📺';
+        title = 'B站直播更新';
+      }
+      meta = `${ev.title||''} · 房间${ev.room_id||6} · ${fmtKst(ev.timestamp, true)}`;
     } else if (ev.type === 'error') {
       icon = '⚠️';
       title = '监控错误';
@@ -1942,6 +2148,75 @@ function renderEvents() {
       </div>
     `;
   }).join('');
+}
+
+function renderBilibiliBar() {
+  const bar = document.getElementById('bili-bar');
+  const dot = document.getElementById('bili-dot');
+  const titleEl = document.getElementById('bili-title');
+  const metaEl = document.getElementById('bili-meta');
+  const link = document.getElementById('bili-link');
+  if (!allData || !allData.bilibili) {
+    bar.classList.remove('show');
+    return;
+  }
+  const bili = allData.bilibili;
+  const isLive = bili.is_ig_live || bili.is_live;
+  if (isLive) {
+    bar.classList.add('show', 'live');
+    dot.style.display = '';
+    link.style.display = '';
+    titleEl.textContent = bili.title || 'B站LPL直播中';
+    const liveTime = bili.live_time ? ` · ${bili.live_time}` : '';
+    metaEl.textContent = bili.is_ig_live ? '🔴 IG比赛直播中' : 'B站直播中';
+    metaEl.textContent += liveTime;
+    if (bili.is_ig_live) {
+      metaEl.textContent += ' · 🎮 TheShy比赛直播中!';
+    }
+  } else {
+    // Only show if there was a recent stream or status available
+    if (bili.title && bili.last_check) {
+      bar.classList.add('show');
+      bar.classList.remove('live');
+      dot.style.display = 'none';
+      link.style.display = 'none';
+      titleEl.textContent = 'B站LPL直播间';
+      metaEl.textContent = bili.title ? `当前: ${bili.title}` : '当前未开播';
+    } else {
+      bar.classList.remove('show');
+    }
+  }
+}
+
+function renderDailyStats() {
+  const container = document.getElementById('daily-stats');
+  if (!allData || !allData.daily_stats || !currentData || !currentData.account) {
+    container.classList.remove('show');
+    return;
+  }
+  const ds = allData.daily_stats[currentData.account.slug];
+  if (!ds || !ds.today_matches) {
+    container.classList.remove('show');
+    return;
+  }
+  container.classList.add('show');
+  const streakEmoji = ds.streak_type === 'WIN' ? '🔥' : '💔';
+  const streakText = ds.streak >= 2 ? `${streakEmoji} ${ds.streak}${ds.streak_type === 'WIN' ? '连胜' : '连败'}` : '';
+  container.innerHTML = `
+    <div class="ds-card">
+      <div class="ds-label">今日比赛</div>
+      <div class="ds-value">${ds.today_matches}场</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-label">战绩</div>
+      <div class="ds-value"><span class="ds-win">${ds.win}W</span> <span class="ds-lose">${ds.lose}L</span></div>
+      <div class="ds-wr">胜率 ${ds.win_rate}</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-label">当前状态</div>
+      <div style="margin-top:4px;">${streakText ? `<span class="ds-streak ${ds.streak_type === 'WIN' ? 'win' : 'lose'}">${streakText}</span>` : '<span style="color:var(--muted); font-size:13px;">—</span>'}</div>
+    </div>
+  `;
 }
 
 function renderDebug() {
@@ -1964,11 +2239,28 @@ function renderDebug() {
 
 function renderAll() {
   renderHero();
+  renderBilibiliBar();
+  renderDailyStats();
   renderMatches();
   renderEvents();
   renderSeasons();
   renderMostChampions();
   renderDebug();
+}
+
+// ============================================================
+// Event filter setup
+// ============================================================
+function setupEventFilter() {
+  const buttons = document.querySelectorAll('#ev-filter .ev-filter-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      eventFilter = btn.dataset.filter;
+      renderEvents();
+    });
+  });
 }
 
 // ============================================================
@@ -2001,6 +2293,7 @@ function setupAuto() {
 document.getElementById('refresh-btn').addEventListener('click', refresh);
 
 setupAuto();
+setupEventFilter();
 refresh();
 fetchCommitCount();
 setInterval(fetchCommitCount, 60000);
