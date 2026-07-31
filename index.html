@@ -1044,6 +1044,155 @@
     max-height: 200px;
     overflow-y: auto;
   }
+
+  /* ===== 主标签页导航 ===== */
+  .main-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: sticky;
+    top: 8px;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .main-tab {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+  }
+  .main-tab:hover {
+    color: var(--text);
+    background: var(--card-2);
+  }
+  .main-tab.active {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(88,166,255,0.3);
+  }
+  .main-tab .tab-icon { font-size: 15px; line-height: 1; }
+  .main-tab .tab-badge {
+    display: none;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+  }
+  .main-tab .tab-badge.show { display: inline-block; }
+  .main-tab .tab-badge.live {
+    background: var(--red);
+    animation: pulse 1.5s infinite;
+  }
+  .main-tab .tab-badge.dot {
+    width: 8px; height: 8px;
+    min-width: 0;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  /* ===== 标签页内容面板 ===== */
+  .tab-pane {
+    display: none;
+    animation: fadeIn 0.25s ease;
+  }
+  .tab-pane.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 总览页快捷比赛列表 */
+  .quick-matches { margin-bottom: 16px; }
+  .quick-matches .g-match { margin-bottom: 4px; }
+
+  /* 紧凑工具栏 */
+  .toolbar-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    margin-bottom: 12px;
+    font-size: 11px;
+    color: var(--muted-2);
+    border-bottom: 1px solid var(--border-2);
+  }
+  .toolbar-compact button {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 3px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s;
+  }
+  .toolbar-compact button:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .toolbar-compact select {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+
+  /* 赛事页空状态 */
+  .lpl-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .lpl-empty .big-icon { font-size: 36px; margin-bottom: 8px; }
+
+  /* 赛事页直播徽章 */
+  .live-ribbon {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: var(--red);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    animation: pulse 1.5s infinite;
+  }
+
+  @media (max-width: 640px) {
+    .main-tab { padding: 8px 6px; font-size: 12px; gap: 4px; }
+    .main-tab .tab-icon { font-size: 14px; }
+    .main-tab .tab-label-sub { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -1069,49 +1218,84 @@
   <!-- Account Tabs -->
   <div class="account-tabs" id="account-tabs"></div>
 
-  <!-- B站直播状态 -->
-  <div class="bili-bar" id="bili-bar">
-    <span class="bili-live-dot" id="bili-dot" style="display:none;"></span>
-    <div class="bili-text">
-      <div class="bili-title" id="bili-title"></div>
-      <div class="bili-meta" id="bili-meta"></div>
+  <!-- 主标签页导航 -->
+  <nav class="main-tabs" id="main-tabs">
+    <div class="main-tab active" data-tab="overview">
+      <span class="tab-icon">🏠</span>
+      <span>总览</span>
     </div>
-    <a href="https://live.bilibili.com/6" target="_blank" class="bili-link" id="bili-link" style="display:none;">去观看 →</a>
+    <div class="main-tab" data-tab="ranked">
+      <span class="tab-icon">🎮</span>
+      <span>排位</span>
+    </div>
+    <div class="main-tab" data-tab="lpl">
+      <span class="tab-icon">📺</span>
+      <span>赛事</span>
+      <span class="tab-badge" id="tab-lpl-badge"></span>
+    </div>
+    <div class="main-tab" data-tab="activity">
+      <span class="tab-icon">📋</span>
+      <span>动态</span>
+      <span class="tab-badge" id="tab-act-badge"></span>
+    </div>
+  </nav>
+
+  <!-- ==================== 总览 Tab ==================== -->
+  <div class="tab-pane active" id="pane-overview">
+
+    <!-- 紧凑工具栏 -->
+    <div class="toolbar-compact">
+      <div>
+        <span id="last-fetch">未刷新</span> ·
+        <label>刷新
+          <select id="refresh-interval">
+            <option value="0">关</option>
+            <option value="30">30s</option>
+            <option value="60" selected>1m</option>
+            <option value="300">5m</option>
+          </select>
+        </label> ·
+        <span id="check-count">-</span>次
+      </div>
+      <button id="refresh-btn">刷新</button>
+    </div>
+
+    <!-- 实时提醒区: B站直播 + 虎扑评分 -->
+    <div id="overview-alerts">
+      <!-- B站直播状态 (总览页显示) -->
+      <div class="bili-bar" id="bili-bar">
+        <span class="bili-live-dot" id="bili-dot" style="display:none;"></span>
+        <div class="bili-text">
+          <div class="bili-title" id="bili-title"></div>
+          <div class="bili-meta" id="bili-meta"></div>
+        </div>
+        <a href="https://live.bilibili.com/6" target="_blank" class="bili-link" id="bili-link" style="display:none;">去观看 →</a>
+      </div>
+      <!-- 虎扑评分 (总览页显示) -->
+      <div class="hupu-section" id="hupu-section" style="display:none;">
+        <div class="hupu-header">
+          <span class="hupu-logo">虎扑</span>
+          <span id="hupu-header-text">LPL比赛评分</span>
+          <span style="margin-left:auto; font-size:11px; color:var(--muted); font-weight:400;" id="hupu-last-check"></span>
+        </div>
+        <div class="hupu-list" id="hupu-list"></div>
+        <a href="https://bbs.hupu.com/lol" target="_blank" class="hupu-more">查看更多LPL讨论 →</a>
+      </div>
+    </div>
+
+    <!-- 今日战绩汇总 -->
+    <div class="daily-stats" id="daily-stats"></div>
+
+    <!-- 最近5场速览 -->
+    <div class="section-title" style="margin-top:20px;">
+      最近比赛 <span class="tab-label-sub" style="font-weight:400; color:var(--muted-2); text-transform:none; letter-spacing:0; font-size:11px; margin-left:8px;">· 在「排位」页查看全部</span>
+      <span class="meta" id="matches-meta-overview"></span>
+    </div>
+    <div class="quick-matches" id="matches-list-overview"></div>
   </div>
 
-  <!-- 虎扑LPL评分 -->
-  <div class="hupu-section" id="hupu-section" style="display:none;">
-    <div class="hupu-header">
-      <span class="hupu-logo">虎扑</span>
-      <span id="hupu-header-text">LPL比赛评分</span>
-      <span style="margin-left:auto; font-size:11px; color:var(--muted); font-weight:400;" id="hupu-last-check"></span>
-    </div>
-    <div class="hupu-list" id="hupu-list"></div>
-    <a href="https://bbs.hupu.com/lol" target="_blank" class="hupu-more">查看更多LPL讨论 →</a>
-  </div>
-
-  <!-- 今日战绩汇总 -->
-  <div class="daily-stats" id="daily-stats"></div>
-
-  <!-- Toolbar -->
-  <div class="toolbar">
-    <div>
-      <span id="last-fetch">未刷新</span> ·
-      <label>自动刷新:
-        <select id="refresh-interval">
-          <option value="0">关闭</option>
-          <option value="30">30s</option>
-          <option value="60" selected>1m</option>
-          <option value="300">5m</option>
-        </select>
-      </label> ·
-      <span id="check-count">-</span> 次检测
-    </div>
-    <button id="refresh-btn">立即刷新</button>
-  </div>
-
-  <!-- 最近比赛 -->
-  <div class="section">
+  <!-- ==================== 排位 Tab ==================== -->
+  <div class="tab-pane" id="pane-ranked">
     <div class="section-title">
       最近比赛 · Recent Matches
       <span class="meta" id="matches-meta"></span>
@@ -1119,10 +1303,57 @@
     <div id="matches-list">
       <div class="loading"><span class="spinner"></span>加载中...</div>
     </div>
+
+    <!-- 最常玩英雄 -->
+    <div class="section-title" style="margin-top:24px;">
+      常用英雄 · Champions
+      <span class="meta" id="mc-meta"></span>
+    </div>
+    <div class="tabs" id="mc-tabs"></div>
+    <div id="mc-content">
+      <div class="loading"><span class="spinner"></span>加载中...</div>
+    </div>
+
+    <!-- 赛季历史 (折叠) -->
+    <details class="section-collapse">
+      <summary class="section-title section-title-collapse">赛季历史 · Season History</summary>
+      <div class="grid-3" id="season-grid">
+        <div class="loading"><span class="spinner"></span>加载中...</div>
+      </div>
+    </details>
+
+    <!-- Debug -->
+    <details>
+      <summary style="cursor:pointer; color:var(--muted); font-size:12px; padding:12px 0;">📦 调试数据</summary>
+      <div class="debug" id="debug">未加载</div>
+    </details>
   </div>
 
-  <!-- 事件历史 -->
-  <div class="section">
+  <!-- ==================== 赛事 Tab ==================== -->
+  <div class="tab-pane" id="pane-lpl">
+    <!-- B站直播状态 -->
+    <div class="bili-bar" id="bili-bar-lpl" style="display:none;">
+      <span class="bili-live-dot" id="bili-dot-lpl" style="display:none;"></span>
+      <div class="bili-text">
+        <div class="bili-title" id="bili-title-lpl"></div>
+        <div class="bili-meta" id="bili-meta-lpl"></div>
+      </div>
+      <a href="https://live.bilibili.com/6" target="_blank" class="bili-link" id="bili-link-lpl" style="display:none;">去观看 →</a>
+    </div>
+
+    <!-- 虎扑评分 -->
+    <div class="section-title">虎扑比赛评分</div>
+    <div id="hupu-section-lpl"></div>
+
+    <!-- LPL赛程提醒将由后端事件填充 -->
+    <div class="section-title" style="margin-top:20px;">LPL相关动态</div>
+    <div class="events" id="lpl-events-list">
+      <div class="empty">暂无赛事动态</div>
+    </div>
+  </div>
+
+  <!-- ==================== 动态 Tab ==================== -->
+  <div class="tab-pane" id="pane-activity">
     <div class="section-title">
       事件历史 · Event Log
       <span class="meta" id="events-meta"></span>
@@ -1141,39 +1372,12 @@
     </div>
   </div>
 
-  <!-- 更多数据 (合并折叠) -->
-  <details class="section-collapse">
-    <summary class="section-title section-title-collapse">更多数据 · More</summary>
-
-    <div class="subsection">
-      <div class="section-title subsection-title">最常玩英雄 · Most Champions <span class="meta" id="mc-meta"></span></div>
-      <div class="tabs" id="mc-tabs"></div>
-      <div id="mc-content">
-        <div class="loading"><span class="spinner"></span>加载中...</div>
-      </div>
-    </div>
-
-    <div class="subsection">
-      <div class="section-title subsection-title">赛季历史 · Season History</div>
-      <div class="grid-3" id="season-grid">
-        <div class="loading"><span class="spinner"></span>加载中...</div>
-      </div>
-    </div>
-  </details>
-
-  <!-- Debug -->
-  <details>
-    <summary style="cursor:pointer; color:var(--muted); font-size:12px; padding:8px 0;">📦 调试 JSON (state + profile + matches)</summary>
-    <div class="debug" id="debug">未加载</div>
-  </details>
-
   <footer>
     数据源:
-    <a href="https://mcp-api.op.gg/mcp" target="_blank">OP.GG MCP</a> ·
     <a href="https://www.op.gg/summoners/kr/TheShy" target="_blank" id="footer-opgg">OP.GG</a> ·
-    <a href="https://live.bilibili.com/6" target="_blank">B站LPL直播</a> ·
+    <a href="https://live.bilibili.com/6" target="_blank">B站LPL</a> ·
     <a href="https://bbs.hupu.com/lol" target="_blank">虎扑LOL</a> ·
-    <a href="https://github.com/racheko-lab/theshy-monitor" target="_blank">GitHub 源码</a>
+    <a href="https://github.com/racheko-lab/theshy-monitor" target="_blank">GitHub</a>
   </footer>
 </div>
 
@@ -1546,86 +1750,82 @@ function renderSeasons() {
   }).join('');
 }
 
-function renderMatches() {
-  const { matches } = currentData;
-  if (!matches || matches.length === 0) {
-    document.getElementById('matches-list').innerHTML = '<div class="empty">暂无最近比赛 (OP.GG 还没记录到)</div>';
-    return;
+function buildMatchCard(m, idx, containerPrefix) {
+  const win = m.result === 'WIN';
+  const totalSec = m.game_length_second || 0;
+  const mins = Math.floor(totalSec/60);
+  const secs = totalSec%60;
+  const dateStr = fmtKst(m.created_at).replace(/^\d{2}\/\d{2}\s/, '');
+  const isMvp = m.op_score_rank === 1;
+  const isSvp = m.op_score_rank === 2;
+  const rankBadge = isMvp ? '<span class="rank-badge mvp">MVP</span>' :
+                    isSvp ? '<span class="rank-badge svp">SVP</span>' :
+                    m.op_score_rank ? `<span class="rank-badge">${ordinal(m.op_score_rank)}</span>` : '';
+  const mk = multiKillBadge(m.largest_multi_kill);
+
+  const parts = m.participants || [];
+  const blueTeam = parts.filter(p => p.team_key === 'BLUE');
+  const redTeam = parts.filter(p => p.team_key === 'RED');
+
+  function miniPlayerRow(p) {
+    const isMe = isMePlayer(p);
+    const name = p.summoner_name || '?';
+    const tag = p.summoner_tag ? `#${p.summoner_tag}` : '';
+    const pMk = multiKillBadge(p.largest_multi_kill);
+    const pMvp = p.op_score_rank === 1 ? '<span class="rank-badge mvp" style="font-size:9px;padding:1px 5px;">MVP</span>' :
+                 p.op_score_rank === 2 ? '<span class="rank-badge svp" style="font-size:9px;padding:1px 5px;">SVP</span>' : '';
+    return `<div class="g-mini-row">
+      <img class="mini-champ" src="${champIcon(p.champion_id)}" title="${name}${tag}" alt="" onerror="${IMG_ERR}">
+      <span class="mini-name ${isMe?'mini-me':''}">${pMvp}${name}${tag}${pMk ? ' ' : ''}${pMk}</span>
+    </div>`;
   }
-  document.getElementById('matches-meta').textContent = `${matches.length} 场 · 点击展开详情`;
-  document.getElementById('matches-list').innerHTML = matches.map((m, idx) => {
-    const win = m.result === 'WIN';
-    const totalSec = m.game_length_second || 0;
-    const mins = Math.floor(totalSec/60);
-    const secs = totalSec%60;
-    const dateStr = fmtKst(m.created_at).replace(/^\d{2}\/\d{2}\s/, '');
-    const isMvp = m.op_score_rank === 1;
-    const isSvp = m.op_score_rank === 2;
-    const rankBadge = isMvp ? '<span class="rank-badge mvp">MVP</span>' :
-                      isSvp ? '<span class="rank-badge svp">SVP</span>' :
-                      m.op_score_rank ? `<span class="rank-badge">${ordinal(m.op_score_rank)}</span>` : '';
-    const mk = multiKillBadge(m.largest_multi_kill);
+  const blueHtml = blueTeam.map(miniPlayerRow).join('');
+  const redHtml = redTeam.map(miniPlayerRow).join('');
 
-    const parts = m.participants || [];
-    const blueTeam = parts.filter(p => p.team_key === 'BLUE');
-    const redTeam = parts.filter(p => p.team_key === 'RED');
+  const myItems = (m.items || []).slice(0, 7);
+  while (myItems.length < 7) myItems.push(0);
+  const myItemNames = (m.items_names || []).slice(0, 7);
+  while (myItemNames.length < 7) myItemNames.push('');
+  const itemsHtml = myItems.map((iid, i) => {
+    if (!iid) return '<span class="item-icon item-empty"></span>';
+    return `<img class="item-icon" src="${itemIcon(iid)}" title="${myItemNames[i]||''}" alt="" onerror="${IMG_ERR}">`;
+  }).join('');
 
-    function miniPlayerRow(p) {
-      const isMe = isMePlayer(p);
-      const name = p.summoner_name || '?';
-      const tag = p.summoner_tag ? `#${p.summoner_tag}` : '';
-      const pMk = multiKillBadge(p.largest_multi_kill);
-      const pMvp = p.op_score_rank === 1 ? '<span class="rank-badge mvp" style="font-size:9px;padding:1px 5px;">MVP</span>' :
-                   p.op_score_rank === 2 ? '<span class="rank-badge svp" style="font-size:9px;padding:1px 5px;">SVP</span>' : '';
-      return `<div class="g-mini-row">
-        <img class="mini-champ" src="${champIcon(p.champion_id)}" title="${name}${tag}" alt="" onerror="${IMG_ERR}">
-        <span class="mini-name ${isMe?'mini-me':''}">${pMvp}${name}${tag}${pMk ? ' ' : ''}${pMk}</span>
-      </div>`;
-    }
-    const blueHtml = blueTeam.map(miniPlayerRow).join('');
-    const redHtml = redTeam.map(miniPlayerRow).join('');
+  const spellsHtml = (m.spells || []).map(s => `<img class="spell-icon" src="${spellIcon(s)}" title="${SUMMONER_SPELLS[s]||''}" alt="" onerror="${IMG_ERR}">`).join('');
+  const rune = m.rune || {};
+  const runeHtml = runeIconHtml(rune, 'spell-icon');
 
-    const myItems = (m.items || []).slice(0, 7);
-    while (myItems.length < 7) myItems.push(0);
-    const myItemNames = (m.items_names || []).slice(0, 7);
-    while (myItemNames.length < 7) myItemNames.push('');
-    const itemsHtml = myItems.map((iid, i) => {
-      if (!iid) return '<span class="item-icon item-empty"></span>';
-      return `<img class="item-icon" src="${itemIcon(iid)}" title="${myItemNames[i]||''}" alt="" onerror="${IMG_ERR}">`;
-    }).join('');
+  const ati = m.average_tier_info;
+  const avgTierStr = ati ? `${tierName(ati.tier)}${ati.division?DIVISION_NAMES[ati.division]||ati.division:''}` : '';
 
-    const spellsHtml = (m.spells || []).map(s => `<img class="spell-icon" src="${spellIcon(s)}" title="${SUMMONER_SPELLS[s]||''}" alt="" onerror="${IMG_ERR}">`).join('');
-    const rune = m.rune || {};
-    const runeHtml = runeIconHtml(rune, 'spell-icon');
+  const showDetail = containerPrefix === 'matches-list'; // 只有排位页显示详情展开
+  const cardDataIdx = `${containerPrefix}-${idx}`;
 
-    const ati = m.average_tier_info;
-    const avgTierStr = ati ? `${tierName(ati.tier)}${ati.division?DIVISION_NAMES[ati.division]||ati.division:''}` : '';
-
-    return `
-      <div class="g-match ${win?'g-win-bg':'g-lose-bg'}">
-        <div class="g-match-row" data-idx="${idx}" style="cursor:pointer;">
-          <div class="g-top-bar">
-            <span class="g-type-badge ${win?'g-type-win':'g-type-lose'}">${GAME_TYPES[m.game_type]||m.game_type||'-'}</span>
-            <span class="g-time-str">${dateStr}</span>
-          </div>
-          <div class="g-main-row">
-            <div class="g-left-col">
-              <div class="g-hero-section">
-                <div class="g-champ-wrap">
-                  <img class="g-champ-icon" src="${champIcon(m.champion_id)}" alt="${m.champion||''}" onerror="${IMG_ERR}">
-                  <span class="g-champ-lv">${m.champion_level||''}</span>
-                </div>
-                <div class="g-spells-runes">
-                  <div class="g-spells-col">${spellsHtml}</div>
-                  <div class="g-runes-col">${runeHtml}</div>
-                </div>
+  return `
+    <div class="g-match ${win?'g-win-bg':'g-lose-bg'}">
+      <div class="g-match-row" data-idx="${cardDataIdx}" data-container="${containerPrefix}" style="cursor:pointer;">
+        <div class="g-top-bar">
+          <span class="g-type-badge ${win?'g-type-win':'g-type-lose'}">${GAME_TYPES[m.game_type]||m.game_type||'-'}</span>
+          <span class="g-time-str">${dateStr}</span>
+        </div>
+        <div class="g-main-row">
+          <div class="g-left-col">
+            <div class="g-hero-section">
+              <div class="g-champ-wrap">
+                <img class="g-champ-icon" src="${champIcon(m.champion_id)}" alt="${m.champion||''}" onerror="${IMG_ERR}">
+                <span class="g-champ-lv">${m.champion_level||''}</span>
               </div>
-              <div class="g-stats-col">
-                <div class="g-badges">${rankBadge}${mk}</div>
-                <div class="g-kda-line">
-                  <span class="g-kill-num">${m.kill||0}</span>
-                  <span class="g-kda-sep">/</span>
-                  <span class="g-death-num">${m.death||0}</span>
+              <div class="g-spells-runes">
+                <div class="g-spells-col">${spellsHtml}</div>
+                <div class="g-runes-col">${runeHtml}</div>
+              </div>
+            </div>
+            <div class="g-stats-col">
+              <div class="g-badges">${rankBadge}${mk}</div>
+              <div class="g-kda-line">
+                <span class="g-kill-num">${m.kill||0}</span>
+                <span class="g-kda-sep">/</span>
+                <span class="g-death-num">${m.death||0}</span>
                   <span class="g-kda-sep">/</span>
                   <span class="g-assist-num">${m.assist||0}</span>
                 </div>
@@ -1645,19 +1845,18 @@ function renderMatches() {
               </div>
             </div>
           </div>
-          <div class="g-expand-arrow">▼</div>
+          ${showDetail ? '<div class="g-expand-arrow">▼</div>' : ''}
         </div>
-        <div class="g-match-detail" data-detail="${idx}" style="display:none;">
-          ${renderMatchDetail(m)}
-        </div>
+        ${showDetail ? `<div class="g-match-detail" data-detail="${cardDataIdx}" style="display:none;">${renderMatchDetail(m)}</div>` : ''}
       </div>
     `;
-  }).join('');
+}
 
-  document.querySelectorAll('#matches-list .g-match-row').forEach(row => {
+function bindMatchRowClicks(containerSelector) {
+  document.querySelectorAll(`${containerSelector} .g-match-row`).forEach(row => {
     row.onclick = () => {
-      const idx = row.dataset.idx;
-      const detail = document.querySelector(`#matches-list .g-match-detail[data-detail="${idx}"]`);
+      const cardIdx = row.dataset.idx;
+      const detail = document.querySelector(`${containerSelector} .g-match-detail[data-detail="${cardIdx}"]`);
       const arrow = row.querySelector('.g-expand-arrow');
       if (detail) {
         const isOpen = detail.style.display !== 'none';
@@ -1666,6 +1865,41 @@ function renderMatches() {
       }
     };
   });
+}
+
+function renderMatches() {
+  const { matches } = currentData;
+  if (!matches || matches.length === 0) {
+    const mainList = document.getElementById('matches-list');
+    if (mainList) mainList.innerHTML = '<div class="empty">暂无最近比赛 (OP.GG 还没记录到)</div>';
+    const overviewList = document.getElementById('matches-list-overview');
+    if (overviewList) overviewList.innerHTML = '';
+    return;
+  }
+
+  // 排位页 - 完整列表
+  const mainMeta = document.getElementById('matches-meta');
+  const mainList = document.getElementById('matches-list');
+  if (mainMeta) mainMeta.textContent = `${matches.length} 场 · 点击展开详情`;
+  if (mainList) {
+    mainList.innerHTML = matches.map((m, idx) => buildMatchCard(m, idx, 'matches-list')).join('');
+    bindMatchRowClicks('#matches-list');
+  }
+
+  // 总览页 - 最近5场
+  const overviewMeta = document.getElementById('matches-meta-overview');
+  const overviewList = document.getElementById('matches-list-overview');
+  const recentMatches = matches.slice(0, 5);
+  if (overviewMeta) overviewMeta.textContent = `最近${recentMatches.length}场`;
+  if (overviewList) {
+    overviewList.innerHTML = recentMatches.map((m, idx) => buildMatchCard(m, idx, 'matches-list-overview')).join('');
+    // 总览页不绑定详情展开，点击跳转到排位页
+    overviewList.querySelectorAll('.g-match-row').forEach(row => {
+      row.onclick = () => {
+        document.querySelector('.main-tab[data-tab="ranked"]').click();
+      };
+    });
+  }
 }
 
 function getTheshyParticipant(m) {
@@ -2149,106 +2383,92 @@ function eventCategory(ev) {
   return 'other';
 }
 
-function renderEvents() {
-  let events = currentData.events || [];
-  // Apply filter
-  if (eventFilter !== 'all') {
-    events = events.filter(ev => eventCategory(ev) === eventFilter);
-  }
-  if (!events || events.length === 0) {
-    const allCount = (currentData.events || []).length;
-    document.getElementById('events-list').innerHTML = `<div class="empty">${eventFilter === 'all' ? '暂无事件' : '该分类下暂无事件'}${allCount ? ` (共${allCount}条)` : ''}</div>`;
-    document.getElementById('events-meta').textContent = `${allCount} 条`;
-    return;
-  }
-  const totalCount = (currentData.events || []).length;
-  document.getElementById('events-meta').textContent = `${events.length}/${totalCount} 条`;
-  document.getElementById('events-list').innerHTML = events.slice(0, 100).map(ev => {
-    let cls = 'event-item';
-    let icon = '📨';
-    let title = ev.type;
-    let meta = fmtKst(ev.timestamp, true);
-    const acctTag = ev.account ? `<span class="ev-acct">${ev.account}</span>` : '';
-    if (ev.type === 'became_active' || ev.type === 'opgg_updated') {
+function buildEventItem(ev) {
+  let cls = 'event-item';
+  let icon = '📨';
+  let title = ev.type;
+  let meta = fmtKst(ev.timestamp, true);
+  const acctTag = ev.account ? `<span class="ev-acct">${ev.account}</span>` : '';
+  if (ev.type === 'became_active' || ev.type === 'opgg_updated') {
+    cls += ' active';
+    icon = '🔥';
+    title = '可能开始排位了';
+    meta = `${acctTag}OP.GG 更新: ${fmtKst(ev.updated_at)} · ${ageString(ev.updated_at)}`;
+  } else if (ev.type === 'new_match') {
+    cls += ev.result === 'WIN' ? ' match-win' : ' match-lose';
+    icon = ev.result === 'WIN' ? '🏆' : '💔';
+    title = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${ev.champion} · ${ev.result === 'WIN' ? '胜利' : '失败'}`;
+    meta = `${acctTag}KDA ${ev.kda} (${ev.kill}/${ev.death}/${ev.assist}) · ${fmtKst(ev.created_at)}`;
+  } else if (ev.type === 'level_changed') {
+    cls += ' level';
+    icon = '📈';
+    title = `等级 ${ev.old ?? '-'} → ${ev.new}`;
+    meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
+  } else if (ev.type === 'rank_changed') {
+    cls += ' rank';
+    icon = '🏆';
+    title = `段位变化: ${ev.old} → ${ev.new}`;
+    meta = `${acctTag}${GAME_TYPES[ev.game_type]||ev.game_type} · ${fmtKst(ev.timestamp)}`;
+  } else if (ev.type === 'lp_changed') {
+    const sign = ev.delta >= 0 ? '+' : '';
+    cls += ev.delta >= 0 ? ' lp-up' : ' lp-down';
+    icon = ev.delta >= 0 ? '📈' : '📉';
+    title = `LP ${ev.old_lp} → ${ev.new_lp} (${sign}${ev.delta})`;
+    meta = `${acctTag}${GAME_TYPES[ev.game_type]||ev.game_type} · ${tierName(ev.tier)} ${ev.division ? (DIVISION_NAMES[ev.division]||ev.division) : ''} · ${fmtKst(ev.timestamp)}`;
+  } else if (ev.type === 'winning_streak') {
+    cls += ' match-win';
+    icon = '🔥';
+    title = `${ev.streak}连胜!`;
+    meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
+  } else if (ev.type === 'losing_streak') {
+    cls += ' match-lose';
+    icon = '💔';
+    title = `${ev.streak}连败...`;
+    meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
+  } else if (ev.type === 'highlight') {
+    const hl = [];
+    if (ev.is_mvp) hl.push('⭐MVP');
+    if (ev.is_penta) hl.push('💥五杀');
+    if (ev.is_quadra) hl.push('💥四杀');
+    icon = '✨';
+    cls += ' rank';
+    title = `高光时刻! ${hl.join(' ')}`;
+    const m = ev.match || {};
+    meta = `${acctTag}${m.champion||'?'} · KDA ${m.kda||'?'} · ${fmtKst(ev.timestamp, true)}`;
+  } else if (ev.type === 'lpl_match') {
+    icon = '🏟️';
+    title = ev.kind === 'pre' ? `即将开赛: ${ev.team_a} vs ${ev.team_b}` :
+            ev.kind === 'start' ? `比赛开始: ${ev.team_a} vs ${ev.team_b}` :
+            `LPL: ${ev.team_a} vs ${ev.team_b}`;
+    meta = `${ev.stage||''} · ${ev.match_time||''}`;
+  } else if (ev.type === 'bilibili_live') {
+    if (ev.kind === 'ig_live_start') {
       cls += ' active';
-      icon = '🔥';
-      title = '可能开始排位了';
-      meta = `${acctTag}OP.GG 更新: ${fmtKst(ev.updated_at)} · ${ageString(ev.updated_at)}`;
-    } else if (ev.type === 'new_match') {
-      cls += ev.result === 'WIN' ? ' match-win' : ' match-lose';
-      icon = ev.result === 'WIN' ? '🏆' : '💔';
-      title = `${GAME_TYPES[ev.game_type]||ev.game_type} · ${ev.champion} · ${ev.result === 'WIN' ? '胜利' : '失败'}`;
-      meta = `${acctTag}KDA ${ev.kda} (${ev.kill}/${ev.death}/${ev.assist}) · ${fmtKst(ev.created_at)}`;
-    } else if (ev.type === 'level_changed') {
-      cls += ' level';
-      icon = '📈';
-      title = `等级 ${ev.old ?? '-'} → ${ev.new}`;
-      meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
-    } else if (ev.type === 'rank_changed') {
-      cls += ' rank';
-      icon = '🏆';
-      title = `段位变化: ${ev.old} → ${ev.new}`;
-      meta = `${acctTag}${GAME_TYPES[ev.game_type]||ev.game_type} · ${fmtKst(ev.timestamp)}`;
-    } else if (ev.type === 'lp_changed') {
-      const sign = ev.delta >= 0 ? '+' : '';
-      cls += ev.delta >= 0 ? ' lp-up' : ' lp-down';
-      icon = ev.delta >= 0 ? '📈' : '📉';
-      title = `LP ${ev.old_lp} → ${ev.new_lp} (${sign}${ev.delta})`;
-      meta = `${acctTag}${GAME_TYPES[ev.game_type]||ev.game_type} · ${tierName(ev.tier)} ${ev.division ? (DIVISION_NAMES[ev.division]||ev.division) : ''} · ${fmtKst(ev.timestamp)}`;
-    } else if (ev.type === 'winning_streak') {
-      cls += ' match-win';
-      icon = '🔥';
-      title = `${ev.streak}连胜!`;
-      meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
-    } else if (ev.type === 'losing_streak') {
-      cls += ' match-lose';
-      icon = '💔';
-      title = `${ev.streak}连败...`;
-      meta = `${acctTag}${fmtKst(ev.timestamp, true)}`;
-    } else if (ev.type === 'highlight') {
-      const hl = [];
-      if (ev.is_mvp) hl.push('⭐MVP');
-      if (ev.is_penta) hl.push('💥五杀');
-      if (ev.is_quadra) hl.push('💥四杀');
-      icon = '✨';
-      cls += ' rank';
-      title = `高光时刻! ${hl.join(' ')}`;
-      const m = ev.match || {};
-      meta = `${acctTag}${m.champion||'?'} · KDA ${m.kda||'?'} · ${fmtKst(ev.timestamp, true)}`;
-    } else if (ev.type === 'lpl_match') {
-      icon = '🏟️';
-      title = ev.kind === 'pre' ? `即将开赛: ${ev.team_a} vs ${ev.team_b}` :
-              ev.kind === 'start' ? `比赛开始: ${ev.team_a} vs ${ev.team_b}` :
-              `LPL: ${ev.team_a} vs ${ev.team_b}`;
-      meta = `${ev.stage||''} · ${ev.match_time||''}`;
-    } else if (ev.type === 'bilibili_live') {
-      if (ev.kind === 'ig_live_start') {
-        cls += ' active';
-        icon = '📺';
-        title = 'B站直播: IG比赛已开播!';
-      } else if (ev.kind === 'ig_live_end') {
-        icon = '📺';
-        cls += ' lp-down';
-        title = 'B站直播: IG比赛直播已结束';
-      } else {
-        icon = '📺';
-        title = 'B站直播更新';
-      }
-      meta = `${ev.title||''} · 房间${ev.room_id||6} · ${fmtKst(ev.timestamp, true)}`;
-    } else if (ev.type === 'hupu_rating') {
-      icon = '🏆';
-      title = '虎扑评分: IG比赛已出评分';
-      meta = `${ev.title||''} · ${fmtKst(ev.timestamp, true)}`;
-    } else if (ev.type === 'error') {
-      icon = '⚠️';
-      title = '监控错误';
-      meta = `${acctTag}${ev.msg || ''}`;
-    } else if (ev.type === 'system_initialized') {
-      icon = '🚀';
-      title = ev.msg || '监控启动';
+      icon = '📺';
+      title = 'B站直播: IG比赛已开播!';
+    } else if (ev.kind === 'ig_live_end') {
+      icon = '📺';
+      cls += ' lp-down';
+      title = 'B站直播: IG比赛直播已结束';
+    } else {
+      icon = '📺';
+      title = 'B站直播更新';
     }
-    return `
-      <div class="${cls}">
+    meta = `${ev.title||''} · 房间${ev.room_id||6} · ${fmtKst(ev.timestamp, true)}`;
+  } else if (ev.type === 'hupu_rating') {
+    icon = '🏆';
+    title = '虎扑评分: IG比赛已出评分';
+    meta = `${ev.title||''} · ${fmtKst(ev.timestamp, true)}`;
+  } else if (ev.type === 'error') {
+    icon = '⚠️';
+    title = '监控错误';
+    meta = `${acctTag}${ev.msg || ''}`;
+  } else if (ev.type === 'system_initialized') {
+    icon = '🚀';
+    title = ev.msg || '监控启动';
+  }
+  return `
+    <div class="${cls}">
         <div class="icon">${icon}</div>
         <div class="body">
           <div class="title">${title}</div>
@@ -2256,45 +2476,103 @@ function renderEvents() {
         </div>
       </div>
     `;
-  }).join('');
+}
+
+function isLplEvent(ev) {
+  const cat = eventCategory(ev);
+  return cat === 'lpl' || cat === 'bilibili' || cat === 'hupu';
+}
+
+function renderEvents() {
+  const allEvents = currentData.events || [];
+
+  // 1. 动态页 - 带筛选的完整事件列表
+  let filteredEvents = allEvents;
+  if (eventFilter !== 'all') {
+    filteredEvents = allEvents.filter(ev => eventCategory(ev) === eventFilter);
+  }
+  const mainList = document.getElementById('events-list');
+  const mainMeta = document.getElementById('events-meta');
+  if (mainMeta) mainMeta.textContent = `${filteredEvents.length}/${allEvents.length} 条`;
+  if (mainList) {
+    if (!filteredEvents.length) {
+      mainList.innerHTML = `<div class="empty">${eventFilter === 'all' ? '暂无事件' : '该分类下暂无事件'}${allEvents.length ? ` (共${allEvents.length}条)` : ''}</div>`;
+    } else {
+      mainList.innerHTML = filteredEvents.slice(0, 100).map(buildEventItem).join('');
+    }
+  }
+
+  // 2. 赛事页 - LPL相关事件
+  const lplList = document.getElementById('lpl-events-list');
+  if (lplList) {
+    const lplEvents = allEvents.filter(isLplEvent).slice(0, 30);
+    if (!lplEvents.length) {
+      lplList.innerHTML = '<div class="empty">暂无赛事动态</div>';
+    } else {
+      lplList.innerHTML = lplEvents.map(buildEventItem).join('');
+    }
+  }
+
+  updateTabBadges();
 }
 
 function renderBilibiliBar() {
-  const bar = document.getElementById('bili-bar');
-  const dot = document.getElementById('bili-dot');
-  const titleEl = document.getElementById('bili-title');
-  const metaEl = document.getElementById('bili-meta');
-  const link = document.getElementById('bili-link');
   if (!allData || !allData.bilibili) {
-    bar.classList.remove('show');
+    document.getElementById('bili-bar').classList.remove('show');
+    const lplBar = document.getElementById('bili-bar-lpl');
+    if (lplBar) lplBar.style.display = 'none';
+    updateTabBadges();
     return;
   }
   const bili = allData.bilibili;
   const isLive = bili.is_ig_live || bili.is_live;
-  if (isLive) {
-    bar.classList.add('show', 'live');
-    dot.style.display = '';
-    link.style.display = '';
-    titleEl.textContent = bili.title || 'B站LPL直播中';
-    const liveTime = bili.live_time ? ` · ${bili.live_time}` : '';
-    metaEl.textContent = bili.is_ig_live ? '🔴 IG比赛直播中' : 'B站直播中';
-    metaEl.textContent += liveTime;
-    if (bili.is_ig_live) {
-      metaEl.textContent += ' · 🎮 TheShy比赛直播中!';
-    }
-  } else {
-    // Only show if there was a recent stream or status available
-    if (bili.title && bili.last_check) {
-      bar.classList.add('show');
-      bar.classList.remove('live');
-      dot.style.display = 'none';
-      link.style.display = 'none';
-      titleEl.textContent = 'B站LPL直播间';
-      metaEl.textContent = bili.title ? `当前: ${bili.title}` : '当前未开播';
+
+  // Helper to render one bar instance
+  function renderOne(bar, dot, titleEl, metaEl, link) {
+    if (!bar) return;
+    if (isLive) {
+      bar.classList.add('show', 'live');
+      bar.style.display = '';
+      if (dot) dot.style.display = '';
+      if (link) link.style.display = '';
+      titleEl.textContent = bili.title || 'B站LPL直播中';
+      const liveTime = bili.live_time ? ` · ${bili.live_time}` : '';
+      metaEl.textContent = bili.is_ig_live ? '🔴 IG比赛直播中' : 'B站直播中';
+      metaEl.textContent += liveTime;
+      if (bili.is_ig_live) {
+        metaEl.textContent += ' · 🎮 TheShy比赛直播中!';
+      }
     } else {
-      bar.classList.remove('show');
+      if (bili.title && bili.last_check) {
+        bar.classList.add('show');
+        bar.classList.remove('live');
+        bar.style.display = '';
+        if (dot) dot.style.display = 'none';
+        if (link) link.style.display = 'none';
+        titleEl.textContent = 'B站LPL直播间';
+        metaEl.textContent = bili.title ? `当前: ${bili.title}` : '当前未开播';
+      } else {
+        bar.classList.remove('show');
+        bar.style.display = 'none';
+      }
     }
   }
+
+  renderOne(
+    document.getElementById('bili-bar'),
+    document.getElementById('bili-dot'),
+    document.getElementById('bili-title'),
+    document.getElementById('bili-meta'),
+    document.getElementById('bili-link')
+  );
+  renderOne(
+    document.getElementById('bili-bar-lpl'),
+    document.getElementById('bili-dot-lpl'),
+    document.getElementById('bili-title-lpl'),
+    document.getElementById('bili-meta-lpl'),
+    document.getElementById('bili-link-lpl')
+  );
+  updateTabBadges();
 }
 
 function renderDailyStats() {
@@ -2329,39 +2607,15 @@ function renderDailyStats() {
 }
 
 function renderHupuRatings() {
-  const section = document.getElementById('hupu-section');
-  const list = document.getElementById('hupu-list');
-  const headerText = document.getElementById('hupu-header-text');
-  const lastCheck = document.getElementById('hupu-last-check');
+  const hupu = allData && allData.hupu_ratings;
+  const matches = (hupu && hupu.matches) || [];
 
-  if (!allData || !allData.hupu_ratings) {
-    section.style.display = 'none';
-    return;
-  }
-  const hupu = allData.hupu_ratings;
-  const matches = hupu.matches || [];
-  if (!matches.length) {
-    section.style.display = 'none';
-    return;
-  }
-  section.style.display = '';
-  headerText.textContent = `虎扑${hupu.team || 'LPL'}比赛评分`;
-  if (hupu.last_check) {
-    const t = new Date(hupu.last_check);
-    lastCheck.textContent = isNaN(t) ? '' : `更新于 ${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
-  } else {
-    lastCheck.textContent = '';
-  }
-
-  // 清理标题: 去掉[赛后]前缀, 截取主要信息
   function cleanTitle(title) {
     return title.replace(/^\[赛后\]\s*/, '').replace(/：.*$/, match => {
-      // 保留冒号后的部分但截断过长
       if (match.length > 30) return match.substring(0, 28) + '...';
       return match;
     });
   }
-
   function timeAgo(isoStr) {
     if (!isoStr) return '';
     const t = new Date(isoStr);
@@ -2374,16 +2628,57 @@ function renderHupuRatings() {
     if (hours < 24) return `${hours}小时前`;
     return `${Math.floor(hours/24)}天前`;
   }
-
-  list.innerHTML = matches.slice(0, 5).map(m => `
-    <div class="hupu-item">
-      ${m.score ? `<span class="hupu-score-badge">${m.score}</span>` : '<span class="hupu-score-badge hupu-badge-score">赛后</span>'}
-      <div class="hupu-title">
-        <a href="${m.url}" target="_blank" title="${m.title}">${cleanTitle(m.title)}</a>
+  function buildList(items, limit) {
+    return items.slice(0, limit).map(m => `
+      <div class="hupu-item">
+        ${m.score ? `<span class="hupu-score-badge">${m.score}</span>` : '<span class="hupu-score-badge hupu-badge-score">赛后</span>'}
+        <div class="hupu-title">
+          <a href="${m.url}" target="_blank" title="${m.title}">${cleanTitle(m.title)}</a>
+        </div>
+        <span class="hupu-time">${timeAgo(m.found_at)}</span>
       </div>
-      <span class="hupu-time">${timeAgo(m.found_at)}</span>
-    </div>
-  `).join('');
+    `).join('');
+  }
+
+  // 总览页: 紧凑模式 (已有完整section结构)
+  const section = document.getElementById('hupu-section');
+  if (section) {
+    const list = document.getElementById('hupu-list');
+    const headerText = document.getElementById('hupu-header-text');
+    const lastCheck = document.getElementById('hupu-last-check');
+    if (!matches.length) {
+      section.style.display = 'none';
+    } else {
+      section.style.display = '';
+      headerText.textContent = `虎扑${hupu.team || 'LPL'}比赛评分`;
+      if (hupu.last_check) {
+        const t = new Date(hupu.last_check);
+        lastCheck.textContent = isNaN(t) ? '' : `更新于 ${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
+      } else { lastCheck.textContent = ''; }
+      list.innerHTML = buildList(matches, 3);
+    }
+  }
+
+  // 赛事页: 嵌入到容器中
+  const lplContainer = document.getElementById('hupu-section-lpl');
+  if (lplContainer) {
+    if (!matches.length) {
+      lplContainer.innerHTML = '<div class="empty">暂无IG比赛评分</div>';
+    } else {
+      lplContainer.innerHTML = `
+        <div class="hupu-section" style="display:block; margin-bottom:0;">
+          <div class="hupu-header">
+            <span class="hupu-logo">虎扑</span>
+            <span>虎扑${hupu.team || 'LPL'}比赛评分</span>
+            <span style="margin-left:auto; font-size:11px; color:var(--muted); font-weight:400;">更新于 ${(() => { const t=new Date(hupu.last_check); return isNaN(t)?'':String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0'); })()}</span>
+          </div>
+          <div class="hupu-list">${buildList(matches, 10)}</div>
+          <a href="https://bbs.hupu.com/lol" target="_blank" class="hupu-more">查看更多LPL讨论 →</a>
+        </div>
+      `;
+    }
+  }
+  updateTabBadges();
 }
 
 function renderDebug() {
@@ -2459,6 +2754,46 @@ function setupAuto() {
 }
 
 document.getElementById('refresh-btn').addEventListener('click', refresh);
+
+// ============================================================
+// 标签页切换逻辑
+// ============================================================
+function updateTabBadges() {
+  // 赛事页直播徽章
+  const bili = allData?.bilibili;
+  const isLive = !!(bili && (bili.is_live || bili.is_ig_live));
+  const lplBadge = document.getElementById('tab-lpl-badge');
+  if (lplBadge) {
+    lplBadge.className = isLive ? 'tab-badge show live dot' : 'tab-badge';
+    lplBadge.textContent = '';
+  }
+
+  // 动态页未读事件徽章（用事件总数作为提示）
+  const events = currentData?.events || [];
+  const actBadge = document.getElementById('tab-act-badge');
+  if (actBadge) {
+    const recentCount = events.filter(e => e.ts > Date.now() - 3600000).length;
+    actBadge.className = recentCount > 0 ? 'tab-badge show' : 'tab-badge';
+    actBadge.textContent = recentCount > 9 ? '9+' : (recentCount || '');
+  }
+}
+
+document.querySelectorAll('.main-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const pane = document.getElementById(`pane-${tab.dataset.tab}`);
+    if (pane) pane.classList.add('active');
+  });
+});
+
+// URL hash记忆
+if (window.location.hash) {
+  const hash = window.location.hash.slice(1);
+  const targetTab = document.querySelector(`.main-tab[data-tab="${hash}"]`);
+  if (targetTab) targetTab.click();
+}
 
 setupAuto();
 setupEventFilter();
