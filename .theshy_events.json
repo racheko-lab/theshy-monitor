@@ -1,5 +1,39 @@
 [
   {
+    "type": "became_active",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-01T06:48:05+09:00",
+    "level": 92,
+    "timestamp": "2026-08-01T06:48:15.690003+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-01T06:48:05+09:00",
+    "level": 92,
+    "is_active": true,
+    "timestamp": "2026-08-01T06:48:15.686818+09:00"
+  },
+  {
+    "type": "became_active",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-01T06:47:01+09:00",
+    "level": 294,
+    "timestamp": "2026-08-01T06:48:14.606396+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-01T06:47:01+09:00",
+    "level": 294,
+    "is_active": true,
+    "timestamp": "2026-08-01T06:48:14.603228+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -2899,43 +2933,5 @@
     "level": 294,
     "is_active": false,
     "timestamp": "2026-07-30T03:00:04.326079+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-30T01:46:07+09:00",
-    "level": 90,
-    "is_active": false,
-    "timestamp": "2026-07-30T01:51:31.646812+09:00"
-  },
-  {
-    "type": "became_active",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-30T01:47:58+09:00",
-    "level": 294,
-    "timestamp": "2026-07-30T01:51:30.592196+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-30T01:47:58+09:00",
-    "level": 294,
-    "is_active": true,
-    "timestamp": "2026-07-30T01:51:30.591200+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "game_type": "SOLORANKED",
-    "old_lp": 1757,
-    "new_lp": 1735,
-    "delta": -22,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-07-30T00:30:08.712931+09:00"
   }
 ]
