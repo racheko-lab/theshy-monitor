@@ -1,5 +1,23 @@
 [
   {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-07-31T21:16:23+09:00",
+    "level": 91,
+    "is_active": true,
+    "timestamp": "2026-07-31T21:17:17.058097+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-07-31T21:04:00+09:00",
+    "level": 294,
+    "is_active": false,
+    "timestamp": "2026-07-31T21:17:17.057143+09:00"
+  },
+  {
     "type": "became_active",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -967,31 +985,5 @@
     "level": 90,
     "is_active": false,
     "timestamp": "2026-07-29T02:08:34.177158+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-29T02:03:06+09:00",
-    "level": 294,
-    "is_active": false,
-    "timestamp": "2026-07-29T02:08:34.176235+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "match_id": "qfvdWpGbi21Qrq2RT5YHPPP0-TcszR_eGCEwVvQJnMc=",
-    "game_type": "SOLORANKED",
-    "champion": "深海泰坦",
-    "result": "LOSE",
-    "kda": "0.75",
-    "kill": 1,
-    "death": 4,
-    "assist": 2,
-    "created_at": "2026-07-29T00:08:15+09:00",
-    "game_length_second": 919,
-    "position": "SUPPORT",
-    "timestamp": "2026-07-29T00:40:08.692087+09:00"
   }
 ]
