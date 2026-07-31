@@ -844,6 +844,11 @@
     min-width: 36px;
     justify-content: center;
   }
+  .hupu-badge-score {
+    background: rgba(148,163,184,0.1);
+    border-color: rgba(148,163,184,0.2);
+    color: var(--muted);
+  }
   .hupu-title {
     flex: 1;
     min-width: 0;
@@ -2372,7 +2377,7 @@ function renderHupuRatings() {
 
   list.innerHTML = matches.slice(0, 5).map(m => `
     <div class="hupu-item">
-      ${m.score ? `<span class="hupu-score-badge">${m.score}</span>` : '<span class="hupu-score-badge" style="background:rgba(148,163,184,0.1); border-color:rgba(148,163,184,0.2); color:var(--muted);">评分</span>'}
+      ${m.score ? `<span class="hupu-score-badge">${m.score}</span>` : '<span class="hupu-score-badge hupu-badge-score">赛后</span>'}
       <div class="hupu-title">
         <a href="${m.url}" target="_blank" title="${m.title}">${cleanTitle(m.title)}</a>
       </div>

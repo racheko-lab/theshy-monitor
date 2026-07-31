@@ -1692,6 +1692,9 @@ def check_bilibili_live(cfg, verbose=False):
 
 # ============================================================
 # 虎扑LPL比赛评分采集
+# 策略: 监控虎扑LOL区首页的[赛后]帖, 筛选IG比赛
+# 注: 虎扑选手评分是APP专属功能, 网页端链接到论坛帖即可
+#     (手机端打开帖会自动跳转APP评分页, PC端帖内有评分入口)
 # ============================================================
 def check_hupu_ratings(cfg, verbose=False):
     """抓取虎扑LOL区最近的赛后帖, 返回IG相关比赛评分帖信息"""
@@ -1710,24 +1713,34 @@ def check_hupu_ratings(cfg, verbose=False):
         return notifications_sent, prev_state
 
     import re as _re
-    # 提取帖子列表: 匹配标题和链接 (虎扑帖子链接格式: /641445465.html)
-    # 虎扑帖子链接通常是 <a href="/xxxxx.html" ... class="p-title">标题</a>
-    post_pattern = _re.compile(
-        r'<a[^>]+href="(/\d{6,}\.html)"[^>]*class="p-title"[^>]*>([^<]*赛后[^<]*)</a>',
-        _re.IGNORECASE
-    )
-    posts = post_pattern.findall(html)
-
-    # 备用: 更宽松的匹配
-    if not posts:
-        post_pattern2 = _re.compile(
-            r'href="(/\d{6,}\.html)"[^>]*>([^<]*\[赛后\][^<]*)</a>',
-            _re.IGNORECASE
-        )
-        posts = post_pattern2.findall(html)
+    # 提取帖子列表 (多种模式兼容虎扑页面结构变化)
+    posts = []
+    for pat in [
+        _re.compile(r'<a[^>]+href="(/\d{6,}\.html)"[^>]*class="p-title"[^>]*>([^<]*赛后[^<]*)</a>', _re.IGNORECASE),
+        _re.compile(r'href="(/\d{6,}\.html)"[^>]*>([^<]*\[赛后\][^<]*)</a>', _re.IGNORECASE),
+        _re.compile(r'<a[^>]+href="(/\d{6,}\.html)"[^>]*>([^<]*赛后[^<]*)</a>', _re.IGNORECASE),
+    ]:
+        posts = pat.findall(html)
+        if posts:
+            break
 
     now_cst = datetime.now(CST)
-    team_name = cfg.get("HUPU_TEAM", HUPU_TEAM)
+    hupu_cfg = cfg.get("hupu", {}) if isinstance(cfg.get("hupu"), dict) else {}
+    team_name = hupu_cfg.get("team", HUPU_TEAM)
+
+    def _has_team(text, team):
+        """战队名边界匹配, 避免子串误识别 (如LIGHT里的IG)"""
+        idx = text.find(team)
+        while idx != -1:
+            before = text[idx - 1] if idx > 0 else " "
+            after = text[idx + len(team)] if idx + len(team) < len(text) else " "
+            if not (before.isalpha() or before.isdigit() or after.isalpha() or after.isdigit()):
+                return True
+            idx = text.find(team, idx + 1)
+        return False
+
+    LPL_TEAMS = ["WBG", "LNG", "NIP", "JDG", "BLG", "TES", "AL", "TT", "WE",
+                 "LGD", "EDG", "RNG", "FPX", "OMG", "RA", "UP", "IG"]
 
     for href, title in posts:
         title = title.strip()
@@ -1736,30 +1749,15 @@ def check_hupu_ratings(cfg, verbose=False):
         post_id = href.strip("/").replace(".html", "")
         post_url = f"https://bbs.hupu.com{href}"
 
-        # 检查是否是IG比赛
-        # 战队名边界匹配
-        def _has_team(text, team):
-            idx = text.find(team)
-            while idx != -1:
-                before = text[idx - 1] if idx > 0 else " "
-                after = text[idx + len(team)] if idx + len(team) < len(text) else " "
-                if not (before.isalpha() or after.isalpha()):
-                    return True
-                idx = text.find(team, idx + 1)
-            return False
-
         if not _has_team(title, team_name):
             continue
 
-        # 解析比分和战队
-        # 标题格式: [赛后]IG 2-1 WBG：xxx
+        # 解析比分和对手战队
         score_match = _re.search(r'(\d+)\s*[-:：]\s*(\d+)', title)
         team_a = team_b = score = ""
         if score_match:
             score = f"{score_match.group(1)}-{score_match.group(2)}"
-            # 尝试提取双方战队
-            for t in ["WBG", "LNG", "NIP", "JDG", "BLG", "TES", "AL", "TT", "WE",
-                      "LGD", "EDG", "RNG", "FPX", "OMG", "V5", "RA", "UP", "IG"]:
+            for t in LPL_TEAMS:
                 if t != team_name and _has_team(title, t):
                     team_b = t
                     break
@@ -1776,14 +1774,14 @@ def check_hupu_ratings(cfg, verbose=False):
         }
         cur_matches.append(match_info)
 
-        # IG比赛新赛后帖通知
+        # 新帖通知
         if post_id not in notified_ids:
             notif_title = f"🏆 虎扑评分: {team_name}比赛已出评分"
+            vs_str = f" {team_a} vs {team_b}" if team_b else ""
             notif_body = (
-                f"标题: {title}\n"
-                f"比分: {score or '见详情'}\n"
-                f"链接: {post_url}\n"
-                f"点击去虎扑看JR评分!"
+                f"{title}\n"
+                f"比分: {score or '见详情'}{vs_str}\n"
+                f"点击去虎扑看JR评分 → {post_url}"
             )
             results = notify(notif_title, notif_body, cfg)
             for ch, ok in results:
@@ -1796,9 +1794,10 @@ def check_hupu_ratings(cfg, verbose=False):
         ig_count = len(cur_matches)
         print(f"  虎扑评分: 发现{ig_count}个{team_name}赛后帖")
 
-    # 保留最近20条记录, 最近100个通知ID
+    # 保留最近20条, 通知ID保留最近100个
     prev_matches = prev_state.get("matches", [])
-    all_matches = cur_matches + [m for m in prev_matches if m["id"] not in {x["id"] for x in cur_matches}]
+    existing_ids = {x["id"] for x in cur_matches}
+    all_matches = cur_matches + [m for m in prev_matches if m["id"] not in existing_ids]
     all_matches = all_matches[:20]
 
     cur_state = {
