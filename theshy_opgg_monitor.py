@@ -1749,14 +1749,82 @@ def _ij_val(info_json, key, default=""):
     return default
 
 
-def fetch_hupu_match_detail(out_biz_no):
-    """通过outBizNo获取一场比赛的详细信息(队伍、比分、时间)和所有选手评分
+def _extract_images(raw):
+    """从image字段提取图片URL数组,兼容string/list/dict格式"""
+    if not raw:
+        return []
+    if isinstance(raw, str):
+        return [raw] if raw else []
+    if isinstance(raw, list):
+        result = []
+        for x in raw:
+            if isinstance(x, str) and x:
+                result.append(x)
+            elif isinstance(x, dict):
+                url = x.get("url") or x.get("src") or x.get("image") or ""
+                if url:
+                    result.append(url)
+        return result
+    if isinstance(raw, dict):
+        url = raw.get("url") or raw.get("src") or raw.get("image") or ""
+        return [url] if url else []
+    return []
 
-    返回dict: {home, away, home_score, away_score, match_time, league_name, round_name,
-              home_players, away_players, ig_home, ig_win, total_scorers, out_biz_no}
-    失败返回None
+
+def _extract_labels(pij):
+    """从infoJson提取label标签数组,如[{'text':'强势回归',...}]"""
+    labels = pij.get("label")
+    if not labels:
+        return []
+    result = []
+    if isinstance(labels, list):
+        for lab in labels:
+            if isinstance(lab, dict):
+                text = lab.get("text") or lab.get("title") or ""
+                if text:
+                    result.append({
+                        "text": str(text),
+                        "color": str(lab.get("textColorDay") or "#fff"),
+                        "bg": str(lab.get("bgColorDay") or "#9b59b6"),
+                    })
+            elif isinstance(lab, str) and lab:
+                result.append({"text": lab, "color": "#fff", "bg": "#9b59b6"})
+    elif isinstance(labels, str) and labels:
+        result.append({"text": labels, "color": "#fff", "bg": "#9b59b6"})
+    return result
+
+
+def _extract_hot_comment(n):
+    """从node提取热评,返回{content, likes, user}或None"""
+    hcm = n.get("hotCommentModels") or []
+    if hcm and isinstance(hcm, list):
+        for c in hcm:
+            if isinstance(c, dict) and c.get("commentContent"):
+                return {
+                    "content": str(c.get("commentContent") or ""),
+                    "likes": int(c.get("lightCount") or 0),
+                    "user": str(c.get("commentUserName") or ""),
+                }
+    hc = n.get("hottestComments") or []
+    if hc and isinstance(hc, list):
+        for c in hc:
+            if isinstance(c, str) and c:
+                return {"content": c, "likes": 0, "user": ""}
+            if isinstance(c, dict) and c.get("commentContent"):
+                return {
+                    "content": str(c.get("commentContent") or ""),
+                    "likes": int(c.get("lightCount") or 0),
+                    "user": str(c.get("commentUserName") or ""),
+                }
+    return None
+
+
+def fetch_hupu_match_detail(out_biz_no):
+    """通过outBizNo获取一场比赛的所有可见信息:
+    - 比赛基本信息(队名/比分/时间/赛制/队标/封面/胜负方)
+    - 每局(bo)数据: 选手头像/英雄/KDA/评分/评分人数/标签/热评/教练/解说/BP英雄
+    - 系列赛聚合数据(跨局加权平均分、累计KDA、出场英雄)
     """
-    # 1. 获取比赛基本信息
     self_data = _hupu_api_get(HUPU_SCORE_SELF_URL, params={
         "outBizNo": str(out_biz_no),
         "outBizType": "lol_match",
@@ -1766,39 +1834,55 @@ def fetch_hupu_match_detail(out_biz_no):
     detail = (self_data.get("data") or {}).get("detail") or {}
     ij = _parse_info_json(detail.get("infoJson"))
 
-    home_name = str(_ij_val(ij, "homeTeamName", "")).upper()
-    away_name = str(_ij_val(ij, "awayTeamName", "")).upper()
+    home_name_raw = str(_ij_val(ij, "homeTeamName", ""))
+    away_name_raw = str(_ij_val(ij, "awayTeamName", ""))
     home_tid = str(_ij_val(ij, "homeTeamId", ""))
     away_tid = str(_ij_val(ij, "awayTeamId", ""))
+    win_tid = str(_ij_val(ij, "winTeamId", ""))
     home_score = int(_ij_val(ij, "homeTeamScore", 0) or 0)
     away_score = int(_ij_val(ij, "awayTeamScore", 0) or 0)
     match_time = int(_ij_val(ij, "matchTime", 0) or 0)
     league_name = str(_ij_val(ij, "competitionTypeCn", ""))
     round_name = str(_ij_val(ij, "competitionStageTypeCn", ""))
-    if match_time > 0 and match_time < 10**12:
-        match_time = match_time * 1000  # 秒转毫秒
+    match_title = str(detail.get("selfName") or "")
 
-    # 规范化队名
+    home_logo = _extract_images(_ij_val(ij, "homeTeamLogo", ""))
+    away_logo = _extract_images(_ij_val(ij, "awayTeamLogo", ""))
+    home_logo = home_logo[0] if home_logo else ""
+    away_logo = away_logo[0] if away_logo else ""
+    cover_imgs = _extract_images(detail.get("cover") or detail.get("image") or "")
+    cover = cover_imgs[0] if cover_imgs else ""
+
+    if match_time > 0 and match_time < 10**12:
+        match_time = match_time * 1000
+
     def norm(name):
         for tn in ["IG", "WBG", "LNG", "NIP", "JDG", "BLG", "TES", "AL", "TT", "WE",
                     "LGD", "EDG", "RNG", "FPX", "OMG", "RA", "UP"]:
             if tn in name.upper():
                 return tn
         return name.upper()
-    home_norm = norm(home_name)
-    away_norm = norm(away_name)
+    home_norm = norm(home_name_raw)
+    away_norm = norm(away_name_raw)
     is_ig_home = "IG" in home_norm.upper()
     is_ig_away = "IG" in away_norm.upper()
     if not (is_ig_home or is_ig_away):
         return None
 
-    # 2. 获取所有局(games/bo)的选手数据, 聚合成比赛级评分
-    games = (self_data.get("data") or {}).get("subNodes") or []
-    player_stats = {}  # name -> {weighted_score, total_count, team_id, kills, deaths, assists}
+    games_meta = (self_data.get("data") or {}).get("subNodes") or []
 
-    for game in games:
-        bo_no = game.get("outBizNo")
-        bo_type = game.get("outBizType", "lol_bo")
+    player_agg = {}
+    games_detail = []
+
+    for gm in games_meta:
+        bo_no = gm.get("outBizNo")
+        bo_type = gm.get("outBizType", "lol_bo")
+        bo_name = str(gm.get("selfName") or "")
+        if not bo_name and len(games_meta) > 1:
+            bo_name = f"第{len(games_detail)+1}局"
+        bo_cover_imgs = _extract_images(gm.get("cover") or gm.get("image") or "")
+        bo_cover = bo_cover_imgs[0] if bo_cover_imgs else ""
+
         if not bo_no:
             continue
         cur_data = _hupu_api_get(HUPU_SCORE_SUB_URL, params={
@@ -1806,96 +1890,273 @@ def fetch_hupu_match_detail(out_biz_no):
             "outBizType": bo_type,
             "relation": "CHILD",
             "page": 1,
-            "pageSize": 30,
+            "pageSize": 50,
         })
         if not _api_success(cur_data):
             continue
         nodes = (((cur_data.get("data") or {}).get("pageResult") or {}).get("data")) or []
+
+        game_players = []
+        game_coaches = []
+        game_casters = []
+        game_bpHeroes = []
+
         for item in nodes:
             n = item.get("node") or {}
             pij = _parse_info_json(n.get("infoJson"))
             ptype = str(_ij_val(pij, "type", ""))
-            if ptype != "player":
-                continue
             name = str(n.get("name") or "").strip()
             if not name:
                 continue
-            tid = str(_ij_val(pij, "teamId", ""))
-            avg = float(n.get("scoreAvg") or 0)
-            cnt = int(n.get("scorePersonCount") or 0)
-            try:
-                kills = int(_ij_val(pij, "killCount", 0) or 0)
-            except Exception:
-                kills = 0
-            try:
-                deaths = int(_ij_val(pij, "deathCount", 0) or 0)
-            except Exception:
-                deaths = 0
-            try:
-                assists = int(_ij_val(pij, "assistCount", 0) or 0)
-            except Exception:
-                assists = 0
-            if name not in player_stats:
-                player_stats[name] = {
-                    "weighted_score": 0.0, "total_count": 0, "team_id": tid,
-                    "kills": 0, "deaths": 0, "assists": 0,
-                }
-            if avg > 0 and cnt > 0:
-                player_stats[name]["weighted_score"] += avg * cnt
-                player_stats[name]["total_count"] += cnt
-            player_stats[name]["kills"] += kills
-            player_stats[name]["deaths"] += deaths
-            player_stats[name]["assists"] += assists
 
-    # 3. 组装选手列表
-    home_players = []
-    away_players = []
-    total_scorers = int(detail.get("summedScorePersonCount") or 0)
-    for name, ps in player_stats.items():
-        avg = round(ps["weighted_score"] / ps["total_count"], 1) if ps["total_count"] > 0 else 0.0
-        kda_str = f"{ps['kills']}/{ps['deaths']}/{ps['assists']}"
-        # KDA比率 = (K+A)/D
-        kda_ratio = round((ps["kills"] + ps["assists"]) / ps["deaths"], 2) if ps["deaths"] > 0 else (ps["kills"] + ps["assists"])
-        p = {
-            "name": name,
-            "team": home_norm if ps["team_id"] == home_tid else away_norm,
+            avatar_list = _extract_images(n.get("image"))
+            avatar = avatar_list[0] if avatar_list else ""
+            avg = float(n.get("scoreAvg") or 0)
+            votes = int(n.get("scorePersonCount") or 0)
+            comments = int(n.get("commentCount") or 0)
+            bg_color = str(n.get("bgColor") or _ij_val(pij, "bgColor", "") or "")
+            champion_list = _extract_images(_ij_val(pij, "auxiliaryPic", ""))
+            champion = champion_list[0] if champion_list else ""
+            labels = _extract_labels(pij)
+            hot = _extract_hot_comment(n)
+            position = str(_ij_val(pij, "position", "") or _ij_val(pij, "playerPosition", ""))
+
+            if ptype == "player":
+                tid = str(_ij_val(pij, "teamId", ""))
+                try:
+                    kills = int(_ij_val(pij, "killCount", 0) or 0)
+                except Exception:
+                    kills = 0
+                try:
+                    deaths = int(_ij_val(pij, "deathCount", 0) or 0)
+                except Exception:
+                    deaths = 0
+                try:
+                    assists = int(_ij_val(pij, "assistCount", 0) or 0)
+                except Exception:
+                    assists = 0
+
+                gp = {
+                    "name": name, "avatar": avatar, "champion": champion,
+                    "score": avg, "votes": votes, "comments": comments,
+                    "kills": kills, "deaths": deaths, "assists": assists,
+                    "kda": f"{kills}/{deaths}/{assists}",
+                    "team_id": tid, "labels": labels, "hot_comment": hot,
+                    "bg_color": bg_color, "position": position,
+                }
+                game_players.append(gp)
+
+                if name not in player_agg:
+                    player_agg[name] = {
+                        "weighted_score": 0.0, "total_count": 0, "team_id": tid,
+                        "kills": 0, "deaths": 0, "assists": 0,
+                        "total_comments": 0, "avatar": avatar,
+                        "bg_color": bg_color, "champions": [], "labels": [],
+                        "hot_comments": [], "games_played": 0, "position": position,
+                        "kind": "player",
+                    }
+                if avg > 0 and votes > 0:
+                    player_agg[name]["weighted_score"] += avg * votes
+                    player_agg[name]["total_count"] += votes
+                player_agg[name]["kills"] += kills
+                player_agg[name]["deaths"] += deaths
+                player_agg[name]["assists"] += assists
+                player_agg[name]["total_comments"] += comments
+                player_agg[name]["games_played"] += 1
+                if avatar:
+                    player_agg[name]["avatar"] = avatar
+                if bg_color:
+                    player_agg[name]["bg_color"] = bg_color
+                if champion:
+                    player_agg[name]["champions"].append(champion)
+                for lab in labels:
+                    if lab["text"] not in [l["text"] for l in player_agg[name]["labels"]]:
+                        player_agg[name]["labels"].append(lab)
+                if hot:
+                    player_agg[name]["hot_comments"].append(hot)
+                if position and not player_agg[name]["position"]:
+                    player_agg[name]["position"] = position
+
+            elif ptype == "coach":
+                tid = str(_ij_val(pij, "teamId", ""))
+                gc = {
+                    "name": name, "avatar": avatar, "score": avg, "votes": votes,
+                    "comments": comments, "team_id": tid, "labels": labels,
+                    "hot_comment": hot, "bg_color": bg_color,
+                }
+                game_coaches.append(gc)
+                ck = f"__coach__{name}__{tid}"
+                if ck not in player_agg:
+                    player_agg[ck] = {
+                        "weighted_score": 0.0, "total_count": 0, "team_id": tid,
+                        "kills": 0, "deaths": 0, "assists": 0,
+                        "total_comments": 0, "avatar": avatar,
+                        "bg_color": bg_color, "champions": [], "labels": [],
+                        "hot_comments": [], "games_played": 0,
+                        "kind": "coach", "display_name": name,
+                    }
+                if avg > 0 and votes > 0:
+                    player_agg[ck]["weighted_score"] += avg * votes
+                    player_agg[ck]["total_count"] += votes
+                player_agg[ck]["total_comments"] += comments
+                player_agg[ck]["games_played"] += 1
+                if avatar: player_agg[ck]["avatar"] = avatar
+                for lab in labels:
+                    if lab["text"] not in [l["text"] for l in player_agg[ck]["labels"]]:
+                        player_agg[ck]["labels"].append(lab)
+                if hot:
+                    player_agg[ck]["hot_comments"].append(hot)
+
+            elif ptype == "bpHero":
+                tid = str(_ij_val(pij, "teamId", ""))
+                game_bpHeroes.append({
+                    "name": name, "score": avg, "votes": votes, "comments": comments,
+                    "team_id": tid, "bg_color": bg_color,
+                })
+
+            else:
+                is_caster_like = any(k in name for k in ["解说", "主持", "评论", "嘉宾"])
+                gc = {
+                    "name": name, "avatar": avatar, "score": avg, "votes": votes,
+                    "comments": comments, "labels": labels,
+                    "hot_comment": hot, "bg_color": bg_color,
+                }
+                game_casters.append(gc)
+                if is_caster_like:
+                    ck = f"__caster__{name}"
+                    if ck not in player_agg:
+                        player_agg[ck] = {
+                            "weighted_score": 0.0, "total_count": 0, "team_id": "",
+                            "kills": 0, "deaths": 0, "assists": 0,
+                            "total_comments": 0, "avatar": avatar,
+                            "bg_color": bg_color, "champions": [], "labels": [],
+                            "hot_comments": [], "games_played": 0,
+                            "kind": "caster", "display_name": name,
+                        }
+                    if avg > 0 and votes > 0:
+                        player_agg[ck]["weighted_score"] += avg * votes
+                        player_agg[ck]["total_count"] += votes
+                    player_agg[ck]["total_comments"] += comments
+                    player_agg[ck]["games_played"] += 1
+                    if avatar: player_agg[ck]["avatar"] = avatar
+                    for lab in labels:
+                        if lab["text"] not in [l["text"] for l in player_agg[ck]["labels"]]:
+                            player_agg[ck]["labels"].append(lab)
+                    if hot:
+                        player_agg[ck]["hot_comments"].append(hot)
+
+        game_bpHeroes.sort(key=lambda x: x.get("votes", 0), reverse=True)
+        games_detail.append({
+            "bo_no": str(bo_no),
+            "bo_name": bo_name or f"第{len(games_detail)+1}局",
+            "cover": bo_cover,
+            "players": game_players,
+            "coaches": game_coaches,
+            "casters": game_casters,
+            "bpHeroes": game_bpHeroes,
+        })
+
+    def _finalize(stats, display_name):
+        avg = round(stats["weighted_score"] / stats["total_count"], 1) if stats["total_count"] > 0 else 0.0
+        kind = stats.get("kind", "player")
+        if kind == "player":
+            kda_str = f"{stats['kills']}/{stats['deaths']}/{stats['assists']}"
+            kda_ratio = round((stats["kills"] + stats["assists"]) / max(stats["deaths"], 1), 2)
+        else:
+            kda_str = ""
+            kda_ratio = 0
+        best_hot = None
+        for h in stats["hot_comments"]:
+            if best_hot is None or h.get("likes", 0) > best_hot.get("likes", 0):
+                best_hot = h
+        champs = []
+        for c in stats["champions"]:
+            if c and c not in champs:
+                champs.append(c)
+        return {
+            "name": display_name,
+            "team": home_norm if stats["team_id"] == home_tid else (away_norm if stats["team_id"] == away_tid else ""),
             "avg": avg,
-            "total_count": ps["total_count"],
+            "total_count": stats["total_count"],
+            "comments": stats["total_comments"],
             "kda": kda_str,
             "kda_ratio": kda_ratio,
-            "kills": ps["kills"],
-            "deaths": ps["deaths"],
-            "assists": ps["assists"],
+            "kills": stats["kills"],
+            "deaths": stats["deaths"],
+            "assists": stats["assists"],
+            "avatar": stats["avatar"],
+            "bg_color": stats["bg_color"],
+            "champions": champs,
+            "labels": stats["labels"],
+            "hot_comment": best_hot,
+            "games_played": stats["games_played"],
+            "position": stats.get("position", ""),
+            "kind": kind,
         }
-        if ps["team_id"] == home_tid:
-            home_players.append(p)
-        elif ps["team_id"] == away_tid:
-            away_players.append(p)
+
+    home_players = []
+    away_players = []
+    all_coaches = []
+    all_casters = []
+    for key, stats in player_agg.items():
+        kind = stats.get("kind", "player")
+        display = stats.get("display_name") or key
+        p = _finalize(stats, display)
+        if kind == "coach":
+            all_coaches.append(p)
+        elif kind == "caster":
+            all_casters.append(p)
+        else:
+            if stats["team_id"] == home_tid:
+                home_players.append(p)
+            elif stats["team_id"] == away_tid:
+                away_players.append(p)
     home_players.sort(key=lambda x: -x["avg"])
     away_players.sort(key=lambda x: -x["avg"])
+    all_coaches.sort(key=lambda x: -x["avg"])
+    all_casters.sort(key=lambda x: -x["avg"])
 
     ig_win = (is_ig_home and home_score > away_score) or (is_ig_away and away_score > home_score)
+    total_scorers = int(detail.get("summedScorePersonCount") or 0)
+    if total_scorers == 0:
+        for g in games_detail:
+            for p in g["players"]:
+                total_scorers = max(total_scorers, p["votes"])
 
+    ig_team = home_norm if is_ig_home else away_norm
+    opp_team = away_norm if is_ig_home else home_norm
     return {
         "out_biz_no": str(out_biz_no),
-        "home": home_norm,
-        "away": away_norm,
-        "home_score": home_score,
-        "away_score": away_score,
+        "match_id": str(_ij_val(ij, "matchId", "") or ""),
+        "title": match_title,
+        "home": home_norm, "away": away_norm,
+        "home_name_raw": home_name_raw, "away_name_raw": away_name_raw,
+        "home_score": home_score, "away_score": away_score,
+        "home_logo": home_logo, "away_logo": away_logo,
+        "home_team_id": home_tid, "away_team_id": away_tid,
+        "win_team_id": win_tid,
+        "cover": cover,
         "match_time": match_time,
         "league_name": league_name,
         "round_name": round_name,
         "home_players": home_players,
         "away_players": away_players,
+        "coaches": all_coaches,
+        "casters": all_casters,
+        "games": games_detail,
         "ig_home": is_ig_home,
         "ig_win": ig_win,
         "ig_players": home_players if is_ig_home else away_players,
         "opp_players": away_players if is_ig_home else home_players,
         "ig_score": home_score if is_ig_home else away_score,
         "opp_score": away_score if is_ig_home else home_score,
-        "opponent": away_norm if is_ig_home else home_norm,
+        "opponent": opp_team,
+        "ig_coaches": [c for c in all_coaches if c["team"] == ig_team],
+        "opp_coaches": [c for c in all_coaches if c["team"] == opp_team],
         "total_scorers": total_scorers,
     }
+
+
 
 
 # ============================================================
@@ -2074,6 +2335,9 @@ def check_hupu_ratings(cfg, verbose=False):
             "score": f"{hs}-{aws}",
             "home": home,
             "away": away,
+            "home_logo": m.get("home_logo", ""),
+            "away_logo": m.get("away_logo", ""),
+            "cover": m.get("cover", ""),
             "home_score": hs,
             "away_score": aws,
             "ig_win": ig_win,
@@ -2085,6 +2349,11 @@ def check_hupu_ratings(cfg, verbose=False):
             "opp_players": m.get("opp_players", []),
             "home_players": m.get("home_players", []),
             "away_players": m.get("away_players", []),
+            "coaches": m.get("coaches", []),
+            "casters": m.get("casters", []),
+            "ig_coaches": m.get("ig_coaches", []),
+            "opp_coaches": m.get("opp_coaches", []),
+            "games": m.get("games", []),
             "total_scorers": m.get("total_scorers", 0),
             "league_name": m.get("league_name", ""),
             "round_name": m.get("round_name", ""),
