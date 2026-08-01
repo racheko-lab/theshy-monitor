@@ -60,14 +60,21 @@ html, body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overscroll-behavior-y: contain;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  max-width: 480px;
-  margin: 0 auto;
   background: var(--bg);
   padding-bottom: calc(68px + var(--safe-bottom));
   min-height: 100vh;
+  position: relative;
+}
+
+/* 移动端容器 - 居中限制最大宽度 */
+.app-container {
+  max-width: 480px;
+  margin: 0 auto;
   position: relative;
 }
 
@@ -81,8 +88,6 @@ body {
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   padding-top: var(--safe-top);
-  max-width: 480px;
-  margin: 0 auto;
 }
 .top-nav-inner {
   display: flex;
@@ -861,16 +866,20 @@ body {
 .bottom-tabs {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 480px;
+  left: 0;
+  right: 0;
   z-index: 100;
   background: rgba(13, 15, 20, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--border);
   padding-bottom: var(--safe-bottom);
+  display: flex;
+  justify-content: center;
+}
+.bottom-tabs-inner {
+  width: 100%;
+  max-width: 480px;
   display: flex;
 }
 .bottom-tab {
@@ -1041,6 +1050,7 @@ details[open] summary::after { transform: rotate(90deg); }
 </style>
 </head>
 <body>
+<div class="app-container">
 
 <!-- 顶部导航 -->
 <header class="top-nav">
@@ -1160,25 +1170,29 @@ details[open] summary::after { transform: rotate(90deg); }
   </div>
 </div>
 
-<!-- 底部Tab栏 -->
+</div><!-- /.app-container -->
+
+<!-- 底部Tab栏 - fixed定位，在container外 -->
 <nav class="bottom-tabs">
-  <div class="bottom-tab active" data-tab="overview">
-    <div class="bottom-tab-icon">📊</div>
-    <div class="bottom-tab-label">总览</div>
-  </div>
-  <div class="bottom-tab" data-tab="matches">
-    <div class="bottom-tab-icon">⚔️</div>
-    <div class="bottom-tab-label">战绩</div>
-  </div>
-  <div class="bottom-tab" data-tab="esports">
-    <div class="bottom-tab-icon">🏆</div>
-    <div class="bottom-tab-label">赛事</div>
-    <div class="bottom-tab-dot" id="tab-esports-dot" style="display:none;"></div>
-  </div>
-  <div class="bottom-tab" data-tab="activity">
-    <div class="bottom-tab-icon">📋</div>
-    <div class="bottom-tab-label">动态</div>
-    <div class="bottom-tab-badge" id="tab-activity-badge" style="display:none;"></div>
+  <div class="bottom-tabs-inner">
+    <div class="bottom-tab active" data-tab="overview">
+      <div class="bottom-tab-icon">📊</div>
+      <div class="bottom-tab-label">总览</div>
+    </div>
+    <div class="bottom-tab" data-tab="matches">
+      <div class="bottom-tab-icon">⚔️</div>
+      <div class="bottom-tab-label">战绩</div>
+    </div>
+    <div class="bottom-tab" data-tab="esports">
+      <div class="bottom-tab-icon">🏆</div>
+      <div class="bottom-tab-label">赛事</div>
+      <div class="bottom-tab-dot" id="tab-esports-dot" style="display:none;"></div>
+    </div>
+    <div class="bottom-tab" data-tab="activity">
+      <div class="bottom-tab-icon">📋</div>
+      <div class="bottom-tab-label">动态</div>
+      <div class="bottom-tab-badge" id="tab-activity-badge" style="display:none;"></div>
+    </div>
   </div>
 </nav>
 
