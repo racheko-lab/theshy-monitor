@@ -1217,6 +1217,56 @@ body {
   height: 100%;
   border-radius: 2px;
 }
+/* 星级分布条 */
+.hupu-stars {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+  height: 3px;
+  width: 48px;
+  margin-left: auto;
+}
+.hupu-stars > span {
+  height: 100%;
+  border-radius: 1px;
+  transition: width .2s;
+}
+.hupu-stars .s5 { background: #4ade80; }
+.hupu-stars .s4 { background: #86efac; }
+.hupu-stars .s3 { background: #fde047; }
+.hupu-stars .s2 { background: #fb923c; }
+.hupu-stars .s1 { background: #f87171; }
+/* 对位数据(雷达简化为数值对比) */
+.hupu-radar {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-top: 4px;
+  padding: 5px 6px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 5px;
+  font-size: 9px;
+}
+.hupu-radar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.hupu-radar-label {
+  color: var(--text-muted);
+  font-size: 9px;
+}
+.hupu-radar-vals {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+}
+.hupu-radar-self { color: #4ade80; font-weight: 700; }
+.hupu-radar-opp  { color: #f87171; opacity: .75; }
+.hupu-radar-vs   { color: var(--text-muted); font-size: 8px; }
 
 /* 队标 */
 .hupu-team-logo {
@@ -2556,6 +2606,50 @@ function renderHupu() {
       ? `<span class="hupu-champs-more">${p.champions.slice(1).map(c=>safeImg(c,'','')).join('')}</span>` : '';
     const hot = p.hot_comment && p.hot_comment.content
       ? `<div class="hupu-player-comment">"${escHtml(p.hot_comment.content)}"${p.hot_comment.likes>100?' <span style="opacity:.6">· '+p.hot_comment.likes+'赞</span>':''}</div>` : '';
+    // 星级分布条
+    let starsHtml = '';
+    if (p.score_dist && p.score_dist_total > 0) {
+      const sd = p.score_dist, total = p.score_dist_total;
+      const segs = [
+        {k:'s5', v:sd.s5||0},
+        {k:'s4', v:sd.s4||0},
+        {k:'s3', v:sd.s3||0},
+        {k:'s2', v:sd.s2||0},
+        {k:'s1', v:sd.s1||0},
+      ];
+      starsHtml = `<div class="hupu-stars">${segs.map(s=>{
+        const pct = total>0 ? (s.v/total*100) : 0;
+        return `<span class="${s.k}" style="width:${pct}%" title="${s.k.slice(1)}星:${s.v}人"></span>`;
+      }).join('')}</div>`;
+    }
+    // 对位雷达数据(只给每队最高分选手展示,避免页面过长)
+    let radarHtml = '';
+    if (isMvp && p.best_radar && p.best_radar.self && p.best_radar.opponent) {
+      const rs = p.best_radar.self.stats, ro = p.best_radar.opponent.stats;
+      const opp = p.best_radar.opponent;
+      const items = [
+        {l:'参团', s:rs.attend.real, o:ro.attend.real},
+        {l:'伤害', s:rs.damage.real, o:ro.damage.real},
+        {l:'伤转', s:rs.dpg.real,    o:ro.dpg.real},
+        {l:'承伤', s:rs.taken.real,  o:ro.taken.real},
+        {l:'补刀', s:rs.cs.real,     o:ro.cs.real},
+        {l:'死亡', s:rs.death.real,  o:ro.death.real},
+      ];
+      radarHtml = `<div class="hupu-radar">
+        <div style="grid-column:1/-1;display:flex;justify-content:space-between;opacity:.5;font-size:8px;margin-bottom:2px;">
+          <span>对位 ${escHtml(opp.name)} (${opp.score})</span>
+          <span style="color:#4ade80">● 我方</span><span style="color:#f87171">● 对方</span>
+        </div>
+        ${items.map(it=>`<div class="hupu-radar-item">
+          <span class="hupu-radar-label">${it.l}</span>
+          <span class="hupu-radar-vals">
+            <span class="hupu-radar-self">${it.s}</span>
+            <span class="hupu-radar-vs">vs</span>
+            <span class="hupu-radar-opp">${it.o}</span>
+          </span>
+        </div>`).join('')}
+      </div>`;
+    }
     return `<div class="hupu-player-row${isMvp?' mvp':''}">
       <div class="hupu-avatar-wrap">${avatar}${champ}</div>
       <div class="hupu-player-mid">
@@ -2574,7 +2668,9 @@ function renderHupu() {
       <div class="hupu-player-right">
         <div class="hupu-player-score-big ${scoreColorClass(p.avg)}">${p.avg ? p.avg.toFixed(1) : '-'}</div>
         <div class="hupu-player-bar-mini"><div class="${barColorClass(p.avg)}" style="width:${p.avg?barWidth(p.avg):'0%'}"></div></div>
+        ${starsHtml}
       </div>
+      ${radarHtml}
     </div>`;
   }
 

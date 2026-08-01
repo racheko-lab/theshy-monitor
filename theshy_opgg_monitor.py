@@ -88,6 +88,7 @@ HUPU_SCORE_API_HEADERS = {
 }
 HUPU_SCORE_SELF_URL = "https://games.mobileapi.hupu.com/1/8.0.99/bplcommentapi/bpl/score_tree/getSelfByBizKey"
 HUPU_SCORE_SUB_URL = "https://games.mobileapi.hupu.com/1/8.0.99/bplcommentapi/bpl/score_tree/getCurAndSubNodeByBizKey"
+HUPU_PLAYER_ALIGNMENT_URL = "https://games.mobileapi.hupu.com/1/8.0.99/egallapi/player/alignment"
 
 # 虎扑评分API - 已知IG比赛outBizNo列表 (用于初次数据填充, 爬虫会自动发现新比赛)
 KNOWN_IG_MATCH_BIZNOS = ["3678", "3612", "3610", "3606", "3552", "3545", "3534", "3530", "3512", "3506"]
@@ -1819,6 +1820,62 @@ def _extract_hot_comment(n):
     return None
 
 
+def _fetch_radar(match_id, player_id, bo_num):
+    """调用egallapi/player/alignment获取选手对位雷达图数据"""
+    if not match_id or not player_id:
+        return None
+    try:
+        r = _hupu_api_get(HUPU_PLAYER_ALIGNMENT_URL, params={
+            "matchId": str(match_id),
+            "playerId": str(player_id),
+            "outBizType": "lol_item",
+            "currentBo": str(bo_num or ""),
+            "queryType": "detail",
+        }, timeout=5)
+        if not _api_success(r):
+            return None
+        stat = ((r.get("data") or {}).get("statistical")) or []
+        if not stat or len(stat) < 2:
+            return None
+        def _extract_player(entry):
+            pi = entry.get("playerInfo") or {}
+            stats = {}
+            for k, label_map in [
+                ("attendWarRate", "attend"),
+                ("damageRate", "damage"),
+                ("death", "death"),
+                ("damagePerGold", "dpg"),
+                ("takenDamageRate", "taken"),
+                ("minionKilled", "cs"),
+            ]:
+                v = entry.get(k) or {}
+                stats[label_map] = {"real": str(v.get("real") or ""), "current": float(v.get("current") or 0)}
+            return {
+                "name": str(pi.get("playerName") or ""),
+                "desc": str(pi.get("desc") or ""),
+                "score": str(pi.get("scoreAvg") or ""),
+                "votes": str(pi.get("scoreCount") or ""),
+                "avatar": str(pi.get("playerLogo") or ""),
+                "champion": str(pi.get("heroLogo") or ""),
+                "team_id": str(pi.get("teamId") or ""),
+                "camp": str(entry.get("camp") or ""),
+                "stats": stats,
+            }
+        self_e = None
+        opp_e = None
+        for e in stat:
+            p = _extract_player(e)
+            if self_e is None:
+                self_e = p
+            else:
+                opp_e = p
+        if self_e is None or opp_e is None:
+            return None
+        return {"self": self_e, "opponent": opp_e}
+    except Exception:
+        return None
+
+
 def fetch_hupu_match_detail(out_biz_no):
     """通过outBizNo获取一场比赛的所有可见信息:
     - 比赛基本信息(队名/比分/时间/赛制/队标/封面/胜负方)
@@ -1870,6 +1927,7 @@ def fetch_hupu_match_detail(out_biz_no):
         return None
 
     games_meta = (self_data.get("data") or {}).get("subNodes") or []
+    _match_id = str(_ij_val(ij, "matchId", "") or "")
 
     player_agg = {}
     games_detail = []
@@ -1882,6 +1940,13 @@ def fetch_hupu_match_detail(out_biz_no):
             bo_name = f"第{len(games_detail)+1}局"
         bo_cover_imgs = _extract_images(gm.get("cover") or gm.get("image") or "")
         bo_cover = bo_cover_imgs[0] if bo_cover_imgs else ""
+        # 推断bo序号
+        _bo_num = 0
+        for digit in re.findall(r"(\d+)", bo_name):
+            _bo_num = int(digit)
+            break
+        if _bo_num == 0:
+            _bo_num = len(games_detail) + 1
 
         if not bo_no:
             continue
@@ -1920,6 +1985,18 @@ def fetch_hupu_match_detail(out_biz_no):
             labels = _extract_labels(pij)
             hot = _extract_hot_comment(n)
             position = str(_ij_val(pij, "position", "") or _ij_val(pij, "playerPosition", ""))
+            # 星级分布 (1★=2分, 2★=4分, ... 5★=10分)
+            _raw_sd = n.get("scoreDistribution") or {}
+            try:
+                score_dist = {
+                    "s5": int(_raw_sd.get("10", 0) or 0),
+                    "s4": int(_raw_sd.get("8", 0) or 0),
+                    "s3": int(_raw_sd.get("6", 0) or 0),
+                    "s2": int(_raw_sd.get("4", 0) or 0),
+                    "s1": int(_raw_sd.get("2", 0) or 0),
+                }
+            except Exception:
+                score_dist = {"s5": 0, "s4": 0, "s3": 0, "s2": 0, "s1": 0}
 
             if ptype == "player":
                 tid = str(_ij_val(pij, "teamId", ""))
@@ -1935,6 +2012,11 @@ def fetch_hupu_match_detail(out_biz_no):
                     assists = int(_ij_val(pij, "assistCount", 0) or 0)
                 except Exception:
                     assists = 0
+                player_id = str(_ij_val(pij, "itemId", "") or "")
+                # 雷达数据
+                radar = None
+                if _match_id and player_id:
+                    radar = _fetch_radar(_match_id, player_id, _bo_num)
 
                 gp = {
                     "name": name, "avatar": avatar, "champion": champion,
@@ -1943,6 +2025,9 @@ def fetch_hupu_match_detail(out_biz_no):
                     "kda": f"{kills}/{deaths}/{assists}",
                     "team_id": tid, "labels": labels, "hot_comment": hot,
                     "bg_color": bg_color, "position": position,
+                    "score_dist": score_dist,
+                    "radar": radar,
+                    "player_id": player_id,
                 }
                 game_players.append(gp)
 
@@ -1954,6 +2039,9 @@ def fetch_hupu_match_detail(out_biz_no):
                         "bg_color": bg_color, "champions": [], "labels": [],
                         "hot_comments": [], "games_played": 0, "position": position,
                         "kind": "player",
+                        "score_dist": {"s5": 0, "s4": 0, "s3": 0, "s2": 0, "s1": 0},
+                        "best_radar": None,
+                        "best_radar_score": 0.0,
                     }
                 if avg > 0 and votes > 0:
                     player_agg[name]["weighted_score"] += avg * votes
@@ -1963,6 +2051,8 @@ def fetch_hupu_match_detail(out_biz_no):
                 player_agg[name]["assists"] += assists
                 player_agg[name]["total_comments"] += comments
                 player_agg[name]["games_played"] += 1
+                for sk in ("s5","s4","s3","s2","s1"):
+                    player_agg[name]["score_dist"][sk] = player_agg[name]["score_dist"].get(sk,0) + score_dist.get(sk,0)
                 if avatar:
                     player_agg[name]["avatar"] = avatar
                 if bg_color:
@@ -1976,6 +2066,10 @@ def fetch_hupu_match_detail(out_biz_no):
                     player_agg[name]["hot_comments"].append(hot)
                 if position and not player_agg[name]["position"]:
                     player_agg[name]["position"] = position
+                # 选一个最高评分局的雷达作为代表
+                if radar and avg > player_agg[name]["best_radar_score"]:
+                    player_agg[name]["best_radar"] = radar
+                    player_agg[name]["best_radar_score"] = avg
 
             elif ptype == "coach":
                 tid = str(_ij_val(pij, "teamId", ""))
@@ -2073,6 +2167,8 @@ def fetch_hupu_match_detail(out_biz_no):
         for c in stats["champions"]:
             if c and c not in champs:
                 champs.append(c)
+        sd = stats.get("score_dist") or {"s5":0,"s4":0,"s3":0,"s2":0,"s1":0}
+        sd_total = sum(sd.values())
         return {
             "name": display_name,
             "team": home_norm if stats["team_id"] == home_tid else (away_norm if stats["team_id"] == away_tid else ""),
@@ -2092,6 +2188,9 @@ def fetch_hupu_match_detail(out_biz_no):
             "games_played": stats["games_played"],
             "position": stats.get("position", ""),
             "kind": kind,
+            "score_dist": sd,
+            "score_dist_total": sd_total,
+            "best_radar": stats.get("best_radar"),
         }
 
     home_players = []
