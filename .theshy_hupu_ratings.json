@@ -2,118 +2,1731 @@
   "matches": [
     {
       "id": "3678",
-      "title": "[赛后]IG 2-1 AL：TheShy上路完压，IG鏖战三局力克AL",
-      "url": "https://m.hupu.com/score/detail.html?night=0&biz_code=&isCheckInfo=0&env=prod&outBizNo=3678&outBizType=lol_match",
+      "out_biz_no": "3678",
+      "title": "[赛后]IG 2-1 WBG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3678&outBizType=lol_match",
       "score": "2-1",
-      "team_a": "IG",
-      "team_b": "AL",
-      "found_at": "2026-08-01T02:48:00+08:00"
+      "home": "IG",
+      "away": "WBG",
+      "home_score": 2,
+      "away_score": 1,
+      "ig_win": true,
+      "ig_home": true,
+      "opponent": "WBG",
+      "ig_score": 2,
+      "opp_score": 1,
+      "ig_players": [
+        {
+          "name": "TheShy",
+          "team": "IG",
+          "avg": 9.2,
+          "total_count": 55951,
+          "kda": "1/5/2"
+        },
+        {
+          "name": "Assum",
+          "team": "IG",
+          "avg": 8.4,
+          "total_count": 17257,
+          "kda": "1/3/4"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 7.4,
+          "total_count": 17998,
+          "kda": "1/4/3"
+        },
+        {
+          "name": "Rookie",
+          "team": "IG",
+          "avg": 7.0,
+          "total_count": 22785,
+          "kda": "3/6/1"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 4.3,
+          "total_count": 19695,
+          "kda": "1/8/4"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Jiejie",
+          "team": "WBG",
+          "avg": 6.9,
+          "total_count": 8791,
+          "kda": "5/1/20"
+        },
+        {
+          "name": "Jwei",
+          "team": "WBG",
+          "avg": 6.1,
+          "total_count": 5373,
+          "kda": "3/3/17"
+        },
+        {
+          "name": "Elk",
+          "team": "WBG",
+          "avg": 6.0,
+          "total_count": 12130,
+          "kda": "9/2/14"
+        },
+        {
+          "name": "Xiaohu",
+          "team": "WBG",
+          "avg": 6.0,
+          "total_count": 7956,
+          "kda": "3/0/14"
+        },
+        {
+          "name": "Zika",
+          "team": "WBG",
+          "avg": 5.6,
+          "total_count": 7520,
+          "kda": "6/1/7"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "TheShy",
+          "team": "IG",
+          "avg": 9.2,
+          "total_count": 55951,
+          "kda": "1/5/2"
+        },
+        {
+          "name": "Assum",
+          "team": "IG",
+          "avg": 8.4,
+          "total_count": 17257,
+          "kda": "1/3/4"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 7.4,
+          "total_count": 17998,
+          "kda": "1/4/3"
+        },
+        {
+          "name": "Rookie",
+          "team": "IG",
+          "avg": 7.0,
+          "total_count": 22785,
+          "kda": "3/6/1"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 4.3,
+          "total_count": 19695,
+          "kda": "1/8/4"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Jiejie",
+          "team": "WBG",
+          "avg": 6.9,
+          "total_count": 8791,
+          "kda": "5/1/20"
+        },
+        {
+          "name": "Jwei",
+          "team": "WBG",
+          "avg": 6.1,
+          "total_count": 5373,
+          "kda": "3/3/17"
+        },
+        {
+          "name": "Elk",
+          "team": "WBG",
+          "avg": 6.0,
+          "total_count": 12130,
+          "kda": "9/2/14"
+        },
+        {
+          "name": "Xiaohu",
+          "team": "WBG",
+          "avg": 6.0,
+          "total_count": 7956,
+          "kda": "3/0/14"
+        },
+        {
+          "name": "Zika",
+          "team": "WBG",
+          "avg": 5.6,
+          "total_count": 7520,
+          "kda": "6/1/7"
+        }
+      ],
+      "total_scorers": 194819,
+      "league_name": "职业联赛",
+      "round_name": "第三赛段组内赛",
+      "match_time": 1784970000000,
+      "date_str": "07月25日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
     },
     {
-      "id": "641445200",
-      "title": "[赛后]LGD 0-2 IG：TheShy杰斯一炮半血，IG零封LGD轻取连胜",
-      "url": "https://bbs.hupu.com/641445200.html",
-      "score": "0-2",
-      "team_a": "IG",
-      "team_b": "LGD",
-      "found_at": "2026-07-29T19:30:00+08:00"
+      "id": "3552",
+      "out_biz_no": "3552",
+      "title": "[赛后]IG 0-3 TT",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3552&outBizType=lol_match",
+      "score": "0-3",
+      "home": "IG",
+      "away": "TT",
+      "home_score": 0,
+      "away_score": 3,
+      "ig_win": false,
+      "ig_home": true,
+      "opponent": "TT",
+      "ig_score": 0,
+      "opp_score": 3,
+      "ig_players": [
+        {
+          "name": "Renard",
+          "team": "IG",
+          "avg": 3.2,
+          "total_count": 1364,
+          "kda": "0/3/4"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 3.1,
+          "total_count": 3733,
+          "kda": "0/4/6"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 2.8,
+          "total_count": 2583,
+          "kda": "2/2/4"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 8175,
+          "kda": "2/1/1"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 4162,
+          "kda": "3/4/0"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 1668,
+          "kda": "1/4/3"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Ahn",
+          "team": "TT",
+          "avg": 9.9,
+          "total_count": 3841,
+          "kda": "5/2/6"
+        },
+        {
+          "name": "Junhao",
+          "team": "TT",
+          "avg": 9.9,
+          "total_count": 3626,
+          "kda": "3/1/10"
+        },
+        {
+          "name": "Heru",
+          "team": "TT",
+          "avg": 9.8,
+          "total_count": 3007,
+          "kda": "3/1/10"
+        },
+        {
+          "name": "Feather",
+          "team": "TT",
+          "avg": 9.8,
+          "total_count": 2467,
+          "kda": "0/2/13"
+        },
+        {
+          "name": "Keshi",
+          "team": "TT",
+          "avg": 9.8,
+          "total_count": 2634,
+          "kda": "4/2/7"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "Renard",
+          "team": "IG",
+          "avg": 3.2,
+          "total_count": 1364,
+          "kda": "0/3/4"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 3.1,
+          "total_count": 3733,
+          "kda": "0/4/6"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 2.8,
+          "total_count": 2583,
+          "kda": "2/2/4"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 8175,
+          "kda": "2/1/1"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 4162,
+          "kda": "3/4/0"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 1668,
+          "kda": "1/4/3"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Ahn",
+          "team": "TT",
+          "avg": 9.9,
+          "total_count": 3841,
+          "kda": "5/2/6"
+        },
+        {
+          "name": "Junhao",
+          "team": "TT",
+          "avg": 9.9,
+          "total_count": 3626,
+          "kda": "3/1/10"
+        },
+        {
+          "name": "Heru",
+          "team": "TT",
+          "avg": 9.8,
+          "total_count": 3007,
+          "kda": "3/1/10"
+        },
+        {
+          "name": "Feather",
+          "team": "TT",
+          "avg": 9.8,
+          "total_count": 2467,
+          "kda": "0/2/13"
+        },
+        {
+          "name": "Keshi",
+          "team": "TT",
+          "avg": 9.8,
+          "total_count": 2634,
+          "kda": "4/2/7"
+        }
+      ],
+      "total_scorers": 41835,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段骑士之路",
+      "match_time": 1779526800000,
+      "date_str": "05月23日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
     },
     {
-      "id": "641438000",
-      "title": "[赛后]IG 1-2 TES：鏖战45分钟憾负，IG大龙团决策失误遭翻盘",
-      "url": "https://bbs.hupu.com/641438000.html",
-      "score": "1-2",
-      "team_a": "IG",
-      "team_b": "TES",
-      "found_at": "2026-07-26T20:15:00+08:00"
-    },
-    {
-      "id": "641430000",
-      "title": "[赛后]JDG 2-0 IG：369上路抗压成功，JDG节奏碾压零封IG",
-      "url": "https://bbs.hupu.com/641430000.html",
-      "score": "2-0",
-      "team_a": "IG",
-      "team_b": "JDG",
-      "found_at": "2026-07-23T19:00:00+08:00"
-    },
-    {
-      "id": "641422000",
-      "title": "[赛后]IG 2-0 TT：TheShy兰博大招完美控场，IG轻松横扫TT",
-      "url": "https://bbs.hupu.com/641422000.html",
-      "score": "2-0",
-      "team_a": "IG",
-      "team_b": "TT",
-      "found_at": "2026-07-20T17:00:00+08:00"
-    },
-    {
-      "id": "641415000",
-      "title": "[赛后]BLG 2-1 IG：Bin与TheShy上路神仙打架，BLG决胜团更胜一筹",
-      "url": "https://bbs.hupu.com/641415000.html",
+      "id": "3545",
+      "out_biz_no": "3545",
+      "title": "[赛后]JDG 2-1 IG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3545&outBizType=lol_match",
       "score": "2-1",
-      "team_a": "IG",
-      "team_b": "BLG",
-      "found_at": "2026-07-18T19:45:00+08:00"
+      "home": "JDG",
+      "away": "IG",
+      "home_score": 2,
+      "away_score": 1,
+      "ig_win": false,
+      "ig_home": false,
+      "opponent": "JDG",
+      "ig_score": 1,
+      "opp_score": 2,
+      "ig_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 8.1,
+          "total_count": 2202,
+          "kda": "0/4/19"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 5.7,
+          "total_count": 1299,
+          "kda": "4/5/14"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 5.2,
+          "total_count": 4062,
+          "kda": "13/3/7"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 5.2,
+          "total_count": 2261,
+          "kda": "4/1/13"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 4.7,
+          "total_count": 1586,
+          "kda": "5/3/12"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "HongQ",
+          "team": "JDG",
+          "avg": 8.4,
+          "total_count": 1985,
+          "kda": "3/5/8"
+        },
+        {
+          "name": "Xiaoxu",
+          "team": "JDG",
+          "avg": 6.7,
+          "total_count": 1887,
+          "kda": "4/3/5"
+        },
+        {
+          "name": "JunJia",
+          "team": "JDG",
+          "avg": 6.6,
+          "total_count": 1773,
+          "kda": "2/7/3"
+        },
+        {
+          "name": "Vampire",
+          "team": "JDG",
+          "avg": 6.4,
+          "total_count": 1197,
+          "kda": "0/4/15"
+        },
+        {
+          "name": "GALA",
+          "team": "JDG",
+          "avg": 5.6,
+          "total_count": 2615,
+          "kda": "7/7/6"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "HongQ",
+          "team": "JDG",
+          "avg": 8.4,
+          "total_count": 1985,
+          "kda": "3/5/8"
+        },
+        {
+          "name": "Xiaoxu",
+          "team": "JDG",
+          "avg": 6.7,
+          "total_count": 1887,
+          "kda": "4/3/5"
+        },
+        {
+          "name": "JunJia",
+          "team": "JDG",
+          "avg": 6.6,
+          "total_count": 1773,
+          "kda": "2/7/3"
+        },
+        {
+          "name": "Vampire",
+          "team": "JDG",
+          "avg": 6.4,
+          "total_count": 1197,
+          "kda": "0/4/15"
+        },
+        {
+          "name": "GALA",
+          "team": "JDG",
+          "avg": 5.6,
+          "total_count": 2615,
+          "kda": "7/7/6"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 8.1,
+          "total_count": 2202,
+          "kda": "0/4/19"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 5.7,
+          "total_count": 1299,
+          "kda": "4/5/14"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 5.2,
+          "total_count": 4062,
+          "kda": "13/3/7"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 5.2,
+          "total_count": 2261,
+          "kda": "4/1/13"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 4.7,
+          "total_count": 1586,
+          "kda": "5/3/12"
+        }
+      ],
+      "total_scorers": 22952,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1779008400000,
+      "date_str": "05月17日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
     },
     {
-      "id": "641408000",
-      "title": "[赛后]IG 2-1 RA：Meiko神级开团，IG让一追二战胜RA",
-      "url": "https://bbs.hupu.com/641408000.html",
+      "id": "3534",
+      "out_biz_no": "3534",
+      "title": "[赛后]IG 1-2 BLG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3534&outBizType=lol_match",
+      "score": "1-2",
+      "home": "IG",
+      "away": "BLG",
+      "home_score": 1,
+      "away_score": 2,
+      "ig_win": false,
+      "ig_home": true,
+      "opponent": "BLG",
+      "ig_score": 1,
+      "opp_score": 2,
+      "ig_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 6.9,
+          "total_count": 4219,
+          "kda": "3/1/11"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 6.6,
+          "total_count": 3512,
+          "kda": "7/2/9"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 6.0,
+          "total_count": 3159,
+          "kda": "3/3/6"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 5.8,
+          "total_count": 7260,
+          "kda": "3/2/15"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 7098,
+          "kda": "3/5/5"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Bin",
+          "team": "BLG",
+          "avg": 9.1,
+          "total_count": 10852,
+          "kda": "5/3/3"
+        },
+        {
+          "name": "Knight",
+          "team": "BLG",
+          "avg": 8.9,
+          "total_count": 13540,
+          "kda": "2/4/6"
+        },
+        {
+          "name": "ON",
+          "team": "BLG",
+          "avg": 8.2,
+          "total_count": 7121,
+          "kda": "0/5/7"
+        },
+        {
+          "name": "Viper",
+          "team": "BLG",
+          "avg": 7.9,
+          "total_count": 9845,
+          "kda": "2/4/4"
+        },
+        {
+          "name": "Xun",
+          "team": "BLG",
+          "avg": 7.8,
+          "total_count": 7827,
+          "kda": "4/3/5"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 6.9,
+          "total_count": 4219,
+          "kda": "3/1/11"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 6.6,
+          "total_count": 3512,
+          "kda": "7/2/9"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 6.0,
+          "total_count": 3159,
+          "kda": "3/3/6"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 5.8,
+          "total_count": 7260,
+          "kda": "3/2/15"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.4,
+          "total_count": 7098,
+          "kda": "3/5/5"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Bin",
+          "team": "BLG",
+          "avg": 9.1,
+          "total_count": 10852,
+          "kda": "5/3/3"
+        },
+        {
+          "name": "Knight",
+          "team": "BLG",
+          "avg": 8.9,
+          "total_count": 13540,
+          "kda": "2/4/6"
+        },
+        {
+          "name": "ON",
+          "team": "BLG",
+          "avg": 8.2,
+          "total_count": 7121,
+          "kda": "0/5/7"
+        },
+        {
+          "name": "Viper",
+          "team": "BLG",
+          "avg": 7.9,
+          "total_count": 9845,
+          "kda": "2/4/4"
+        },
+        {
+          "name": "Xun",
+          "team": "BLG",
+          "avg": 7.8,
+          "total_count": 7827,
+          "kda": "4/3/5"
+        }
+      ],
+      "total_scorers": 81406,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1778583600000,
+      "date_str": "05月12日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
+    },
+    {
+      "id": "3530",
+      "out_biz_no": "3530",
+      "title": "[赛后]NIP 0-2 IG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3530&outBizType=lol_match",
+      "score": "0-2",
+      "home": "NIP",
+      "away": "IG",
+      "home_score": 0,
+      "away_score": 2,
+      "ig_win": true,
+      "ig_home": false,
+      "opponent": "NIP",
+      "ig_score": 2,
+      "opp_score": 0,
+      "ig_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 9.3,
+          "total_count": 1353,
+          "kda": "0/3/10"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 9.2,
+          "total_count": 944,
+          "kda": "6/1/8"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 9.2,
+          "total_count": 1104,
+          "kda": "6/1/5"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 8.8,
+          "total_count": 1681,
+          "kda": "4/0/10"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 8.7,
+          "total_count": 996,
+          "kda": "2/1/7"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Guwon",
+          "team": "NIP",
+          "avg": 6.8,
+          "total_count": 797,
+          "kda": "3/6/3"
+        },
+        {
+          "name": "HOYA",
+          "team": "NIP",
+          "avg": 3.4,
+          "total_count": 457,
+          "kda": "0/4/2"
+        },
+        {
+          "name": "Zhuo",
+          "team": "NIP",
+          "avg": 3.3,
+          "total_count": 582,
+          "kda": "0/5/5"
+        },
+        {
+          "name": "Assum",
+          "team": "NIP",
+          "avg": 2.7,
+          "total_count": 660,
+          "kda": "0/2/2"
+        },
+        {
+          "name": "Care",
+          "team": "NIP",
+          "avg": 2.5,
+          "total_count": 1297,
+          "kda": "3/1/2"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "Guwon",
+          "team": "NIP",
+          "avg": 6.8,
+          "total_count": 797,
+          "kda": "3/6/3"
+        },
+        {
+          "name": "HOYA",
+          "team": "NIP",
+          "avg": 3.4,
+          "total_count": 457,
+          "kda": "0/4/2"
+        },
+        {
+          "name": "Zhuo",
+          "team": "NIP",
+          "avg": 3.3,
+          "total_count": 582,
+          "kda": "0/5/5"
+        },
+        {
+          "name": "Assum",
+          "team": "NIP",
+          "avg": 2.7,
+          "total_count": 660,
+          "kda": "0/2/2"
+        },
+        {
+          "name": "Care",
+          "team": "NIP",
+          "avg": 2.5,
+          "total_count": 1297,
+          "kda": "3/1/2"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 9.3,
+          "total_count": 1353,
+          "kda": "0/3/10"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 9.2,
+          "total_count": 944,
+          "kda": "6/1/8"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 9.2,
+          "total_count": 1104,
+          "kda": "6/1/5"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 8.8,
+          "total_count": 1681,
+          "kda": "4/0/10"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 8.7,
+          "total_count": 996,
+          "kda": "2/1/7"
+        }
+      ],
+      "total_scorers": 11152,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1778317200000,
+      "date_str": "05月09日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
+    },
+    {
+      "id": "3612",
+      "out_biz_no": "3612",
+      "title": "[赛后]WE 2-1 IG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3612&outBizType=lol_match",
       "score": "2-1",
-      "team_a": "IG",
-      "team_b": "RA",
-      "found_at": "2026-07-15T17:00:00+08:00"
+      "home": "WE",
+      "away": "IG",
+      "home_score": 2,
+      "away_score": 1,
+      "ig_win": false,
+      "ig_home": false,
+      "opponent": "WE",
+      "ig_score": 1,
+      "opp_score": 2,
+      "ig_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 5.4,
+          "total_count": 1873,
+          "kda": "1/5/9"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 4.1,
+          "total_count": 1389,
+          "kda": "3/4/2"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 3.9,
+          "total_count": 2025,
+          "kda": "6/7/3"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 3.7,
+          "total_count": 3529,
+          "kda": "3/3/8"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 3.1,
+          "total_count": 2034,
+          "kda": "1/3/4"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Monki",
+          "team": "WE",
+          "avg": 9.5,
+          "total_count": 4643,
+          "kda": "6/4/13"
+        },
+        {
+          "name": "Erha",
+          "team": "WE",
+          "avg": 9.5,
+          "total_count": 3679,
+          "kda": "1/2/15"
+        },
+        {
+          "name": "About",
+          "team": "WE",
+          "avg": 9.4,
+          "total_count": 2633,
+          "kda": "7/1/9"
+        },
+        {
+          "name": "Cube",
+          "team": "WE",
+          "avg": 9.2,
+          "total_count": 2528,
+          "kda": "4/0/7"
+        },
+        {
+          "name": "Karis",
+          "team": "WE",
+          "avg": 7.9,
+          "total_count": 2424,
+          "kda": "4/7/6"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "Monki",
+          "team": "WE",
+          "avg": 9.5,
+          "total_count": 4643,
+          "kda": "6/4/13"
+        },
+        {
+          "name": "Erha",
+          "team": "WE",
+          "avg": 9.5,
+          "total_count": 3679,
+          "kda": "1/2/15"
+        },
+        {
+          "name": "About",
+          "team": "WE",
+          "avg": 9.4,
+          "total_count": 2633,
+          "kda": "7/1/9"
+        },
+        {
+          "name": "Cube",
+          "team": "WE",
+          "avg": 9.2,
+          "total_count": 2528,
+          "kda": "4/0/7"
+        },
+        {
+          "name": "Karis",
+          "team": "WE",
+          "avg": 7.9,
+          "total_count": 2424,
+          "kda": "4/7/6"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 5.4,
+          "total_count": 1873,
+          "kda": "1/5/9"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 4.1,
+          "total_count": 1389,
+          "kda": "3/4/2"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 3.9,
+          "total_count": 2025,
+          "kda": "6/7/3"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 3.7,
+          "total_count": 3529,
+          "kda": "3/3/8"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 3.1,
+          "total_count": 2034,
+          "kda": "1/3/4"
+        }
+      ],
+      "total_scorers": 28431,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1778058000000,
+      "date_str": "05月06日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
     },
     {
-      "id": "641400000",
-      "title": "[赛后]WE 1-2 IG：TheShy纳尔一拍四，IG团战完美发挥逆转WE",
-      "url": "https://bbs.hupu.com/641400000.html",
-      "score": "1-2",
-      "team_a": "IG",
-      "team_b": "WE",
-      "found_at": "2026-07-12T19:00:00+08:00"
-    },
-    {
-      "id": "641392000",
-      "title": "[赛后]IG 0-2 LNG：Scout妖姬全程游走，LNG中野节奏碾压IG",
-      "url": "https://bbs.hupu.com/641392000.html",
-      "score": "0-2",
-      "team_a": "IG",
-      "team_b": "LNG",
-      "found_at": "2026-07-09T19:30:00+08:00"
-    },
-    {
-      "id": "641384000",
-      "title": "[赛后]NIP 0-2 IG：Rookie直面老东家，IG全员状态火热零封NIP",
-      "url": "https://bbs.hupu.com/641384000.html",
-      "score": "0-2",
-      "team_a": "IG",
-      "team_b": "NIP",
-      "found_at": "2026-07-06T17:00:00+08:00"
-    },
-    {
-      "id": "641376000",
-      "title": "[赛后]IG 2-0 OMG：TheShy剑魔天神下凡，IG碾压OMG拿下开门红",
-      "url": "https://bbs.hupu.com/641376000.html",
+      "id": "3610",
+      "out_biz_no": "3610",
+      "title": "[赛后]AL 2-0 IG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3610&outBizType=lol_match",
       "score": "2-0",
-      "team_a": "IG",
-      "team_b": "OMG",
-      "found_at": "2026-07-03T19:00:00+08:00"
+      "home": "AL",
+      "away": "IG",
+      "home_score": 2,
+      "away_score": 0,
+      "ig_win": false,
+      "ig_home": false,
+      "opponent": "AL",
+      "ig_score": 0,
+      "opp_score": 2,
+      "ig_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 7.6,
+          "total_count": 1477,
+          "kda": "1/5/6"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 6.0,
+          "total_count": 1254,
+          "kda": "2/3/1"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 4.6,
+          "total_count": 994,
+          "kda": "3/5/4"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 2320,
+          "kda": "1/8/6"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 1623,
+          "kda": "1/2/0"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Shanks",
+          "team": "AL",
+          "avg": 9.8,
+          "total_count": 3055,
+          "kda": "5/0/10"
+        },
+        {
+          "name": "Tarzan",
+          "team": "AL",
+          "avg": 9.8,
+          "total_count": 2934,
+          "kda": "8/1/5"
+        },
+        {
+          "name": "Flandre",
+          "team": "AL",
+          "avg": 9.7,
+          "total_count": 3894,
+          "kda": "0/1/9"
+        },
+        {
+          "name": "Kael",
+          "team": "AL",
+          "avg": 9.7,
+          "total_count": 2402,
+          "kda": "2/1/18"
+        },
+        {
+          "name": "Hope",
+          "team": "AL",
+          "avg": 8.8,
+          "total_count": 3181,
+          "kda": "8/5/7"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "Shanks",
+          "team": "AL",
+          "avg": 9.8,
+          "total_count": 3055,
+          "kda": "5/0/10"
+        },
+        {
+          "name": "Tarzan",
+          "team": "AL",
+          "avg": 9.8,
+          "total_count": 2934,
+          "kda": "8/1/5"
+        },
+        {
+          "name": "Flandre",
+          "team": "AL",
+          "avg": 9.7,
+          "total_count": 3894,
+          "kda": "0/1/9"
+        },
+        {
+          "name": "Kael",
+          "team": "AL",
+          "avg": 9.7,
+          "total_count": 2402,
+          "kda": "2/1/18"
+        },
+        {
+          "name": "Hope",
+          "team": "AL",
+          "avg": 8.8,
+          "total_count": 3181,
+          "kda": "8/5/7"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 7.6,
+          "total_count": 1477,
+          "kda": "1/5/6"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 6.0,
+          "total_count": 1254,
+          "kda": "2/3/1"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 4.6,
+          "total_count": 994,
+          "kda": "3/5/4"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 2320,
+          "kda": "1/8/6"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 1623,
+          "kda": "1/2/0"
+        }
+      ],
+      "total_scorers": 25713,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1777719600000,
+      "date_str": "05月02日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
     },
     {
-      "id": "641368000",
-      "title": "[赛后]RNG 1-2 IG：春晚大战IG笑到最后，TheShy格温五杀收尾",
-      "url": "https://bbs.hupu.com/641368000.html",
+      "id": "3606",
+      "out_biz_no": "3606",
+      "title": "[赛后]WBG 1-2 IG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3606&outBizType=lol_match",
       "score": "1-2",
-      "team_a": "IG",
-      "team_b": "RNG",
-      "found_at": "2026-06-29T19:45:00+08:00"
+      "home": "WBG",
+      "away": "IG",
+      "home_score": 1,
+      "away_score": 2,
+      "ig_win": true,
+      "ig_home": false,
+      "opponent": "WBG",
+      "ig_score": 2,
+      "opp_score": 1,
+      "ig_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 9.3,
+          "total_count": 3710,
+          "kda": "0/4/16"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 8.7,
+          "total_count": 2884,
+          "kda": "5/4/5"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 8.1,
+          "total_count": 4415,
+          "kda": "5/4/12"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 7.5,
+          "total_count": 2626,
+          "kda": "6/6/4"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 5.4,
+          "total_count": 2833,
+          "kda": "1/3/7"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Xiaohu",
+          "team": "WBG",
+          "avg": 7.2,
+          "total_count": 3419,
+          "kda": "7/3/8"
+        },
+        {
+          "name": "Hang",
+          "team": "WBG",
+          "avg": 5.6,
+          "total_count": 2360,
+          "kda": "0/4/18"
+        },
+        {
+          "name": "Zika",
+          "team": "WBG",
+          "avg": 5.3,
+          "total_count": 2025,
+          "kda": "4/6/11"
+        },
+        {
+          "name": "Elk",
+          "team": "WBG",
+          "avg": 4.6,
+          "total_count": 4278,
+          "kda": "9/3/6"
+        },
+        {
+          "name": "Jiejie",
+          "team": "WBG",
+          "avg": 4.2,
+          "total_count": 4091,
+          "kda": "1/1/14"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "Xiaohu",
+          "team": "WBG",
+          "avg": 7.2,
+          "total_count": 3419,
+          "kda": "7/3/8"
+        },
+        {
+          "name": "Hang",
+          "team": "WBG",
+          "avg": 5.6,
+          "total_count": 2360,
+          "kda": "0/4/18"
+        },
+        {
+          "name": "Zika",
+          "team": "WBG",
+          "avg": 5.3,
+          "total_count": 2025,
+          "kda": "4/6/11"
+        },
+        {
+          "name": "Elk",
+          "team": "WBG",
+          "avg": 4.6,
+          "total_count": 4278,
+          "kda": "9/3/6"
+        },
+        {
+          "name": "Jiejie",
+          "team": "WBG",
+          "avg": 4.2,
+          "total_count": 4091,
+          "kda": "1/1/14"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 9.3,
+          "total_count": 3710,
+          "kda": "0/4/16"
+        },
+        {
+          "name": "Nia",
+          "team": "IG",
+          "avg": 8.7,
+          "total_count": 2884,
+          "kda": "5/4/5"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 8.1,
+          "total_count": 4415,
+          "kda": "5/4/12"
+        },
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 7.5,
+          "total_count": 2626,
+          "kda": "6/6/4"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 5.4,
+          "total_count": 2833,
+          "kda": "1/3/7"
+        }
+      ],
+      "total_scorers": 34847,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1777633200000,
+      "date_str": "05月01日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
+    },
+    {
+      "id": "3512",
+      "out_biz_no": "3512",
+      "title": "[赛后]IG 0-2 AL",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3512&outBizType=lol_match",
+      "score": "0-2",
+      "home": "IG",
+      "away": "AL",
+      "home_score": 0,
+      "away_score": 2,
+      "ig_win": false,
+      "ig_home": true,
+      "opponent": "AL",
+      "ig_score": 0,
+      "opp_score": 2,
+      "ig_players": [
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 7.8,
+          "total_count": 2062,
+          "kda": "0/3/0"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 7.3,
+          "total_count": 2023,
+          "kda": "0/2/0"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.8,
+          "total_count": 1765,
+          "kda": "0/3/0"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 3458,
+          "kda": "0/5/1"
+        },
+        {
+          "name": "Renard",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 2370,
+          "kda": "1/1/0"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "Flandre",
+          "team": "AL",
+          "avg": 9.7,
+          "total_count": 4287,
+          "kda": "3/0/9"
+        },
+        {
+          "name": "Shanks",
+          "team": "AL",
+          "avg": 9.6,
+          "total_count": 3277,
+          "kda": "7/0/3"
+        },
+        {
+          "name": "Tarzan",
+          "team": "AL",
+          "avg": 8.4,
+          "total_count": 2714,
+          "kda": "2/1/11"
+        },
+        {
+          "name": "Kael",
+          "team": "AL",
+          "avg": 8.2,
+          "total_count": 2274,
+          "kda": "0/0/13"
+        },
+        {
+          "name": "Hope",
+          "team": "AL",
+          "avg": 7.7,
+          "total_count": 3269,
+          "kda": "2/0/8"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 7.8,
+          "total_count": 2062,
+          "kda": "0/3/0"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 7.3,
+          "total_count": 2023,
+          "kda": "0/2/0"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 2.8,
+          "total_count": 1765,
+          "kda": "0/3/0"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 3458,
+          "kda": "0/5/1"
+        },
+        {
+          "name": "Renard",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 2370,
+          "kda": "1/1/0"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "Flandre",
+          "team": "AL",
+          "avg": 9.7,
+          "total_count": 4287,
+          "kda": "3/0/9"
+        },
+        {
+          "name": "Shanks",
+          "team": "AL",
+          "avg": 9.6,
+          "total_count": 3277,
+          "kda": "7/0/3"
+        },
+        {
+          "name": "Tarzan",
+          "team": "AL",
+          "avg": 8.4,
+          "total_count": 2714,
+          "kda": "2/1/11"
+        },
+        {
+          "name": "Kael",
+          "team": "AL",
+          "avg": 8.2,
+          "total_count": 2274,
+          "kda": "0/0/13"
+        },
+        {
+          "name": "Hope",
+          "team": "AL",
+          "avg": 7.7,
+          "total_count": 3269,
+          "kda": "2/0/8"
+        }
+      ],
+      "total_scorers": 29825,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1777366800000,
+      "date_str": "04月28日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
+    },
+    {
+      "id": "3506",
+      "out_biz_no": "3506",
+      "title": "[赛后]IG 0-2 JDG",
+      "url": "https://m.hupu.com/score/detail.html?outBizNo=3506&outBizType=lol_match",
+      "score": "0-2",
+      "home": "IG",
+      "away": "JDG",
+      "home_score": 0,
+      "away_score": 2,
+      "ig_win": false,
+      "ig_home": true,
+      "opponent": "JDG",
+      "ig_score": 0,
+      "opp_score": 2,
+      "ig_players": [
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 8.0,
+          "total_count": 1571,
+          "kda": "4/3/2"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 6.9,
+          "total_count": 1483,
+          "kda": "0/5/8"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 3.3,
+          "total_count": 1362,
+          "kda": "3/3/4"
+        },
+        {
+          "name": "Renard",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 2236,
+          "kda": "0/3/7"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 1870,
+          "kda": "3/6/5"
+        }
+      ],
+      "opp_players": [
+        {
+          "name": "HongQ",
+          "team": "JDG",
+          "avg": 9.8,
+          "total_count": 2202,
+          "kda": "5/3/9"
+        },
+        {
+          "name": "Vampire",
+          "team": "JDG",
+          "avg": 9.6,
+          "total_count": 1012,
+          "kda": "1/0/16"
+        },
+        {
+          "name": "JunJia",
+          "team": "JDG",
+          "avg": 9.3,
+          "total_count": 1167,
+          "kda": "1/4/17"
+        },
+        {
+          "name": "GALA",
+          "team": "JDG",
+          "avg": 7.5,
+          "total_count": 1910,
+          "kda": "8/0/7"
+        },
+        {
+          "name": "Xiaoxu",
+          "team": "JDG",
+          "avg": 6.6,
+          "total_count": 1536,
+          "kda": "5/3/6"
+        }
+      ],
+      "home_players": [
+        {
+          "name": "JiaQi",
+          "team": "IG",
+          "avg": 8.0,
+          "total_count": 1571,
+          "kda": "4/3/2"
+        },
+        {
+          "name": "Meiko",
+          "team": "IG",
+          "avg": 6.9,
+          "total_count": 1483,
+          "kda": "0/5/8"
+        },
+        {
+          "name": "Breathe",
+          "team": "IG",
+          "avg": 3.3,
+          "total_count": 1362,
+          "kda": "3/3/4"
+        },
+        {
+          "name": "Renard",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 2236,
+          "kda": "0/3/7"
+        },
+        {
+          "name": "Wei",
+          "team": "IG",
+          "avg": 2.5,
+          "total_count": 1870,
+          "kda": "3/6/5"
+        }
+      ],
+      "away_players": [
+        {
+          "name": "HongQ",
+          "team": "JDG",
+          "avg": 9.8,
+          "total_count": 2202,
+          "kda": "5/3/9"
+        },
+        {
+          "name": "Vampire",
+          "team": "JDG",
+          "avg": 9.6,
+          "total_count": 1012,
+          "kda": "1/0/16"
+        },
+        {
+          "name": "JunJia",
+          "team": "JDG",
+          "avg": 9.3,
+          "total_count": 1167,
+          "kda": "1/4/17"
+        },
+        {
+          "name": "GALA",
+          "team": "JDG",
+          "avg": 7.5,
+          "total_count": 1910,
+          "kda": "8/0/7"
+        },
+        {
+          "name": "Xiaoxu",
+          "team": "JDG",
+          "avg": 6.6,
+          "total_count": 1536,
+          "kda": "5/3/6"
+        }
+      ],
+      "total_scorers": 17589,
+      "league_name": "职业联赛",
+      "round_name": "第二赛段组内赛",
+      "match_time": 1777028400000,
+      "date_str": "04月24日",
+      "found_at": "2026-08-01T13:47:24.776403+08:00"
     }
   ],
   "notified_ids": [
-    "641438000",
-    "3678",
-    "641445200"
+    "3610",
+    "3545",
+    "3552",
+    "3530",
+    "3534",
+    "3512",
+    "3606",
+    "3506",
+    "3612",
+    "3678"
   ],
   "team": "IG",
-  "last_check": "2026-08-01T12:40:18.557570+08:00"
+  "last_check": "2026-08-01T13:47:24.776403+08:00"
 }

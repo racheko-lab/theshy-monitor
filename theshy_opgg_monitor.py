@@ -79,6 +79,19 @@ HUPU_HEADERS = {
 HUPU_RATINGS_STATE_FILE = BASE_DIR / ".theshy_hupu_ratings.json"
 HUPU_TEAM = "IG"  # 监控的战队
 
+# 虎扑评分树API (移动端接口, 返回真实比赛数据和选手评分)
+HUPU_SCORE_API_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+    "Accept": "application/json",
+    "Referer": "https://m.hupu.com/",
+    "Origin": "https://m.hupu.com",
+}
+HUPU_SCORE_SELF_URL = "https://games.mobileapi.hupu.com/1/8.0.99/bplcommentapi/bpl/score_tree/getSelfByBizKey"
+HUPU_SCORE_SUB_URL = "https://games.mobileapi.hupu.com/1/8.0.99/bplcommentapi/bpl/score_tree/getCurAndSubNodeByBizKey"
+
+# 虎扑评分API - 已知IG比赛outBizNo列表 (用于初次数据填充, 爬虫会自动发现新比赛)
+KNOWN_IG_MATCH_BIZNOS = ["3678", "3612", "3610", "3606", "3552", "3545", "3534", "3530", "3512", "3506"]
+
 # 旧版单账号文件 (为前端兼容保留, 主账号写这些)
 LEGACY_STATE_FILE = BASE_DIR / ".theshy_opgg_state.json"
 LEGACY_PROFILE_FILE = BASE_DIR / ".theshy_profile.json"
@@ -1691,45 +1704,246 @@ def check_bilibili_live(cfg, verbose=False):
 
 
 # ============================================================
-# 虎扑LPL比赛评分采集
-# 策略: 监控虎扑LOL区首页的[赛后]帖, 筛选IG比赛
-# 注: 虎扑选手评分是APP专属功能, 网页端链接到论坛帖即可
-#     (手机端打开帖会自动跳转APP评分页, PC端帖内有评分入口)
+# 虎扑评分树API - 获取真实比赛数据和选手评分
+# 数据层级: Match(lol_match) → Games(lol_bo/局) → Players(lol_item/type=player)
+# API返回code=1为成功, 选手评分需聚合所有局的加权平均分
 # ============================================================
+def _hupu_api_get(url, params=None, timeout=10):
+    """调用虎扑移动端API, 返回JSON dict或None"""
+    try:
+        r = requests.get(url, params=params, headers=HUPU_SCORE_API_HEADERS, timeout=timeout)
+        if r.status_code != 200:
+            return None
+        return r.json()
+    except Exception:
+        return None
+
+
+def _api_success(data):
+    """检查API返回是否成功"""
+    return data is not None and data.get("code") in (1, "1", 200, "200")
+
+
+def _parse_info_json(raw):
+    """解析infoJson字段(可能是string或dict)"""
+    import json as _json
+    if raw is None:
+        return {}
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        try:
+            return _json.loads(raw)
+        except Exception:
+            return {}
+    return {}
+
+
+def _ij_val(info_json, key, default=""):
+    """从infoJson获取值(数组值取第一个)"""
+    v = info_json.get(key)
+    if isinstance(v, list) and v:
+        return v[0]
+    if v is not None:
+        return v
+    return default
+
+
+def fetch_hupu_match_detail(out_biz_no):
+    """通过outBizNo获取一场比赛的详细信息(队伍、比分、时间)和所有选手评分
+
+    返回dict: {home, away, home_score, away_score, match_time, league_name, round_name,
+              home_players, away_players, ig_home, ig_win, total_scorers, out_biz_no}
+    失败返回None
+    """
+    # 1. 获取比赛基本信息
+    self_data = _hupu_api_get(HUPU_SCORE_SELF_URL, params={
+        "outBizNo": str(out_biz_no),
+        "outBizType": "lol_match",
+    })
+    if not _api_success(self_data):
+        return None
+    detail = (self_data.get("data") or {}).get("detail") or {}
+    ij = _parse_info_json(detail.get("infoJson"))
+
+    home_name = str(_ij_val(ij, "homeTeamName", "")).upper()
+    away_name = str(_ij_val(ij, "awayTeamName", "")).upper()
+    home_tid = str(_ij_val(ij, "homeTeamId", ""))
+    away_tid = str(_ij_val(ij, "awayTeamId", ""))
+    home_score = int(_ij_val(ij, "homeTeamScore", 0) or 0)
+    away_score = int(_ij_val(ij, "awayTeamScore", 0) or 0)
+    match_time = int(_ij_val(ij, "matchTime", 0) or 0)
+    league_name = str(_ij_val(ij, "competitionTypeCn", ""))
+    round_name = str(_ij_val(ij, "competitionStageTypeCn", ""))
+    if match_time > 0 and match_time < 10**12:
+        match_time = match_time * 1000  # 秒转毫秒
+
+    # 规范化队名
+    def norm(name):
+        for tn in ["IG", "WBG", "LNG", "NIP", "JDG", "BLG", "TES", "AL", "TT", "WE",
+                    "LGD", "EDG", "RNG", "FPX", "OMG", "RA", "UP"]:
+            if tn in name.upper():
+                return tn
+        return name.upper()
+    home_norm = norm(home_name)
+    away_norm = norm(away_name)
+    is_ig_home = "IG" in home_norm.upper()
+    is_ig_away = "IG" in away_norm.upper()
+    if not (is_ig_home or is_ig_away):
+        return None
+
+    # 2. 获取所有局(games/bo)的选手数据, 聚合成比赛级评分
+    games = (self_data.get("data") or {}).get("subNodes") or []
+    player_stats = {}  # name -> {weighted_score, total_count, team_id, kda_parts}
+
+    for game in games:
+        bo_no = game.get("outBizNo")
+        bo_type = game.get("outBizType", "lol_bo")
+        if not bo_no:
+            continue
+        cur_data = _hupu_api_get(HUPU_SCORE_SUB_URL, params={
+            "outBizNo": str(bo_no),
+            "outBizType": bo_type,
+            "relation": "CHILD",
+            "page": 1,
+            "pageSize": 30,
+        })
+        if not _api_success(cur_data):
+            continue
+        nodes = (((cur_data.get("data") or {}).get("pageResult") or {}).get("data")) or []
+        for item in nodes:
+            n = item.get("node") or {}
+            pij = _parse_info_json(n.get("infoJson"))
+            ptype = str(_ij_val(pij, "type", ""))
+            if ptype != "player":
+                continue
+            name = str(n.get("name") or "").strip()
+            if not name:
+                continue
+            tid = str(_ij_val(pij, "teamId", ""))
+            avg = float(n.get("scoreAvg") or 0)
+            cnt = int(n.get("scorePersonCount") or 0)
+            kills = str(_ij_val(pij, "killCount", "0"))
+            deaths = str(_ij_val(pij, "deathCount", "0"))
+            assists = str(_ij_val(pij, "assistCount", "0"))
+            if name not in player_stats:
+                player_stats[name] = {"weighted_score": 0.0, "total_count": 0, "team_id": tid, "kda": ""}
+            if avg > 0 and cnt > 0:
+                player_stats[name]["weighted_score"] += avg * cnt
+                player_stats[name]["total_count"] += cnt
+            player_stats[name]["kda"] = f"{kills}/{deaths}/{assists}"
+
+    # 3. 组装选手列表
+    home_players = []
+    away_players = []
+    total_scorers = int(detail.get("summedScorePersonCount") or 0)
+    for name, ps in player_stats.items():
+        avg = round(ps["weighted_score"] / ps["total_count"], 1) if ps["total_count"] > 0 else 0.0
+        p = {
+            "name": name,
+            "team": home_norm if ps["team_id"] == home_tid else away_norm,
+            "avg": avg,
+            "total_count": ps["total_count"],
+            "kda": ps["kda"],
+        }
+        if ps["team_id"] == home_tid:
+            home_players.append(p)
+        elif ps["team_id"] == away_tid:
+            away_players.append(p)
+    home_players.sort(key=lambda x: -x["avg"])
+    away_players.sort(key=lambda x: -x["avg"])
+
+    ig_win = (is_ig_home and home_score > away_score) or (is_ig_away and away_score > home_score)
+
+    return {
+        "out_biz_no": str(out_biz_no),
+        "home": home_norm,
+        "away": away_norm,
+        "home_score": home_score,
+        "away_score": away_score,
+        "match_time": match_time,
+        "league_name": league_name,
+        "round_name": round_name,
+        "home_players": home_players,
+        "away_players": away_players,
+        "ig_home": is_ig_home,
+        "ig_win": ig_win,
+        "ig_players": home_players if is_ig_home else away_players,
+        "opp_players": away_players if is_ig_home else home_players,
+        "ig_score": home_score if is_ig_home else away_score,
+        "opp_score": away_score if is_ig_home else home_score,
+        "opponent": away_norm if is_ig_home else home_norm,
+        "total_scorers": total_scorers,
+    }
+
+
+# ============================================================
+# 虎扑LPL比赛评分采集
+# 策略: 1.刷新已有out_biz_no的比赛(真实API)  2.用已知BIZ NO初始化  3.BBS帖子抓取新比赛
+# ============================================================
+def _find_outbizno_from_bbs_post(post_url):
+    """从BBS帖子页面中提取评分树的outBizNo"""
+    import re as _re
+    try:
+        resp = requests.get(post_url, headers=HUPU_HEADERS, timeout=10)
+        resp.encoding = "utf-8"
+        m = _re.search(r'outBizNo[=:"\']+(\d{3,})', resp.text)
+        if m:
+            return m.group(1)
+    except Exception:
+        pass
+    return None
+
+
 def check_hupu_ratings(cfg, verbose=False):
-    """抓取虎扑LOL区最近的赛后帖, 返回IG相关比赛评分帖信息"""
+    """使用虎扑真实评分API + BBS帖子抓取获取IG比赛数据"""
     notifications_sent = []
     prev_state = load_json(HUPU_RATINGS_STATE_FILE, {"matches": [], "notified_ids": []})
     notified_ids = set(prev_state.get("notified_ids", []))
-    cur_matches = []
-
-    try:
-        resp = requests.get(HUPU_LOL_URL, headers=HUPU_HEADERS, timeout=15)
-        resp.encoding = "utf-8"
-        html = resp.text
-    except Exception as e:
-        if verbose:
-            print(f"  虎扑请求失败: {e}")
-        return notifications_sent, prev_state
-
-    import re as _re
-    # 提取帖子列表 (多种模式兼容虎扑页面结构变化)
-    posts = []
-    for pat in [
-        _re.compile(r'<a[^>]+href="(/\d{6,}\.html)"[^>]*class="p-title"[^>]*>([^<]*赛后[^<]*)</a>', _re.IGNORECASE),
-        _re.compile(r'href="(/\d{6,}\.html)"[^>]*>([^<]*\[赛后\][^<]*)</a>', _re.IGNORECASE),
-        _re.compile(r'<a[^>]+href="(/\d{6,}\.html)"[^>]*>([^<]*赛后[^<]*)</a>', _re.IGNORECASE),
-    ]:
-        posts = pat.findall(html)
-        if posts:
-            break
-
     now_cst = datetime.now(CST)
     hupu_cfg = cfg.get("hupu", {}) if isinstance(cfg.get("hupu"), dict) else {}
     team_name = hupu_cfg.get("team", HUPU_TEAM)
 
+    # ---------- 1. 确定要刷新的out_biz_no列表 (已有 + 种子) ----------
+    prev_matches_raw = prev_state.get("matches", [])
+    known_obns = set(KNOWN_IG_MATCH_BIZNOS)
+    for pm in prev_matches_raw:
+        obn = pm.get("out_biz_no") or pm.get("id", "")
+        if obn and obn.isdigit() and len(obn) >= 3:
+            known_obns.add(obn)
+
+    # ---------- 2. 通过API刷新所有已知比赛 ----------
+    api_matches = []
+    for obn in sorted(known_obns):
+        try:
+            detail = fetch_hupu_match_detail(obn)
+            if detail:
+                api_matches.append(detail)
+        except Exception:
+            pass
+    if verbose:
+        print(f"  虎扑API: 刷新了{len(api_matches)}场已有比赛")
+
+    # ---------- 3. BBS帖子抓取(发现新比赛) ----------
+    bbs_posts = []
+    try:
+        resp = requests.get(HUPU_LOL_URL, headers=HUPU_HEADERS, timeout=15)
+        resp.encoding = "utf-8"
+        html = resp.text
+        import re as _re
+        for pat in [
+            _re.compile(r'<a[^>]+href="(/\d{6,}\.html)"[^>]*class="p-title"[^>]*>([^<]*赛后[^<]*)</a>', _re.IGNORECASE),
+            _re.compile(r'href="(/\d{6,}\.html)"[^>]*>([^<]*\[赛后\][^<]*)</a>', _re.IGNORECASE),
+            _re.compile(r'<a[^>]+href="(/\d{6,}\.html)"[^>]*>([^<]*赛后[^<]*)</a>', _re.IGNORECASE),
+        ]:
+            bbs_posts = pat.findall(html)
+            if bbs_posts:
+                break
+    except Exception as e:
+        if verbose:
+            print(f"  虎扑BBS请求失败: {e}")
+
     def _has_team(text, team):
-        """战队名边界匹配, 避免子串误识别 (如LIGHT里的IG)"""
         idx = text.find(team)
         while idx != -1:
             before = text[idx - 1] if idx > 0 else " "
@@ -1742,63 +1956,151 @@ def check_hupu_ratings(cfg, verbose=False):
     LPL_TEAMS = ["WBG", "LNG", "NIP", "JDG", "BLG", "TES", "AL", "TT", "WE",
                  "LGD", "EDG", "RNG", "FPX", "OMG", "RA", "UP", "IG"]
 
-    for href, title in posts:
+    bbs_matches = []
+    existing_obns = {m.get("out_biz_no") for m in api_matches}
+    for href, title in bbs_posts:
         title = title.strip()
-        if not title:
+        if not title or not _has_team(title, team_name):
             continue
         post_id = href.strip("/").replace(".html", "")
         post_url = f"https://bbs.hupu.com{href}"
 
-        if not _has_team(title, team_name):
-            continue
-
-        # 解析比分和对手战队
         score_match = _re.search(r'(\d+)\s*[-:：]\s*(\d+)', title)
-        team_a = team_b = score = ""
+        score = ""
+        team_b = ""
         if score_match:
             score = f"{score_match.group(1)}-{score_match.group(2)}"
             for t in LPL_TEAMS:
                 if t != team_name and _has_team(title, t):
                     team_b = t
                     break
-            team_a = team_name
 
-        match_info = {
-            "id": post_id,
+        # 尝试从帖子页获取outBizNo
+        out_biz_no = _find_outbizno_from_bbs_post(post_url)
+        if out_biz_no and out_biz_no not in existing_obns:
+            try:
+                detail = fetch_hupu_match_detail(out_biz_no)
+                if detail:
+                    bbs_matches.append(detail)
+                    existing_obns.add(out_biz_no)
+                    continue
+            except Exception:
+                pass
+
+        # Fallback: 基于标题的基础数据
+        ig_home = title.startswith(f"[赛后]{team_name}")
+        hs = int(score.split("-")[0]) if score and "-" in score else 0
+        aws = int(score.split("-")[1]) if score and "-" in score else 0
+        bbs_matches.append({
+            "out_biz_no": "",
+            "post_id": post_id,
             "title": title,
             "url": post_url,
-            "score": score,
-            "team_a": team_a,
-            "team_b": team_b,
+            "home": team_name if ig_home else team_b,
+            "away": team_b if ig_home else team_name,
+            "home_score": hs,
+            "away_score": aws,
+            "ig_players": [],
+            "opp_players": [],
+            "home_players": [],
+            "away_players": [],
+            "total_scorers": 0,
+            "league_name": "",
+            "round_name": "",
+            "match_time": 0,
+            "ig_home": ig_home,
+            "ig_win": (ig_home and hs > aws) or (not ig_home and aws > hs),
             "found_at": now_cst.isoformat(),
+        })
+
+    # ---------- 4. 组装cur_matches ----------
+    cur_matches = []
+    seen_ids = set()
+    for m in api_matches + bbs_matches:
+        mid = m.get("out_biz_no") or m.get("post_id", "")
+        if mid and mid in seen_ids:
+            continue
+        seen_ids.add(mid)
+
+        ig_home = m.get("ig_home", False)
+        home = m.get("home", "")
+        away = m.get("away", "")
+        hs = m.get("home_score", 0)
+        aws = m.get("away_score", 0)
+        title = m.get("title") or f"[赛后]{home} {hs}-{aws} {away}"
+
+        mt = m.get("match_time", 0)
+        date_str = ""
+        try:
+            ts = mt / 1000 if mt > 10**12 else mt
+            if ts > 0:
+                dt = datetime.fromtimestamp(ts, CST)
+                date_str = dt.strftime("%m月%d日")
+        except Exception:
+            pass
+
+        obn = m.get("out_biz_no", "")
+        match_id = obn or m.get("post_id", "")
+        default_url = f"https://m.hupu.com/score/detail.html?outBizNo={obn}&outBizType=lol_match" if obn else m.get("url", "")
+        url = m.get("url") or default_url
+        ig_win = m.get("ig_win", False) or (ig_home and hs > aws) or (not ig_home and aws > hs)
+
+        match_info = {
+            "id": match_id,
+            "out_biz_no": obn,
+            "title": title,
+            "url": url or f"https://m.hupu.com/score/detail.html?outBizNo={obn}&outBizType=lol_match",
+            "score": f"{hs}-{aws}",
+            "home": home,
+            "away": away,
+            "home_score": hs,
+            "away_score": aws,
+            "ig_win": ig_win,
+            "ig_home": ig_home,
+            "opponent": m.get("opponent", away if ig_home else home),
+            "ig_score": hs if ig_home else aws,
+            "opp_score": aws if ig_home else hs,
+            "ig_players": m.get("ig_players", []),
+            "opp_players": m.get("opp_players", []),
+            "home_players": m.get("home_players", []),
+            "away_players": m.get("away_players", []),
+            "total_scorers": m.get("total_scorers", 0),
+            "league_name": m.get("league_name", ""),
+            "round_name": m.get("round_name", ""),
+            "match_time": mt,
+            "date_str": date_str,
+            "found_at": m.get("found_at", now_cst.isoformat()),
         }
         cur_matches.append(match_info)
 
-        # 新帖通知
-        if post_id not in notified_ids:
-            notif_title = f"🏆 虎扑评分: {team_name}比赛已出评分"
-            vs_str = f" {team_a} vs {team_b}" if team_b else ""
+        # 新比赛通知(有选手评分的才发)
+        nid = obn or match_id
+        if nid and nid not in notified_ids and m.get("ig_players"):
+            best = max(m["ig_players"], key=lambda p: p.get("avg", 0))
+            notif_title = f"🏆 虎扑评分: {team_name}{'赢了' if ig_win else '输了'} {match_info['ig_score']}-{match_info['opp_score']}"
+            best_str = f"\n{best['name']} {best['avg']:.1f}分"
             notif_body = (
                 f"{title}\n"
-                f"比分: {score or '见详情'}{vs_str}\n"
-                f"点击去虎扑看JR评分 → {post_url}"
+                f"{'🟢 胜利' if ig_win else '🔴 失败'}{best_str}\n"
+                f"去虎扑看选手评分 → {match_info['url']}"
             )
             results = notify(notif_title, notif_body, cfg)
             for ch, ok in results:
                 if verbose:
                     print(f"  虎扑IG比赛评分提醒 {ch}: {'✅' if ok else '❌'}")
             notifications_sent.append(("hupu_rating", title))
-            notified_ids.add(post_id)
+            notified_ids.add(nid)
+
+    # ---------- 5. 合并旧数据并排序 ----------
+    existing_ids = {x["id"] for x in cur_matches}
+    old_extra = [m for m in prev_matches_raw if m.get("id") not in existing_ids and not m.get("out_biz_no")]
+    all_matches = cur_matches + old_extra
+    all_matches.sort(key=lambda x: x.get("match_time", 0) or 0, reverse=True)
+    all_matches = all_matches[:20]
 
     if verbose:
-        ig_count = len(cur_matches)
-        print(f"  虎扑评分: 发现{ig_count}个{team_name}赛后帖")
-
-    # 保留最近20条, 通知ID保留最近100个
-    prev_matches = prev_state.get("matches", [])
-    existing_ids = {x["id"] for x in cur_matches}
-    all_matches = cur_matches + [m for m in prev_matches if m["id"] not in existing_ids]
-    all_matches = all_matches[:20]
+        with_api = sum(1 for m in all_matches if m.get("ig_players"))
+        print(f"  虎扑评分: 共{len(all_matches)}场{team_name}比赛, 其中{with_api}场含选手评分")
 
     cur_state = {
         "matches": all_matches,
