@@ -218,15 +218,32 @@ body {
   font-family: var(--font-mono);
 }
 
-/* 段位信息 */
+/* 段位信息 - 支持多队列 */
+.ranked-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
 .ranked-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   background: rgba(0,0,0,0.2);
   border-radius: var(--radius);
-  margin-bottom: 12px;
+}
+.ranked-row.secondary {
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.1);
+}
+.ranked-queue-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 }
 .tier-badge {
   width: 44px;
@@ -241,16 +258,25 @@ body {
   color: white;
   flex-shrink: 0;
 }
+.ranked-row.secondary .tier-badge {
+  width: 36px;
+  height: 36px;
+  font-size: 11px;
+}
 .tier-text {
   flex: 1;
+  min-width: 0;
 }
 .tier-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
 }
+.ranked-row.secondary .tier-name {
+  font-size: 13px;
+}
 .tier-lp {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
 }
@@ -258,15 +284,31 @@ body {
   text-align: center;
 }
 .wr-num {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--win);
   font-family: var(--font-mono);
 }
+.ranked-row.secondary .wr-num {
+  font-size: 14px;
+}
 .wr-label {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text-muted);
   text-transform: uppercase;
+}
+.rank-glob {
+  text-align: center;
+}
+.rank-glob-num {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  font-family: var(--font-mono);
+}
+.rank-glob-label {
+  font-size: 9px;
+  color: var(--text-muted);
 }
 
 /* 账号切换 */
@@ -450,11 +492,11 @@ body {
 .match-main {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 8px;
+  gap: 10px;
+  padding: 12px 10px;
 }
 .match-result {
-  width: 36px;
+  width: 40px;
   flex-shrink: 0;
   text-align: center;
 }
@@ -482,8 +524,8 @@ body {
   flex-shrink: 0;
 }
 .champ-icon {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-sm);
   border: 2px solid var(--border-light);
 }
@@ -507,32 +549,52 @@ body {
   flex-direction: column;
   gap: 3px;
   flex-shrink: 0;
-  width: 24px;
+  width: 26px;
 }
 .spell-rune {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 4px;
   border: 1px solid var(--border);
   display: block;
   object-fit: cover;
 }
 
-.match-kda {
-  flex-shrink: 0;
-  width: 70px;
-  text-align: center;
+/* 比赛信息区（KDA+CS+OP评分） */
+.match-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
+.match-kda {
+  text-align: left;
+}
+.match-stats-sub {
+  display: flex;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+.match-cs {
+  color: var(--text-secondary);
+}
+.match-op-score {
+  font-weight: 600;
+}
+.op-score-good { color: var(--gold); }
+.op-score-great { color: var(--orange); }
 .match-badges {
   display: flex;
-  gap: 3px;
-  justify-content: center;
-  margin-bottom: 2px;
+  gap: 4px;
+  margin-bottom: 3px;
 }
 .badge {
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
-  padding: 1px 4px;
+  padding: 2px 5px;
   border-radius: 3px;
 }
 .badge-mvp { background: var(--gold); color: #000; }
@@ -540,7 +602,7 @@ body {
 .badge-ace { background: var(--lose); color: white; }
 .kda-line {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -548,16 +610,16 @@ body {
 .kda-d { color: var(--lose); }
 .kda-a { color: var(--cyan); }
 .kda-sep { color: var(--text-muted); font-weight: 400; margin: 0 1px; }
-.kda-ratio {
-  font-size: 10px;
-  color: var(--text-tertiary);
-  font-family: var(--font-mono);
-}
 
 .match-items {
   display: flex;
+  flex-direction: column;
   gap: 2px;
   flex-shrink: 0;
+}
+.match-items-row {
+  display: flex;
+  gap: 2px;
 }
 .item-slot {
   width: 22px;
@@ -574,7 +636,7 @@ body {
   font-size: 11px;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
-  width: 42px;
+  width: 36px;
 }
 
 /* 比赛详情 */
@@ -1100,7 +1162,7 @@ details[open] summary::after { transform: rotate(90deg); }
           <div class="profile-status" id="profile-status">加载中...</div>
         </div>
       </div>
-      <div class="ranked-row" id="ranked-row"></div>
+      <div class="ranked-section" id="ranked-section"></div>
       <div class="account-chips" id="account-chips"></div>
     </div>
 
@@ -1441,39 +1503,63 @@ function renderProfile() {
   document.getElementById('status-ring').className = `status-ring ${st.level}`;
   document.getElementById('profile-status').textContent = st.text;
 
-  const row = document.getElementById('ranked-row');
+  const section = document.getElementById('ranked-section');
   const ls = (p.league_stats||[]).filter(l => l.game_type !== 'ARENA');
 
-  if (ls.length) {
-    const l = ls[0];
-    const tierName = TIER_NAMES[l.tier] || '';
-    const divName = l.division ? DIVISION_NAMES[l.division] : '';
-    const play = l.play || (l.match_win||0)+(l.match_lose||0);
-    const wins = l.match_win ?? l.win ?? 0;
-    const losses = l.match_lose ?? l.lose ?? 0;
-    const wr = play ? (wins/play*100).toFixed(0) : 0;
-    const tierShort = TIER_SHORT[l.tier] || (tierName ? tierName.charAt(0) : '?');
+  // 排位队列排序：单双排优先
+  const queueOrder = { SOLORANKED: 0, RANKED: 0, FLEXRANKED: 1 };
+  ls.sort((a,b) => (queueOrder[a.game_type] ?? 99) - (queueOrder[b.game_type] ?? 99));
 
-    let rankHtml = '';
+  if (ls.length) {
+    let globalRankHtml = '';
     if (p.ladder_rank?.rank) {
       const rk = p.ladder_rank.rank;
-      rankHtml = `<div style="text-align:center;"><div style="font-size:16px;font-weight:700;color:var(--gold);font-family:var(--font-mono);">#${rk>=10000?(rk/10000).toFixed(1)+'w':rk.toLocaleString()}</div><div style="font-size:10px;color:var(--text-muted);">排名</div></div>`;
+      globalRankHtml = `<div class="rank-glob">
+        <div class="rank-glob-num">#${rk>=10000?(rk/10000).toFixed(1)+'w':rk.toLocaleString()}</div>
+        <div class="rank-glob-label">全服</div>
+      </div>`;
     }
 
-    row.innerHTML = `
-      <div class="tier-badge">${tierShort}</div>
-      <div class="tier-text">
-        <div class="tier-name">${tierName} ${divName}</div>
-        <div class="tier-lp">${l.lp??0} LP · ${wins}W ${losses}L</div>
-      </div>
-      <div class="wr-mini">
-        <div class="wr-num">${wr}%</div>
-        <div class="wr-label">胜率</div>
-      </div>
-      ${rankHtml}
-    `;
+    function buildRankedRow(l, isSecondary) {
+      const tierName = TIER_NAMES[l.tier] || '';
+      const divName = l.division ? DIVISION_NAMES[l.division] : '';
+      const play = l.play || (l.match_win||0)+(l.match_lose||0);
+      const wins = l.match_win ?? l.win ?? 0;
+      const losses = l.match_lose ?? l.lose ?? 0;
+      const wr = play ? (wins/play*100).toFixed(0) : 0;
+      const tierShort = TIER_SHORT[l.tier] || (tierName ? tierName.charAt(0) : '?');
+      const queueName = GAME_TYPES[l.game_type] || '';
+      
+      // 不同队列不同颜色徽章
+      let badgeStyle = '';
+      if (l.game_type === 'SOLORANKED' || l.game_type === 'RANKED') {
+        badgeStyle = 'background: linear-gradient(135deg, #b066ff 0%, #8b5cf6 100%);';
+      } else {
+        badgeStyle = 'background: linear-gradient(135deg, #4a7dff 0%, #3b8eff 100%);';
+      }
+
+      return `<div class="ranked-row${isSecondary?' secondary':''}">
+        <div class="tier-badge" style="${badgeStyle}">${tierShort}</div>
+        <div class="tier-text">
+          ${isSecondary ? `<div class="ranked-queue-label">${queueName}</div>` : ''}
+          <div class="tier-name">${tierName} ${divName}</div>
+          <div class="tier-lp">${l.lp??0} LP · ${wins}胜${losses}负 · ${play}场</div>
+        </div>
+        <div class="wr-mini">
+          <div class="wr-num">${wr}%</div>
+          <div class="wr-label">胜率</div>
+        </div>
+        ${!isSecondary ? globalRankHtml : ''}
+      </div>`;
+    }
+
+    let html = '';
+    ls.forEach((l, idx) => {
+      html += buildRankedRow(l, idx > 0);
+    });
+    section.innerHTML = html;
   } else {
-    row.innerHTML = '<div style="color:var(--text-muted);font-size:13px;">未定级</div>';
+    section.innerHTML = '<div class="ranked-row"><div style="color:var(--text-muted);font-size:13px;">未定级</div></div>';
   }
 }
 
@@ -1572,13 +1658,18 @@ function buildMatchCard(m, idx, expandable) {
   else if (isSvp) badge = '<span class="badge badge-svp">SVP</span>';
   const mk = multiKillBadge(m.largest_multi_kill);
 
-  // 移动端紧凑：只显示5个装备（省空间）
-  const items = (m.items||[]).slice(0,5);
-  while (items.length < 5) items.push(0);
-  const itemsHtml = items.map(iid =>
-    iid ? `<img class="item-slot" src="${itemIcon(iid)}" onerror="${IMG_ERR}">`
-        : '<span class="item-slot empty"></span>'
-  ).join('');
+  // 6个装备，双行3+3排列节省宽度
+  const items = (m.items||[]).slice(0,6);
+  while (items.length < 6) items.push(0);
+  const row1 = items.slice(0,3);
+  const row2 = items.slice(3,6);
+  const buildItem = iid => iid 
+    ? `<img class="item-slot" src="${itemIcon(iid)}" onerror="${IMG_ERR}">`
+    : '<span class="item-slot empty"></span>';
+  const itemsHtml = `
+    <div class="match-items-row">${row1.map(buildItem).join('')}</div>
+    <div class="match-items-row">${row2.map(buildItem).join('')}</div>
+  `;
 
   // 召唤师技能（2个）+ 主符文（1个），总共3个小图标
   const spells = (m.spells||[]).slice(0,2);
@@ -1586,12 +1677,23 @@ function buildMatchCard(m, idx, expandable) {
   // 只取主符文（第一个img）
   const runeImgs = runeHtml(m.rune).match(/<img[^>]*>/g);
   if (runeImgs && runeImgs.length > 0) {
-    // 给主符文加上spell-rune class（替换掉可能的其他class）
     const mainRune = runeImgs[0].replace(/class="[^"]*"/, 'class="spell-rune"').replace(/style="[^"]*"/g, '');
     spellsHtml += mainRune;
   }
 
   const kda = calcKda(m.kill, m.death, m.assist);
+  const cs = m.cs || m.minion_kill || 0;
+  const opScore = m.op_score;
+  let opClass = '';
+  if (opScore >= 8.0) opClass = 'op-score-great';
+  else if (opScore >= 6.5) opClass = 'op-score-good';
+
+  // KDA比例不再单独一行，和CS、OP评分放一起
+  const statsLine = `<div class="match-stats-sub">
+    <span class="match-cs">${cs} CS</span>
+    ${opScore ? `<span class="match-op-score ${opClass}">${typeof opScore === 'number' ? opScore.toFixed(1) : opScore}分</span>` : ''}
+    <span>${kda} KDA</span>
+  </div>`;
 
   return `
     <div class="match-card ${win?'win':'lose'}" data-idx="${idx}">
@@ -1608,12 +1710,14 @@ function buildMatchCard(m, idx, expandable) {
         <div class="match-spells">
           ${spellsHtml}
         </div>
-        <div class="match-kda">
+        <div class="match-info">
           <div class="match-badges">${badge}${mk}</div>
-          <div class="kda-line">
-            <span class="kda-k">${m.kill||0}</span><span class="kda-sep">/</span><span class="kda-d">${m.death||0}</span><span class="kda-sep">/</span><span class="kda-a">${m.assist||0}</span>
+          <div class="match-kda">
+            <div class="kda-line">
+              <span class="kda-k">${m.kill||0}</span><span class="kda-sep">/</span><span class="kda-d">${m.death||0}</span><span class="kda-sep">/</span><span class="kda-a">${m.assist||0}</span>
+            </div>
           </div>
-          <div class="kda-ratio">${kda} KDA</div>
+          ${statsLine}
         </div>
         <div class="match-items">${itemsHtml}</div>
         <div class="match-meta">
@@ -1667,13 +1771,13 @@ function renderMatchDetail(m) {
 
 function renderMatches() {
   const { matches } = currentData;
-  // 最近5场
+  // 最近8场
   const recent = document.getElementById('matches-recent');
   if (recent) {
     if (!matches?.length) {
       recent.innerHTML = '<div class="empty-state">暂无比赛</div>';
     } else {
-      recent.innerHTML = matches.slice(0,5).map((m,i) => buildMatchCard(m,i,false)).join('');
+      recent.innerHTML = matches.slice(0,8).map((m,i) => buildMatchCard(m,i,false)).join('');
     }
   }
   // 全部
