@@ -450,11 +450,11 @@ body {
 .match-main {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px;
+  gap: 8px;
+  padding: 10px 8px;
 }
 .match-result {
-  width: 40px;
+  width: 36px;
   flex-shrink: 0;
   text-align: center;
 }
@@ -482,8 +482,8 @@ body {
   flex-shrink: 0;
 }
 .champ-icon {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   border: 2px solid var(--border-light);
 }
@@ -501,9 +501,26 @@ body {
   font-family: var(--font-mono);
 }
 
+/* 召唤师技能+符文列 */
+.match-spells {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-shrink: 0;
+  width: 24px;
+}
+.spell-rune {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  display: block;
+  object-fit: cover;
+}
+
 .match-kda {
   flex-shrink: 0;
-  width: 80px;
+  width: 70px;
   text-align: center;
 }
 .match-badges {
@@ -523,7 +540,7 @@ body {
 .badge-ace { background: var(--lose); color: white; }
 .kda-line {
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -541,12 +558,11 @@ body {
   display: flex;
   gap: 2px;
   flex-shrink: 0;
-  margin-left: auto;
 }
 .item-slot {
-  width: 26px;
-  height: 26px;
-  border-radius: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
   border: 1px solid var(--border);
   background: var(--bg);
 }
@@ -1556,16 +1572,24 @@ function buildMatchCard(m, idx, expandable) {
   else if (isSvp) badge = '<span class="badge badge-svp">SVP</span>';
   const mk = multiKillBadge(m.largest_multi_kill);
 
-  const items = (m.items||[]).slice(0,6);
-  while (items.length < 6) items.push(0);
+  // 移动端紧凑：只显示5个装备（省空间）
+  const items = (m.items||[]).slice(0,5);
+  while (items.length < 5) items.push(0);
   const itemsHtml = items.map(iid =>
     iid ? `<img class="item-slot" src="${itemIcon(iid)}" onerror="${IMG_ERR}">`
         : '<span class="item-slot empty"></span>'
   ).join('');
 
-  const spellsHtml = (m.spells||[]).map(s => `<img class="spell-rune" src="${spellIcon(s)}" onerror="${IMG_ERR}" style="width:18px;height:18px;border-radius:3px;border:1px solid var(--border);display:block;">`).join('');
-  const runeH = runeHtml(m.rune).replace('spell-rune', 'spell-rune')
-    .replace(/style="[^"]*"/g, 'style="width:18px;height:18px;border-radius:3px;border:1px solid var(--border);display:block;"');
+  // 召唤师技能（2个）+ 主符文（1个），总共3个小图标
+  const spells = (m.spells||[]).slice(0,2);
+  let spellsHtml = spells.map(s => `<img class="spell-rune" src="${spellIcon(s)}" onerror="${IMG_ERR}">`).join('');
+  // 只取主符文（第一个img）
+  const runeImgs = runeHtml(m.rune).match(/<img[^>]*>/g);
+  if (runeImgs && runeImgs.length > 0) {
+    // 给主符文加上spell-rune class（替换掉可能的其他class）
+    const mainRune = runeImgs[0].replace(/class="[^"]*"/, 'class="spell-rune"').replace(/style="[^"]*"/g, '');
+    spellsHtml += mainRune;
+  }
 
   const kda = calcKda(m.kill, m.death, m.assist);
 
@@ -1581,8 +1605,8 @@ function buildMatchCard(m, idx, expandable) {
           <img class="champ-icon" src="${champIcon(m.champion_id)}" onerror="${IMG_ERR}">
           ${m.champion_level ? `<span class="champ-lvl">${m.champion_level}</span>` : ''}
         </div>
-        <div style="display:flex;flex-direction:column;gap:2px;">
-          ${spellsHtml}${runeH}
+        <div class="match-spells">
+          ${spellsHtml}
         </div>
         <div class="match-kda">
           <div class="match-badges">${badge}${mk}</div>
@@ -1594,7 +1618,7 @@ function buildMatchCard(m, idx, expandable) {
         <div class="match-items">${itemsHtml}</div>
         <div class="match-meta">
           <div>${min}分</div>
-          ${expandable?'<div style="font-size:10px;margin-top:2px;">▼</div>':''}
+          ${expandable?'<div style="font-size:9px;margin-top:2px;opacity:0.6;">▼</div>':''}
         </div>
       </div>
       ${expandable ? `<div class="match-detail" data-detail="${idx}">${renderMatchDetail(m)}</div>` : ''}
