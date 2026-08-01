@@ -479,60 +479,75 @@ body {
   gap: 8px;
 }
 
+/* ========== 比赛卡片 - 参考电竞GG堂布局 ========== */
 .match-card {
   background: var(--bg-card);
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
+  margin-bottom: 8px;
 }
-.match-card.win { border-left: 3px solid var(--win); }
-.match-card.lose { border-left: 3px solid var(--lose); }
-.match-card:active { background: var(--bg-card-2); }
+.match-card.win {
+  background: rgba(59, 142, 255, 0.08);
+  border-color: rgba(59, 142, 255, 0.2);
+}
+.match-card.lose {
+  background: rgba(255, 77, 106, 0.08);
+  border-color: rgba(255, 77, 106, 0.2);
+}
+.match-card:active {
+  transform: scale(0.98);
+}
 
-.match-main {
+/* 卡片头部：模式+时间+时长+装备 */
+.match-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 10px;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.15);
 }
-.match-result {
-  width: 40px;
-  flex-shrink: 0;
-  text-align: center;
-}
-.match-result-text {
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-}
-.match-card.win .match-result-text { color: var(--win); }
-.match-card.lose .match-result-text { color: var(--lose); }
-.match-game-type {
-  font-size: 9px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-.match-time {
-  font-size: 10px;
-  color: var(--text-muted);
+.match-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-secondary);
   font-family: var(--font-mono);
-  margin-top: 2px;
+}
+.match-header-items {
+  display: flex;
+  gap: 2px;
 }
 
+/* 卡片主体 */
+.match-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+}
+
+/* 英雄+技能区域 */
+.match-champ-area {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
 .match-champ {
   position: relative;
   flex-shrink: 0;
 }
 .champ-icon {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: var(--radius-sm);
   border: 2px solid var(--border-light);
 }
 .champ-lvl {
   position: absolute;
-  bottom: -3px;
-  right: -3px;
+  bottom: -2px;
+  right: -2px;
   background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text-primary);
@@ -543,134 +558,174 @@ body {
   font-family: var(--font-mono);
 }
 
-/* 召唤师技能+符文列 */
+/* 技能+符文：2x2网格 */
 .match-spells {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
   flex-shrink: 0;
-  width: 26px;
 }
 .spell-rune {
-  width: 24px;
-  height: 24px;
+  width: 23px;
+  height: 23px;
   border-radius: 4px;
   border: 1px solid var(--border);
   display: block;
   object-fit: cover;
 }
 
-/* 比赛信息区（KDA+CS+OP评分） */
+/* 信息区域：徽章+KDA+补刀经济 */
 .match-info {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
+  padding-top: 2px;
 }
-.match-kda {
-  text-align: left;
+.match-badges {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
 }
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  letter-spacing: 0.02em;
+}
+.badge-mvp { background: var(--gold); color: #000; }
+.badge-svp { background: var(--purple); color: white; }
+.badge-ace { background: var(--lose); color: white; }
+/* 排名徽章（灰色椭圆） */
+.badge-rank {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+/* 连杀徽章（红色胶囊） */
+.badge-multikill {
+  background: rgba(255, 77, 106, 0.9);
+  color: white;
+}
+
+.kda-line {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.kda-k { color: var(--text-primary); }
+.kda-d { color: var(--lose); }
+.kda-a { color: var(--cyan); }
+.kda-sep { color: var(--text-muted); font-weight: 400; margin: 0 2px; }
+
 .match-stats-sub {
   display: flex;
-  gap: 8px;
-  font-size: 10px;
+  gap: 10px;
+  font-size: 11px;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
 }
 .match-cs {
   color: var(--text-secondary);
 }
+.match-gold {
+  color: var(--gold);
+}
 .match-op-score {
   font-weight: 600;
 }
 .op-score-good { color: var(--gold); }
 .op-score-great { color: var(--orange); }
-.match-badges {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 3px;
-}
-.badge {
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 5px;
-  border-radius: 3px;
-}
-.badge-mvp { background: var(--gold); color: #000; }
-.badge-svp { background: var(--purple); color: white; }
-.badge-ace { background: var(--lose); color: white; }
-.kda-line {
-  font-family: var(--font-mono);
-  font-size: 15px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-.kda-k { color: var(--text-primary); }
-.kda-d { color: var(--lose); }
-.kda-a { color: var(--cyan); }
-.kda-sep { color: var(--text-muted); font-weight: 400; margin: 0 1px; }
 
-.match-items {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex-shrink: 0;
-}
-.match-items-row {
-  display: flex;
-  gap: 2px;
-}
+/* 装备槽位 - 放在header右侧 */
 .item-slot {
   width: 22px;
   height: 22px;
   border-radius: 3px;
   border: 1px solid var(--border);
-  background: var(--bg);
+  background: rgba(0,0,0,0.3);
 }
-.item-slot.empty { opacity: 0.25; border-style: dashed; }
+.item-slot.empty { opacity: 0.3; background: rgba(255,255,255,0.05); }
 
+/* 右侧展开箭头区域 */
 .match-meta {
   flex-shrink: 0;
-  text-align: right;
-  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 2px;
+  gap: 4px;
+}
+.match-duration {
+  font-size: 12px;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
-  width: 36px;
 }
 
-/* 比赛详情 */
+/* 比赛详情 - 紧凑5v5 */
 .match-detail {
   display: none;
   border-top: 1px solid var(--border);
-  background: rgba(0,0,0,0.2);
-  padding: 10px 12px;
+  background: rgba(0,0,0,0.3);
 }
 .match-detail.show { display: block; }
 .detail-team-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 6px;
-  margin-bottom: 4px;
+  justify-content: space-between;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 700;
 }
-.detail-team-header.win { background: var(--win-bg); color: var(--win); }
-.detail-team-header.lose { background: var(--lose-bg); color: var(--lose); }
-.detail-kda { font-family: var(--font-mono); margin-left: auto; font-weight: 600; }
+.detail-team-header.win { background: rgba(59, 142, 255, 0.15); color: var(--win); }
+.detail-team-header.lose { background: rgba(255, 77, 106, 0.15); color: var(--lose); }
+.detail-kda-row {
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.detail-bans {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.detail-ban-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  opacity: 0.5;
+  filter: grayscale(0.8);
+}
 .detail-player {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 5px 10px;
+  gap: 6px;
+  padding: 4px 10px;
   font-size: 11px;
 }
-.detail-player.me { color: var(--brand); font-weight: 600; }
+.detail-player.me { background: rgba(74,125,255,0.1); }
 .detail-player-champ {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.detail-player-spells {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex-shrink: 0;
+}
+.detail-player-spells img {
+  width: 12px;
+  height: 12px;
   border-radius: 2px;
 }
 .detail-player-name {
@@ -679,20 +734,35 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text-secondary);
+  font-size: 11px;
 }
-.detail-player.me .detail-player-name { color: var(--brand); }
+.detail-player.me .detail-player-name { color: var(--brand); font-weight: 600; }
 .detail-player-kda {
   font-family: var(--font-mono);
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  width: 52px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.detail-player-rank {
   font-size: 10px;
+  color: var(--text-tertiary);
+  width: 70px;
+  text-align: right;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .detail-items-mini {
   display: flex;
   gap: 1px;
+  flex-shrink: 0;
 }
 .detail-items-mini .item-slot {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 /* ========== 英雄统计 ========== */
@@ -1653,77 +1723,100 @@ function buildMatchCard(m, idx, expandable) {
   const time = fmtKstTime(m.created_at);
   const isMvp = m.op_score_rank === 1;
   const isSvp = m.op_score_rank === 2;
-  let badge = '';
-  if (isMvp) badge = '<span class="badge badge-mvp">MVP</span>';
-  else if (isSvp) badge = '<span class="badge badge-svp">SVP</span>';
-  const mk = multiKillBadge(m.largest_multi_kill);
+  const opRank = m.op_score_rank;
 
-  // 6个装备，双行3+3排列节省宽度
-  const items = (m.items||[]).slice(0,6);
-  while (items.length < 6) items.push(0);
-  const row1 = items.slice(0,3);
-  const row2 = items.slice(3,6);
+  // 徽章：排名/MVP/SVP/连杀
+  const badges = [];
+  if (isMvp) {
+    badges.push('<span class="badge badge-mvp">MVP</span>');
+  } else if (isSvp) {
+    badges.push('<span class="badge badge-svp">SVP</span>');
+  } else if (opRank && opRank >= 2 && opRank <= 10) {
+    // 排名徽章（2-10名显示，如"5th"）
+    const suffixes = ['th','st','nd','rd','th','th','th','th','th','th','th'];
+    const suffix = opRank <= 3 ? suffixes[opRank] : 'th';
+    badges.push(`<span class="badge badge-rank">${opRank}${suffix}</span>`);
+  }
+  const mk = multiKillBadge(m.largest_multi_kill);
+  if (mk) {
+    // 将mk转换为badge-multikill样式
+    const mkText = mk.replace(/class="[^"]*"/, 'class="badge badge-multikill"');
+    badges.push(mkText);
+  }
+
+  // 装备：7格（6装备+1饰品），单行排列在header右侧
+  const items = (m.items||[]).slice(0,7);
+  while (items.length < 7) items.push(0);
   const buildItem = iid => iid 
     ? `<img class="item-slot" src="${itemIcon(iid)}" onerror="${IMG_ERR}">`
     : '<span class="item-slot empty"></span>';
-  const itemsHtml = `
-    <div class="match-items-row">${row1.map(buildItem).join('')}</div>
-    <div class="match-items-row">${row2.map(buildItem).join('')}</div>
-  `;
+  const itemsHtml = `<div class="match-header-items">${items.map(buildItem).join('')}</div>`;
 
-  // 召唤师技能（2个）+ 主符文（1个），总共3个小图标
+  // 召唤师技能（2个）+ 主副符文（2个），2x2网格排列
   const spells = (m.spells||[]).slice(0,2);
-  let spellsHtml = spells.map(s => `<img class="spell-rune" src="${spellIcon(s)}" onerror="${IMG_ERR}">`).join('');
-  // 只取主符文（第一个img）
-  const runeImgs = runeHtml(m.rune).match(/<img[^>]*>/g);
-  if (runeImgs && runeImgs.length > 0) {
-    const mainRune = runeImgs[0].replace(/class="[^"]*"/, 'class="spell-rune"').replace(/style="[^"]*"/g, '');
-    spellsHtml += mainRune;
-  }
+  let spellImgs = spells.map(s => `<img class="spell-rune" src="${spellIcon(s)}" onerror="${IMG_ERR}">`);
+  // 取前2个符文
+  const runeImgs = runeHtml(m.rune).match(/<img[^>]*>/g) || [];
+  runeImgs.slice(0,2).forEach(runeImg => {
+    const fixed = runeImg.replace(/class="[^"]*"/, 'class="spell-rune"').replace(/style="[^"]*"/g, '');
+    spellImgs.push(fixed);
+  });
+  while (spellImgs.length < 4) spellImgs.push('<span class="spell-rune" style="background:rgba(0,0,0,0.2);"></span>');
+  // 2x2排列：技能1 符文1 / 技能2 符文2
+  const spellsHtml = `${spellImgs[0]}${spellImgs[2]}${spellImgs[1]}${spellImgs[3]}`;
 
   const kda = calcKda(m.kill, m.death, m.assist);
   const cs = m.cs || m.minion_kill || 0;
+  const gold = m.gold_earned ? Math.round(m.gold_earned / 1000) : null;
   const opScore = m.op_score;
   let opClass = '';
   if (opScore >= 8.0) opClass = 'op-score-great';
   else if (opScore >= 6.5) opClass = 'op-score-good';
 
-  // KDA比例不再单独一行，和CS、OP评分放一起
-  const statsLine = `<div class="match-stats-sub">
-    <span class="match-cs">${cs} CS</span>
-    ${opScore ? `<span class="match-op-score ${opClass}">${typeof opScore === 'number' ? opScore.toFixed(1) : opScore}分</span>` : ''}
-    <span>${kda} KDA</span>
-  </div>`;
+  // 统计行：CS / 经济 / KDA比 / OP评分
+  const statsParts = [];
+  statsParts.push(`<span class="match-cs">${cs}刀</span>`);
+  if (gold) statsParts.push(`<span class="match-gold">${gold}k</span>`);
+  statsParts.push(`<span>${kda} KDA</span>`);
+  if (opScore) statsParts.push(`<span class="match-op-score ${opClass}">${typeof opScore === 'number' ? opScore.toFixed(1) : opScore}</span>`);
+  const statsLine = `<div class="match-stats-sub">${statsParts.join('<span style="opacity:0.3">·</span>')}</div>`;
 
   return `
     <div class="match-card ${win?'win':'lose'}" data-idx="${idx}">
+      <!-- 卡片头部：模式 时间 时长 装备 -->
+      <div class="match-header">
+        <div class="match-header-left">
+          <span>${GAME_TYPES[m.game_type]||''}</span>
+          <span>${time}</span>
+          <span>${min}分钟</span>
+        </div>
+        ${itemsHtml}
+      </div>
+      <!-- 卡片主体：英雄+技能 徽章 KDA 展开按钮 -->
       <div class="match-main">
-        <div class="match-result">
-          <div class="match-result-text">${win?'胜':'负'}</div>
-          <div class="match-game-type">${GAME_TYPES[m.game_type]||''}</div>
-          <div class="match-time">${time}</div>
-        </div>
-        <div class="match-champ">
-          <img class="champ-icon" src="${champIcon(m.champion_id)}" onerror="${IMG_ERR}">
-          ${m.champion_level ? `<span class="champ-lvl">${m.champion_level}</span>` : ''}
-        </div>
-        <div class="match-spells">
-          ${spellsHtml}
+        <div class="match-champ-area">
+          <div class="match-champ">
+            <img class="champ-icon" src="${champIcon(m.champion_id)}" onerror="${IMG_ERR}">
+            ${m.champion_level ? `<span class="champ-lvl">${m.champion_level}</span>` : ''}
+          </div>
+          <div class="match-spells">
+            ${spellsHtml}
+          </div>
         </div>
         <div class="match-info">
-          <div class="match-badges">${badge}${mk}</div>
-          <div class="match-kda">
-            <div class="kda-line">
-              <span class="kda-k">${m.kill||0}</span><span class="kda-sep">/</span><span class="kda-d">${m.death||0}</span><span class="kda-sep">/</span><span class="kda-a">${m.assist||0}</span>
-            </div>
+          <div class="match-badges">${badges.join('')}</div>
+          <div class="kda-line">
+            <span class="kda-k">${m.kill||0}</span><span class="kda-sep">/</span><span class="kda-d">${m.death||0}</span><span class="kda-sep">/</span><span class="kda-a">${m.assist||0}</span>
           </div>
           ${statsLine}
         </div>
-        <div class="match-items">${itemsHtml}</div>
+        ${expandable ? `
+        <div class="match-meta" style="cursor:pointer;">
+          <span style="font-size:16px;opacity:0.4;">›</span>
+        </div>` : `
         <div class="match-meta">
-          <div>${min}分</div>
-          ${expandable?'<div style="font-size:9px;margin-top:2px;opacity:0.6;">▼</div>':''}
-        </div>
+          <div class="match-duration">${min}分</div>
+        </div>`}
       </div>
       ${expandable ? `<div class="match-detail" data-detail="${idx}">${renderMatchDetail(m)}</div>` : ''}
     </div>
@@ -1737,34 +1830,80 @@ function renderMatchDetail(m) {
   const red = parts.filter(p => p.team_key === 'RED');
 
   function teamKda(t) { let k=0,d=0,a=0; t.forEach(p=>{k+=p.kill||0;d+=p.death||0;a+=p.assist||0;}); return {k,d,a}; }
+  function teamBans(t) {
+    const bans = [];
+    t.forEach(p => {
+      if (p.banned_champion_id) {
+        Array.isArray(p.banned_champion_id) 
+          ? bans.push(...p.banned_champion_id) 
+          : bans.push(p.banned_champion_id);
+      }
+    });
+    return bans.slice(0,5);
+  }
   const bk = teamKda(blue), rk = teamKda(red);
   const blueWin = blue[0]?.result === 'WIN';
   const redWin = red[0]?.result === 'WIN';
 
+  function miniSpells(p) {
+    const spells = (p.spells||[]).slice(0,2).map(s => 
+      `<img src="${spellIcon(s)}" onerror="${IMG_ERR}">`
+    ).join('');
+    return `<div class="detail-player-spells">${spells}</div>`;
+  }
+
+  function tierStr(p) {
+    // 尝试提取段位信息（如果有）
+    if (p.tier_info) {
+      const t = p.tier_info;
+      const tName = TIER_SHORT[t.tier] || '';
+      const d = t.division ? DIVISION_NAMES[t.division] : '';
+      const lp = t.lp ? ` ${t.lp}` : '';
+      return `${tName}${d}${lp}`;
+    }
+    if (p.league_tier) {
+      return TIER_SHORT[p.league_tier] || '';
+    }
+    return '';
+  }
+
   function pRow(p) {
     const me = isMe(p);
-    const pItems = (p.items||[]).slice(0,6).map(iid =>
+    const pItems = (p.items||[]).slice(0,7).map(iid =>
       iid ? `<img class="item-slot" src="${itemIcon(iid)}" onerror="${IMG_ERR}">`
           : '<span class="item-slot empty"></span>'
     ).join('');
+    const rank = tierStr(p);
     return `<div class="detail-player ${me?'me':''}">
       <img class="detail-player-champ" src="${champIcon(p.champion_id)}" onerror="${IMG_ERR}">
+      ${miniSpells(p)}
       <span class="detail-player-name">${p.summoner_name||'?'}</span>
+      ${rank ? `<span class="detail-player-rank">${rank}</span>` : ''}
       <span class="detail-player-kda">${p.kill||0}/${p.death||0}/${p.assist||0}</span>
       <span class="detail-items-mini">${pItems}</span>
     </div>`;
   }
 
+  function buildTeamHeader(team, kda, isWin, teamName) {
+    const bans = teamBans(team);
+    const bansHtml = bans.length ? `<div class="detail-bans">${bans.map(cid =>
+      `<img class="detail-ban-icon" src="${champIcon(cid)}" onerror="${IMG_ERR}">`
+    ).join('')}</div>` : '';
+    return `<div class="detail-team-header ${isWin?'win':'lose'}">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span>${teamName} ${isWin?'胜':'负'}</span>
+        ${bansHtml}
+      </div>
+      <div class="detail-kda-row">
+        <span>⚔${kda.k}/${kda.d}/${kda.a}</span>
+      </div>
+    </div>`;
+  }
+
   return `
-    <div class="detail-team-header ${blueWin?'win':'lose'}">
-      <span>蓝方 ${blueWin?'胜':'负'}</span>
-      <span class="detail-kda">${bk.k}/${bk.d}/${bk.a}</span>
-    </div>
+    ${buildTeamHeader(blue, bk, blueWin, '蓝方')}
     ${blue.map(pRow).join('')}
-    <div class="detail-team-header ${redWin?'win':'lose'}">
-      <span>红方 ${redWin?'胜':'负'}</span>
-      <span class="detail-kda">${rk.k}/${rk.d}/${rk.a}</span>
-    </div>
+    ${buildTeamHeader(red, rk, redWin, '红方')}
     ${red.map(pRow).join('')}
   `;
 }
