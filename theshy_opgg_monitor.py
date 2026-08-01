@@ -1794,7 +1794,7 @@ def fetch_hupu_match_detail(out_biz_no):
 
     # 2. 获取所有局(games/bo)的选手数据, 聚合成比赛级评分
     games = (self_data.get("data") or {}).get("subNodes") or []
-    player_stats = {}  # name -> {weighted_score, total_count, team_id, kda_parts}
+    player_stats = {}  # name -> {weighted_score, total_count, team_id, kills, deaths, assists}
 
     for game in games:
         bo_no = game.get("outBizNo")
@@ -1823,15 +1823,29 @@ def fetch_hupu_match_detail(out_biz_no):
             tid = str(_ij_val(pij, "teamId", ""))
             avg = float(n.get("scoreAvg") or 0)
             cnt = int(n.get("scorePersonCount") or 0)
-            kills = str(_ij_val(pij, "killCount", "0"))
-            deaths = str(_ij_val(pij, "deathCount", "0"))
-            assists = str(_ij_val(pij, "assistCount", "0"))
+            try:
+                kills = int(_ij_val(pij, "killCount", 0) or 0)
+            except Exception:
+                kills = 0
+            try:
+                deaths = int(_ij_val(pij, "deathCount", 0) or 0)
+            except Exception:
+                deaths = 0
+            try:
+                assists = int(_ij_val(pij, "assistCount", 0) or 0)
+            except Exception:
+                assists = 0
             if name not in player_stats:
-                player_stats[name] = {"weighted_score": 0.0, "total_count": 0, "team_id": tid, "kda": ""}
+                player_stats[name] = {
+                    "weighted_score": 0.0, "total_count": 0, "team_id": tid,
+                    "kills": 0, "deaths": 0, "assists": 0,
+                }
             if avg > 0 and cnt > 0:
                 player_stats[name]["weighted_score"] += avg * cnt
                 player_stats[name]["total_count"] += cnt
-            player_stats[name]["kda"] = f"{kills}/{deaths}/{assists}"
+            player_stats[name]["kills"] += kills
+            player_stats[name]["deaths"] += deaths
+            player_stats[name]["assists"] += assists
 
     # 3. 组装选手列表
     home_players = []
@@ -1839,12 +1853,19 @@ def fetch_hupu_match_detail(out_biz_no):
     total_scorers = int(detail.get("summedScorePersonCount") or 0)
     for name, ps in player_stats.items():
         avg = round(ps["weighted_score"] / ps["total_count"], 1) if ps["total_count"] > 0 else 0.0
+        kda_str = f"{ps['kills']}/{ps['deaths']}/{ps['assists']}"
+        # KDA比率 = (K+A)/D
+        kda_ratio = round((ps["kills"] + ps["assists"]) / ps["deaths"], 2) if ps["deaths"] > 0 else (ps["kills"] + ps["assists"])
         p = {
             "name": name,
             "team": home_norm if ps["team_id"] == home_tid else away_norm,
             "avg": avg,
             "total_count": ps["total_count"],
-            "kda": ps["kda"],
+            "kda": kda_str,
+            "kda_ratio": kda_ratio,
+            "kills": ps["kills"],
+            "deaths": ps["deaths"],
+            "assists": ps["assists"],
         }
         if ps["team_id"] == home_tid:
             home_players.append(p)
