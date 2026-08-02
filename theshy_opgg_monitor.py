@@ -2641,7 +2641,24 @@ def check_hupu_ratings(cfg, verbose=False):
 
     # ---------- 5. 合并旧数据并排序 ----------
     existing_ids = {x["id"] for x in cur_matches}
-    old_extra = [m for m in prev_matches_raw if m.get("id") not in existing_ids and not m.get("out_biz_no")]
+    # 重新计算已有完整数据的对手集合,用于过滤旧fallback
+    final_full_opponents = set()
+    for m in cur_matches:
+        if m.get("out_biz_no") and m.get("ig_players"):
+            opp = m.get("away") if m.get("home") == "IG" else m.get("home")
+            if opp:
+                final_full_opponents.add(opp)
+    old_extra = []
+    for m in prev_matches_raw:
+        if m.get("id") in existing_ids:
+            continue
+        if m.get("out_biz_no"):
+            continue  # 有out_biz_no但不在cur_matches中的旧API比赛,不再保留
+        # 无out_biz_no的fallback条目,检查对手是否已有完整数据
+        opp = m.get("away") if m.get("home") == "IG" else m.get("home")
+        if opp in final_full_opponents:
+            continue  # 已有完整评分,跳过旧fallback
+        old_extra.append(m)
     all_matches = cur_matches + old_extra
     all_matches.sort(key=lambda x: x.get("match_time", 0) or 0, reverse=True)
     all_matches = all_matches[:20]
