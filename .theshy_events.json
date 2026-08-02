@@ -1,5 +1,38 @@
 [
   {
+    "type": "bilibili_live",
+    "kind": "ig_live_start",
+    "title": "【直播】LNG vs IG",
+    "room_id": 6,
+    "timestamp": "2026-08-02T18:59:22.810733+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-02T18:33:01+09:00",
+    "level": 92,
+    "is_active": false,
+    "timestamp": "2026-08-02T18:59:21.687023+09:00"
+  },
+  {
+    "type": "became_active",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-02T18:55:33+09:00",
+    "level": 294,
+    "timestamp": "2026-08-02T18:59:20.845287+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-02T18:55:33+09:00",
+    "level": 294,
+    "is_active": true,
+    "timestamp": "2026-08-02T18:59:20.840053+09:00"
+  },
+  {
     "type": "winning_streak",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -4759,40 +4792,5 @@
     "level": 294,
     "is_active": false,
     "timestamp": "2026-07-31T13:46:30.355105+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-31T10:17:11+09:00",
-    "level": 91,
-    "is_active": true,
-    "timestamp": "2026-07-31T10:17:24.457313+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-07-31T09:52:02+09:00",
-    "level": 294,
-    "is_active": false,
-    "timestamp": "2026-07-31T10:17:24.456282+09:00"
-  },
-  {
-    "type": "became_active",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-31T08:48:31+09:00",
-    "level": 91,
-    "timestamp": "2026-07-31T08:48:41.342953+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-07-31T08:48:31+09:00",
-    "level": 91,
-    "is_active": true,
-    "timestamp": "2026-07-31T08:48:41.341957+09:00"
   }
 ]
