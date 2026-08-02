@@ -2528,6 +2528,23 @@ def check_hupu_ratings(cfg, verbose=False):
     if enum_found:
         bbs_matches.extend(enum_found)
 
+    # ---------- 3.6 过滤BBS fallback重复条目 ----------
+    # 如果某场比赛已有完整API数据(out_biz_no+ig_players),过滤掉对应BBS fallback
+    seen_full_opponents = set()
+    for m in api_matches + bbs_matches:
+        if m.get("out_biz_no") and m.get("ig_players"):
+            opp = m.get("away") if m.get("home") == "IG" else m.get("home")
+            if opp:
+                seen_full_opponents.add(opp)
+    filtered_bbs = []
+    for m in bbs_matches:
+        if not m.get("out_biz_no") and not m.get("ig_players"):
+            opp = m.get("away") if m.get("home") == "IG" else m.get("home")
+            if opp in seen_full_opponents:
+                continue  # 对手已有完整评分数据,跳过BBS fallback
+        filtered_bbs.append(m)
+    bbs_matches = filtered_bbs
+
     # ---------- 4. 组装cur_matches ----------
     cur_matches = []
     seen_ids = set()
@@ -2535,6 +2552,11 @@ def check_hupu_ratings(cfg, verbose=False):
         mid = m.get("out_biz_no") or m.get("post_id", "")
         if mid and mid in seen_ids:
             continue
+        # 再次检查: 无out_biz_no的fallback且对手已有完整数据则跳过
+        if not m.get("out_biz_no") and not m.get("ig_players"):
+            opp = m.get("away") if m.get("home") == "IG" else m.get("home")
+            if opp in seen_full_opponents:
+                continue
         seen_ids.add(mid)
 
         ig_home = m.get("ig_home", False)
