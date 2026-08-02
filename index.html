@@ -1047,9 +1047,101 @@ body {
 }
 .hupu-team-label .win-badge.w { background: rgba(34,197,94,0.2); color: #4ade80; }
 .hupu-team-label .win-badge.l { background: rgba(239,68,68,0.2); color: #f87171; }
-.hupu-score-high { background: linear-gradient(90deg, #4ade80, #22c55e); }
-.hupu-score-mid  { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
-.hupu-score-low  { background: linear-gradient(90deg, #f87171, #ef4444); }
+/* 赛事页分级卡片 */
+.es-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.es-card-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.15);
+  letter-spacing: 0.5px;
+}
+.es-card-head .es-head-icon {
+  width: 4px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--brand);
+}
+.es-card-body {
+  padding: 14px;
+}
+
+/* 赛果对阵卡 */
+.es-result-vs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.es-result-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+.es-result-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: rgba(255,255,255,0.06);
+}
+.es-result-name {
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.es-result-score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 28px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+}
+.es-result-score .dash { color: var(--text-muted); font-size: 18px; }
+.es-result-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.es-result-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.es-result-badge.win { background: rgba(34,197,94,0.15); color: #4ade80; }
+.es-result-badge.lose { background: rgba(239,68,68,0.15); color: #f87171; }
+
+/* 评分卡片内部战队分隔 */
+.hupu-team-block { margin-bottom: 8px; }
+.hupu-team-block:last-child { margin-bottom: 0; }
+.es-section-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.05);
+  margin: 14px 0;
+}
 .hupu-scorers-count {
   font-size: 10px;
   color: var(--text-muted);
@@ -2961,9 +3053,10 @@ function renderHupu() {
   const totalPanel = (igPlayers.length || oppPlayers.length) ? `
     <div class="hupu-teams">
       ${teamBlock(igPlayers, teamName, igLogo, true, !!igWin, igCoaches)}
+      <div class="es-section-divider"></div>
       ${teamBlock(oppPlayers, opponent, oppLogo, false, !igWin, oppCoaches)}
     </div>
-    ${casterHtml}
+    ${casterHtml ? `<div class="es-section-divider"></div>${casterHtml}` : ''}
     ${latest.total_scorers ? `<div class="hupu-scorers-count">${latest.total_scorers.toLocaleString()}人参与评分 · ${latest.games?latest.games.length:1}局比赛</div>` : ''}
   ` : '';
 
@@ -2990,6 +3083,7 @@ function renderHupu() {
           ${coverImg}
           ${g.bo_name ? `<div class="hupu-game-title">${escHtml(g.bo_name)}</div>` : ''}
           ${teamBlockGame(igPs, teamName, igLogo, true, null, gIgCoaches, igMvpId)}
+          <div class="es-section-divider"></div>
           ${teamBlockGame(oppPs, opponent, oppLogo, false, null, gOppCoaches, oppMvpId)}
         </div>
         <div class="hupu-scorers-count">${g.bo_short||('G'+(gi+1))} · ${fmtVotes(totalG)}人参与评分</div>
@@ -3007,75 +3101,91 @@ function renderHupu() {
     ${gamePanelsArr.map((ph,gi)=>`<div class="hupu-tab-panel" data-panel="g${gi}">${ph}</div>`).join('')}
   ` : totalPanel;
 
-  // 往期比赛（可点击展开）
   const history = matches.slice(1);
-  const historyHtml = history.length ? `
-    <div class="hupu-history-head">
-      <span>往期比赛</span>
-      <span>共${matches.length}场</span>
-    </div>
-    <div class="hupu-history-list" id="hupu-history-list">
-      ${history.map((m, idx) => {
-        const mHome = m.home || '';
-        const mAway = m.away || '';
-        const mIgHome = m.ig_home;
-        const mIgWin = m.ig_win;
-        const mIgScore = m.ig_score ?? (mIgHome ? (m.home_score ?? '-') : (m.away_score ?? '-'));
-        const mOppScore = m.opp_score ?? (mIgHome ? (m.away_score ?? '-') : (m.home_score ?? '-'));
-        const mOpp = m.opponent || (mIgHome ? mAway : mHome);
-        const mDate = m.date_str || fmtDate(m.found_at) || fmtDate(m.match_time);
-        const winClass = mIgWin ? 'win' : (mIgWin === false ? 'lose' : '');
-        const mIgPlayers = (m.ig_players || []).slice(0, 8);
-        const mOppPlayers = (m.opp_players || []).slice(0, 8);
-        const hasDetail = mIgPlayers.length > 0 || mOppPlayers.length > 0;
-        const detailHtml = hasDetail ? `<div class="hupu-item-detail">
-          <div class="hupu-item-team-split">${teamName}</div>
-          ${[...mIgPlayers].sort((a,b)=>b.avg-a.avg).map(playerRowMini).join('')}
-          <div class="hupu-item-team-split">${mOpp}</div>
-          ${[...mOppPlayers].sort((a,b)=>b.avg-a.avg).map(playerRowMini).join('')}
-        </div>` : '';
-        return `<div class="hupu-item ${winClass}" data-idx="${idx}" onclick="this.classList.toggle('open')">
-          <div class="hupu-item-main">
-            <span class="hupu-item-score">${mIgScore}-${mOppScore}</span>
-            <div class="hupu-item-info">
-              <div class="hupu-item-vs">${teamName} ${mIgScore}-${mOppScore} ${mOpp}</div>
-              <div class="hupu-item-date">${mDate}${hasDetail?' · 点击查看评分':''}</div>
-            </div>
-            <span class="hupu-item-arrow">›</span>
-          </div>
-          ${detailHtml}
-        </div>`;
-      }).join('')}
-    </div>
-  ` : '';
 
   const winTag = igWin ? '🔥 最新赛果' : '😔 最新赛果';
+  const winBadgeClass = igWin ? 'win' : 'lose';
+  const winBadgeText = igWin ? '胜利' : '失败';
 
-  c.innerHTML = `<div class="hupu-card">
-    <div class="hupu-head">
-      <span class="hupu-logo">虎扑</span>
-      <span style="font-weight:600;color:var(--text-primary);font-size:13px;">${teamName}比赛评分</span>
-      <span class="hupu-count">共${matches.length}场</span>
-    </div>
-
-    <!-- 最新比赛突出 -->
-    <div class="hupu-featured">
-      <div class="hupu-featured-tag">${winTag}</div>
-      <div class="hupu-featured-match">
-        <div class="hupu-vs" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-          ${teamHeaderHtml(igLogo, teamName, igScore, igColor)}
-          <div class="hupu-score-big-wrap">
-            <span style="color:${igColor}">${igScore}</span><span class="dash">:</span><span style="color:${oppColor}">${oppScore}</span>
+  c.innerHTML = `
+    <!-- 卡片1: 最新赛果对阵 -->
+    <div class="es-card">
+      <div class="es-card-head"><span class="es-head-icon"></span>${winTag} · ${stage || '比赛'}</div>
+      <div class="es-card-body">
+        <div class="es-result-vs">
+          <div class="es-result-team">
+            ${igLogo ? safeImg(igLogo, 'es-result-logo', teamName) : `<div class="es-result-logo"></div>`}
+            <div class="es-result-name" style="color:${igColor}">${teamName}</div>
           </div>
-          ${teamHeaderHtml(oppLogo, opponent, oppScore, oppColor)}
+          <div class="es-result-score">
+            <span style="color:${igColor}">${igScore}</span>
+            <span class="dash">:</span>
+            <span style="color:${oppColor}">${oppScore}</span>
+          </div>
+          <div class="es-result-team">
+            ${oppLogo ? safeImg(oppLogo, 'es-result-logo', opponent) : `<div class="es-result-logo"></div>`}
+            <div class="es-result-name" style="color:${oppColor}">${opponent}</div>
+          </div>
+        </div>
+        <div class="es-result-meta">
+          <span class="es-result-badge ${winBadgeClass}">${winBadgeText}</span>
+          <span>${date}</span>
+          ${latest.games && latest.games.length ? `<span>BO${latest.games.length}</span>` : ''}
         </div>
       </div>
-      <div class="hupu-featured-title">${stage ? stage + ' · ' : ''}${date}</div>
-      ${tabsHtmlFinal}
     </div>
 
-    ${historyHtml}
-  </div>`;
+    <!-- 卡片2: 选手评分 (Tab切换) -->
+    ${(igPlayers.length || oppPlayers.length) ? `
+    <div class="es-card">
+      <div class="es-card-head"><span class="es-head-icon"></span>选手评分</div>
+      <div class="es-card-body">
+        ${tabsHtmlFinal}
+      </div>
+    </div>
+    ` : ''}
+
+    <!-- 卡片3: 往期比赛 -->
+    ${history.length ? `
+    <div class="es-card">
+      <div class="es-card-head"><span class="es-head-icon"></span>往期比赛 <span style="margin-left:auto;font-size:10px;color:var(--text-muted);font-weight:400;">共${matches.length}场</span></div>
+      <div id="hupu-history-list">
+        ${history.map((m, idx) => {
+          const mHome = m.home || '';
+          const mAway = m.away || '';
+          const mIgHome = m.ig_home;
+          const mIgWin = m.ig_win;
+          const mIgScore = m.ig_score ?? (mIgHome ? (m.home_score ?? '-') : (m.away_score ?? '-'));
+          const mOppScore = m.opp_score ?? (mIgHome ? (m.away_score ?? '-') : (m.home_score ?? '-'));
+          const mOpp = m.opponent || (mIgHome ? mAway : mHome);
+          const mDate = m.date_str || fmtDate(m.found_at) || fmtDate(m.match_time);
+          const winClass = mIgWin ? 'win' : (mIgWin === false ? 'lose' : '');
+          const mIgPlayers = (m.ig_players || []).slice(0, 8);
+          const mOppPlayers = (m.opp_players || []).slice(0, 8);
+          const hasDetail = mIgPlayers.length > 0 || mOppPlayers.length > 0;
+          const detailHtml = hasDetail ? `<div class="hupu-item-detail">
+            <div class="hupu-item-team-split">${teamName}</div>
+            ${[...mIgPlayers].sort((a,b)=>b.avg-a.avg).map(playerRowMini).join('')}
+            <div class="es-section-divider"></div>
+            <div class="hupu-item-team-split">${mOpp}</div>
+            ${[...mOppPlayers].sort((a,b)=>b.avg-a.avg).map(playerRowMini).join('')}
+          </div>` : '';
+          return `<div class="hupu-item ${winClass}" data-idx="${idx}" onclick="this.classList.toggle('open')">
+            <div class="hupu-item-main">
+              <span class="hupu-item-score">${mIgScore}-${mOppScore}</span>
+              <div class="hupu-item-info">
+                <div class="hupu-item-vs">${teamName} ${mIgScore}-${mOppScore} ${mOpp}</div>
+                <div class="hupu-item-date">${mDate}${hasDetail?' · 点击查看评分':''}</div>
+              </div>
+              <span class="hupu-item-arrow">›</span>
+            </div>
+            ${detailHtml}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    ` : ''}
+  `;
   updateTabBadges();
   // Tab 点击切换
   setTimeout(() => {
@@ -3085,7 +3195,7 @@ function renderHupu() {
         const tab = e.target.closest('.hupu-tab');
         if (!tab) return;
         const tabKey = tab.dataset.tab;
-        const card = tabsEl.closest('.hupu-card');
+        const card = tabsEl.closest('.es-card');
         if (!card) return;
         card.querySelectorAll('.hupu-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabKey));
         card.querySelectorAll('.hupu-tab-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tabKey));
