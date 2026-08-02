@@ -91,7 +91,7 @@ HUPU_SCORE_SUB_URL = "https://games.mobileapi.hupu.com/1/8.0.99/bplcommentapi/bp
 HUPU_PLAYER_ALIGNMENT_URL = "https://games.mobileapi.hupu.com/1/8.0.99/egallapi/player/alignment"
 
 # 虎扑评分API - 已知IG比赛outBizNo列表 (用于初次数据填充, 爬虫会自动发现新比赛)
-KNOWN_IG_MATCH_BIZNOS = ["3678", "3612", "3610", "3606", "3552", "3545", "3534", "3530", "3512", "3506"]
+KNOWN_IG_MATCH_BIZNOS = ["3692", "3678", "3612", "3610", "3606", "3552", "3545", "3534", "3530", "3512", "3506"]
 
 # 旧版单账号文件 (为前端兼容保留, 主账号写这些)
 LEGACY_STATE_FILE = BASE_DIR / ".theshy_opgg_state.json"
@@ -1974,7 +1974,7 @@ def fetch_hupu_match_detail(out_biz_no):
     match_time = int(_ij_val(ij, "matchTime", 0) or 0)
     league_name = str(_ij_val(ij, "competitionTypeCn", ""))
     round_name = str(_ij_val(ij, "competitionStageTypeCn", ""))
-    match_title = str(detail.get("selfName") or "")
+    match_title = str(detail.get("selfName") or detail.get("name") or "")
 
     home_logo = _extract_images(_ij_val(ij, "homeTeamLogo", ""))
     away_logo = _extract_images(_ij_val(ij, "awayTeamLogo", ""))
@@ -2000,6 +2000,11 @@ def fetch_hupu_match_detail(out_biz_no):
         return None
 
     games_meta = (self_data.get("data") or {}).get("subNodes") or []
+    # 按boNum排序确保局数顺序正确
+    try:
+        games_meta.sort(key=lambda g: int(g.get("boNum") or 0))
+    except Exception:
+        pass
     _match_id = str(_ij_val(ij, "matchId", "") or "")
 
     player_agg = {}
@@ -2008,15 +2013,20 @@ def fetch_hupu_match_detail(out_biz_no):
     for gm in games_meta:
         bo_no = gm.get("outBizNo")
         bo_type = gm.get("outBizType", "lol_bo")
-        bo_raw_name = str(gm.get("selfName") or "")
-        # 推断bo序号
+        bo_raw_name = str(gm.get("selfName") or gm.get("name") or "")
+        # 推断bo序号 - 优先使用API返回的boNum字段
         _bo_num = 0
-        for digit in re.findall(r"(\d+)", bo_raw_name):
-            _bo_num = int(digit)
-            break
+        try:
+            _bo_num = int(gm.get("boNum") or 0)
+        except Exception:
+            pass
+        if _bo_num == 0:
+            for digit in re.findall(r"(\d+)", bo_raw_name):
+                _bo_num = int(digit)
+                break
         if _bo_num == 0:
             _bo_num = len(games_detail) + 1
-        bo_name = bo_raw_name if bo_raw_name else f"G{_bo_num}"
+        bo_name = bo_raw_name if bo_raw_name else f"第{_bo_num}局"
         # 短标签用于Tab展示 G1/G2/G3
         bo_short = f"G{_bo_num}"
         bo_cover_imgs = _extract_images(gm.get("cover") or gm.get("image") or "")
@@ -2493,6 +2503,30 @@ def check_hupu_ratings(cfg, verbose=False):
             "ig_win": (ig_home and hs > aws) or (not ig_home and aws > hs),
             "found_at": now_cst.isoformat(),
         })
+
+    # ---------- 3.5 枚举兜底扫描 (BBS页面改为Next.js后HTML中无outBizNo) ----------
+    # 从已知最大outBizNo往后扫描,寻找IG新比赛
+    enum_found = []
+    existing_obns = {m.get("out_biz_no") for m in api_matches if m.get("out_biz_no")}
+    existing_obns.update({m.get("out_biz_no") for m in bbs_matches if m.get("out_biz_no")})
+    if known_obns:
+        max_known = max(int(o) for o in known_obns if o and o.isdigit())
+        scan_end = max_known + 80  # 一次最多扫描80个ID
+        for obn in range(max_known + 1, scan_end + 1):
+            sob = str(obn)
+            if sob in existing_obns:
+                continue
+            try:
+                detail = fetch_hupu_match_detail(sob)
+                if detail and detail.get("ig_players"):
+                    enum_found.append(detail)
+                    existing_obns.add(sob)
+                    if verbose:
+                        print(f"  枚举发现新比赛: {detail['home']} {detail['home_score']}-{detail['away_score']} {detail['away']} (outBizNo={sob})")
+            except Exception:
+                pass
+    if enum_found:
+        bbs_matches.extend(enum_found)
 
     # ---------- 4. 组装cur_matches ----------
     cur_matches = []
