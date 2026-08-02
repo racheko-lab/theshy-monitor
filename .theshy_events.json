@@ -1,5 +1,14 @@
 [
   {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-02T22:28:35+09:00",
+    "level": 92,
+    "is_active": true,
+    "timestamp": "2026-08-02T22:30:41.022364+09:00"
+  },
+  {
     "type": "hupu_rating",
     "kind": "hupu_rating",
     "title": "LNG 0-2 IG",
@@ -4766,17 +4775,5 @@
     "level": 294,
     "is_active": false,
     "timestamp": "2026-08-01T02:59:06.178809+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "game_type": "SOLORANKED",
-    "old_lp": 1781,
-    "new_lp": 1817,
-    "delta": 36,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-08-01T01:22:55.517068+09:00"
   }
 ]
