@@ -1445,14 +1445,277 @@ body {
   margin-right: 4px;
   opacity: 0.7;
 }
-.hupu-comment-item .c-likes {
-  font-style: normal;
+/* 选手行 - 紧凑 + 展开 */
+.hpu-player {
+  margin-bottom: 2px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: background 0.15s;
+}
+.hpu-player.mvp {
+  background: rgba(250, 204, 21, 0.05);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  margin-bottom: 4px;
+}
+.hpu-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.hpu-row:hover {
+  background: rgba(255,255,255,0.03);
+}
+.hpu-avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255,255,255,0.08);
+}
+.hpu-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hpu-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hpu-name-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.hpu-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hpu-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.hpu-kda b {
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+.hpu-dot { opacity: 0.4; }
+.hpu-votes { font-size: 10px; }
+
+.hpu-right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  min-width: 52px;
+}
+.hpu-score {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+.hpu-bar {
+  width: 52px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.hpu-bar > div {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+.hpu-champ-mini {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.hpu-champ-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hpu-chevron {
+  flex-shrink: 0;
   font-size: 9px;
-  color: rgba(251,191,36,0.6);
-  margin-left: 4px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  width: 14px;
+  text-align: center;
+}
+.hpu-player.open .hpu-chevron {
+  transform: rotate(180deg);
+  color: var(--text-secondary);
 }
 
-/* 队标 */
+/* 展开详情 */
+.hpu-detail {
+  display: none;
+  padding: 2px 10px 8px 50px;
+  font-size: 10.5px;
+  border-top: 1px dashed rgba(255,255,255,0.06);
+  margin-top: 2px;
+}
+.hpu-player.open .hpu-detail {
+  display: block;
+  animation: hpuFade 0.2s ease;
+}
+@keyframes hpuFade {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 500px; }
+}
+.hpu-hot-first {
+  color: #fbbf24;
+  font-style: italic;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+.hpu-hot-rest {
+  margin-top: 3px;
+  color: rgba(251, 191, 36, 0.65);
+  font-style: italic;
+  line-height: 1.4;
+  font-size: 10px;
+}
+.hpu-hot-rest div {
+  margin-top: 1px;
+}
+.hpu-stars-wrap {
+  margin-top: 6px;
+}
+.hpu-radar {
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.hpu-radar-title {
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.hpu-radar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.hpu-radar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 9px;
+}
+.hpu-radar-label {
+  color: var(--text-muted);
+  font-size: 9px;
+  margin-bottom: 1px;
+}
+.hpu-radar-vals {
+  display: flex;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+.hpu-radar-self { color: #4ade80; font-weight: 700; }
+.hpu-radar-opp { color: #f87171; }
+
+/* 战队块 */
+.hpu-team-block { margin-bottom: 8px; }
+.hpu-team-block:last-child { margin-bottom: 0; }
+.hpu-team-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.12);
+  border-radius: 5px;
+  margin-bottom: 4px;
+}
+.hpu-team-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: rgba(255,255,255,0.08);
+}
+.hpu-team-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.hpu-team-label .hpu-team-name { color: var(--brand); }
+.hpu-team-label.opp .hpu-team-name { color: var(--text-secondary); }
+
+/* 解说/教练 */
+.hpu-extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 5px;
+  margin-top: 4px;
+  font-size: 10px;
+}
+.hpu-extra-person {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.hpu-extra-person img {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.hpu-extra-person .name { color: var(--text-secondary); }
+.hpu-extra-person .score {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+/* 标签 */
+.hpu-label-tag {
+  display: inline-block;
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* 旧样式兼容(确保旧类不冲突) */
+.hupu-stars-wrap { margin-top: 6px; }
+.hpu-stars-wrap .hupu-stars { height: 4px; }
 .hupu-team-logo {
   width: 22px;
   height: 22px;
@@ -2783,19 +3046,25 @@ function renderHupu() {
   }
 
   // 选手行 - 支持多热评 + 聚合视图
+  // 选手行（紧凑版 - 核心信息始终可见,细节展开显示）
   function playerRow(p, isMvp) {
     const avatar = safeImg(p.avatar, 'hupu-avatar', p.name);
     const champ = p.champions && p.champions.length ? safeImg(p.champions[0], 'hupu-champ', '') : '';
     const extraChamps = (p.champions && p.champions.length > 1)
       ? `<span class="hupu-champs-more">${p.champions.slice(1).map(c=>safeImg(c,'','')).join('')}</span>` : '';
-    // 多条热评(总评视图按点赞排序,最多3条)
+
+    // 热评(总评视图按点赞排序,最多3条)
     const hots = (p.hot_comments && p.hot_comments.length) ? p.hot_comments.slice(0, 3) : (p.hot_comment ? [p.hot_comment] : []);
-    const hotHtml = hots.length ? `<div class="hupu-comments-list">${hots.map(h => {
-      if (!h || !h.content) return '';
-      const boTag = h.bo_label ? `<span class="c-bo">${escHtml(h.bo_label)}</span>` : '';
-      const likes = (h.likes && h.likes > 100) ? `<span class="c-likes">${h.likes}赞</span>` : '';
-      return `<div class="hupu-comment-item">${boTag}"${escHtml(h.content)}"${likes}</div>`;
-    }).join('')}</div>` : '';
+    let hotHtml = '';
+    if (hots.length) {
+      const first = hots[0];
+      const rest = hots.slice(1);
+      hotHtml = `<div class="hpu-hot-first">${first.content?`"${escHtml(first.content)}"`:''}${first.likes>50?` <span class="c-likes">${first.likes}</span>`:''}</div>`;
+      if (rest.length) {
+        hotHtml += `<div class="hpu-hot-rest">${rest.map(h=>h.content?`<div>"${escHtml(h.content)}"</div>`:'').join('')}</div>`;
+      }
+    }
+
     // 星级分布条
     let starsHtml = '';
     if (p.score_dist && p.score_dist_total > 0) {
@@ -2812,7 +3081,8 @@ function renderHupu() {
         return `<span class="${s.k}" style="width:${pct}%" title="${s.k.slice(1)}星:${s.v}人"></span>`;
       }).join('')}</div>`;
     }
-    // 对位雷达数据(只给每队最高分选手展示,避免页面过长)
+
+    // 对位雷达数据
     let radarHtml = '';
     if (isMvp && p.best_radar && p.best_radar.self && p.best_radar.opponent) {
       const rs = p.best_radar.self.stats, ro = p.best_radar.opponent.stats;
@@ -2826,54 +3096,67 @@ function renderHupu() {
         {l:'死亡', s:rs.death.real,  o:ro.death.real},
       ];
       radarHtml = `<div class="hupu-radar">
-        <div style="grid-column:1/-1;display:flex;justify-content:space-between;opacity:.5;font-size:8px;margin-bottom:2px;">
-          <span>对位 ${escHtml(opp.name)} (${opp.score})</span>
-          <span style="color:#4ade80">● 我方</span><span style="color:#f87171">● 对方</span>
-        </div>
+        <div class="hupu-radar-title">对位 ${escHtml(opp.name)} <span style="color:#4ade80">●我方</span> <span style="color:#f87171">●对方</span></div>
+        <div class="hupu-radar-grid">
         ${items.map(it=>`<div class="hupu-radar-item">
           <span class="hupu-radar-label">${it.l}</span>
           <span class="hupu-radar-vals">
             <span class="hupu-radar-self">${it.s}</span>
-            <span class="hupu-radar-vs">vs</span>
             <span class="hupu-radar-opp">${it.o}</span>
           </span>
         </div>`).join('')}
+        </div>
       </div>`;
     }
+
     const scoreVal = (p.avg !== undefined && p.avg !== null) ? p.avg : p.score;
     const votesVal = p.total_count !== undefined ? p.total_count : (p.votes||0);
     const gamesN = p.games_played || 0;
-    return `<div class="hupu-player-row${isMvp?' mvp':''}">
-      <div class="hupu-avatar-wrap">${avatar}${champ}</div>
-      <div class="hupu-player-mid">
-        <div class="hupu-player-top">
-          <span class="hupu-player-name">${escHtml(p.name)}</span>
-          ${labelTags(p.labels)}
-          ${extraChamps}
+    const hasDetail = !!(hotHtml || starsHtml || radarHtml || p.labels?.length);
+
+    return `<div class="hpu-player${isMvp?' mvp':''}">
+      <!-- 紧凑行 - 始终可见 -->
+      <div class="hpu-row" ${hasDetail?`onclick="this.parentElement.classList.toggle('open')"`:''}>
+        <div class="hpu-avatar">${avatar}</div>
+        <div class="hpu-main">
+          <div class="hpu-name-row">
+            <span class="hpu-name">${escHtml(p.name)}</span>
+            ${labelTags(p.labels)}
+          </div>
+          <div class="hpu-stat-row">
+            <span class="hpu-kda">KDA <b>${p.kda||'-'}</b></span>
+            <span class="hpu-dot">·</span>
+            <span class="hpu-votes">${fmtVotes(votesVal)}评${gamesN>1?`·${gamesN}局`:''}</span>
+          </div>
         </div>
-        <div class="hupu-player-sub">
-          <span class="kda">${p.kda||'-'}</span>
-          <span class="votes">${fmtVotes(votesVal)}人评</span>
-          ${gamesN>1?`<span class="votes">${gamesN}局</span>`:''}
+        <div class="hpu-right">
+          <div class="hpu-score ${scoreColorClass(scoreVal)}">${scoreVal?scoreVal.toFixed(1):'-'}</div>
+          <div class="hpu-bar"><div class="${barColorClass(scoreVal)}" style="width:${scoreVal?barWidth(scoreVal):'0%'}"></div></div>
         </div>
+        ${champ?`<div class="hpu-champ-mini">${champ}</div>`:''}
+        ${extraChamps}
+        ${hasDetail?`<div class="hpu-chevron">▾</div>`:''}
+      </div>
+      ${hasDetail ? `
+      <!-- 展开详情 -->
+      <div class="hpu-detail">
         ${hotHtml}
-      </div>
-      <div class="hupu-player-right">
-        <div class="hupu-player-score-big ${scoreColorClass(scoreVal)}">${scoreVal ? Number(scoreVal).toFixed(1) : '-'}</div>
-        <div class="hupu-player-bar-mini"><div class="${barColorClass(scoreVal)}" style="width:${scoreVal?barWidth(scoreVal):'0%'}"></div></div>
-        ${starsHtml}
-      </div>
-      ${radarHtml}
+        ${starsHtml ? `<div class="hpu-stars-wrap">${starsHtml}</div>` : ''}
+        ${radarHtml}
+      </div>` : ''}
     </div>`;
   }
 
-  // 单局选手行 - 使用单局数据(score/kda/champion单英雄/单条热评/该局雷达)
+  // 单局选手行（紧凑版 - 核心信息始终可见,细节展开显示）
   function gamePlayerRow(p, isMvp) {
     const avatar = safeImg(p.avatar, 'hupu-avatar', p.name);
     const champ = p.champion ? safeImg(p.champion, 'hupu-champ', '') : '';
     const hots = p.hot_comments || [];
     const hot = hots[0] || null;
-    const hotHtml = hot && hot.content ? `<div class="hupu-comments-list"><div class="hupu-comment-item">"${escHtml(hot.content)}"${hot.likes>100?`<span class="c-likes">${hot.likes}赞</span>`:''}</div></div>` : '';
+    let hotHtml = '';
+    if (hot && hot.content) {
+      hotHtml = `<div class="hpu-hot-first">"${escHtml(hot.content)}"${hot.likes>50?` <span class="c-likes">${hot.likes}</span>`:''}</div>`;
+    }
     let starsHtml = '';
     if (p.score_dist) {
       const sd = p.score_dist;
@@ -2902,39 +3185,46 @@ function renderHupu() {
         {l:'死亡', s:rs.death.real,  o:ro.death.real},
       ];
       radarHtml = `<div class="hupu-radar">
-        <div style="grid-column:1/-1;display:flex;justify-content:space-between;opacity:.5;font-size:8px;margin-bottom:2px;">
-          <span>对位 ${escHtml(opp.name)} (${opp.score})</span>
-          <span style="color:#4ade80">● 我方</span><span style="color:#f87171">● 对方</span>
-        </div>
+        <div class="hupu-radar-title">对位 ${escHtml(opp.name)} <span style="color:#4ade80">●我方</span> <span style="color:#f87171">●对方</span></div>
+        <div class="hupu-radar-grid">
         ${items.map(it=>`<div class="hupu-radar-item">
           <span class="hupu-radar-label">${it.l}</span>
           <span class="hupu-radar-vals">
             <span class="hupu-radar-self">${it.s}</span>
-            <span class="hupu-radar-vs">vs</span>
             <span class="hupu-radar-opp">${it.o}</span>
           </span>
         </div>`).join('')}
+        </div>
       </div>`;
     }
-    return `<div class="hupu-player-row${isMvp?' mvp':''}">
-      <div class="hupu-avatar-wrap">${avatar}${champ}</div>
-      <div class="hupu-player-mid">
-        <div class="hupu-player-top">
-          <span class="hupu-player-name">${escHtml(p.name)}</span>
-          ${labelTags(p.labels)}
+    const hasDetail = !!(hotHtml || starsHtml || radarHtml || (p.labels && p.labels.length));
+    return `<div class="hpu-player${isMvp?' mvp':''}">
+      <div class="hpu-row" ${hasDetail?`onclick="this.parentElement.classList.toggle('open')"`:''}>
+        <div class="hpu-avatar">${avatar}</div>
+        <div class="hpu-main">
+          <div class="hpu-name-row">
+            <span class="hpu-name">${escHtml(p.name)}</span>
+            ${labelTags(p.labels)}
+          </div>
+          <div class="hpu-stat-row">
+            <span class="hpu-kda">KDA <b>${p.kda||'-'}</b></span>
+            <span class="hpu-dot">·</span>
+            <span class="hpu-votes">${fmtVotes(p.votes||0)}评</span>
+          </div>
         </div>
-        <div class="hupu-player-sub">
-          <span class="kda">${p.kda||'-'}</span>
-          <span class="votes">${fmtVotes(p.votes||0)}人评</span>
+        <div class="hpu-right">
+          <div class="hpu-score ${scoreColorClass(p.score)}">${p.score?p.score.toFixed(1):'-'}</div>
+          <div class="hpu-bar"><div class="${barColorClass(p.score)}" style="width:${p.score?barWidth(p.score):'0%'}"></div></div>
         </div>
+        ${champ?`<div class="hpu-champ-mini">${champ}</div>`:''}
+        ${hasDetail?`<div class="hpu-chevron">▾</div>`:''}
+      </div>
+      ${hasDetail ? `
+      <div class="hpu-detail">
         ${hotHtml}
-      </div>
-      <div class="hupu-player-right">
-        <div class="hupu-player-score-big ${scoreColorClass(p.score)}">${p.score?Number(p.score).toFixed(1):'-'}</div>
-        <div class="hupu-player-bar-mini"><div class="${barColorClass(p.score)}" style="width:${p.score?barWidth(p.score):'0%'}"></div></div>
-        ${starsHtml}
-      </div>
-      ${radarHtml}
+        ${starsHtml ? `<div class="hpu-stars-wrap">${starsHtml}</div>` : ''}
+        ${radarHtml}
+      </div>` : ''}
     </div>`;
   }
 
@@ -2954,23 +3244,24 @@ function renderHupu() {
   function teamBlock(players, label, logo, isIg, teamWin, coaches) {
     if (!players || !players.length) return '';
     const sorted = [...players].sort((a,b) => b.avg - a.avg);
-    const badge = teamWin ? '<span class="win-badge w">胜</span>' : '<span class="win-badge l">负</span>';
-    const logoHtml = logo ? safeImg(logo, 'hupu-team-logo', label) : '';
+    const badge = teamWin ? 'W' : 'L';
+    const logoHtml = logo ? safeImg(logo, 'hpu-team-logo', label) : '';
     const coachHtml = (coaches && coaches.length) ? `
-      <div class="hupu-extra-section" style="margin-top:6px;">
-        <div class="hupu-extra-title">教练</div>
-        <div class="hupu-extra-row">
-          ${coaches.map(c=>`
-            <div class="hupu-extra-person">
-              ${safeImg(c.avatar,'','')}
-              <span class="name">${escHtml(c.name.replace(/^教练\s*/,''))}</span>
-              <span class="score-mini ${scoreColorClass(c.avg)}">${c.avg?c.avg.toFixed(1):'-'}</span>
-            </div>
-          `).join('')}
-        </div>
+      <div class="hpu-extras">
+        ${coaches.map(c=>`
+          <div class="hpu-extra-person">
+            ${safeImg(c.avatar,'','')}
+            <span class="name">${escHtml(c.name.replace(/^教练\s*/,''))}</span>
+            <span class="score ${scoreColorClass(c.avg)}">${c.avg?c.avg.toFixed(1):'-'}</span>
+          </div>
+        `).join('')}
       </div>` : '';
-    return `<div class="hupu-team-block">
-      <div class="hupu-team-label ${isIg?'ig':'opp'}">${logoHtml}${badge} ${label}</div>
+    return `<div class="hpu-team-block">
+      <div class="hpu-team-head">
+        ${logoHtml}
+        <span class="hpu-team-name" style="${isIg?'color:var(--brand);':''}">${label}</span>
+        <span style="margin-left:auto;font-size:9px;color:${teamWin?'#4ade80':'#f87171'};font-weight:700;">${badge}</span>
+      </div>
       ${sorted.map((p,i) => playerRow(p, i===0 && p.avg >= 8)).join('')}
       ${coachHtml}
     </div>`;
@@ -2980,22 +3271,22 @@ function renderHupu() {
   function teamBlockGame(players, label, logo, isIg, teamWin, coaches, mvpId) {
     if (!players || !players.length) return '';
     const sorted = [...players].sort((a,b) => (b.score||0) - (a.score||0));
-    const logoHtml = logo ? safeImg(logo, 'hupu-team-logo', label) : '';
+    const logoHtml = logo ? safeImg(logo, 'hpu-team-logo', label) : '';
     const coachHtml = (coaches && coaches.length) ? `
-      <div class="hupu-extra-section" style="margin-top:6px;">
-        <div class="hupu-extra-title">教练</div>
-        <div class="hupu-extra-row">
-          ${coaches.map(c=>`
-            <div class="hupu-extra-person">
-              ${safeImg(c.avatar,'','')}
-              <span class="name">${escHtml((c.name||'').replace(/^教练\s*/,''))}</span>
-              <span class="score-mini ${scoreColorClass(c.score)}">${c.score?Number(c.score).toFixed(1):'-'}</span>
-            </div>
-          `).join('')}
-        </div>
+      <div class="hpu-extras">
+        ${coaches.map(c=>`
+          <div class="hpu-extra-person">
+            ${safeImg(c.avatar,'','')}
+            <span class="name">${escHtml((c.name||'').replace(/^教练\s*/,''))}</span>
+            <span class="score ${scoreColorClass(c.score)}">${c.score?Number(c.score).toFixed(1):'-'}</span>
+          </div>
+        `).join('')}
       </div>` : '';
-    return `<div class="hupu-team-block">
-      <div class="hupu-team-label ${isIg?'ig':'opp'}">${logoHtml} ${label}</div>
+    return `<div class="hpu-team-block">
+      <div class="hpu-team-head">
+        ${logoHtml}
+        <span class="hpu-team-name" style="${isIg?'color:var(--brand);':''}">${label}</span>
+      </div>
       ${sorted.map(p => gamePlayerRow(p, p.player_id === mvpId && (p.score||0) >= 8)).join('')}
       ${coachHtml}
     </div>`;
@@ -3035,18 +3326,16 @@ function renderHupu() {
   }
 
   const casterHtml = casters.length ? `
-    <div class="hupu-extra-section" style="margin-top:10px;">
-      <div class="hupu-extra-title">解说/主持评分</div>
-      <div class="hupu-extra-row">
-        ${casters.map(c=>`
-          <div class="hupu-extra-person">
-            ${safeImg(c.avatar,'','')}
-            <span class="name">${escHtml(c.name)}</span>
-            <span class="score-mini ${scoreColorClass(c.avg)}">${c.avg?c.avg.toFixed(1):'-'}</span>
-            <span class="mini-meta" style="color:var(--text-muted);font-size:9px;">${fmtVotes(c.total_count)}</span>
-          </div>
-        `).join('')}
-      </div>
+    <div style="font-size:10px;color:var(--text-secondary);font-weight:600;margin:10px 0 4px;">解说/主持评分</div>
+    <div class="hpu-extras">
+      ${casters.map(c=>`
+        <div class="hpu-extra-person">
+          ${safeImg(c.avatar,'','')}
+          <span class="name">${escHtml(c.name)}</span>
+          <span class="score ${scoreColorClass(c.avg)}">${c.avg?c.avg.toFixed(1):'-'}</span>
+          <span style="color:var(--text-muted);font-size:9px;">${fmtVotes(c.total_count)}</span>
+        </div>
+      `).join('')}
     </div>` : '';
 
   // 总评面板（聚合视图）
