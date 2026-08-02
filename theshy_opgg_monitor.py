@@ -1772,6 +1772,50 @@ def _extract_images(raw):
     return []
 
 
+def _normalize_champion_url(url):
+    """清洗英雄头像URL: 过滤非英雄头像, http升级https, 修复路径错误"""
+    if not url:
+        return ""
+    # 升级http为https
+    url = str(url).replace("http://p1.hoopchina.com.cn", "https://p1.hoopchina.com.cn")
+    url = str(url).replace("http://i1.hoopchina.com.cn", "https://i1.hoopchina.com.cn")
+    # 修复路径错误: champion/picxxx -> champion/pic/xxx
+    url = url.replace("/champion/pice", "/champion/pic/e")
+    url = url.replace("/champion/pic0", "/champion/pic/0")
+    url = url.replace("/champion/pic1", "/champion/pic/1")
+    url = url.replace("/champion/pic2", "/champion/pic/2")
+    url = url.replace("/champion/pic3", "/champion/pic/3")
+    url = url.replace("/champion/pic4", "/champion/pic/4")
+    url = url.replace("/champion/pic5", "/champion/pic/5")
+    url = url.replace("/champion/pic6", "/champion/pic/6")
+    url = url.replace("/champion/pic7", "/champion/pic/7")
+    url = url.replace("/champion/pic8", "/champion/pic/8")
+    url = url.replace("/champion/pic9", "/champion/pic/9")
+    url = url.replace("/champion/pica", "/champion/pic/a")
+    url = url.replace("/champion/picb", "/champion/pic/b")
+    url = url.replace("/champion/picc", "/champion/pic/c")
+    url = url.replace("/champion/picd", "/champion/pic/d")
+    url = url.replace("/champion/pice", "/champion/pic/e")
+    url = url.replace("/champion/picf", "/champion/pic/f")
+    # 只保留真正的英雄头像URL (gdc/lol/champion/pic/ 路径)
+    if "/gdc/lol/champion/pic/" in url:
+        return url
+    return ""
+
+
+def _extract_champion_images(raw):
+    """从auxiliaryPic提取英雄头像URL,过滤掉非英雄头像图片"""
+    images = _extract_images(raw)
+    result = []
+    seen = set()
+    for img in images:
+        cleaned = _normalize_champion_url(img)
+        if cleaned and cleaned not in seen:
+            seen.add(cleaned)
+            result.append(cleaned)
+    return result
+
+
 def _extract_labels(pij):
     """从infoJson提取label标签数组,如[{'text':'强势回归',...}]"""
     labels = pij.get("label")
@@ -1795,20 +1839,30 @@ def _extract_labels(pij):
     return result
 
 
-def _extract_hot_comments(n, limit=3):
-    """从node提取热评列表, 返回[{content, likes, user}] (最多limit条)"""
+def _extract_hot_comments(n, limit=20):
+    """从node提取热评列表, 返回[{content, likes, user}] (最多limit条)
+    虎扑API每个node通常只返回1条hotCommentModel(精选亮回复),
+    但保留较大limit以防API返回多条的情况
+    
+    去重逻辑: hotCommentModels和hottestComments可能包含同一条评论,
+    通过去除[图片]等附件标记后比较前50字符进行去重"""
+    def _clean_content(s):
+        """清理评论内容用于去重比较: 去除[图片]等附件标记"""
+        return re.sub(r'\[.[^\]]*\]', '', str(s or '')).strip()
+    
     results = []
     seen = set()
     hcm = n.get("hotCommentModels") or []
     if hcm and isinstance(hcm, list):
         for c in hcm:
             if isinstance(c, dict) and c.get("commentContent"):
-                key = str(c.get("commentContent", ""))[:50]
-                if key in seen:
+                raw = str(c.get("commentContent") or "")
+                key = _clean_content(raw)[:50]
+                if not key or key in seen:
                     continue
                 seen.add(key)
                 results.append({
-                    "content": str(c.get("commentContent") or ""),
+                    "content": raw,
                     "likes": int(c.get("lightCount") or 0),
                     "user": str(c.get("commentUserName") or ""),
                 })
@@ -1818,18 +1872,19 @@ def _extract_hot_comments(n, limit=3):
     if hc and isinstance(hc, list):
         for c in hc:
             if isinstance(c, str) and c:
-                key = c[:50]
-                if key in seen:
+                key = _clean_content(c)[:50]
+                if not key or key in seen:
                     continue
                 seen.add(key)
                 results.append({"content": c, "likes": 0, "user": ""})
             elif isinstance(c, dict) and c.get("commentContent"):
-                key = str(c.get("commentContent", ""))[:50]
-                if key in seen:
+                raw = str(c.get("commentContent") or "")
+                key = _clean_content(raw)[:50]
+                if not key or key in seen:
                     continue
                 seen.add(key)
                 results.append({
-                    "content": str(c.get("commentContent") or ""),
+                    "content": raw,
                     "likes": int(c.get("lightCount") or 0),
                     "user": str(c.get("commentUserName") or ""),
                 })
@@ -1995,14 +2050,17 @@ def fetch_hupu_match_detail(out_biz_no):
 
             avatar_list = _extract_images(n.get("image"))
             avatar = avatar_list[0] if avatar_list else ""
+            if avatar:
+                avatar = avatar.replace("http://p1.hoopchina.com.cn", "https://p1.hoopchina.com.cn")
+                avatar = avatar.replace("http://i1.hoopchina.com.cn", "https://i1.hoopchina.com.cn")
             avg = float(n.get("scoreAvg") or 0)
             votes = int(n.get("scorePersonCount") or 0)
             comments = int(n.get("commentCount") or 0)
             bg_color = str(n.get("bgColor") or _ij_val(pij, "bgColor", "") or "")
-            champion_list = _extract_images(_ij_val(pij, "auxiliaryPic", ""))
+            champion_list = _extract_champion_images(_ij_val(pij, "auxiliaryPic", ""))
             champion = champion_list[0] if champion_list else ""
             labels = _extract_labels(pij)
-            hot_comments = _extract_hot_comments(n, limit=3)
+            hot_comments = _extract_hot_comments(n, limit=20)
             position = str(_ij_val(pij, "position", "") or _ij_val(pij, "playerPosition", ""))
             # 星级分布 (1★=2分, 2★=4分, ... 5★=10分)
             _raw_sd = n.get("scoreDistribution") or {}
@@ -2192,15 +2250,21 @@ def fetch_hupu_match_detail(out_biz_no):
         else:
             kda_str = ""
             kda_ratio = 0
-        # 热评按点赞排序,取前5条
+        # 热评按点赞排序,最多取20条(覆盖BO3全部局的亮回复)
         all_hots = [h for h in stats.get("hot_comments", []) if h and h.get("content")]
         all_hots.sort(key=lambda x: x.get("likes", 0), reverse=True)
-        top_hots = all_hots[:5]
+        top_hots = all_hots[:20]
         best_hot = top_hots[0] if top_hots else None
         champs = []
         for c in stats["champions"]:
-            if c and c not in champs:
-                champs.append(c)
+            cleaned = _normalize_champion_url(c)
+            if cleaned and cleaned not in champs:
+                champs.append(cleaned)
+        # 头像URL也升级https
+        avatar = stats["avatar"] or ""
+        if avatar:
+            avatar = avatar.replace("http://p1.hoopchina.com.cn", "https://p1.hoopchina.com.cn")
+            avatar = avatar.replace("http://i1.hoopchina.com.cn", "https://i1.hoopchina.com.cn")
         sd = stats.get("score_dist") or {"s5":0,"s4":0,"s3":0,"s2":0,"s1":0}
         sd_total = sum(sd.values())
         return {
@@ -2214,7 +2278,7 @@ def fetch_hupu_match_detail(out_biz_no):
             "kills": stats["kills"],
             "deaths": stats["deaths"],
             "assists": stats["assists"],
-            "avatar": stats["avatar"],
+            "avatar": avatar,
             "bg_color": stats["bg_color"],
             "champions": champs,
             "labels": stats["labels"],
@@ -2858,9 +2922,11 @@ def main():
                 "last_check": bili_state.get("last_check", ""),
                 "notified_title": bili_state.get("notified_title", ""),
             }
+            hupu_matches = hupu_state.get("matches", [])
             combined["hupu_ratings"] = {
                 "team": hupu_state.get("team", HUPU_TEAM),
-                "matches": hupu_state.get("matches", []),
+                "matches": hupu_matches,
+                "latest_match": hupu_matches[0] if hupu_matches else None,
                 "last_check": hupu_state.get("last_check", ""),
             }
             combined["daily_stats"] = daily_stats

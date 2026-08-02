@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>TheShy 监控 v2026.08.01</title>
+<title>TheShy 监控 v2026.08.02</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1210,26 +1210,27 @@ body {
   display: block;
 }
 .hupu-champ {
-  position: absolute;
-  right: -2px;
-  bottom: -2px;
+  position: static;
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.1);
   object-fit: cover;
   background: rgba(0,0,0,0.4);
+  flex-shrink: 0;
 }
 .hupu-champs-more {
   display: inline-flex;
   gap: 2px;
   margin-left: 4px;
+  position: relative;
 }
 .hupu-champs-more img {
   width: 16px;
   height: 16px;
   border-radius: 4px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 .hupu-player-mid {
   min-width: 0;
@@ -1553,11 +1554,20 @@ body {
   overflow: hidden;
   flex-shrink: 0;
   border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  display: inline-block;
 }
 .hpu-champ-mini img {
-  width: 100%;
-  height: 100%;
+  width: 18px !important;
+  height: 18px !important;
   object-fit: cover;
+  position: static !important;
+  right: auto !important;
+  bottom: auto !important;
+  border-radius: 50%;
+  border: none !important;
+  background: none !important;
+  display: block;
 }
 .hpu-chevron {
   flex-shrink: 0;
@@ -1603,6 +1613,22 @@ body {
 }
 .hpu-hot-rest div {
   margin-top: 1px;
+}
+.c-likes {
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: normal;
+}
+.c-bo-tag {
+  display: inline-block;
+  padding: 0 4px;
+  margin-left: 4px;
+  font-size: 10px;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.15);
+  border-radius: 3px;
+  font-style: normal;
+  vertical-align: middle;
 }
 .hpu-stars-wrap {
   margin-top: 6px;
@@ -2371,10 +2397,28 @@ function showToast(msg) {
 // ============================================================
 // 数据获取
 // ============================================================
+function upgradeHttps(obj) {
+  /** 递归升级所有 http://hoopchina/hupu URL 为 https://，避免混合内容问题 */
+  if (typeof obj === 'string') {
+    return obj.replace(/http:\/\/((?:p\d+|i\d+|activity-static)\.hoopchina\.com\.cn)/g, 'https://$1');
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(upgradeHttps);
+  }
+  if (obj && typeof obj === 'object') {
+    const result = {};
+    for (const k of Object.keys(obj)) {
+      result[k] = upgradeHttps(obj[k]);
+    }
+    return result;
+  }
+  return obj;
+}
+
 async function fetchJson(url) {
   const r = await fetch(`${url}?t=${Date.now()}`, { cache: 'no-store' });
   if (!r.ok) throw new Error(`${r.status}`);
-  return r.json();
+  return upgradeHttps(await r.json());
 }
 
 let allData = null;
@@ -3032,6 +3076,8 @@ function renderHupu() {
 
   function safeImg(src, cls, alt) {
     if (!src) return '';
+    // 升级http为https，避免混合内容问题（全局替换所有hoopchina/hupu的http链接）
+    src = String(src).replace(/http:\/\/((?:p\d+|i\d+|activity-static)\.hoopchina\.com\.cn)/g, 'https://$1');
     return `<img class="${cls}" src="${escHtml(src)}" alt="${escHtml(alt||'')}" onerror="this.style.display='none'" referrerpolicy="no-referrer" loading="lazy">`;
   }
 
@@ -3049,19 +3095,20 @@ function renderHupu() {
   // 选手行（紧凑版 - 核心信息始终可见,细节展开显示）
   function playerRow(p, isMvp) {
     const avatar = safeImg(p.avatar, 'hupu-avatar', p.name);
-    const champ = p.champions && p.champions.length ? safeImg(p.champions[0], 'hupu-champ', '') : '';
+    const champ = p.champions && p.champions.length ? safeImg(p.champions[0], '', '') : '';
     const extraChamps = (p.champions && p.champions.length > 1)
       ? `<span class="hupu-champs-more">${p.champions.slice(1).map(c=>safeImg(c,'','')).join('')}</span>` : '';
 
-    // 热评(总评视图按点赞排序,最多3条)
-    const hots = (p.hot_comments && p.hot_comments.length) ? p.hot_comments.slice(0, 3) : (p.hot_comment ? [p.hot_comment] : []);
+    // 热评(总评视图显示所有聚合热评,最多20条,按点赞数排序)
+    const hotRaw = (p.hot_comments && p.hot_comments.length) ? p.hot_comments : (p.hot_comment ? [p.hot_comment] : []);
+    const hots = hotRaw.slice(0, 20);
     let hotHtml = '';
     if (hots.length) {
       const first = hots[0];
       const rest = hots.slice(1);
-      hotHtml = `<div class="hpu-hot-first">${first.content?`"${escHtml(first.content)}"`:''}${first.likes>50?` <span class="c-likes">${first.likes}</span>`:''}</div>`;
+      hotHtml = `<div class="hpu-hot-first">${first.content?`"${escHtml(first.content)}"`:''}${first.likes>50?` <span class="c-likes">${first.likes}</span>`:''}${first.bo_label?` <span class="c-bo-tag">${escHtml(first.bo_label)}</span>`:''}</div>`;
       if (rest.length) {
-        hotHtml += `<div class="hpu-hot-rest">${rest.map(h=>h.content?`<div>"${escHtml(h.content)}"</div>`:'').join('')}</div>`;
+        hotHtml += `<div class="hpu-hot-rest">${rest.map(h=>h.content?`<div>"${escHtml(h.content)}"${h.likes>10?` <span class="c-likes">${h.likes}</span>`:''}${h.bo_label?` <span class="c-bo-tag">${escHtml(h.bo_label)}</span>`:''}</div>`:'').join('')}</div>`;
       }
     }
 
@@ -3150,12 +3197,14 @@ function renderHupu() {
   // 单局选手行（紧凑版 - 核心信息始终可见,细节展开显示）
   function gamePlayerRow(p, isMvp) {
     const avatar = safeImg(p.avatar, 'hupu-avatar', p.name);
-    const champ = p.champion ? safeImg(p.champion, 'hupu-champ', '') : '';
-    const hots = p.hot_comments || [];
-    const hot = hots[0] || null;
+    const champ = p.champion ? safeImg(p.champion, '', '') : '';
+    const hots = (p.hot_comments && p.hot_comments.length) ? p.hot_comments.slice(0, 20) : [];
     let hotHtml = '';
-    if (hot && hot.content) {
-      hotHtml = `<div class="hpu-hot-first">"${escHtml(hot.content)}"${hot.likes>50?` <span class="c-likes">${hot.likes}</span>`:''}</div>`;
+    if (hots.length) {
+      hotHtml = `<div class="hpu-hot-first">${hots[0].content?`"${escHtml(hots[0].content)}"`:''}${hots[0].likes>50?` <span class="c-likes">${hots[0].likes}</span>`:''}</div>`;
+      if (hots.length > 1) {
+        hotHtml += `<div class="hpu-hot-rest">${hots.slice(1).map(h=>h.content?`<div>"${escHtml(h.content)}"${h.likes>10?` <span class="c-likes">${h.likes}</span>`:''}</div>`:'').join('')}</div>`;
+      }
     }
     let starsHtml = '';
     if (p.score_dist) {
@@ -3365,7 +3414,7 @@ function renderHupu() {
       const oppMvpId = oppPs.length ? oppPs.reduce((a,b)=>((b.score||0)>(a.score||0)?b:a)).player_id : null;
       const gIgCoaches = (g.coaches||[]).filter(c => c.team_id && String(c.team_id)===String(igTid));
       const gOppCoaches = (g.coaches||[]).filter(c => c.team_id && String(c.team_id)!==String(igTid));
-      const coverImg = g.cover ? `<img src="${g.cover}" class="bo-cover" alt="" loading="lazy" onerror="this.style.display='none'">` : '';
+      const coverImg = g.cover ? `<img src="${String(g.cover).replace(/http:\/\/((?:p\d+|i\d+|activity-static)\.hoopchina\.com\.cn)/g,'https://$1')}" class="bo-cover" alt="" loading="lazy" onerror="this.style.display='none'" referrerpolicy="no-referrer">` : '';
       const totalG = igPs.reduce((s,p)=>s+(p.votes||0),0) + oppPs.reduce((s,p)=>s+(p.votes||0),0);
       gamePanelsArr.push(`
         <div class="hupu-teams">
