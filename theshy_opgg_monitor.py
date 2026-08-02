@@ -1795,29 +1795,47 @@ def _extract_labels(pij):
     return result
 
 
-def _extract_hot_comment(n):
-    """从node提取热评,返回{content, likes, user}或None"""
+def _extract_hot_comments(n, limit=3):
+    """从node提取热评列表, 返回[{content, likes, user}] (最多limit条)"""
+    results = []
+    seen = set()
     hcm = n.get("hotCommentModels") or []
     if hcm and isinstance(hcm, list):
         for c in hcm:
             if isinstance(c, dict) and c.get("commentContent"):
-                return {
+                key = str(c.get("commentContent", ""))[:50]
+                if key in seen:
+                    continue
+                seen.add(key)
+                results.append({
                     "content": str(c.get("commentContent") or ""),
                     "likes": int(c.get("lightCount") or 0),
                     "user": str(c.get("commentUserName") or ""),
-                }
+                })
+                if len(results) >= limit:
+                    return results
     hc = n.get("hottestComments") or []
     if hc and isinstance(hc, list):
         for c in hc:
             if isinstance(c, str) and c:
-                return {"content": c, "likes": 0, "user": ""}
-            if isinstance(c, dict) and c.get("commentContent"):
-                return {
+                key = c[:50]
+                if key in seen:
+                    continue
+                seen.add(key)
+                results.append({"content": c, "likes": 0, "user": ""})
+            elif isinstance(c, dict) and c.get("commentContent"):
+                key = str(c.get("commentContent", ""))[:50]
+                if key in seen:
+                    continue
+                seen.add(key)
+                results.append({
                     "content": str(c.get("commentContent") or ""),
                     "likes": int(c.get("lightCount") or 0),
                     "user": str(c.get("commentUserName") or ""),
-                }
-    return None
+                })
+            if len(results) >= limit:
+                return results
+    return results
 
 
 def _fetch_radar(match_id, player_id, bo_num):
@@ -1935,18 +1953,19 @@ def fetch_hupu_match_detail(out_biz_no):
     for gm in games_meta:
         bo_no = gm.get("outBizNo")
         bo_type = gm.get("outBizType", "lol_bo")
-        bo_name = str(gm.get("selfName") or "")
-        if not bo_name and len(games_meta) > 1:
-            bo_name = f"第{len(games_detail)+1}局"
-        bo_cover_imgs = _extract_images(gm.get("cover") or gm.get("image") or "")
-        bo_cover = bo_cover_imgs[0] if bo_cover_imgs else ""
+        bo_raw_name = str(gm.get("selfName") or "")
         # 推断bo序号
         _bo_num = 0
-        for digit in re.findall(r"(\d+)", bo_name):
+        for digit in re.findall(r"(\d+)", bo_raw_name):
             _bo_num = int(digit)
             break
         if _bo_num == 0:
             _bo_num = len(games_detail) + 1
+        bo_name = bo_raw_name if bo_raw_name else f"G{_bo_num}"
+        # 短标签用于Tab展示 G1/G2/G3
+        bo_short = f"G{_bo_num}"
+        bo_cover_imgs = _extract_images(gm.get("cover") or gm.get("image") or "")
+        bo_cover = bo_cover_imgs[0] if bo_cover_imgs else ""
 
         if not bo_no:
             continue
@@ -1983,7 +2002,7 @@ def fetch_hupu_match_detail(out_biz_no):
             champion_list = _extract_images(_ij_val(pij, "auxiliaryPic", ""))
             champion = champion_list[0] if champion_list else ""
             labels = _extract_labels(pij)
-            hot = _extract_hot_comment(n)
+            hot_comments = _extract_hot_comments(n, limit=3)
             position = str(_ij_val(pij, "position", "") or _ij_val(pij, "playerPosition", ""))
             # 星级分布 (1★=2分, 2★=4分, ... 5★=10分)
             _raw_sd = n.get("scoreDistribution") or {}
@@ -2023,7 +2042,7 @@ def fetch_hupu_match_detail(out_biz_no):
                     "score": avg, "votes": votes, "comments": comments,
                     "kills": kills, "deaths": deaths, "assists": assists,
                     "kda": f"{kills}/{deaths}/{assists}",
-                    "team_id": tid, "labels": labels, "hot_comment": hot,
+                    "team_id": tid, "labels": labels, "hot_comments": hot_comments,
                     "bg_color": bg_color, "position": position,
                     "score_dist": score_dist,
                     "radar": radar,
@@ -2062,8 +2081,12 @@ def fetch_hupu_match_detail(out_biz_no):
                 for lab in labels:
                     if lab["text"] not in [l["text"] for l in player_agg[name]["labels"]]:
                         player_agg[name]["labels"].append(lab)
-                if hot:
-                    player_agg[name]["hot_comments"].append(hot)
+                # 把本局热评加入汇总,附带局数标签
+                _bo_label = bo_name or f"G{_bo_num}"
+                for hc in hot_comments:
+                    hc_copy = dict(hc)
+                    hc_copy["bo_label"] = _bo_label
+                    player_agg[name]["hot_comments"].append(hc_copy)
                 if position and not player_agg[name]["position"]:
                     player_agg[name]["position"] = position
                 # 选一个最高评分局的雷达作为代表
@@ -2076,7 +2099,7 @@ def fetch_hupu_match_detail(out_biz_no):
                 gc = {
                     "name": name, "avatar": avatar, "score": avg, "votes": votes,
                     "comments": comments, "team_id": tid, "labels": labels,
-                    "hot_comment": hot, "bg_color": bg_color,
+                    "hot_comments": hot_comments, "bg_color": bg_color,
                 }
                 game_coaches.append(gc)
                 ck = f"__coach__{name}__{tid}"
@@ -2098,8 +2121,11 @@ def fetch_hupu_match_detail(out_biz_no):
                 for lab in labels:
                     if lab["text"] not in [l["text"] for l in player_agg[ck]["labels"]]:
                         player_agg[ck]["labels"].append(lab)
-                if hot:
-                    player_agg[ck]["hot_comments"].append(hot)
+                _bo_label = bo_name or f"G{_bo_num}"
+                for hc in hot_comments:
+                    hc_copy = dict(hc)
+                    hc_copy["bo_label"] = _bo_label
+                    player_agg[ck]["hot_comments"].append(hc_copy)
 
             elif ptype == "bpHero":
                 tid = str(_ij_val(pij, "teamId", ""))
@@ -2113,7 +2139,7 @@ def fetch_hupu_match_detail(out_biz_no):
                 gc = {
                     "name": name, "avatar": avatar, "score": avg, "votes": votes,
                     "comments": comments, "labels": labels,
-                    "hot_comment": hot, "bg_color": bg_color,
+                    "hot_comments": hot_comments, "bg_color": bg_color,
                 }
                 game_casters.append(gc)
                 if is_caster_like:
@@ -2136,14 +2162,21 @@ def fetch_hupu_match_detail(out_biz_no):
                     for lab in labels:
                         if lab["text"] not in [l["text"] for l in player_agg[ck]["labels"]]:
                             player_agg[ck]["labels"].append(lab)
-                    if hot:
-                        player_agg[ck]["hot_comments"].append(hot)
+                    _bo_label = bo_name or f"G{_bo_num}"
+                    for hc in hot_comments:
+                        hc_copy = dict(hc)
+                        hc_copy["bo_label"] = _bo_label
+                        player_agg[ck]["hot_comments"].append(hc_copy)
 
         game_bpHeroes.sort(key=lambda x: x.get("votes", 0), reverse=True)
         games_detail.append({
             "bo_no": str(bo_no),
-            "bo_name": bo_name or f"第{len(games_detail)+1}局",
+            "bo_index": _bo_num,
+            "bo_name": bo_name,
+            "bo_short": bo_short,
             "cover": bo_cover,
+            "home_tid": home_tid,
+            "away_tid": away_tid,
             "players": game_players,
             "coaches": game_coaches,
             "casters": game_casters,
@@ -2159,10 +2192,11 @@ def fetch_hupu_match_detail(out_biz_no):
         else:
             kda_str = ""
             kda_ratio = 0
-        best_hot = None
-        for h in stats["hot_comments"]:
-            if best_hot is None or h.get("likes", 0) > best_hot.get("likes", 0):
-                best_hot = h
+        # 热评按点赞排序,取前5条
+        all_hots = [h for h in stats.get("hot_comments", []) if h and h.get("content")]
+        all_hots.sort(key=lambda x: x.get("likes", 0), reverse=True)
+        top_hots = all_hots[:5]
+        best_hot = top_hots[0] if top_hots else None
         champs = []
         for c in stats["champions"]:
             if c and c not in champs:
@@ -2185,6 +2219,7 @@ def fetch_hupu_match_detail(out_biz_no):
             "champions": champs,
             "labels": stats["labels"],
             "hot_comment": best_hot,
+            "hot_comments": top_hots,
             "games_played": stats["games_played"],
             "position": stats.get("position", ""),
             "kind": kind,
@@ -2233,6 +2268,7 @@ def fetch_hupu_match_detail(out_biz_no):
         "home_score": home_score, "away_score": away_score,
         "home_logo": home_logo, "away_logo": away_logo,
         "home_team_id": home_tid, "away_team_id": away_tid,
+        "ig_tid": home_tid if is_ig_home else away_tid,
         "win_team_id": win_tid,
         "cover": cover,
         "match_time": match_time,
@@ -2439,6 +2475,9 @@ def check_hupu_ratings(cfg, verbose=False):
             "cover": m.get("cover", ""),
             "home_score": hs,
             "away_score": aws,
+            "home_team_id": m.get("home_team_id", ""),
+            "away_team_id": m.get("away_team_id", ""),
+            "ig_tid": m.get("ig_tid", ""),
             "ig_win": ig_win,
             "ig_home": ig_home,
             "opponent": m.get("opponent", away if ig_home else home),
