@@ -1,5 +1,31 @@
 [
   {
+    "type": "became_active",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-03T01:38:11+09:00",
+    "level": 92,
+    "timestamp": "2026-08-03T01:38:22.114547+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-03T01:38:11+09:00",
+    "level": 92,
+    "is_active": true,
+    "timestamp": "2026-08-03T01:38:22.109566+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-03T01:10:17+09:00",
+    "level": 294,
+    "is_active": false,
+    "timestamp": "2026-08-03T01:38:22.104569+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -4728,31 +4754,5 @@
     "level": 294,
     "is_active": false,
     "timestamp": "2026-08-01T05:55:09.244645+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-01T05:47:23+09:00",
-    "level": 92,
-    "is_active": true,
-    "timestamp": "2026-08-01T05:49:26.626583+09:00"
-  },
-  {
-    "type": "became_active",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-01T05:47:03+09:00",
-    "level": 294,
-    "timestamp": "2026-08-01T05:49:25.751806+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-01T05:47:03+09:00",
-    "level": 294,
-    "is_active": true,
-    "timestamp": "2026-08-01T05:49:25.750833+09:00"
   }
 ]
