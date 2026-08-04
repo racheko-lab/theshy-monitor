@@ -89,6 +89,7 @@ HUPU_SCORE_API_HEADERS = {
 HUPU_SCORE_SELF_URL = "https://games.mobileapi.hupu.com/1/8.0.99/bplcommentapi/bpl/score_tree/getSelfByBizKey"
 HUPU_SCORE_SUB_URL = "https://games.mobileapi.hupu.com/1/8.0.99/bplcommentapi/bpl/score_tree/getCurAndSubNodeByBizKey"
 HUPU_PLAYER_ALIGNMENT_URL = "https://games.mobileapi.hupu.com/1/8.0.99/egallapi/player/alignment"
+HUPU_SCHEDULE_URL = "https://match-api.hupu.com/1/8.2.10/matchallapi/bff/standard/getScheduleListByTagForH5"
 
 # 虎扑评分API - 已知IG比赛outBizNo列表 (用于初次数据填充, 爬虫会自动发现新比赛)
 KNOWN_IG_MATCH_BIZNOS = ["3692", "3678", "3612", "3610", "3606", "3552", "3545", "3534", "3530", "3512", "3506"]
@@ -2386,6 +2387,106 @@ def _find_outbizno_from_bbs_post(post_url):
     return None
 
 
+# ============================================================
+# 虎扑赛程 - 获取IG下一场比赛和近期赛程
+# ============================================================
+def fetch_ig_schedule(verbose=False):
+    """从虎扑赛程API获取IG近期赛程, 返回下一场比赛和未来赛程列表"""
+    now_cst = datetime.now(CST)
+    try:
+        r = requests.get(HUPU_SCHEDULE_URL, params={
+            "businessType": "common",
+            "businessId": "lol",
+            "datasource": "navigation",
+        }, headers=HUPU_SCORE_API_HEADERS, timeout=15)
+        data = r.json()
+        days = (data.get("result") or {}).get("dayGameData", [])
+    except Exception as e:
+        if verbose:
+            print(f"  虎扑赛程获取失败: {e}")
+        return {"next_match": None, "upcoming": [], "last_check": now_cst.isoformat()}
+
+    upcoming = []
+    next_match = None
+
+    for day in days:
+        day_str = day.get("dayTime", "")
+        date_block = day.get("dateBlock", "")
+        for m in day.get("matchData", []):
+            teams_info = (m.get("againstInfo") or {}).get("memberInfos") or []
+            team_names = [t.get("memberName", "") for t in teams_info]
+            team_logos = [t.get("memberLogo", "") for t in teams_info]
+            team_ids = [t.get("memberId", "") for t in teams_info]
+
+            if HUPU_TEAM not in team_names:
+                continue
+
+            status = m.get("matchStatus", "")
+            ts_raw = m.get("matchStartTimeStamp", "0")
+            try:
+                match_ts = int(ts_raw)
+            except (ValueError, TypeError):
+                match_ts = 0
+            match_dt = datetime.fromtimestamp(match_ts / 1000, tz=CST) if match_ts else None
+
+            ig_idx = team_names.index(HUPU_TEAM)
+            opp_idx = 1 - ig_idx if len(team_names) == 2 else -1
+            opp_name = team_names[opp_idx] if opp_idx >= 0 else ""
+            opp_logo = team_logos[opp_idx] if opp_idx >= 0 else ""
+            ig_logo = team_logos[ig_idx] if ig_idx < len(team_logos) else ""
+
+            score_a = teams_info[0].get("memberBaseScore") if teams_info else ""
+            score_b = teams_info[1].get("memberBaseScore") if len(teams_info) > 1 else ""
+
+            out_biz = (m.get("scoreItemKey") or {}).get("outBizNo", "")
+            match_info = {
+                "home": team_names[0] if len(team_names) >= 1 else "",
+                "away": team_names[1] if len(team_names) >= 2 else "",
+                "home_logo": team_logos[0] if len(team_logos) >= 1 else "",
+                "away_logo": team_logos[1] if len(team_logos) >= 2 else "",
+                "ig_side": "home" if ig_idx == 0 else "away",
+                "opponent": opp_name,
+                "opponent_logo": opp_logo,
+                "ig_logo": ig_logo,
+                "home_score": score_a,
+                "away_score": score_b,
+                "status": status,
+                "status_desc": m.get("matchStatusDesc", ""),
+                "match_time": match_ts,
+                "date_str": day_str,
+                "date_block": date_block,
+                "time_str": match_dt.strftime("%H:%M") if match_dt else "",
+                "weekday": match_dt.strftime("%A") if match_dt else "",
+                "stage": m.get("matchName") or m.get("matchIntroduction", ""),
+                "out_biz_no": out_biz,
+                "is_live": status == "LIVE",
+                "is_completed": status == "COMPLETED",
+                "is_upcoming": status not in ("COMPLETED",),
+            }
+
+            # 只取未来/进行中的比赛
+            if status != "COMPLETED" and match_ts:
+                match_info["countdown_hours"] = round((match_dt - now_cst).total_seconds() / 3600, 1)
+                upcoming.append(match_info)
+                if next_match is None and match_dt >= now_cst:
+                    next_match = match_info
+
+    # 按时间排序
+    upcoming.sort(key=lambda x: x.get("match_time", 0))
+
+    if verbose:
+        if next_match:
+            print(f"  虎扑赛程: 下一场 {next_match['home']} vs {next_match['away']} @ {next_match['date_block']} {next_match['time_str']}")
+        else:
+            print(f"  虎扑赛程: 暂无IG即将到来的比赛 (共获取{len(upcoming)}场未来赛程)")
+
+    return {
+        "next_match": next_match,
+        "upcoming": upcoming[:5],  # 只保留最近5场
+        "last_check": now_cst.isoformat(),
+    }
+
+
 def check_hupu_ratings(cfg, verbose=False):
     """使用虎扑真实评分API + BBS帖子抓取获取IG比赛数据"""
     notifications_sent = []
@@ -2975,6 +3076,8 @@ def main():
 
             # 虎扑LPL比赛评分
             hupu_notifs, hupu_state = check_hupu_ratings(cfg, verbose=args.verbose)
+            # 获取IG赛程预告
+            hupu_schedule = fetch_ig_schedule(verbose=args.verbose)
             for kind, post_title in hupu_notifs:
                 print(f"  🏆 虎扑评分提醒已发送: {post_title}")
                 append_event({
@@ -3000,6 +3103,9 @@ def main():
                 "team": hupu_state.get("team", HUPU_TEAM),
                 "matches": hupu_matches,
                 "latest_match": hupu_matches[0] if hupu_matches else None,
+                "schedule": hupu_schedule,
+                "next_match": hupu_schedule.get("next_match"),
+                "upcoming": hupu_schedule.get("upcoming", []),
                 "last_check": hupu_state.get("last_check", ""),
             }
             combined["daily_stats"] = daily_stats

@@ -1134,6 +1134,127 @@ body {
 .es-result-badge.win { background: rgba(34,197,94,0.15); color: #4ade80; }
 .es-result-badge.lose { background: rgba(239,68,68,0.15); color: #f87171; }
 
+/* 下一场比赛预告卡 */
+.es-next-card {
+  background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.08) 100%);
+  border: 1px solid rgba(99,102,241,0.25);
+}
+.es-next-card .es-card-head {
+  background: rgba(99,102,241,0.1);
+  border-bottom-color: rgba(99,102,241,0.15);
+  color: #a5b4fc;
+}
+.es-next-vs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.es-next-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+.es-next-team.ig .es-next-name { color: var(--brand); }
+.es-next-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid rgba(99,102,241,0.2);
+}
+.es-next-name {
+  font-size: 13px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.es-next-vs-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 4px;
+}
+.es-next-vs-text {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.es-next-time {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #818cf8;
+}
+.es-next-date {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.es-next-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(99,102,241,0.1);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.es-next-stage {
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.es-countdown {
+  font-weight: 700;
+  color: #a5b4fc;
+  background: rgba(99,102,241,0.15);
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+}
+.es-no-upcoming {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.es-upcoming-list {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(99,102,241,0.08);
+}
+.es-upcoming-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+.es-upcoming-item .es-up-date {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  min-width: 60px;
+}
+.es-upcoming-item .es-up-vs {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.es-upcoming-item .es-up-vs .ig { color: var(--brand); font-weight: 600; }
+
 /* 评分卡片内部战队分隔 */
 .hupu-team-block { margin-bottom: 8px; }
 .hupu-team-block:last-child { margin-bottom: 0; }
@@ -3445,7 +3566,77 @@ function renderHupu() {
   const winBadgeClass = igWin ? 'win' : 'lose';
   const winBadgeText = igWin ? '胜利' : '失败';
 
+  // 下一场比赛预告
+  const nextMatch = hupu?.next_match || hupu?.schedule?.next_match;
+  const upcomingList = hupu?.upcoming || hupu?.schedule?.upcoming || [];
+  let nextCardHtml = '';
+  if (nextMatch) {
+    const nmHome = nextMatch.home || '';
+    const nmAway = nextMatch.away || '';
+    const nmIgSide = nextMatch.ig_side || (nmHome === teamName ? 'home' : 'away');
+    const nmOpp = nextMatch.opponent || (nmIgSide === 'home' ? nmAway : nmHome);
+    const nmHomeLogo = nextMatch.home_logo || '';
+    const nmAwayLogo = nextMatch.away_logo || '';
+    const nmDateBlock = nextMatch.date_block || '';
+    const nmTime = nextMatch.time_str || '';
+    const nmStage = nextMatch.stage || '';
+    const countdownH = nextMatch.countdown_hours;
+    let countdownText = '';
+    if (countdownH != null) {
+      if (countdownH < 1) {
+        const mins = Math.max(1, Math.round(countdownH * 60));
+        countdownText = `${mins}分钟后`;
+      } else if (countdownH < 48) {
+        countdownText = `${Math.round(countdownH)}小时后`;
+      } else {
+        countdownText = `${Math.round(countdownH/24)}天后`;
+      }
+    }
+    const upcomingRest = upcomingList.filter(u => u.home !== nmHome || u.away !== nmAway || u.date_str !== nextMatch.date_str);
+    nextCardHtml = `
+    <div class="es-card es-next-card">
+      <div class="es-card-head"><span class="es-head-icon" style="background:#818cf8;"></span>⏳ 下一场比赛</div>
+      <div class="es-card-body">
+        <div class="es-next-vs">
+          <div class="es-next-team ${nmIgSide==='home'?'ig':''}">
+            ${nmHomeLogo ? safeImg(nmHomeLogo, 'es-next-logo', nmHome) : `<div class="es-next-logo"></div>`}
+            <div class="es-next-name">${escHtml(nmHome)}</div>
+          </div>
+          <div class="es-next-vs-mid">
+            <span class="es-next-vs-text">VS</span>
+            <span class="es-next-time">${escHtml(nmTime)}</span>
+            <span class="es-next-date">${escHtml(nmDateBlock)}</span>
+          </div>
+          <div class="es-next-team ${nmIgSide==='away'?'ig':''}">
+            ${nmAwayLogo ? safeImg(nmAwayLogo, 'es-next-logo', nmAway) : `<div class="es-next-logo"></div>`}
+            <div class="es-next-name">${escHtml(nmAway)}</div>
+          </div>
+        </div>
+        <div class="es-next-meta">
+          <span class="es-next-stage">${escHtml(nmStage)}</span>
+          ${countdownText ? `<span class="es-countdown">${countdownText}</span>` : ''}
+        </div>
+        ${upcomingRest.length ? `
+        <div class="es-upcoming-list">
+          ${upcomingRest.slice(0, 3).map(u => {
+            const uIgIsHome = u.home === teamName;
+            return `<div class="es-upcoming-item">
+              <span class="es-up-date">${escHtml((u.date_block||'').replace(/周./,''))}</span>
+              <span class="es-up-vs">
+                ${uIgIsHome
+                  ? `<span class="ig">${teamName}</span> vs ${escHtml(u.away||'')}`
+                  : `${escHtml(u.home||'')} vs <span class="ig">${teamName}</span>`}
+              </span>
+              <span style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);">${escHtml(u.time_str||'')}</span>
+            </div>`;
+          }).join('')}
+        </div>` : ''}
+      </div>
+    </div>`;
+  }
+
   c.innerHTML = `
+    ${nextCardHtml}
     <!-- 卡片1: 最新赛果对阵 -->
     <div class="es-card">
       <div class="es-card-head"><span class="es-head-icon"></span>${winTag} · ${stage || '比赛'}</div>
