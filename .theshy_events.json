@@ -1,5 +1,43 @@
 [
   {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-05T04:35:46+09:00",
+    "level": 93,
+    "is_active": false,
+    "timestamp": "2026-08-05T05:37:49.210114+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "game_type": "SOLORANKED",
+    "old_lp": 1484,
+    "new_lp": 1503,
+    "delta": 19,
+    "tier": "GRANDMASTER",
+    "division": 1,
+    "timestamp": "2026-08-05T05:37:48.158144+09:00"
+  },
+  {
+    "type": "level_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "old": 294,
+    "new": 295,
+    "timestamp": "2026-08-05T05:37:47.041012+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-05T05:37:25+09:00",
+    "level": 295,
+    "is_active": true,
+    "timestamp": "2026-08-05T05:37:47.021146+09:00"
+  },
+  {
     "type": "losing_streak",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -17946,40 +17984,5 @@
     "updated_at": "2026-08-02T22:25:02+09:00",
     "level": 92,
     "timestamp": "2026-08-02T22:28:44.240796+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-02T22:25:02+09:00",
-    "level": 92,
-    "is_active": true,
-    "timestamp": "2026-08-02T22:28:44.238208+09:00"
-  },
-  {
-    "type": "became_active",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-02T22:28:09+09:00",
-    "level": 294,
-    "timestamp": "2026-08-02T22:28:44.235207+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-02T22:28:09+09:00",
-    "level": 294,
-    "is_active": true,
-    "timestamp": "2026-08-02T22:28:44.232545+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-02T21:31:58+09:00",
-    "level": 92,
-    "is_active": false,
-    "timestamp": "2026-08-02T22:02:29.590731+09:00"
   }
 ]
