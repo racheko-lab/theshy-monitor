@@ -1022,28 +1022,10 @@ def check_account(client, game_name, tag_line, region, slug, label, state, verbo
             }
             events.append(new_match_event)
 
-    # 4.5 开始活跃检测 (仅在没有新比赛时通知, 避免与赛后通知重复)
-    # 添加30分钟冷却, 防止游戏中OP.GG多次刷新导致重复通知
-    last_active_notify = state.get("last_active_notify")
-    active_cd_ok = True
-    if last_active_notify:
-        try:
-            last_dt = datetime.fromisoformat(last_active_notify)
-            if last_dt.tzinfo is None:
-                last_dt = last_dt.replace(tzinfo=KST)
-            if (datetime.now(KST) - last_dt).total_seconds() < 1800:
-                active_cd_ok = False
-        except Exception:
-            pass
-    if is_active and not last_active and not has_new_match and active_cd_ok:
-        events.append({
-            "type": "became_active",
-            "account": label,
-            "slug": slug,
-            "updated_at": updated_at,
-            "level": profile.get("level"),
-        })
-        state["last_active_notify"] = datetime.now(KST).isoformat()
+    # 4.5 开始活跃检测已移除：不再发送"可能开始排位了"猜测性通知
+    # 在主播模式下OP.GG无法获取实时对局信息，只有比赛结束后才能拿到战绩，
+    # 所以 became_active 通知是不准确的猜测，用户不需要这类通知。
+    # 仅保留真实新比赛检测(new_match)来推送战绩。
 
     # 6. 段位变化检测
     last_league = last_state.get("league_stats_summary", [])
@@ -1304,8 +1286,8 @@ def handle_event(event, cfg):
 
     主播模式说明 (2025-10 Riot Patch 25.20 起):
     Riot API 在游戏进行中对开启 Streamer Mode 的玩家不返回数据,
-    OP.GG 也无法获取 updated_at 实时刷新, 所以 became_active 事件几乎不会触发。
-    主要依赖 new_match 事件 (比赛结束后 OP.GG 才能拉到) 作为通知触发器。
+    OP.GG 也无法获取 updated_at 实时刷新, 因此 became_active 猜测性通知已移除。
+    仅在比赛结束后 OP.GG 拉到新对局记录 (new_match 事件) 时才推送战绩通知。
     """
     et = event["type"]
     acct_label = event.get("account", "")
@@ -1316,13 +1298,8 @@ def handle_event(event, cfg):
         return []
 
     if et == "became_active":
-        return notify(
-            f"🎮 {acct_label} 可能开始排位了",
-            f"账号: {acct_label}\n"
-            f"OP.GG 数据已刷新 (updated_at: {fmt_kst(event.get('updated_at'))})\n"
-            f"⚠️ 主播模式下无法获取实时对局信息, 比赛结束后会推送战绩",
-            cfg,
-        )
+        # 不再发送"可能开始排位了"猜测性通知，只在检测到真实新对局后推送战绩
+        return []
     if et == "opgg_updated":
         return []
     if et == "level_changed":
