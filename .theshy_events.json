@@ -1,5 +1,31 @@
 [
   {
+    "type": "became_active",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-04T18:29:19+09:00",
+    "level": 93,
+    "timestamp": "2026-08-04T18:31:27.095653+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-04T18:29:19+09:00",
+    "level": 93,
+    "is_active": true,
+    "timestamp": "2026-08-04T18:31:27.091179+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-04T18:13:15+09:00",
+    "level": 294,
+    "is_active": false,
+    "timestamp": "2026-08-04T18:31:27.086592+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -5481,23 +5507,5 @@
     "kind": "hupu_rating",
     "title": "[赛后]AL 2-0 IG",
     "timestamp": "2026-08-01T14:57:17.560342+09:00"
-  },
-  {
-    "type": "hupu_rating",
-    "kind": "hupu_rating",
-    "title": "[赛后]WBG 1-2 IG",
-    "timestamp": "2026-08-01T14:57:17.558319+09:00"
-  },
-  {
-    "type": "hupu_rating",
-    "kind": "hupu_rating",
-    "title": "[赛后]IG 0-3 TT",
-    "timestamp": "2026-08-01T14:57:17.556295+09:00"
-  },
-  {
-    "type": "hupu_rating",
-    "kind": "hupu_rating",
-    "title": "[赛后]JDG 2-1 IG",
-    "timestamp": "2026-08-01T14:57:17.554290+09:00"
   }
 ]
