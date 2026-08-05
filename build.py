@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
 构建脚本：内联精简首屏数据到 index.html 中，实现真正的秒开
+- 保留所有顶层数据字段：bilibili直播状态、hupu评分、daily_stats等
 - 保留所有账号完整信息（profile/state）
 - 每个账号保留最近20场对局，去掉 participants/teams 等大字段（首屏不需要）
-- 保留最近20条事件
-- 总内联数据约80-100KB，加上HTML总共约200KB，国内秒开
+- 虎扑评分只保留最近3场，并精简掉球员详细数据（头像/热评等）
+- 保留所有事件（约几十KB）
+- 总内联数据约200-250KB，加上HTML总共约300多KB，国内秒开
 """
 import json
 import os
@@ -16,14 +18,34 @@ ESSENTIAL_MATCH_FIELDS = {
     'kill', 'death', 'assist', 'kda', 'result',
     'op_score', 'op_score_rank',
     'gold_earned', 'minion_kill', 'neutral_minion_kill',
+    'total_damage_dealt_to_champions', 'total_damage_taken',
+    'vision_wards_bought_in_game', 'ward_place',
+    'largest_killing_spree', 'largest_multi_kill',
+    'champion_level',
     'items', 'items_names', 'spells', 'rune',
-    'largest_multi_kill', 'average_tier_info',
+    'average_tier_info',
     '_account_slug', '_account_label'
+}
+
+# 虎扑比赛精简字段（首屏只需要比赛基本信息和比分，不需要球员详细数据）
+HUPU_MATCH_ESSENTIAL_FIELDS = {
+    'id', 'title', 'url', 'score', 'home', 'away',
+    'home_score', 'away_score', 'ig_win', 'opponent',
+    'ig_score', 'opp_score', 'league_name', 'round_name',
+    'match_time', 'date_str', 'found_at'
 }
 
 def trim_match(match):
     """精简单场对局数据，只保留首屏需要的字段"""
     return {k: v for k, v in match.items() if k in ESSENTIAL_MATCH_FIELDS}
+
+def trim_hupu_match(match):
+    """精简虎扑比赛数据，去掉球员详细信息（头像、热评等大字段）"""
+    result = {}
+    for k, v in match.items():
+        if k in HUPU_MATCH_ESSENTIAL_FIELDS:
+            result[k] = v
+    return result
 
 def trim_account(account, matches_limit=20):
     """精简账号数据，保留完整profile/state，对局只保留最近N场且精简字段"""
@@ -32,6 +54,18 @@ def trim_account(account, matches_limit=20):
         if k == 'matches':
             result['matches'] = [trim_match(m) for m in (v or [])[:matches_limit]]
         else:
+            result[k] = v
+    return result
+
+def trim_hupu_ratings(hupu, matches_limit=3):
+    """精简虎扑评分数据"""
+    if not hupu:
+        return None
+    result = {}
+    for k, v in hupu.items():
+        if k == 'matches':
+            result['matches'] = [trim_hupu_match(m) for m in (v or [])[:matches_limit]]
+        elif k in ['team', 'last_check']:
             result[k] = v
     return result
 
@@ -45,7 +79,13 @@ def build():
     if os.path.exists('.theshy_data.json'):
         with open('.theshy_data.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
-        print(f"  ✓ 读取 .theshy_data.json ({len(data.get('accounts', []))} 个账号)")
+        print(f"  ✓ 读取 .theshy_data.json")
+        if data.get('accounts'):
+            print(f"    - {len(data['accounts'])} 个账号")
+        if data.get('bilibili'):
+            print(f"    - 包含B站直播状态")
+        if data.get('hupu_ratings', {}).get('matches'):
+            print(f"    - 包含虎扑评分: {len(data['hupu_ratings']['matches'])}场比赛")
     
     if os.path.exists('.theshy_events.json'):
         with open('.theshy_events.json', 'r', encoding='utf-8') as f:
@@ -67,15 +107,33 @@ def build():
         if legacy:
             data = {'accounts': [{'slug': 'main', 'label': 'TheShy', **legacy}]}
     
-    # 精简数据：首屏只需要最近20场对局+最近20条事件
+    # 精简数据
     inline_data = {'data': None, 'events': []}
     
-    if data.get('accounts'):
-        trimmed_accounts = [trim_account(a) for a in data['accounts']]
-        inline_data['data'] = {'accounts': trimmed_accounts}
+    if data:
+        trimmed = {}
+        # 保留所有顶层字段
+        for k, v in data.items():
+            if k == 'accounts':
+                trimmed['accounts'] = [trim_account(a) for a in v]
+            elif k == 'hupu_ratings':
+                trimmed['hupu_ratings'] = trim_hupu_ratings(v)
+            else:
+                # 保留其他顶层字段（bilibili, daily_stats, last_update, quiet_hours等）
+                trimmed[k] = v
+        inline_data['data'] = trimmed
     
-    # 只保留最近20条事件
-    inline_data['events'] = (events or [])[:20]
+    # 保留最近事件，但过滤掉过大的事件（如连败事件包含大量对局数据）
+    MAX_EVENT_SIZE = 5 * 1024  # 单条事件最大5KB
+    MAX_EVENTS = 50
+    trimmed_events = []
+    for e in (events or []):
+        if len(trimmed_events) >= MAX_EVENTS:
+            break
+        e_size = len(json.dumps(e, ensure_ascii=False, separators=(',',':')))
+        if e_size <= MAX_EVENT_SIZE:
+            trimmed_events.append(e)
+    inline_data['events'] = trimmed_events
     
     # 计算内联数据大小
     inline_json = json.dumps(inline_data, ensure_ascii=False, separators=(',', ':'))
@@ -103,7 +161,7 @@ def build():
     
     html_size_kb = os.path.getsize('index.html') / 1024
     print(f"✅ 构建完成！HTML总大小: {html_size_kb:.1f} KB")
-    print(f"   → 首屏打开即可看到完整内容，无需等待网络请求！")
+    print(f"   → 首屏打开即可看到完整内容（直播状态、虎扑评分、赛事），无需等待！")
 
 if __name__ == '__main__':
     build()
