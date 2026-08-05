@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-08-06T08:23:56+09:00",
+    "level": 93,
+    "is_active": false,
+    "timestamp": "2026-08-06T08:36:21.818627+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-06T08:35:58+09:00",
+    "level": 295,
+    "is_active": true,
+    "timestamp": "2026-08-06T08:36:21.798806+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-08-06T07:34:48+09:00",
     "level": 93,
     "is_active": true,
@@ -17969,30 +17987,5 @@
     "tier": "CHALLENGER",
     "division": 1,
     "timestamp": "2026-08-04T01:32:51.557257+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "match_id": "qfvdWpGbi22P_YE7JpDoVRq6lc1ubVRsPeplOToLqHk=",
-    "game_type": "SOLORANKED",
-    "champion": "麦林炮手",
-    "result": "LOSE",
-    "kda": "3.75",
-    "kill": 9,
-    "death": 4,
-    "assist": 6,
-    "created_at": "2026-08-04T01:19:06+09:00",
-    "game_length_second": 1882,
-    "position": "TOP",
-    "timestamp": "2026-08-04T01:32:50.725175+09:00"
-  },
-  {
-    "type": "level_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "old": 92,
-    "new": 93,
-    "timestamp": "2026-08-04T01:32:49.886566+09:00"
   }
 ]
