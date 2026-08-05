@@ -11,6 +11,10 @@ on:
         description: '强制推送测试通知 (不管状态变化)'
         type: boolean
         default: false
+      force_deploy:
+        description: '强制部署 (即使数据没变化，用于代码更新后部署)'
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths:
@@ -18,6 +22,7 @@ on:
       - 'requirements.txt'
       - '.github/workflows/theshy-monitor.yml'
       - 'index.html'
+      - 'build.py'
       - 'config.json'
 
 concurrency:
@@ -76,6 +81,20 @@ jobs:
         if: ${{ !github.event.inputs.force_notify }}
         run: |
           changed=0
+          # 如果强制部署，直接设置为true
+          if [ "${{ github.event.inputs.force_deploy }}" = "true" ]; then
+            changed=1
+          fi
+          # 检查代码文件是否有变化（针对push事件，代码更新需要重新部署）
+          for f in index.html build.py .github/workflows/theshy-monitor.yml; do
+            if [ -f "$f" ]; then
+              if git diff --quiet HEAD~1 HEAD -- "$f" 2>/dev/null; then
+                : # no change between previous commit and current
+              else
+                changed=1
+              fi
+            fi
+          done
           # 保存改动前的data文件哈希用于比较
           for f in .theshy_data.json .theshy_events.json .theshy_profile.json .theshy_matches.json .theshy_match_reminders.json .theshy_bilibili_state.json .theshy_streak_state.json .theshy_hupu_ratings.json index.html; do
             if [ -f "$f" ]; then
