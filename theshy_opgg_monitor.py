@@ -456,6 +456,45 @@ def save_json(path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2, default=str))
 
 
+def inject_data_to_html(combined_data, events_data, verbose=False):
+    """将数据内联到 index.html 中, 实现首屏秒开无需等待fetch
+
+    在 <!-- __INLINE_DATA__ --> 和 <!-- /__INLINE_DATA__ --> 之间
+    注入 <script>window.__INITIAL_DATA__ = {...}</script>
+    """
+    html_path = BASE_DIR / "index.html"
+    if not html_path.exists():
+        return
+    try:
+        html = html_path.read_text(encoding="utf-8")
+        start_marker = "<!-- __INLINE_DATA__ -->"
+        end_marker = "<!-- /__INLINE_DATA__ -->"
+        start_idx = html.find(start_marker)
+        end_idx = html.find(end_marker)
+        if start_idx < 0 or end_idx < 0 or end_idx <= start_idx:
+            return
+        payload = {
+            "data": combined_data,
+            "events": events_data if isinstance(events_data, list) else [],
+        }
+        # 使用紧凑JSON减少体积, ensure_ascii=False支持中文
+        data_json = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), default=str)
+        # 防止</script>标签破坏HTML
+        data_json = data_json.replace("</", "<\\/")
+        new_script = f'<script>window.__INITIAL_DATA__={data_json};</script>'
+        new_html = (
+            html[:start_idx + len(start_marker)]
+            + "\n" + new_script + "\n"
+            + html[end_idx:]
+        )
+        html_path.write_text(new_html, encoding="utf-8")
+        if verbose:
+            size_kb = len(data_json) / 1024
+            print(f"  数据已内联到HTML: {size_kb:.1f} KB")
+    except Exception as e:
+        print(f"  ⚠️ 内联数据到HTML失败: {e}")
+
+
 def load_json(path, default=None):
     if path.exists():
         try:
@@ -3093,6 +3132,10 @@ def main():
                 "end": cfg.get("QUIET_END", ""),
             }
             save_json(COMBINED_DATA_FILE, combined)
+
+            # 将数据内联到HTML中实现首屏秒开
+            events_data = load_json(EVENTS_FILE, [])
+            inject_data_to_html(combined, events_data, verbose=args.verbose)
 
             if args.once:
                 return
