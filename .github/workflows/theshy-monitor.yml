@@ -138,6 +138,11 @@ jobs:
             echo "State committed"
           fi
 
+      - name: Pull latest code (always, to ensure we build with newest index.html)
+        if: ${{ !github.event.inputs.force_notify }}
+        run: |
+          git pull --rebase origin main || true
+
       - name: Build (inline data for fast load)
         if: ${{ !github.event.inputs.force_notify }}
         run: |
