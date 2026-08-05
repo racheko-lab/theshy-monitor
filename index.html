@@ -2621,10 +2621,25 @@ function renderAccountChips() {
   });
 }
 
+let isRefreshing = false;
+
 async function refresh(useInline = false) {
   const btn = document.getElementById('refresh-btn');
-  btn.style.transform = 'rotate(360deg)';
-  btn.style.transition = 'transform 0.5s';
+  if (isRefreshing) return; // 防止重复点击
+  
+  // 如果已有数据，先立即给用户反馈，显示"刷新中..."提示，不用等网络请求
+  const hasData = !!(allData || currentData.matches?.length);
+  if (hasData) {
+    btn.style.transform = 'rotate(360deg)';
+    btn.style.transition = 'transform 0.5s';
+    showToast('正在刷新...');
+  } else {
+    btn.style.transform = 'rotate(360deg)';
+    btn.style.transition = 'transform 0.5s';
+  }
+  
+  isRefreshing = true;
+  
   try {
     let data = null;
     let events = null;
@@ -2667,10 +2682,11 @@ async function refresh(useInline = false) {
     const now = new Date();
     document.getElementById('last-update').textContent = 
       `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-    showToast('已刷新');
+    showToast(hasData ? '已更新' : '已刷新');
   } catch(e) {
-    showToast('刷新失败');
+    showToast(hasData ? '更新失败，使用缓存数据' : '刷新失败');
   }
+  isRefreshing = false;
   setTimeout(() => { btn.style.transform = ''; btn.style.transition = ''; }, 500);
 }
 

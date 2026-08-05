@@ -119,6 +119,12 @@ jobs:
             echo "State committed"
           fi
 
+      - name: Build (inline data for fast load)
+        if: ${{ !github.event.inputs.force_notify && steps.check_changes.outputs.should_deploy == 'true' }}
+        run: |
+          # 构建：内联最新数据到HTML实现首屏秒开
+          python3 build.py
+
       - name: Upload site artifact
         if: ${{ !github.event.inputs.force_notify && steps.check_changes.outputs.should_deploy == 'true' }}
         uses: actions/upload-pages-artifact@v3
