@@ -1,5 +1,36 @@
 [
   {
+    "type": "hupu_rating",
+    "kind": "hupu_rating",
+    "title": "IG 1-1 NIP",
+    "timestamp": "2026-08-06T20:56:31.032354+09:00"
+  },
+  {
+    "type": "bilibili_live",
+    "kind": "ig_live_start",
+    "title": "【直播】IG vs NIP",
+    "room_id": 6,
+    "timestamp": "2026-08-06T20:53:00.177983+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-06T20:52:48+09:00",
+    "level": 93,
+    "is_active": true,
+    "timestamp": "2026-08-06T20:52:59.016291+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-06T20:00:39+09:00",
+    "level": 295,
+    "is_active": false,
+    "timestamp": "2026-08-06T20:52:58.999501+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -15295,41 +15326,5 @@
     "updated_at": "2026-08-04T08:29:46+09:00",
     "level": 93,
     "timestamp": "2026-08-04T08:31:47.448556+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-04T08:29:46+09:00",
-    "level": 93,
-    "is_active": true,
-    "timestamp": "2026-08-04T08:31:47.442759+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-04T08:25:46+09:00",
-    "level": 294,
-    "is_active": false,
-    "timestamp": "2026-08-04T08:31:47.436903+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-04T07:08:50+09:00",
-    "level": 93,
-    "is_active": false,
-    "timestamp": "2026-08-04T07:19:47.777603+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-04T06:33:07+09:00",
-    "level": 294,
-    "is_active": false,
-    "timestamp": "2026-08-04T07:19:47.773005+09:00"
   }
 ]
