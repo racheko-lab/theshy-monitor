@@ -1,33 +1,23 @@
 #!/usr/bin/env python3
 """
-构建脚本：内联精简首屏数据到 index.html 中，实现真正的秒开
-- 保留所有顶层数据字段：bilibili直播状态、hupu评分、daily_stats等
-- 保留所有账号完整信息（profile/state）
-- 每个账号保留最近20场对局，去掉 participants/teams 等大字段（首屏不需要）
-- 虎扑评分只保留最近3场，并精简掉球员详细数据（头像/热评等）
-- 保留所有事件（约几十KB）
-- 总内联数据约200-250KB，加上HTML总共约300多KB，国内秒开
+TheShy Monitor build script
+- Builds the React frontend (web/)
+- Inlines minimal initial data for instant first paint
+- Copies build output to root for GitHub Pages
+- Outputs full data as data.json and events.json for client-side refresh
 """
+
 import json
 import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
 
-# 首屏对局必需字段（去掉 participants, teams, 以及其他非必需字段）
-ESSENTIAL_MATCH_FIELDS = {
-    'id', 'created_at', 'game_type', 'game_length_second', 'game_map',
-    'champion_id', 'champion', 'champion_level', 'position',
-    'kill', 'death', 'assist', 'kda', 'result',
-    'op_score', 'op_score_rank',
-    'gold_earned', 'minion_kill', 'neutral_minion_kill',
-    'total_damage_dealt_to_champions', 'total_damage_taken',
-    'vision_wards_bought_in_game', 'ward_place',
-    'largest_killing_spree', 'largest_multi_kill',
-    'champion_level',
-    'items', 'items_names', 'spells', 'rune',
-    'average_tier_info',
-    '_account_slug', '_account_label'
-}
+ROOT = Path(__file__).parent
+WEB_DIR = ROOT / 'web'
+DIST_DIR = ROOT / 'dist'
 
-# 虎扑比赛精简字段（首屏只需要比赛基本信息和比分，不需要球员详细数据）
 HUPU_MATCH_ESSENTIAL_FIELDS = {
     'id', 'title', 'url', 'score', 'home', 'away',
     'home_score', 'away_score', 'ig_win', 'opponent',
@@ -35,30 +25,18 @@ HUPU_MATCH_ESSENTIAL_FIELDS = {
     'match_time', 'date_str', 'found_at'
 }
 
-def trim_match(match):
-    """精简单场对局数据，只保留首屏需要的字段"""
-    return {k: v for k, v in match.items() if k in ESSENTIAL_MATCH_FIELDS}
+MAX_EVENT_SIZE = 5 * 1024
+MAX_INLINE_EVENTS = 50
+MATCHES_LIMIT = 3
+
 
 def trim_hupu_match(match):
-    """精简虎扑比赛数据，去掉球员详细信息（头像、热评等大字段）"""
-    result = {}
-    for k, v in match.items():
-        if k in HUPU_MATCH_ESSENTIAL_FIELDS:
-            result[k] = v
-    return result
+    if not match:
+        return None
+    return {k: v for k, v in match.items() if k in HUPU_MATCH_ESSENTIAL_FIELDS}
 
-def trim_account(account, matches_limit=20):
-    """精简账号数据，保留完整profile/state，对局只保留最近N场且精简字段"""
-    result = {}
-    for k, v in account.items():
-        if k == 'matches':
-            result['matches'] = [trim_match(m) for m in (v or [])[:matches_limit]]
-        else:
-            result[k] = v
-    return result
 
-def trim_hupu_ratings(hupu, matches_limit=3):
-    """精简虎扑评分数据"""
+def trim_hupu_ratings(hupu, matches_limit=MATCHES_LIMIT):
     if not hupu:
         return None
     result = {}
@@ -69,99 +47,223 @@ def trim_hupu_ratings(hupu, matches_limit=3):
             result[k] = v
     return result
 
-def build():
-    print("🔨 开始构建，内联精简首屏数据...")
+
+def trim_match(match):
+    """精简单场对局数据，去掉大字段"""
+    if not match:
+        return None
+    essential = {
+        'id', 'game_type', 'created_at', 'game_length_second',
+        'is_win', 'champion_name', 'champion_image_url',
+        'kill', 'death', 'assist', 'kda_string',
+        'op_score', 'op_score_rank', 'position',
+        'is_remake', 'average_tier_info', 'items', 'spells', 'runes'
+    }
+    return {k: v for k, v in match.items() if k in essential}
+
+
+def trim_event(event):
+    """精简事件数据，保留渲染需要的字段"""
+    if not event:
+        return None
+    essential = {
+        'type', 'account', 'slug', 'timestamp',
+        # new_match
+        'match_id', 'game_type', 'champion', 'result', 'kda',
+        'kill', 'death', 'assist', 'created_at', 'game_length_second', 'position',
+        # lp_changed
+        'old_lp', 'new_lp', 'delta', 'tier', 'division',
+        # opgg_updated
+        'updated_at', 'level', 'is_active',
+        # became_active
+        # level_changed
+        'old', 'new',
+        # streaks
+        'streak',
+        # rank_changed
+        'from_tier', 'to_tier', 'lp_diff',
+        # live
+        'title', 'duration',
+    }
+    return {k: v for k, v in event.items() if k in essential}
+
+
+def trim_account(acc):
+    """精简账号数据，只保留渲染需要的字段"""
+    if not acc:
+        return None
+    result = {}
+    essential_acc_fields = {'slug', 'label', 'game_name', 'tag_line', 'region', 'state'}
+    for k in essential_acc_fields:
+        if k in acc:
+            result[k] = acc[k]
     
-    # 读取数据文件
-    data = {}
-    events = []
+    # 精简profile
+    profile = acc.get('profile')
+    if profile:
+        essential_profile_fields = {
+            'id', 'game_name', 'tagline', 'name', 'internal_name',
+            'profile_image_url', 'level', 'ladder_rank', 'league_stats'
+        }
+        trimmed_profile = {k: v for k, v in profile.items() if k in essential_profile_fields}
+        # 精简league_stats里的high_leagues
+        if 'league_stats' in trimmed_profile:
+            trimmed_ls = []
+            for ls in trimmed_profile['league_stats']:
+                trimmed_ls.append({k: v for k, v in ls.items() if k != 'high_leagues'})
+            trimmed_profile['league_stats'] = trimmed_ls
+        result['profile'] = trimmed_profile
     
-    if os.path.exists('.theshy_data.json'):
-        with open('.theshy_data.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        print(f"  ✓ 读取 .theshy_data.json")
-        if data.get('accounts'):
-            print(f"    - {len(data['accounts'])} 个账号")
-        if data.get('bilibili'):
-            print(f"    - 包含B站直播状态")
-        if data.get('hupu_ratings', {}).get('matches'):
-            print(f"    - 包含虎扑评分: {len(data['hupu_ratings']['matches'])}场比赛")
+    # 精简matches（只保留最近5场核心字段）
+    if 'matches' in acc and acc['matches']:
+        result['matches'] = [trim_match(m) for m in acc['matches'][:5]]
     
-    if os.path.exists('.theshy_events.json'):
-        with open('.theshy_events.json', 'r', encoding='utf-8') as f:
-            events = json.load(f)
-        print(f"  ✓ 读取 .theshy_events.json ({len(events)} 条事件)")
-    
-    # 如果没有合并数据，回退到旧版单账号格式
-    if not data.get('accounts'):
-        print("  ⚠ 未找到多账号数据，尝试旧版单账号格式...")
-        legacy = {}
-        for fname, key in [
-            ('.theshy_opgg_state.json', 'state'),
-            ('.theshy_profile.json', 'profile'),
-            ('.theshy_matches.json', 'matches'),
-        ]:
-            if os.path.exists(fname):
-                with open(fname, 'r', encoding='utf-8') as f:
-                    legacy[key] = json.load(f)
-        if legacy:
-            data = {'accounts': [{'slug': 'main', 'label': 'TheShy', **legacy}]}
-    
-    # 精简数据
-    inline_data = {'data': None, 'events': []}
-    
-    if data:
-        trimmed = {}
-        # 保留所有顶层字段
-        for k, v in data.items():
-            if k == 'accounts':
-                trimmed['accounts'] = [trim_account(a) for a in v]
-            elif k == 'hupu_ratings':
-                trimmed['hupu_ratings'] = trim_hupu_ratings(v)
-            else:
-                # 保留其他顶层字段（bilibili, daily_stats, last_update, quiet_hours等）
-                trimmed[k] = v
-        inline_data['data'] = trimmed
-    
-    # 保留最近事件，但过滤掉过大的事件（如连败事件包含大量对局数据）
-    MAX_EVENT_SIZE = 5 * 1024  # 单条事件最大5KB
-    MAX_EVENTS = 50
+    return result
+
+
+def build_react_app():
+    """Build the React frontend"""
+    print("🔨 Building React frontend...")
+    result = subprocess.run(
+        ['npm', 'run', 'build'],
+        cwd=str(WEB_DIR),
+        capture_output=True,
+        text=True
+    )
+    if result.returncode != 0:
+        print(f"❌ Build failed:\n{result.stderr}")
+        sys.exit(1)
+    print("✅ React build complete")
+
+
+def load_data():
+    """Load and trim data"""
+    print("\n📦 Loading data...")
+
+    data_path = ROOT / '.theshy_data.json'
+    events_path = ROOT / '.theshy_events.json'
+
+    with open(data_path, 'r', encoding='utf-8') as f:
+        full_data = json.load(f)
+    with open(events_path, 'r', encoding='utf-8') as f:
+        full_events = json.load(f)
+
+    # Build full data (for data.json)
+    data_json = full_data
+    events_json = full_events
+
+    # Build inline trimmed data
+    inline_data = {}
+
+    # Trim accounts
+    inline_data['accounts'] = [trim_account(acc) for acc in full_data.get('accounts', [])]
+
+    # Keep all other top-level fields
+    for k, v in full_data.items():
+        if k == 'accounts':
+            continue
+        if k == 'hupu_ratings':
+            inline_data[k] = trim_hupu_ratings(v)
+        elif k == 'bilibili':
+            inline_data[k] = v
+        elif k in ['daily_stats', 'last_update', 'quiet_hours', 'refresh_interval']:
+            inline_data[k] = v
+        else:
+            inline_data[k] = v
+
+    # Trim events for inline
     trimmed_events = []
-    for e in (events or []):
-        if len(trimmed_events) >= MAX_EVENTS:
+    for e in (full_events or []):
+        if len(trimmed_events) >= MAX_INLINE_EVENTS:
             break
-        e_size = len(json.dumps(e, ensure_ascii=False, separators=(',',':')))
-        if e_size <= MAX_EVENT_SIZE:
-            trimmed_events.append(e)
-    inline_data['events'] = trimmed_events
-    
-    # 计算内联数据大小
-    inline_json = json.dumps(inline_data, ensure_ascii=False, separators=(',', ':'))
-    inline_size_kb = len(inline_json.encode('utf-8')) / 1024
-    print(f"  ✓ 精简数据大小: {inline_size_kb:.1f} KB")
-    
-    # 读取HTML模板
-    with open('index.html', 'r', encoding='utf-8') as f:
+        trimmed = trim_event(e)
+        if trimmed:
+            trimmed_events.append(trimmed)
+        if len(trimmed_events) >= MAX_INLINE_EVENTS:
+            break
+
+    inline_payload = {
+        'data': inline_data,
+        'events': trimmed_events,
+        'lastUpdate': __import__('datetime').datetime.now().isoformat(),
+    }
+
+    print(f"  ✓ {len(inline_data.get('accounts', []))} accounts")
+    bilibili_data = inline_data.get('bilibili', {})
+    print(f"  ✓ Bilibili: {'live' if bilibili_data.get('is_live') else 'offline'}")
+    hupu = inline_data.get('hupu_ratings')
+    print(f"  ✓ Hupu ratings: {len(hupu.get('matches', [])) if hupu else 0} matches")
+    print(f"  ✓ Events: {len(trimmed_events)} (inline) / {len(full_events)} (full)")
+
+    return data_json, events_json, inline_payload
+
+
+def inject_and_copy(data_json, events_json, inline_payload):
+    """Inject inline data, copy assets to root"""
+    print("\n📄 Generating output...")
+
+    # Read built index.html
+    index_path = DIST_DIR / 'index.html'
+    with open(index_path, 'r', encoding='utf-8') as f:
         html = f.read()
-    
-    # 构建内联脚本
-    inline_script = f'<script>window.__INITIAL_DATA__={inline_json};</script>'
-    
-    # 注入到HTML
-    marker = '<!-- __INLINE_DATA__ -->'
-    if marker in html:
-        html = html.replace(marker, inline_script)
-    else:
-        # 如果没有标记，添加到body开头（确保首屏能立即用）
-        html = html.replace('<body>', f'<body>\n{inline_script}')
-    
-    # 写入构建后的HTML
-    with open('index.html', 'w', encoding='utf-8') as f:
+
+    # Inject inline data
+    inline_json = json.dumps(inline_payload, ensure_ascii=False, separators=(',', ':'))
+    inline_size_kb = len(inline_json.encode('utf-8')) / 1024
+    inline_script = f'<script>window.__INITIAL_DATA__={inline_json}</script>'
+
+    html = html.replace('<!-- __INITIAL_DATA__ -->', inline_script)
+
+    # Write data.json and events.json to dist
+    with open(DIST_DIR / 'data.json', 'w', encoding='utf-8') as f:
+        json.dump(data_json, f, ensure_ascii=False, separators=(',', ':'))
+    with open(DIST_DIR / 'events.json', 'w', encoding='utf-8') as f:
+        json.dump(events_json, f, ensure_ascii=False, separators=(',', ':'))
+
+    # Write final index.html
+    with open(DIST_DIR / 'index.html', 'w', encoding='utf-8') as f:
         f.write(html)
-    
-    html_size_kb = os.path.getsize('index.html') / 1024
-    print(f"✅ 构建完成！HTML总大小: {html_size_kb:.1f} KB")
-    print(f"   → 首屏打开即可看到完整内容（直播状态、虎扑评分、赛事），无需等待！")
+
+    # Copy dist contents to root
+    print("\n📋 Copying to root directory...")
+
+    # Remove old assets from root
+    assets_dir = ROOT / 'assets'
+    if assets_dir.exists():
+        shutil.rmtree(assets_dir)
+
+    # Copy new files
+    for item in DIST_DIR.iterdir():
+        dest = ROOT / item.name
+        if item.is_dir():
+            if dest.exists():
+                shutil.rmtree(dest)
+            shutil.copytree(item, dest)
+        else:
+            shutil.copy2(item, dest)
+
+    html_size = len(html.encode('utf-8')) / 1024
+    total_size = sum(
+        f.stat().st_size for f in ROOT.rglob('*') if f.is_file() and f.suffix in ('.html', '.js', '.css', '.json')
+    ) / 1024
+
+    print(f"\n✅ Build complete!")
+    print(f"   Inline data: {inline_size_kb:.1f} KB")
+    print(f"   index.html: {html_size:.1f} KB")
+    print(f"   Total static assets: ~{total_size:.1f} KB")
+    print(f"\n   🚀 First paint: instant (inline data)")
+    print(f"   📡 Background refresh: every 30s from data.json")
+
+
+def main():
+    print("=" * 50)
+    print("TheShy Monitor - Building Dashboard")
+    print("=" * 50)
+
+    build_react_app()
+    data_json, events_json, inline_payload = load_data()
+    inject_and_copy(data_json, events_json, inline_payload)
+
 
 if __name__ == '__main__':
-    build()
+    main()
