@@ -25,6 +25,7 @@ on:
       - 'build.py'
       - 'config.json'
       - 'web/**'
+      - 'frontend-v2/**'
       - 'assets/**'
       - 'favicon.svg'
       - 'icons.svg'
@@ -55,12 +56,19 @@ jobs:
           cache: 'pip'
           cache-dependency-path: requirements.txt
 
-      - name: Setup Node.js
+      - name: Setup Node.js (web)
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: web/package-lock.json
+
+      - name: Setup Node.js (v2)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend-v2/package-lock.json
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -68,6 +76,8 @@ jobs:
       - name: Install npm dependencies
         run: |
           cd web
+          npm ci
+          cd ../frontend-v2
           npm ci
 
       - name: Run monitor
@@ -102,7 +112,7 @@ jobs:
             changed=1
           fi
           # 检查代码文件是否有变化（针对push事件，代码更新需要重新部署）
-          for f in index.html build.py .github/workflows/theshy-monitor.yml; do
+          for f in index.html build.py .github/workflows/theshy-monitor.yml frontend-v2; do
             if [ -f "$f" ]; then
               if git diff --quiet HEAD~1 HEAD -- "$f" 2>/dev/null; then
                 : # no change between previous commit and current

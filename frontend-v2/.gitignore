@@ -1,0 +1,10 @@
+# dependencies
+node_modules
+
+# local data copies used only for dev/build preview (real data injected by build.py at deploy)
+public/data.json
+public/events.json
+
+# logs
+*.log
+.DS_Store

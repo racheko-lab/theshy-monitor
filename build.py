@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
 TheShy Monitor build script
-- Builds the React frontend (web/)
-- Inlines minimal initial data for instant first paint
-- Copies build output to root for GitHub Pages
+- Builds the React frontend (web/) -> 根目录（旧前端）
+- Builds the V2 React frontend (frontend-v2/) -> v2/ 子路径（新前端，独立部署）
+- Inlines minimal initial data for instant first paint (两版各自注入)
+- Copies build output to root / v2 for GitHub Pages
 - Outputs full data as data.json and events.json for client-side refresh
 """
 
@@ -17,6 +18,10 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 WEB_DIR = ROOT / 'web'
 DIST_DIR = ROOT / 'dist'
+
+# V2 前端（独立、不影响旧 web/ 前端，部署在 /v2/ 子路径）
+V2_DIR = ROOT / 'frontend-v2'
+V2_OUT = ROOT / 'v2'
 
 HUPU_MATCH_ESSENTIAL_FIELDS = {
     'id', 'title', 'url', 'score', 'home', 'away',
@@ -81,9 +86,9 @@ def trim_event(event):
         # streaks
         'streak',
         # rank_changed
-        'from_tier', 'to_tier', 'lp_diff',
+        'old', 'new',
         # live
-        'title', 'duration',
+        'title', 'duration', 'kind',
     }
     return {k: v for k, v in event.items() if k in essential}
 
@@ -255,6 +260,52 @@ def inject_and_copy(data_json, events_json, inline_payload):
     print(f"   📡 Background refresh: every 30s from data.json")
 
 
+def build_v2_react():
+    """Build the V2 React frontend (frontend-v2) into v2/"""
+    print("\n🔨 Building V2 frontend (frontend-v2)...")
+    result = subprocess.run(
+        ['npm', 'run', 'build'],
+        cwd=str(V2_DIR),
+        capture_output=True,
+        text=True
+    )
+    if result.returncode != 0:
+        print(f"❌ V2 build failed:\n{result.stderr}")
+        sys.exit(1)
+    print("✅ V2 build complete")
+
+
+def build_v2(data_json, events_json, inline_payload):
+    """Build & deploy V2 output into v2/ (independent of old root frontend)"""
+    print("\n📦 Building V2 output (v2/)...")
+
+    # 1) 构建前端（frontend-v2 -> v2/，见 vite.config.ts outDir）
+    build_v2_react()
+
+    # 2) 写入权威全量数据（供客户端 30s 轮询 ./data.json / ./events.json）
+    with open(V2_OUT / 'data.json', 'w', encoding='utf-8') as f:
+        json.dump(data_json, f, ensure_ascii=False, separators=(',', ':'))
+    with open(V2_OUT / 'events.json', 'w', encoding='utf-8') as f:
+        json.dump(events_json, f, ensure_ascii=False, separators=(',', ':'))
+
+    # 3) 注入 trim 后的首屏数据到 v2/index.html 占位符
+    index_path = V2_OUT / 'index.html'
+    with open(index_path, 'r', encoding='utf-8') as f:
+        html = f.read()
+
+    inline_json = json.dumps(inline_payload, ensure_ascii=False, separators=(',', ':'))
+    inline_script = f'<script>window.__INITIAL_DATA__={inline_json}</script>'
+    if '<!-- __INITIAL_DATA__ -->' not in html:
+        raise RuntimeError('v2/index.html missing <!-- __INITIAL_DATA__ --> placeholder')
+    html = html.replace('<!-- __INITIAL_DATA__ -->', inline_script)
+    with open(index_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+
+    inline_size_kb = len(inline_json.encode('utf-8')) / 1024
+    print(f"  ✓ V2 inline data: {inline_size_kb:.1f} KB")
+    print(f"  ✓ V2 output at v2/ (旧前端在根目录 /，互不影响)")
+
+
 def main():
     print("=" * 50)
     print("TheShy Monitor - Building Dashboard")
@@ -263,6 +314,9 @@ def main():
     build_react_app()
     data_json, events_json, inline_payload = load_data()
     inject_and_copy(data_json, events_json, inline_payload)
+
+    # V2 独立构建（/v2/ 子路径，不影响旧前端）
+    build_v2(data_json, events_json, inline_payload)
 
 
 if __name__ == '__main__':
