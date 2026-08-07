@@ -87,9 +87,3 @@ export function monthKey(iso?: string): string {
   if (Number.isNaN(d.getTime())) return ''
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
 }
-
-/** 月份标签：2026年7月 */
-export function monthLabel(key: string): string {
-  const [, m] = key.split('-')
-  return `${Number(m)}月`
-}

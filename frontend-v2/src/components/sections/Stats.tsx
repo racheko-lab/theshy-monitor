@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo } from 'react'
+import { lazy, Suspense, useMemo, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { Swords, Trophy, Percent, Gauge, Timer, Clock } from 'lucide-react'
 import type { AppData, AppEvent } from '@/types'
@@ -14,8 +14,10 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { StatCard } from '@/components/ui/StatCard'
 import { ChartCard } from '@/components/ui/ChartCard'
 import { Skeleton } from '@/components/ui/Skeleton'
+import { useInView } from '@/hooks/useInView'
 
-// 图表按需加载（ECharts 独立 chunk，进入视口才加载）
+// ECharts 拆为独立 chunk（代码分割）；图表组件通过 IntersectionObserver 在进入视口时才挂载，
+// 实现真正按需加载 —— 首屏不下载 339KB gzip 的 ECharts，滚动到「数据统计」才请求。
 const MatchesChart = lazy(() => import('./charts/MatchesChart'))
 const LpChart = lazy(() => import('./charts/LpChart'))
 const WinRateChart = lazy(() => import('./charts/WinRateChart'))
@@ -24,11 +26,28 @@ function ChartFallback() {
   return <Skeleton className="h-[220px] w-full" />
 }
 
-export function Stats({ data, events }: { data: AppData; events: AppEvent[] }) {
-  const stats = useMemo(() => computeStats(data, events), [data, events])
+/** 进入视口才挂载图表（真正懒加载）；未进入视口时仅显示骨架 */
+function ChartBlock({ title, subtitle, className, children }: {
+  title: string
+  subtitle: string
+  className?: string
+  children: ReactNode
+}) {
+  const [ref, inView] = useInView<HTMLDivElement>()
+  return (
+    <div ref={ref} className={className}>
+      <ChartCard title={title} subtitle={subtitle}>
+        {inView ? children : <ChartFallback />}
+      </ChartCard>
+    </div>
+  )
+}
+
+export function Stats({ data, events, slug = 'main' }: { data: AppData; events: AppEvent[]; slug?: string }) {
+  const stats = useMemo(() => computeStats(data, slug), [data, slug])
   const dailyMatches = useMemo(() => aggregateDailyMatches(events, 30), [events])
   const dailyLp = useMemo(() => aggregateDailyLp(events, 30), [events])
-  const matches = getAccount(data, 'main').matches
+  const matches = getAccount(data, slug).matches
 
   const cards = useMemo(
     () => [
@@ -75,21 +94,21 @@ export function Stats({ data, events }: { data: AppData; events: AppEvent[] }) {
       </motion.div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <ChartCard title="每日对局" subtitle="近 30 天">
+        <ChartBlock title="每日对局" subtitle="近 30 天">
           <Suspense fallback={<ChartFallback />}>
             <MatchesChart data={dailyMatches} />
           </Suspense>
-        </ChartCard>
-        <ChartCard title="每日 LP 变化" subtitle="近 30 天净增减">
+        </ChartBlock>
+        <ChartBlock title="每日 LP 变化" subtitle="近 30 天净增减">
           <Suspense fallback={<ChartFallback />}>
             <LpChart data={dailyLp} />
           </Suspense>
-        </ChartCard>
-        <ChartCard title="累计胜率走势" subtitle="按对局时间" className="lg:col-span-2">
+        </ChartBlock>
+        <ChartBlock title="累计胜率走势" subtitle="按对局时间" className="lg:col-span-2">
           <Suspense fallback={<ChartFallback />}>
             <WinRateChart matches={matches} />
           </Suspense>
-        </ChartCard>
+        </ChartBlock>
       </div>
     </section>
   )

@@ -30,6 +30,14 @@ HUPU_MATCH_ESSENTIAL_FIELDS = {
     'match_time', 'date_str', 'found_at'
 }
 
+# next_match / latest_match 渲染所需字段（Hupu.tsx 使用 home/away/home_logo/away_logo/
+# date_str/time_str/stage/status_desc，以及 title/score/home_score/away_score/ig_win）
+HUPU_SCHEDULE_ESSENTIAL_FIELDS = {
+    'id', 'title', 'url', 'score', 'home', 'away',
+    'home_logo', 'away_logo', 'home_score', 'away_score',
+    'ig_win', 'date_str', 'time_str', 'stage', 'status_desc',
+}
+
 MAX_EVENT_SIZE = 5 * 1024
 MAX_INLINE_EVENTS = 50
 MATCHES_LIMIT = 3
@@ -41,6 +49,13 @@ def trim_hupu_match(match):
     return {k: v for k, v in match.items() if k in HUPU_MATCH_ESSENTIAL_FIELDS}
 
 
+def trim_hupu_schedule(match):
+    """精简下一场/最近一场比赛（保留 Hupu.tsx 渲染所需字段）"""
+    if not match:
+        return None
+    return {k: v for k, v in match.items() if k in HUPU_SCHEDULE_ESSENTIAL_FIELDS}
+
+
 def trim_hupu_ratings(hupu, matches_limit=MATCHES_LIMIT):
     if not hupu:
         return None
@@ -50,19 +65,19 @@ def trim_hupu_ratings(hupu, matches_limit=MATCHES_LIMIT):
             result['matches'] = [trim_hupu_match(m) for m in (v or [])[:matches_limit]]
         elif k in ['team', 'last_check']:
             result[k] = v
+        elif k in ['next_match', 'latest_match']:
+            result[k] = trim_hupu_schedule(v)
     return result
 
 
 def trim_match(match):
-    """精简单场对局数据，去掉大字段"""
+    """精简单场对局数据，仅保留前端真正消费的字段。
+    前端消费点：computeStats 用 game_length_second；WinRateChart 用 created_at + result。
+    删除 items / runes / spells / op_score* / average_tier_info 等大体积且从不使用的字段。"""
     if not match:
         return None
     essential = {
-        'id', 'game_type', 'created_at', 'game_length_second',
-        'is_win', 'champion_name', 'champion_image_url',
-        'kill', 'death', 'assist', 'kda_string',
-        'op_score', 'op_score_rank', 'position',
-        'is_remake', 'average_tier_info', 'items', 'spells', 'runes'
+        'id', 'game_type', 'created_at', 'game_length_second', 'result',
     }
     return {k: v for k, v in match.items() if k in essential}
 
@@ -93,8 +108,9 @@ def trim_event(event):
     return {k: v for k, v in event.items() if k in essential}
 
 
-def trim_account(acc):
-    """精简账号数据，只保留渲染需要的字段"""
+def trim_account(acc, matches_limit=5):
+    """精简账号数据，只保留渲染需要的字段。
+    matches_limit: 保留最近 N 场（内联首屏用 5；v2 轮询传 None 保留全量但已精简字段）。"""
     if not acc:
         return None
     result = {}
@@ -102,7 +118,7 @@ def trim_account(acc):
     for k in essential_acc_fields:
         if k in acc:
             result[k] = acc[k]
-    
+
     # 精简profile
     profile = acc.get('profile')
     if profile:
@@ -118,11 +134,12 @@ def trim_account(acc):
                 trimmed_ls.append({k: v for k, v in ls.items() if k != 'high_leagues'})
             trimmed_profile['league_stats'] = trimmed_ls
         result['profile'] = trimmed_profile
-    
-    # 精简matches（只保留最近5场核心字段）
+
+    # 精简matches（保留最近 matches_limit 场核心字段；None = 全量）
     if 'matches' in acc and acc['matches']:
-        result['matches'] = [trim_match(m) for m in acc['matches'][:5]]
-    
+        limit = len(acc['matches']) if matches_limit is None else matches_limit
+        result['matches'] = [trim_match(m) for m in acc['matches'][:limit]]
+
     return result
 
 
@@ -275,6 +292,27 @@ def build_v2_react():
     print("✅ V2 build complete")
 
 
+def build_v2_data(full_data):
+    """v2 轮询专用 data.json：仅保留前端真正消费的字段。
+    - accounts: trim_account（matches 保留全量但已精简字段，供 WinRateChart 累计胜率走势）
+    - bilibili: 完整（Hero 仅用 is_live / live_time / title）
+    - hupu_ratings: trim_hupu_ratings（team / matches / latest_match）
+    - last_update: Footer / Hero 展示
+    丢弃前端从不消费的历史字段：daily_stats / quiet_hours / refresh_interval。
+    注意：仅作用于 v2 路径，旧前端 web/ 仍使用全量 data_json（见 main）。"""
+    out = {}
+    out['accounts'] = [trim_account(acc, matches_limit=None) for acc in full_data.get('accounts', [])]
+    out['bilibili'] = full_data.get('bilibili')
+    out['hupu_ratings'] = trim_hupu_ratings(full_data.get('hupu_ratings'))
+    out['last_update'] = full_data.get('last_update')
+    return out
+
+
+def build_v2_events(full_events):
+    """v2 轮询专用 events.json：复用 trim_event（与内联一致），保留全部事件（热力图需近 6 个月）。"""
+    return [trim_event(e) for e in (full_events or []) if trim_event(e)]
+
+
 def build_v2(data_json, events_json, inline_payload):
     """Build & deploy V2 output into v2/ (independent of old root frontend)"""
     print("\n📦 Building V2 output (v2/)...")
@@ -313,10 +351,13 @@ def main():
 
     build_react_app()
     data_json, events_json, inline_payload = load_data()
+    # 旧前端 web/ 使用全量数据（不影响）
     inject_and_copy(data_json, events_json, inline_payload)
 
-    # V2 独立构建（/v2/ 子路径，不影响旧前端）
-    build_v2(data_json, events_json, inline_payload)
+    # V2 独立构建（/v2/ 子路径）：仅对 v2 路径使用精简后的轮询数据
+    v2_data = build_v2_data(data_json)
+    v2_events = build_v2_events(events_json)
+    build_v2(v2_data, v2_events, inline_payload)
 
 
 if __name__ == '__main__':

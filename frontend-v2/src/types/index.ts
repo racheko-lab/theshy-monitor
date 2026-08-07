@@ -170,6 +170,15 @@ export interface HupuRatings {
     home_logo: string
     away_logo: string
     match_time?: string
+    date_str?: string
+    time_str?: string
+    stage?: string
+    status_desc?: string
+    status?: string
+    ig_side?: string
+    opponent?: string
+    opponent_logo?: string
+    ig_logo?: string
   } | null
   upcoming: unknown
   last_check: string

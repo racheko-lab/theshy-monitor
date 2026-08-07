@@ -1,16 +1,21 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Radio, Tv, Video, MessageCircle, Swords, Sparkles, type LucideIcon } from 'lucide-react'
+import { Radio, Tv, Swords, Sparkles, type LucideIcon } from 'lucide-react'
 import { EASE_OUT } from '@/constants'
-import { timeAgo } from '@/utils/time'
+import { timeAgo, clock, dateShort, duration } from '@/utils/time'
 import { StatusDot } from '@/components/ui/StatusDot'
 import { Button } from '@/components/ui/Button'
+import type { Account } from '@/types'
 
 interface HeroProps {
   live: boolean
+  liveTime?: string
   liveTitle?: string
   lastUpdate?: string
   particles: boolean
   onToggleParticles: () => void
+  /** 当前选中的账号（跟随账号切换） */
+  account?: Account
 }
 
 const container = {
@@ -31,31 +36,35 @@ function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-interface QuickEntry {
-  icon: LucideIcon
-  label: string
-  onClick: () => void
-  muted: boolean
+/** 直播已播时长 —— 独立 1s 定时器，仅此文本每秒重渲染，Hero 主树不再每秒重渲染 */
+function LiveDuration({ liveTime }: { liveTime: string }) {
+  const [now, setNow] = useState(() => Date.now())
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(Date.now()), 1000)
+    return () => window.clearInterval(id)
+  }, [])
+  const seconds = Math.max(0, Math.floor((now - new Date(liveTime).getTime()) / 1000))
+  return <span>已播 {duration(seconds)}</span>
 }
-
-const QUICK_ENTRIES: QuickEntry[] = [
-  { icon: Tv, label: '直播', onClick: () => scrollToId('status'), muted: false },
-  { icon: Video, label: '视频', onClick: () => {}, muted: true },
-  { icon: MessageCircle, label: '微博', onClick: () => {}, muted: true },
-  { icon: Swords, label: '战绩', onClick: () => scrollToId('stats'), muted: false },
-]
 
 export function Hero({
   live,
+  liveTime,
   liveTitle,
   lastUpdate,
   particles,
   onToggleParticles,
+  account,
 }: HeroProps) {
-  const entries = QUICK_ENTRIES
+  const liveStartValid = !!liveTime && liveTime !== '0000-00-00 00:00:00'
+
+  const entries: { icon: LucideIcon; label: string; onClick: () => void }[] = [
+    { icon: Tv, label: '直播', onClick: () => scrollToId('status') },
+    { icon: Swords, label: '战绩', onClick: () => scrollToId('stats') },
+  ]
 
   return (
-    <header className="relative flex min-h-[82vh] flex-col items-center justify-center px-6 text-center">
+    <header className="relative flex min-h-[82dvh] flex-col items-center justify-center px-6 text-center">
       <Button
         active={particles}
         onClick={onToggleParticles}
@@ -78,6 +87,18 @@ export function Hero({
         >
           <StatusDot state={live ? 'live' : 'online'} />
           REALTIME DASHBOARD
+          {account && (
+            <span className="ml-1 inline-flex items-center gap-1.5 border-l border-[var(--color-border-strong)] pl-2">
+              {account.profile.profile_image_url ? (
+                <img
+                  src={account.profile.profile_image_url}
+                  alt={account.game_name}
+                  className="h-4 w-4 rounded-full object-cover"
+                />
+              ) : null}
+              {account.label}
+            </span>
+          )}
         </motion.div>
 
         <motion.h1
@@ -102,6 +123,20 @@ export function Hero({
             <StatusDot state={live ? 'live' : 'offline'} />
             {live ? '直播中' : '未直播'}
           </span>
+          {live && liveStartValid && (
+            <>
+              <span className="text-tertiary">·</span>
+              <span>开播 {dateShort(liveTime)} {clock(liveTime)}</span>
+              <span className="text-tertiary">·</span>
+              <LiveDuration liveTime={liveTime!} />
+            </>
+          )}
+          {!live && liveStartValid && (
+            <>
+              <span className="text-tertiary">·</span>
+              <span>距上次直播 {timeAgo(liveTime)}</span>
+            </>
+          )}
           <span className="text-tertiary">·</span>
           <span>最后更新 {lastUpdate ? timeAgo(lastUpdate) : '—'}</span>
           <span className="text-tertiary">·</span>
@@ -124,12 +159,7 @@ export function Hero({
               key={e.label}
               type="button"
               onClick={e.onClick}
-              disabled={e.muted}
-              className={`inline-flex items-center gap-2 rounded-sm border px-4 py-2.5 text-caption font-medium transition-colors duration-200 ${
-                e.muted
-                  ? 'cursor-not-allowed border-[var(--color-border)] text-tertiary'
-                  : 'border-[var(--color-border-strong)] text-text hover:border-[var(--color-primary)]/40 hover:bg-[var(--color-primary-soft)]'
-              }`}
+              className="inline-flex items-center gap-2 rounded-sm border border-[var(--color-border-strong)] px-4 py-2.5 text-caption font-medium text-secondary transition-colors duration-200 hover:border-[var(--color-primary)]/40 hover:bg-[var(--color-primary-soft)] hover:text-text"
             >
               <e.icon size={15} />
               {e.label}

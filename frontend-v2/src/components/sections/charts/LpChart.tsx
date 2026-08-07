@@ -4,11 +4,13 @@ import type { EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
 import type { SeriesPoint } from '@/utils/data'
 import { axisCommon, tooltipCommon, baseGrid, axisLabelInterval } from './theme'
+import { useFirstAnimation } from '@/hooks/useFirstAnimation'
 
 /** 每日 LP 净变化 — 面积折线（成功色、细线、渐变填充） */
 export default function LpChart({ data }: { data: SeriesPoint[] }) {
-  const option = useMemo<EChartsOption>(
-    () => ({
+  const firstRef = useFirstAnimation()
+  const option = useMemo<EChartsOption>(() => {
+    const base: EChartsOption = {
       grid: baseGrid,
       tooltip: { ...tooltipCommon, valueFormatter: (v) => `${v} LP` },
       xAxis: {
@@ -35,11 +37,11 @@ export default function LpChart({ data }: { data: SeriesPoint[] }) {
           },
         },
       ],
-      animationDuration: 800,
-      animationEasing: 'cubicOut',
-    }),
-    [data],
-  )
+    }
+    return firstRef.current
+      ? { ...base, animationDuration: 800, animationEasing: 'cubicOut' }
+      : { ...base, animation: false }
+  }, [data, firstRef])
   return (
     <ReactECharts
       option={option}

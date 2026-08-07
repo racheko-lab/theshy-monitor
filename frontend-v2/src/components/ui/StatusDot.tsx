@@ -1,16 +1,17 @@
 interface StatusDotProps {
-  /** live=红(直播中) / online=绿 / offline=灰 */
-  state: 'live' | 'online' | 'offline'
+  /** live=红(直播中) / online=绿 / delayed=琥珀(延迟) / offline=灰 */
+  state: 'live' | 'online' | 'delayed' | 'offline'
   className?: string
 }
 
 const color: Record<StatusDotProps['state'], string> = {
   live: 'var(--color-danger)',
   online: 'var(--color-success)',
+  delayed: 'var(--color-warning)',
   offline: 'var(--color-text-tertiary)',
 }
 
-/** StatusDot — 状态指示点，live/online 带呼吸脉冲 */
+/** StatusDot — 状态指示点，live/online/delayed 带呼吸脉冲 */
 export function StatusDot({ state, className = '' }: StatusDotProps) {
   const c = color[state]
   const pulse = state !== 'offline'

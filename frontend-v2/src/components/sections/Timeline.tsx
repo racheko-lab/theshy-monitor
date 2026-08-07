@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Swords,
@@ -32,16 +33,69 @@ const META: Record<AppEvent['type'], { icon: LucideIcon; color: string }> = {
 
 const GROUP_ORDER: TimelineItem['group'][] = ['today', 'yesterday', 'earlier']
 
-export function Timeline({ events }: { events: AppEvent[] }) {
-  const items = buildTimeline(events)
-  const grouped = GROUP_ORDER.map((g) => ({
-    group: g,
-    items: items.filter((it) => it.group === g),
-  })).filter((g) => g.items.length > 0)
+const FILTERS: { key: string; label: string; types: AppEvent['type'][] | null }[] = [
+  { key: 'all', label: '全部', types: null },
+  { key: 'live', label: '直播', types: ['bilibili_live'] },
+  { key: 'rank', label: '排位', types: ['new_match'] },
+  { key: 'lp', label: 'LP', types: ['lp_changed'] },
+  { key: 'win', label: '连胜', types: ['winning_streak'] },
+  { key: 'lose', label: '连败', types: ['losing_streak'] },
+  { key: 'rank_change', label: 'Rank', types: ['rank_changed'] },
+  { key: 'level', label: '等级', types: ['level_changed'] },
+]
+
+export function Timeline({
+  events,
+  slug,
+}: {
+  events: AppEvent[]
+  slug?: string
+}) {
+  const [filter, setFilter] = useState('all')
+
+  const items = useMemo(() => {
+    const all = buildTimeline(events)
+    const cfg = FILTERS.find((f) => f.key === filter)
+    const typeSet = cfg?.types ? new Set(cfg.types) : null
+    return all.filter((it) => {
+      if (typeSet && !typeSet.has(it.type)) return false
+      // 账号过滤：无 slug 的全局事件（直播/赛事）始终保留
+      if (slug && it.slug && it.slug !== slug) return false
+      return true
+    })
+  }, [events, filter, slug])
+
+  const grouped = useMemo(
+    () =>
+      GROUP_ORDER.map((g) => ({
+        group: g,
+        items: items.filter((it) => it.group === g),
+      })).filter((g) => g.items.length > 0),
+    [items],
+  )
 
   return (
     <section id="timeline" className="mx-auto max-w-3xl px-6 py-16">
       <SectionTitle eyebrow="Timeline" title="动态时间轴" />
+      <div className="mb-8 flex flex-wrap gap-2">
+        {FILTERS.map((f) => {
+          const on = f.key === filter
+          return (
+            <button
+              key={f.key}
+              type="button"
+              onClick={() => setFilter(f.key)}
+              className={`rounded-full border px-3 py-1.5 text-caption font-medium transition-colors duration-200 ${
+                on
+                  ? 'border-[var(--color-primary)]/40 bg-[var(--color-primary-soft)] text-[var(--color-primary)]'
+                  : 'border-[var(--color-border-strong)] text-secondary hover:text-text'
+              }`}
+            >
+              {f.label}
+            </button>
+          )
+        })}
+      </div>
       <div className="flex flex-col gap-10">
         {grouped.map((group) => (
           <div key={group.group}>

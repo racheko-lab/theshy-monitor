@@ -194,14 +194,13 @@ export interface StatsSummary {
   division?: number
   ladderRank?: number
   ladderTotal?: number
-  recentLpDelta: number
   avgGameLength: number
   longestGame: number
   level: number
 }
 
-export function computeStats(data: AppData, events: AppEvent[]): StatsSummary {
-  const main = getAccount(data, 'main')
+export function computeStats(data: AppData, slug = 'main'): StatsSummary {
+  const main = getAccount(data, slug)
   const solo = getSoloranked(main)
   const totalMatches = solo?.play ?? main.matches.length
   const totalWins = solo?.win ?? 0
@@ -214,10 +213,8 @@ export function computeStats(data: AppData, events: AppEvent[]): StatsSummary {
     : 0
   const longestGame = lens.length ? Math.max(...lens) : 0
 
-  const recentLpDelta = events
-    .filter((e): e is LpChangedEvent => isLpChanged(e) && e.slug === 'main')
-    .reduce((s, e) => s + e.delta, 0)
-
+  // 注：近段时间 LP 净变化由 StatusCards 自行按 slug 计算并展示（见 StatusCards.buildStatusCards），
+  // 此处 computeStats 不重复计算（避免硬编码 slug 的死值）。
   return {
     totalMatches,
     totalWins,
@@ -228,7 +225,6 @@ export function computeStats(data: AppData, events: AppEvent[]): StatsSummary {
     division: solo?.division,
     ladderRank: main.profile.ladder_rank?.rank,
     ladderTotal: main.profile.ladder_rank?.total,
-    recentLpDelta,
     avgGameLength,
     longestGame,
     level: main.profile.level,

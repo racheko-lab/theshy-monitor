@@ -3,11 +3,13 @@ import ReactECharts from 'echarts-for-react'
 import type { EChartsOption } from 'echarts'
 import type { SeriesPoint } from '@/utils/data'
 import { axisCommon, tooltipCommon, baseGrid, axisLabelInterval } from './theme'
+import { useFirstAnimation } from '@/hooks/useFirstAnimation'
 
 /** 每日对局数 — 柱状图（细柱、主色、圆角） */
 export default function MatchesChart({ data }: { data: SeriesPoint[] }) {
-  const option = useMemo<EChartsOption>(
-    () => ({
+  const firstRef = useFirstAnimation()
+  const option = useMemo<EChartsOption>(() => {
+    const base: EChartsOption = {
       grid: baseGrid,
       tooltip: { ...tooltipCommon, valueFormatter: (v) => `${v} 场` },
       xAxis: {
@@ -29,11 +31,11 @@ export default function MatchesChart({ data }: { data: SeriesPoint[] }) {
           },
         },
       ],
-      animationDuration: 800,
-      animationEasing: 'cubicOut',
-    }),
-    [data],
-  )
+    }
+    return firstRef.current
+      ? { ...base, animationDuration: 800, animationEasing: 'cubicOut' }
+      : { ...base, animation: false }
+  }, [data, firstRef])
   return (
     <ReactECharts
       option={option}

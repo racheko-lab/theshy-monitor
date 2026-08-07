@@ -4,9 +4,11 @@ import type { EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
 import type { Match } from '@/types'
 import { axisCommon, tooltipCommon, baseGrid } from './theme'
+import { useFirstAnimation } from '@/hooks/useFirstAnimation'
 
 /** 累计胜率走势 — 折线（按对局时间累计，主色细线） */
 export default function WinRateChart({ matches }: { matches: Match[] }) {
+  const firstRef = useFirstAnimation()
   const points = useMemo(() => {
     const sorted = [...matches].sort(
       (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
@@ -21,8 +23,8 @@ export default function WinRateChart({ matches }: { matches: Match[] }) {
     })
   }, [matches])
 
-  const option = useMemo<EChartsOption>(
-    () => ({
+  const option = useMemo<EChartsOption>(() => {
+    const base: EChartsOption = {
       grid: baseGrid,
       tooltip: { ...tooltipCommon, valueFormatter: (v) => `${v}%` },
       xAxis: {
@@ -59,11 +61,11 @@ export default function WinRateChart({ matches }: { matches: Match[] }) {
           },
         },
       ],
-      animationDuration: 800,
-      animationEasing: 'cubicOut',
-    }),
-    [points],
-  )
+    }
+    return firstRef.current
+      ? { ...base, animationDuration: 800, animationEasing: 'cubicOut' }
+      : { ...base, animation: false }
+  }, [points, firstRef])
   return (
     <ReactECharts
       option={option}

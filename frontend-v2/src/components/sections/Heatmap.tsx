@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import type { AppEvent } from '@/types'
 import { buildHistory, type HistoryMonth } from '@/utils/data'
-import { clock, dateShort } from '@/utils/time'
+import { clock, dateShort, dayKey } from '@/utils/time'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { Tag } from '@/components/ui/Tag'
 
@@ -18,14 +18,21 @@ function dayCellColor(count: number): string {
   return `rgba(79,140,255,${alpha.toFixed(2)})`
 }
 
-function MonthRow({ month }: { month: HistoryMonth }) {
+function MonthRow({ month, todayKey }: { month: HistoryMonth; todayKey: string }) {
   const [open, setOpen] = useState(false)
+  const [selectedDay, setSelectedDay] = useState<string | null>(null)
   const [y, m] = month.key.split('-').map(Number)
   const total = daysInMonth(month.key)
   const cells = Array.from({ length: total }, (_, i) => {
     const dd = String(i + 1).padStart(2, '0')
     return { key: `${y}-${String(m).padStart(2, '0')}-${dd}`, count: month.days[`${y}-${String(m).padStart(2, '0')}-${dd}`] ?? 0 }
   })
+
+  const dayItems = useMemo(
+    () => (selectedDay ? month.items.filter((it) => dayKey(it.timestamp) === selectedDay) : []),
+    [selectedDay, month.items],
+  )
+  const dayCount = selectedDay ? month.days[selectedDay] ?? 0 : 0
 
   return (
     <div className="rounded-lg border border-[var(--color-border)] bg-white/[0.02]">
@@ -44,8 +51,11 @@ function MonthRow({ month }: { month: HistoryMonth }) {
               <span
                 key={c.key}
                 className="h-3 w-3 rounded-[3px]"
-                style={{ backgroundColor: dayCellColor(c.count) }}
-                title={`${c.key}: ${c.count}`}
+                style={{
+                  backgroundColor: dayCellColor(c.count),
+                  boxShadow: c.key === todayKey ? '0 0 0 1.5px var(--color-primary)' : undefined,
+                }}
+                title={`${c.key}: ${c.count} 次动态`}
               />
             ))}
           </div>
@@ -56,6 +66,34 @@ function MonthRow({ month }: { month: HistoryMonth }) {
           />
         </div>
       </button>
+
+      {selectedDay && (
+        <div className="border-t border-[var(--color-border)] px-5 py-3">
+          <div className="flex items-center gap-2 text-caption">
+            <span className="font-medium text-text">
+              {dateShort(selectedDay)} · {dayCount} 次动态
+            </span>
+            <button
+              type="button"
+              onClick={() => setSelectedDay(null)}
+              className="ml-auto text-tertiary transition-colors duration-200 hover:text-text"
+            >
+              关闭
+            </button>
+          </div>
+          {dayItems.length > 0 && (
+            <div className="mt-2 flex flex-col gap-1.5">
+              {dayItems.map((it) => (
+                <div key={it.key} className="flex items-center gap-2 text-caption">
+                  <span className="w-12 shrink-0 tabular-nums text-tertiary">{clock(it.timestamp)}</span>
+                  <span className="flex-1 truncate text-text">{it.title}</span>
+                  {it.slug === 'smurf' && <Tag>小号</Tag>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <AnimatePresence initial={false}>
         {open && (
@@ -69,11 +107,22 @@ function MonthRow({ month }: { month: HistoryMonth }) {
             <div className="border-t border-[var(--color-border)] px-5 py-4">
               <div className="mb-3 flex flex-wrap gap-1">
                 {cells.map((c) => (
-                  <span
+                  <button
                     key={c.key}
-                    className="h-3.5 w-3.5 rounded-[3px]"
-                    style={{ backgroundColor: dayCellColor(c.count) }}
-                    title={`${c.key}: ${c.count}`}
+                    type="button"
+                    onClick={() => setSelectedDay(c.key)}
+                    className="h-3.5 w-3.5 rounded-[3px] transition-transform duration-150 hover:scale-125"
+                    style={{
+                      backgroundColor: dayCellColor(c.count),
+                      boxShadow:
+                        c.key === todayKey
+                          ? '0 0 0 1.5px var(--color-primary)'
+                          : c.key === selectedDay
+                            ? '0 0 0 1.5px var(--color-text-secondary)'
+                            : undefined,
+                    }}
+                    title={`${c.key}: ${c.count} 次动态`}
+                    aria-label={`${c.key}: ${c.count} 次动态`}
                   />
                 ))}
               </div>
@@ -106,12 +155,13 @@ function MonthRow({ month }: { month: HistoryMonth }) {
 
 export function Heatmap({ events }: { events: AppEvent[] }) {
   const months = useMemo(() => buildHistory(events, 6), [events])
+  const todayKey = useMemo(() => dayKey(new Date().toISOString()), [])
   return (
     <section id="history" className="mx-auto max-w-3xl px-6 py-16">
       <SectionTitle eyebrow="History" title="历史记录" />
       <div className="flex flex-col gap-3">
         {months.map((m) => (
-          <MonthRow key={m.key} month={m} />
+          <MonthRow key={m.key} month={m} todayKey={todayKey} />
         ))}
       </div>
     </section>

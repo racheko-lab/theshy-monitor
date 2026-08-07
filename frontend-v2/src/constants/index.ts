@@ -11,25 +11,6 @@ export const REFRESH_INTERVAL = 30_000
 /** 首屏数据内联注入的全局变量名（build.py 注入） */
 export const INLINE_DATA_KEY = '__INITIAL_DATA__'
 
-/** 段位 → 强调色（高级灰 + 单点强调，避免彩虹色） */
-export const TIER_COLOR: Record<string, string> = {
-  CHALLENGER: '#f0b232',
-  GRANDMASTER: '#ff4d4f',
-  MASTER: '#ff4d4f',
-  DIAMOND: '#4f8cff',
-  EMERALD: '#4ade80',
-  PLATINUM: '#4ade80',
-  GOLD: '#fbbf24',
-  SILVER: '#999999',
-  BRONZE: '#b06a45',
-  IRON: '#6b6b70',
-}
-
-export function tierColor(tier?: string): string {
-  if (!tier) return 'var(--color-text-secondary)'
-  return TIER_COLOR[tier.toUpperCase()] ?? 'var(--color-primary)'
-}
-
 /** 段位中文（保持克制，仅在必要时本地化） */
 export const TIER_LABEL_CN: Record<string, string> = {
   CHALLENGER: '王者',
