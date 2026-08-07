@@ -1,5 +1,20 @@
 [
   {
+    "type": "error",
+    "account": "은여하#1103",
+    "msg": "{'code': -32603, 'message': 'HTTP request returned status code 503:\\n<html>\\r\\n<head><title>503 Service Temporarily Unavailable</title></head>\\r\\n<body>\\r\\n<center><h1>503 Service Temporarily Una (truncated...)\\n'}",
+    "timestamp": "2026-08-07T16:56:07.220631+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-07T16:55:08+09:00",
+    "level": 295,
+    "is_active": true,
+    "timestamp": "2026-08-07T16:56:07.202599+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -15308,23 +15323,5 @@
     "level": 294,
     "is_active": false,
     "timestamp": "2026-08-04T22:24:35.232690+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-04T21:30:43+09:00",
-    "level": 93,
-    "is_active": false,
-    "timestamp": "2026-08-04T21:47:36.504716+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-04T20:41:17+09:00",
-    "level": 294,
-    "is_active": false,
-    "timestamp": "2026-08-04T21:47:36.498877+09:00"
   }
 ]
