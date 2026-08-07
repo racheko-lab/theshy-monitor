@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-08-07T23:10:48+09:00",
+    "level": 93,
+    "is_active": false,
+    "timestamp": "2026-08-07T23:35:57.469546+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-07T23:35:31+09:00",
+    "level": 295,
+    "is_active": true,
+    "timestamp": "2026-08-07T23:35:57.454966+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-08-07T21:08:58+09:00",
     "level": 93,
     "is_active": false,
@@ -12631,34 +12649,5 @@
     "level": 93,
     "is_active": true,
     "timestamp": "2026-08-05T04:00:29.879077+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "game_type": "SOLORANKED",
-    "old_lp": 1506,
-    "new_lp": 1484,
-    "delta": -22,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-08-05T04:00:28.829640+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi20jmBhFRhBr7aJJtz8iOfOCM3OqmNmAO_g=",
-    "game_type": "SOLORANKED",
-    "champion": "暗夜猎手",
-    "result": "WIN",
-    "kda": "3.40",
-    "kill": 10,
-    "death": 5,
-    "assist": 7,
-    "created_at": "2026-08-05T03:42:42+09:00",
-    "game_length_second": 1851,
-    "position": "TOP",
-    "timestamp": "2026-08-05T04:00:27.768644+09:00"
   }
 ]
