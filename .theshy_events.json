@@ -1,6 +1,24 @@
 [
   {
     "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-09T08:01:51+09:00",
+    "level": 94,
+    "is_active": true,
+    "timestamp": "2026-08-09T08:02:00.125250+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-09T07:37:30+09:00",
+    "level": 295,
+    "is_active": false,
+    "timestamp": "2026-08-09T08:02:00.118018+09:00"
+  },
+  {
+    "type": "opgg_updated",
     "account": "The shy#asdf",
     "slug": "main",
     "updated_at": "2026-08-09T07:00:35+09:00",
@@ -6756,20 +6774,5 @@
       }
     ],
     "timestamp": "2026-08-07T17:48:52.043789+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-07T17:24:01+09:00",
-    "level": 93,
-    "is_active": false,
-    "timestamp": "2026-08-07T17:48:52.007027+09:00"
-  },
-  {
-    "type": "error",
-    "account": "은여하#1103",
-    "msg": "{'code': -32603, 'message': 'HTTP request returned status code 503:\\n<html>\\r\\n<head><title>503 Service Temporarily Unavailable</title></head>\\r\\n<body>\\r\\n<center><h1>503 Service Temporarily Una (truncated...)\\n'}",
-    "timestamp": "2026-08-07T16:56:07.220631+09:00"
   }
 ]
