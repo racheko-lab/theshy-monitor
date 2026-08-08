@@ -17,14 +17,14 @@
         "internal_name": "퐁당가지토마토",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
         "level": 295,
-        "updated_at": "2026-08-08T23:52:51+09:00",
-        "renewable_at": "2026-08-08T23:54:51+09:00",
+        "updated_at": "2026-08-09T00:48:34+09:00",
+        "renewable_at": "2026-08-09T00:50:34+09:00",
         "revision_at": "2026-08-08T02:52:45+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 653,
-          "total": 2827829
+          "rank": 652,
+          "total": 2828009
         },
         "league_stats": [
           {
@@ -50,16 +50,16 @@
                 "key": "CHALLENGER",
                 "current_count": 300,
                 "lp_threshold": 1831,
-                "promotion_candidate_count": 0,
-                "demotion_candidate_count": 0
+                "promotion_candidate_count": 2,
+                "demotion_candidate_count": 2
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
                 "current_count": 700,
                 "lp_threshold": 1337,
-                "promotion_candidate_count": 3,
-                "demotion_candidate_count": 1
+                "promotion_candidate_count": 4,
+                "demotion_candidate_count": 3
               }
             ]
           },
@@ -14583,8 +14583,8 @@
         }
       ],
       "state": {
-        "is_active": false,
-        "last_check": "2026-08-09T00:15:57.362900+09:00",
+        "is_active": true,
+        "last_check": "2026-08-09T00:48:48.563599+09:00",
         "last_match_id": "qfvdWpGbi20jmBhFRhBr7aJJtz8iOfOCM3OqmNmAO_g=",
         "matches_count": 20
       }
@@ -14606,14 +14606,14 @@
         "internal_name": "",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon7146.jpg",
         "level": 94,
-        "updated_at": "2026-08-09T00:13:48+09:00",
-        "renewable_at": "2026-08-09T00:15:48+09:00",
+        "updated_at": "2026-08-09T00:46:25+09:00",
+        "renewable_at": "2026-08-09T00:48:25+09:00",
         "revision_at": "2026-08-08T04:53:52+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 439,
-          "total": 2827830
+          "rank": 438,
+          "total": 2828009
         },
         "league_stats": [
           {
@@ -14639,16 +14639,16 @@
                 "key": "CHALLENGER",
                 "current_count": 300,
                 "lp_threshold": 1831,
-                "promotion_candidate_count": 0,
-                "demotion_candidate_count": 0
+                "promotion_candidate_count": 2,
+                "demotion_candidate_count": 2
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
                 "current_count": 700,
                 "lp_threshold": 1337,
-                "promotion_candidate_count": 3,
-                "demotion_candidate_count": 1
+                "promotion_candidate_count": 4,
+                "demotion_candidate_count": 3
               }
             ]
           },
@@ -28823,20 +28823,20 @@
       ],
       "state": {
         "is_active": true,
-        "last_check": "2026-08-09T00:16:07.580992+09:00",
+        "last_check": "2026-08-09T00:48:59.046200+09:00",
         "last_match_id": "qfvdWpGbi23niyYqxsdE2pARKVi-PsimcvATkug0LqQ=",
         "matches_count": 20
       }
     }
   ],
-  "last_update": "2026-08-09T00:16:07.581445+09:00",
+  "last_update": "2026-08-09T00:48:59.046584+09:00",
   "bilibili": {
     "is_live": true,
     "is_ig_live": false,
     "title": "【预告】9日15点 IG vs LNG",
     "live_time": "2026-08-08 14:02:29",
     "room_id": 7734200,
-    "last_check": "2026-08-08T23:16:08.441867+08:00",
+    "last_check": "2026-08-08T23:48:59.689779+08:00",
     "notified_title": ""
   },
   "hupu_ratings": {
@@ -28868,7 +28868,7 @@
             "name": "Rookie",
             "team": "IG",
             "avg": 8.0,
-            "total_count": 14592,
+            "total_count": 14594,
             "comments": 2028,
             "kda": "13/7/28",
             "kda_ratio": 5.86,
@@ -28918,13 +28918,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 9343,
+              "s5": 9344,
               "s4": 1241,
               "s3": 897,
               "s2": 589,
-              "s1": 2522
+              "s1": 2523
             },
-            "score_dist_total": 14592,
+            "score_dist_total": 14594,
             "best_radar": {
               "self": {
                 "name": "Rookie",
@@ -29004,7 +29004,7 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 6.8,
-            "total_count": 18247,
+            "total_count": 18249,
             "comments": 5959,
             "kda": "7/13/39",
             "kda_ratio": 3.54,
@@ -29047,19 +29047,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 7597,
+              "s5": 7598,
               "s4": 2783,
               "s3": 2157,
               "s2": 878,
-              "s1": 4832
+              "s1": 4833
             },
-            "score_dist_total": 18247,
+            "score_dist_total": 18249,
             "best_radar": {
               "self": {
                 "name": "Meiko",
                 "desc": "败(3/2/18)",
                 "score": "7.1",
-                "votes": "6125评分",
+                "votes": "6127评分",
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                 "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
                 "team_id": "2",
@@ -29095,7 +29095,7 @@
                 "name": "fengyue",
                 "desc": "胜(0/4/13)",
                 "score": "5.3",
-                "votes": "1878评分",
+                "votes": "1879评分",
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
                 "team_id": "587",
@@ -29133,7 +29133,7 @@
             "name": "Wei",
             "team": "IG",
             "avg": 6.8,
-            "total_count": 14016,
+            "total_count": 14017,
             "comments": 2032,
             "kda": "11/11/28",
             "kda_ratio": 3.55,
@@ -29187,9 +29187,9 @@
               "s4": 327,
               "s3": 694,
               "s2": 1009,
-              "s1": 4452
+              "s1": 4453
             },
-            "score_dist_total": 14016,
+            "score_dist_total": 14017,
             "best_radar": {
               "self": {
                 "name": "Wei",
@@ -29432,14 +29432,14 @@
             ],
             "hot_comment": {
               "content": "要不要让我的替补来教你怎么玩武器",
-              "likes": 2389,
+              "likes": 2391,
               "user": "BLGWenbo",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "要不要让我的替补来教你怎么玩武器",
-                "likes": 2389,
+                "likes": 2391,
                 "user": "BLGWenbo",
                 "bo_label": "第3局"
               },
@@ -29450,9 +29450,9 @@
                 "bo_label": "第1局"
               },
               {
-                "content": "毫无熟练度",
-                "likes": 139,
-                "user": "Daisy_yu_Step",
+                "content": "没啥熟练度，也没看出来这阵容有什么配合，瑞兹放传进去打？这种时机太难找了吧",
+                "likes": 212,
+                "user": "路过一缕风",
                 "bo_label": "第2局"
               }
             ],
@@ -29548,7 +29548,7 @@
             "name": "Care",
             "team": "NIP",
             "avg": 9.1,
-            "total_count": 13878,
+            "total_count": 13880,
             "comments": 2135,
             "kda": "26/9/17",
             "kda_ratio": 4.78,
@@ -29588,7 +29588,7 @@
               },
               {
                 "content": "王朝了，五杀亮fpx，最后的小凤凰",
-                "likes": 1009,
+                "likes": 1010,
                 "user": "宇宙第一不能喷辅助kael",
                 "bo_label": "第2局"
               },
@@ -29603,13 +29603,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 12252,
+              "s5": 12253,
               "s4": 95,
               "s3": 68,
               "s2": 174,
-              "s1": 1289
+              "s1": 1290
             },
-            "score_dist_total": 13878,
+            "score_dist_total": 13880,
             "best_radar": {
               "self": {
                 "name": "Care",
@@ -29689,7 +29689,7 @@
             "name": "HOYA",
             "team": "NIP",
             "avg": 8.7,
-            "total_count": 9864,
+            "total_count": 9865,
             "comments": 2005,
             "kda": "15/10/21",
             "kda_ratio": 3.6,
@@ -29743,15 +29743,15 @@
               "s4": 1043,
               "s3": 637,
               "s2": 191,
-              "s1": 954
+              "s1": 955
             },
-            "score_dist_total": 9864,
+            "score_dist_total": 9865,
             "best_radar": {
               "self": {
                 "name": "HOYA",
                 "desc": "胜(4/4/5)",
                 "score": "9.4",
-                "votes": "5710评分",
+                "votes": "5711评分",
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
                 "team_id": "587",
@@ -29825,7 +29825,7 @@
             "name": "Photic",
             "team": "NIP",
             "avg": 5.5,
-            "total_count": 6121,
+            "total_count": 6122,
             "comments": 803,
             "kda": "13/11/27",
             "kda_ratio": 3.64,
@@ -29879,15 +29879,15 @@
               "s4": 364,
               "s3": 210,
               "s2": 322,
-              "s1": 3030
+              "s1": 3031
             },
-            "score_dist_total": 6121,
+            "score_dist_total": 6122,
             "best_radar": {
               "self": {
                 "name": "Photic",
                 "desc": "胜(6/2/6)",
                 "score": "9.1",
-                "votes": "2579评分",
+                "votes": "2580评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
                 "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
                 "team_id": "587",
@@ -29961,7 +29961,7 @@
             "name": "fengyue",
             "team": "NIP",
             "avg": 5.5,
-            "total_count": 5015,
+            "total_count": 5016,
             "comments": 724,
             "kda": "1/9/46",
             "kda_ratio": 5.22,
@@ -30010,9 +30010,9 @@
               "s4": 566,
               "s3": 783,
               "s2": 693,
-              "s1": 1766
+              "s1": 1767
             },
-            "score_dist_total": 5015,
+            "score_dist_total": 5016,
             "best_radar": {
               "self": {
                 "name": "fengyue",
@@ -30092,7 +30092,7 @@
             "name": "Guwon",
             "team": "NIP",
             "avg": 3.5,
-            "total_count": 5632,
+            "total_count": 5633,
             "comments": 1030,
             "kda": "4/16/28",
             "kda_ratio": 2.0,
@@ -30140,9 +30140,9 @@
               "s4": 223,
               "s3": 491,
               "s2": 585,
-              "s1": 3836
+              "s1": 3837
             },
-            "score_dist_total": 5632,
+            "score_dist_total": 5633,
             "best_radar": {
               "self": {
                 "name": "Guwon",
@@ -30224,7 +30224,7 @@
             "name": "Rookie",
             "team": "IG",
             "avg": 8.0,
-            "total_count": 14592,
+            "total_count": 14594,
             "comments": 2028,
             "kda": "13/7/28",
             "kda_ratio": 5.86,
@@ -30274,13 +30274,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 9343,
+              "s5": 9344,
               "s4": 1241,
               "s3": 897,
               "s2": 589,
-              "s1": 2522
+              "s1": 2523
             },
-            "score_dist_total": 14592,
+            "score_dist_total": 14594,
             "best_radar": {
               "self": {
                 "name": "Rookie",
@@ -30360,7 +30360,7 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 6.8,
-            "total_count": 18247,
+            "total_count": 18249,
             "comments": 5959,
             "kda": "7/13/39",
             "kda_ratio": 3.54,
@@ -30403,19 +30403,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 7597,
+              "s5": 7598,
               "s4": 2783,
               "s3": 2157,
               "s2": 878,
-              "s1": 4832
+              "s1": 4833
             },
-            "score_dist_total": 18247,
+            "score_dist_total": 18249,
             "best_radar": {
               "self": {
                 "name": "Meiko",
                 "desc": "败(3/2/18)",
                 "score": "7.1",
-                "votes": "6125评分",
+                "votes": "6127评分",
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                 "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
                 "team_id": "2",
@@ -30451,7 +30451,7 @@
                 "name": "fengyue",
                 "desc": "胜(0/4/13)",
                 "score": "5.3",
-                "votes": "1878评分",
+                "votes": "1879评分",
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
                 "team_id": "587",
@@ -30489,7 +30489,7 @@
             "name": "Wei",
             "team": "IG",
             "avg": 6.8,
-            "total_count": 14016,
+            "total_count": 14017,
             "comments": 2032,
             "kda": "11/11/28",
             "kda_ratio": 3.55,
@@ -30543,9 +30543,9 @@
               "s4": 327,
               "s3": 694,
               "s2": 1009,
-              "s1": 4452
+              "s1": 4453
             },
-            "score_dist_total": 14016,
+            "score_dist_total": 14017,
             "best_radar": {
               "self": {
                 "name": "Wei",
@@ -30788,14 +30788,14 @@
             ],
             "hot_comment": {
               "content": "要不要让我的替补来教你怎么玩武器",
-              "likes": 2389,
+              "likes": 2391,
               "user": "BLGWenbo",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "要不要让我的替补来教你怎么玩武器",
-                "likes": 2389,
+                "likes": 2391,
                 "user": "BLGWenbo",
                 "bo_label": "第3局"
               },
@@ -30806,9 +30806,9 @@
                 "bo_label": "第1局"
               },
               {
-                "content": "毫无熟练度",
-                "likes": 139,
-                "user": "Daisy_yu_Step",
+                "content": "没啥熟练度，也没看出来这阵容有什么配合，瑞兹放传进去打？这种时机太难找了吧",
+                "likes": 212,
+                "user": "路过一缕风",
                 "bo_label": "第2局"
               }
             ],
@@ -30904,7 +30904,7 @@
             "name": "Care",
             "team": "NIP",
             "avg": 9.1,
-            "total_count": 13878,
+            "total_count": 13880,
             "comments": 2135,
             "kda": "26/9/17",
             "kda_ratio": 4.78,
@@ -30944,7 +30944,7 @@
               },
               {
                 "content": "王朝了，五杀亮fpx，最后的小凤凰",
-                "likes": 1009,
+                "likes": 1010,
                 "user": "宇宙第一不能喷辅助kael",
                 "bo_label": "第2局"
               },
@@ -30959,13 +30959,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 12252,
+              "s5": 12253,
               "s4": 95,
               "s3": 68,
               "s2": 174,
-              "s1": 1289
+              "s1": 1290
             },
-            "score_dist_total": 13878,
+            "score_dist_total": 13880,
             "best_radar": {
               "self": {
                 "name": "Care",
@@ -31045,7 +31045,7 @@
             "name": "HOYA",
             "team": "NIP",
             "avg": 8.7,
-            "total_count": 9864,
+            "total_count": 9865,
             "comments": 2005,
             "kda": "15/10/21",
             "kda_ratio": 3.6,
@@ -31099,15 +31099,15 @@
               "s4": 1043,
               "s3": 637,
               "s2": 191,
-              "s1": 954
+              "s1": 955
             },
-            "score_dist_total": 9864,
+            "score_dist_total": 9865,
             "best_radar": {
               "self": {
                 "name": "HOYA",
                 "desc": "胜(4/4/5)",
                 "score": "9.4",
-                "votes": "5710评分",
+                "votes": "5711评分",
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
                 "team_id": "587",
@@ -31181,7 +31181,7 @@
             "name": "Photic",
             "team": "NIP",
             "avg": 5.5,
-            "total_count": 6121,
+            "total_count": 6122,
             "comments": 803,
             "kda": "13/11/27",
             "kda_ratio": 3.64,
@@ -31235,15 +31235,15 @@
               "s4": 364,
               "s3": 210,
               "s2": 322,
-              "s1": 3030
+              "s1": 3031
             },
-            "score_dist_total": 6121,
+            "score_dist_total": 6122,
             "best_radar": {
               "self": {
                 "name": "Photic",
                 "desc": "胜(6/2/6)",
                 "score": "9.1",
-                "votes": "2579评分",
+                "votes": "2580评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
                 "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
                 "team_id": "587",
@@ -31317,7 +31317,7 @@
             "name": "fengyue",
             "team": "NIP",
             "avg": 5.5,
-            "total_count": 5015,
+            "total_count": 5016,
             "comments": 724,
             "kda": "1/9/46",
             "kda_ratio": 5.22,
@@ -31366,9 +31366,9 @@
               "s4": 566,
               "s3": 783,
               "s2": 693,
-              "s1": 1766
+              "s1": 1767
             },
-            "score_dist_total": 5015,
+            "score_dist_total": 5016,
             "best_radar": {
               "self": {
                 "name": "fengyue",
@@ -31448,7 +31448,7 @@
             "name": "Guwon",
             "team": "NIP",
             "avg": 3.5,
-            "total_count": 5632,
+            "total_count": 5633,
             "comments": 1030,
             "kda": "4/16/28",
             "kda_ratio": 2.0,
@@ -31496,9 +31496,9 @@
               "s4": 223,
               "s3": 491,
               "s2": 585,
-              "s1": 3836
+              "s1": 3837
             },
-            "score_dist_total": 5632,
+            "score_dist_total": 5633,
             "best_radar": {
               "self": {
                 "name": "Guwon",
@@ -31580,7 +31580,7 @@
             "name": "教练 Maizijian",
             "team": "NIP",
             "avg": 6.0,
-            "total_count": 1511,
+            "total_count": 1512,
             "comments": 108,
             "kda": "",
             "kda_ratio": 0,
@@ -31634,7 +31634,7 @@
             "name": "教练 Helper",
             "team": "IG",
             "avg": 4.1,
-            "total_count": 4552,
+            "total_count": 4553,
             "comments": 1208,
             "kda": "",
             "kda_ratio": 0,
@@ -31732,7 +31732,7 @@
             "name": "互动主持：阿芙",
             "team": "",
             "avg": 9.2,
-            "total_count": 276,
+            "total_count": 277,
             "comments": 20,
             "kda": "",
             "kda_ratio": 0,
@@ -31860,7 +31860,7 @@
             "name": "教练 Helper",
             "team": "IG",
             "avg": 4.1,
-            "total_count": 4552,
+            "total_count": 4553,
             "comments": 1208,
             "kda": "",
             "kda_ratio": 0,
@@ -31916,7 +31916,7 @@
             "name": "教练 Maizijian",
             "team": "NIP",
             "avg": 6.0,
-            "total_count": 1511,
+            "total_count": 1512,
             "comments": 108,
             "kda": "",
             "kda_ratio": 0,
@@ -33133,7 +33133,7 @@
                 "hot_comments": [
                   {
                     "content": "王朝了，五杀亮fpx，最后的小凤凰",
-                    "likes": 1009,
+                    "likes": 1010,
                     "user": "宇宙第一不能喷辅助kael"
                   }
                 ],
@@ -33237,9 +33237,9 @@
                 "labels": [],
                 "hot_comments": [
                   {
-                    "content": "毫无熟练度",
-                    "likes": 139,
-                    "user": "Daisy_yu_Step"
+                    "content": "没啥熟练度，也没看出来这阵容有什么配合，瑞兹放传进去打？这种时机太难找了吧",
+                    "likes": 212,
+                    "user": "路过一缕风"
                   }
                 ],
                 "bg_color": "#000000",
@@ -34261,7 +34261,7 @@
                 "hot_comments": [
                   {
                     "content": "要不要让我的替补来教你怎么玩武器",
-                    "likes": 2389,
+                    "likes": 2391,
                     "user": "BLGWenbo"
                   }
                 ],
@@ -34315,7 +34315,7 @@
                     "name": "HOYA",
                     "desc": "胜(4/4/5)",
                     "score": "9.4",
-                    "votes": "5710评分",
+                    "votes": "5711评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
                     "team_id": "587",
@@ -34355,7 +34355,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2100023007b8c948cad13705a4016f7102af2aeeprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a90185d25fe3c7ba9cae32afd612c98e.png",
                 "score": 9.8,
-                "votes": 6542,
+                "votes": 6544,
                 "comments": 961,
                 "kills": 6,
                 "deaths": 4,
@@ -34379,18 +34379,18 @@
                 "bg_color": "#000006",
                 "position": "",
                 "score_dist": {
-                  "s5": 6357,
+                  "s5": 6358,
                   "s4": 61,
                   "s3": 11,
                   "s2": 8,
-                  "s1": 105
+                  "s1": 106
                 },
                 "radar": {
                   "self": {
                     "name": "Care",
                     "desc": "胜(6/4/5)",
                     "score": "9.8",
-                    "votes": "6542评分",
+                    "votes": "6544评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2100023007b8c948cad13705a4016f7102af2aeeprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a90185d25fe3c7ba9cae32afd612c98e.png",
                     "team_id": "587",
@@ -34426,7 +34426,7 @@
                     "name": "Rookie",
                     "desc": "败(7/2/10)",
                     "score": "7.6",
-                    "votes": "5396评分",
+                    "votes": "5398评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                     "champion": "https://i10.hoopchina.com.cn/editor/1e8ab10931088a08ed9d45776a62333f_w_120_h_120_.jpeg?x-oss-process=image/resize,w_800/format,webp",
                     "team_id": "2",
@@ -34466,7 +34466,7 @@
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                 "champion": "",
                 "score": 7.1,
-                "votes": 6125,
+                "votes": 6127,
                 "comments": 1810,
                 "kills": 3,
                 "deaths": 2,
@@ -34484,18 +34484,18 @@
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 2805,
+                  "s5": 2806,
                   "s4": 923,
                   "s3": 738,
                   "s2": 237,
-                  "s1": 1422
+                  "s1": 1423
                 },
                 "radar": {
                   "self": {
                     "name": "Meiko",
                     "desc": "败(3/2/18)",
                     "score": "7.1",
-                    "votes": "6125评分",
+                    "votes": "6127评分",
                     "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                     "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
                     "team_id": "2",
@@ -34531,7 +34531,7 @@
                     "name": "fengyue",
                     "desc": "胜(0/4/13)",
                     "score": "5.3",
-                    "votes": "1878评分",
+                    "votes": "1879评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
                     "team_id": "587",
@@ -34571,7 +34571,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
                 "score": 9.4,
-                "votes": 5710,
+                "votes": 5711,
                 "comments": 1088,
                 "kills": 4,
                 "deaths": 4,
@@ -34599,14 +34599,14 @@
                   "s4": 325,
                   "s3": 109,
                   "s2": 41,
-                  "s1": 269
+                  "s1": 270
                 },
                 "radar": {
                   "self": {
                     "name": "HOYA",
                     "desc": "胜(4/4/5)",
                     "score": "9.4",
-                    "votes": "5710评分",
+                    "votes": "5711评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
                     "team_id": "587",
@@ -34682,7 +34682,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                 "champion": "",
                 "score": 7.6,
-                "votes": 5396,
+                "votes": 5398,
                 "comments": 909,
                 "kills": 7,
                 "deaths": 2,
@@ -34700,18 +34700,18 @@
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 2853,
+                  "s5": 2854,
                   "s4": 931,
                   "s3": 427,
                   "s2": 154,
-                  "s1": 1031
+                  "s1": 1032
                 },
                 "radar": {
                   "self": {
                     "name": "Rookie",
                     "desc": "败(7/2/10)",
                     "score": "7.6",
-                    "votes": "5396评分",
+                    "votes": "5398评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                     "champion": "https://i10.hoopchina.com.cn/editor/1e8ab10931088a08ed9d45776a62333f_w_120_h_120_.jpeg?x-oss-process=image/resize,w_800/format,webp",
                     "team_id": "2",
@@ -34747,7 +34747,7 @@
                     "name": "Care",
                     "desc": "胜(6/4/5)",
                     "score": "9.8",
-                    "votes": "6542评分",
+                    "votes": "6544评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2100023007b8c948cad13705a4016f7102af2aeeprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a90185d25fe3c7ba9cae32afd612c98e.png",
                     "team_id": "587",
@@ -34858,7 +34858,7 @@
                     "name": "Photic",
                     "desc": "胜(6/2/6)",
                     "score": "9.1",
-                    "votes": "2579评分",
+                    "votes": "2580评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
                     "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
                     "team_id": "587",
@@ -34898,7 +34898,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/7bcbc03b4702739e3b82efaba27d8f1d.png",
                 "score": 4.4,
-                "votes": 3471,
+                "votes": 3472,
                 "comments": 594,
                 "kills": 4,
                 "deaths": 3,
@@ -34920,14 +34920,14 @@
                   "s4": 210,
                   "s3": 584,
                   "s2": 646,
-                  "s1": 1606
+                  "s1": 1607
                 },
                 "radar": {
                   "self": {
                     "name": "Wei",
                     "desc": "败(4/3/11)",
                     "score": "4.4",
-                    "votes": "3471评分",
+                    "votes": "3472评分",
                     "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/7bcbc03b4702739e3b82efaba27d8f1d.png",
                     "team_id": "2",
@@ -34963,7 +34963,7 @@
                     "name": "Guwon",
                     "desc": "胜(0/7/6)",
                     "score": "2.8",
-                    "votes": "3458评分",
+                    "votes": "3459评分",
                     "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/331817002418176d7d19b9c427ecd08b2b8873ab80e2d3eprod.png",
                     "champion": "https://i5.hoopchina.com.cn/reply/1041ef16c0114cd1c6ed74ecf3915e15.jpeg",
                     "team_id": "587",
@@ -35003,7 +35003,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/331817002418176d7d19b9c427ecd08b2b8873ab80e2d3eprod.png",
                 "champion": "",
                 "score": 2.8,
-                "votes": 3458,
+                "votes": 3459,
                 "comments": 853,
                 "kills": 0,
                 "deaths": 7,
@@ -35025,14 +35025,14 @@
                   "s4": 39,
                   "s3": 120,
                   "s2": 269,
-                  "s1": 2832
+                  "s1": 2833
                 },
                 "radar": {
                   "self": {
                     "name": "Guwon",
                     "desc": "胜(0/7/6)",
                     "score": "2.8",
-                    "votes": "3458评分",
+                    "votes": "3459评分",
                     "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/331817002418176d7d19b9c427ecd08b2b8873ab80e2d3eprod.png",
                     "champion": "https://i5.hoopchina.com.cn/reply/1041ef16c0114cd1c6ed74ecf3915e15.jpeg",
                     "team_id": "587",
@@ -35068,7 +35068,7 @@
                     "name": "Wei",
                     "desc": "败(4/3/11)",
                     "score": "4.4",
-                    "votes": "3471评分",
+                    "votes": "3472评分",
                     "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/7bcbc03b4702739e3b82efaba27d8f1d.png",
                     "team_id": "2",
@@ -35108,7 +35108,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
                 "champion": "",
                 "score": 9.1,
-                "votes": 2579,
+                "votes": 2580,
                 "comments": 297,
                 "kills": 6,
                 "deaths": 2,
@@ -35130,14 +35130,14 @@
                   "s4": 324,
                   "s3": 109,
                   "s2": 37,
-                  "s1": 134
+                  "s1": 135
                 },
                 "radar": {
                   "self": {
                     "name": "Photic",
                     "desc": "胜(6/2/6)",
                     "score": "9.1",
-                    "votes": "2579评分",
+                    "votes": "2580评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
                     "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
                     "team_id": "587",
@@ -35213,7 +35213,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
                 "score": 5.3,
-                "votes": 1878,
+                "votes": 1879,
                 "comments": 207,
                 "kills": 0,
                 "deaths": 4,
@@ -35235,14 +35235,14 @@
                   "s4": 139,
                   "s3": 445,
                   "s2": 349,
-                  "s1": 592
+                  "s1": 593
                 },
                 "radar": {
                   "self": {
                     "name": "fengyue",
                     "desc": "胜(0/4/13)",
                     "score": "5.3",
-                    "votes": "1878评分",
+                    "votes": "1879评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
                     "team_id": "587",
@@ -35278,7 +35278,7 @@
                     "name": "Meiko",
                     "desc": "败(3/2/18)",
                     "score": "7.1",
-                    "votes": "6125评分",
+                    "votes": "6127评分",
                     "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                     "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
                     "team_id": "2",
@@ -35319,7 +35319,7 @@
                 "name": "教练 Helper",
                 "avatar": "https://i5.hoopchina.com.cn/newsPost/251215-pwwp7rrc-upload-1765799899322-2.png",
                 "score": 2.7,
-                "votes": 2047,
+                "votes": 2048,
                 "comments": 680,
                 "team_id": "2",
                 "labels": [],
@@ -35336,7 +35336,7 @@
                 "name": "教练 Maizijian",
                 "avatar": "https://i3.hoopchina.com.cn/newsPost/25323-dptg2arc-upload-1741169262185-28.JPG",
                 "score": 7.5,
-                "votes": 644,
+                "votes": 645,
                 "comments": 40,
                 "team_id": "587",
                 "labels": [],
@@ -35419,7 +35419,7 @@
                 "name": "互动主持：阿芙",
                 "avatar": "https://i3.hoopchina.com.cn/newsPost/1786019790593_o_w_297_h_416_978f55e8.png",
                 "score": 9.2,
-                "votes": 276,
+                "votes": 277,
                 "comments": 20,
                 "labels": [],
                 "hot_comments": [
@@ -35452,12 +35452,12 @@
             ]
           }
         ],
-        "total_scorers": 138416,
+        "total_scorers": 138430,
         "league_name": "职业联赛",
         "round_name": "第三赛段组内赛",
         "match_time": 1786006800000,
         "date_str": "08月06日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3692",
@@ -35485,7 +35485,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 9.8,
-            "total_count": 31058,
+            "total_count": 31059,
             "comments": 5187,
             "kda": "12/4/10",
             "kda_ratio": 5.5,
@@ -35534,13 +35534,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 30053,
+              "s5": 30054,
               "s4": 160,
               "s3": 54,
               "s2": 69,
               "s1": 722
             },
-            "score_dist_total": 31058,
+            "score_dist_total": 31059,
             "best_radar": {
               "self": {
                 "name": "TheShy",
@@ -35829,7 +35829,7 @@
                 "name": "1xn",
                 "desc": "败(1/4/3)",
                 "score": "3.0",
-                "votes": "765评分",
+                "votes": "764评分",
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/10047737605bcd71d58dbae81d3235637a5669363prod.png",
                 "champion": "https://i10.hoopchina.com.cn/editor/6488fab0a2d3deb3294b0716678a5d3c_w_530_h_530_.jpeg",
                 "team_id": "9",
@@ -36241,7 +36241,7 @@
             "name": "1xn",
             "team": "LNG",
             "avg": 4.2,
-            "total_count": 1742,
+            "total_count": 1741,
             "comments": 141,
             "kda": "6/8/7",
             "kda_ratio": 1.62,
@@ -36277,12 +36277,12 @@
             "kind": "player",
             "score_dist": {
               "s5": 170,
-              "s4": 105,
+              "s4": 104,
               "s3": 328,
               "s2": 245,
               "s1": 894
             },
-            "score_dist_total": 1742,
+            "score_dist_total": 1741,
             "best_radar": {
               "self": {
                 "name": "1xn",
@@ -36857,7 +36857,7 @@
             "name": "1xn",
             "team": "LNG",
             "avg": 4.2,
-            "total_count": 1742,
+            "total_count": 1741,
             "comments": 141,
             "kda": "6/8/7",
             "kda_ratio": 1.62,
@@ -36893,12 +36893,12 @@
             "kind": "player",
             "score_dist": {
               "s5": 170,
-              "s4": 105,
+              "s4": 104,
               "s3": 328,
               "s2": 245,
               "s1": 894
             },
-            "score_dist_total": 1742,
+            "score_dist_total": 1741,
             "best_radar": {
               "self": {
                 "name": "1xn",
@@ -37349,7 +37349,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 9.8,
-            "total_count": 31058,
+            "total_count": 31059,
             "comments": 5187,
             "kda": "12/4/10",
             "kda_ratio": 5.5,
@@ -37398,13 +37398,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 30053,
+              "s5": 30054,
               "s4": 160,
               "s3": 54,
               "s2": 69,
               "s1": 722
             },
-            "score_dist_total": 31058,
+            "score_dist_total": 31059,
             "best_radar": {
               "self": {
                 "name": "TheShy",
@@ -37693,7 +37693,7 @@
                 "name": "1xn",
                 "desc": "败(1/4/3)",
                 "score": "3.0",
-                "votes": "765评分",
+                "votes": "764评分",
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/10047737605bcd71d58dbae81d3235637a5669363prod.png",
                 "champion": "https://i10.hoopchina.com.cn/editor/6488fab0a2d3deb3294b0716678a5d3c_w_530_h_530_.jpeg",
                 "team_id": "9",
@@ -39514,7 +39514,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/f2837da31787a5c3085e36cfc24e5d55.png",
                 "score": 9.8,
-                "votes": 16275,
+                "votes": 16276,
                 "comments": 2307,
                 "kills": 7,
                 "deaths": 1,
@@ -39538,7 +39538,7 @@
                 "bg_color": "#000000",
                 "position": "",
                 "score_dist": {
-                  "s5": 15892,
+                  "s5": 15893,
                   "s4": 46,
                   "s3": 21,
                   "s2": 28,
@@ -40005,7 +40005,7 @@
                     "name": "1xn",
                     "desc": "败(1/4/3)",
                     "score": "3.0",
-                    "votes": "765评分",
+                    "votes": "764评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/10047737605bcd71d58dbae81d3235637a5669363prod.png",
                     "champion": "https://i10.hoopchina.com.cn/editor/6488fab0a2d3deb3294b0716678a5d3c_w_530_h_530_.jpeg",
                     "team_id": "9",
@@ -40465,7 +40465,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/10047737605bcd71d58dbae81d3235637a5669363prod.png",
                 "champion": "",
                 "score": 3.0,
-                "votes": 765,
+                "votes": 764,
                 "comments": 25,
                 "kills": 1,
                 "deaths": 4,
@@ -40484,7 +40484,7 @@
                 "position": "",
                 "score_dist": {
                   "s5": 48,
-                  "s4": 7,
+                  "s4": 6,
                   "s3": 42,
                   "s2": 81,
                   "s1": 587
@@ -40494,7 +40494,7 @@
                     "name": "1xn",
                     "desc": "败(1/4/3)",
                     "score": "3.0",
-                    "votes": "765评分",
+                    "votes": "764评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/10047737605bcd71d58dbae81d3235637a5669363prod.png",
                     "champion": "https://i10.hoopchina.com.cn/editor/6488fab0a2d3deb3294b0716678a5d3c_w_530_h_530_.jpeg",
                     "team_id": "9",
@@ -40725,7 +40725,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1785661200000,
         "date_str": "08月02日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3678",
@@ -40785,20 +40785,20 @@
             ],
             "hot_comment": {
               "content": "你姜哥第一把看清了很多人",
-              "likes": 5090,
+              "likes": 5091,
               "user": "旧田丶",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "你姜哥第一把看清了很多人",
-                "likes": 5090,
+                "likes": 5091,
                 "user": "旧田丶",
                 "bo_label": "第3局"
               },
               {
                 "content": "姜大哥半年没打，依然打得像个职业选手，剩下四个是从哪个茅坑里捞出来的？",
-                "likes": 4279,
+                "likes": 4280,
                 "user": "虎扑JR1371826447",
                 "bo_label": "第1局"
               },
@@ -42135,20 +42135,20 @@
             ],
             "hot_comment": {
               "content": "你姜哥第一把看清了很多人",
-              "likes": 5090,
+              "likes": 5091,
               "user": "旧田丶",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "你姜哥第一把看清了很多人",
-                "likes": 5090,
+                "likes": 5091,
                 "user": "旧田丶",
                 "bo_label": "第3局"
               },
               {
                 "content": "姜大哥半年没打，依然打得像个职业选手，剩下四个是从哪个茅坑里捞出来的？",
-                "likes": 4279,
+                "likes": 4280,
                 "user": "虎扑JR1371826447",
                 "bo_label": "第1局"
               },
@@ -43872,7 +43872,7 @@
                 "hot_comments": [
                   {
                     "content": "姜大哥半年没打，依然打得像个职业选手，剩下四个是从哪个茅坑里捞出来的？",
-                    "likes": 4279,
+                    "likes": 4280,
                     "user": "虎扑JR1371826447"
                   }
                 ],
@@ -46146,7 +46146,7 @@
                 "hot_comments": [
                   {
                     "content": "你姜哥第一把看清了很多人",
-                    "likes": 5090,
+                    "likes": 5091,
                     "user": "旧田丶"
                   }
                 ],
@@ -47308,7 +47308,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1784970000000,
         "date_str": "07月25日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3552",
@@ -53743,7 +53743,7 @@
         "round_name": "第二赛段骑士之路",
         "match_time": 1779526800000,
         "date_str": "05月23日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3545",
@@ -59952,7 +59952,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1779008400000,
         "date_str": "05月17日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3534",
@@ -66199,7 +66199,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778583600000,
         "date_str": "05月12日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3530",
@@ -71138,7 +71138,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778317200000,
         "date_str": "05月09日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3612",
@@ -77193,7 +77193,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778058000000,
         "date_str": "05月06日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3610",
@@ -82130,7 +82130,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777719600000,
         "date_str": "05月02日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3606",
@@ -88343,7 +88343,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777633200000,
         "date_str": "05月01日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3512",
@@ -93276,7 +93276,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777366800000,
         "date_str": "04月28日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       },
       {
         "id": "3506",
@@ -98217,7 +98217,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777028400000,
         "date_str": "04月24日",
-        "found_at": "2026-08-08T23:16:08.468573+08:00"
+        "found_at": "2026-08-08T23:48:59.716239+08:00"
       }
     ],
     "latest_match": {
@@ -98246,7 +98246,7 @@
           "name": "Rookie",
           "team": "IG",
           "avg": 8.0,
-          "total_count": 14592,
+          "total_count": 14594,
           "comments": 2028,
           "kda": "13/7/28",
           "kda_ratio": 5.86,
@@ -98296,13 +98296,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 9343,
+            "s5": 9344,
             "s4": 1241,
             "s3": 897,
             "s2": 589,
-            "s1": 2522
+            "s1": 2523
           },
-          "score_dist_total": 14592,
+          "score_dist_total": 14594,
           "best_radar": {
             "self": {
               "name": "Rookie",
@@ -98382,7 +98382,7 @@
           "name": "Meiko",
           "team": "IG",
           "avg": 6.8,
-          "total_count": 18247,
+          "total_count": 18249,
           "comments": 5959,
           "kda": "7/13/39",
           "kda_ratio": 3.54,
@@ -98425,19 +98425,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 7597,
+            "s5": 7598,
             "s4": 2783,
             "s3": 2157,
             "s2": 878,
-            "s1": 4832
+            "s1": 4833
           },
-          "score_dist_total": 18247,
+          "score_dist_total": 18249,
           "best_radar": {
             "self": {
               "name": "Meiko",
               "desc": "败(3/2/18)",
               "score": "7.1",
-              "votes": "6125评分",
+              "votes": "6127评分",
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
               "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
               "team_id": "2",
@@ -98473,7 +98473,7 @@
               "name": "fengyue",
               "desc": "胜(0/4/13)",
               "score": "5.3",
-              "votes": "1878评分",
+              "votes": "1879评分",
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
               "team_id": "587",
@@ -98511,7 +98511,7 @@
           "name": "Wei",
           "team": "IG",
           "avg": 6.8,
-          "total_count": 14016,
+          "total_count": 14017,
           "comments": 2032,
           "kda": "11/11/28",
           "kda_ratio": 3.55,
@@ -98565,9 +98565,9 @@
             "s4": 327,
             "s3": 694,
             "s2": 1009,
-            "s1": 4452
+            "s1": 4453
           },
-          "score_dist_total": 14016,
+          "score_dist_total": 14017,
           "best_radar": {
             "self": {
               "name": "Wei",
@@ -98810,14 +98810,14 @@
           ],
           "hot_comment": {
             "content": "要不要让我的替补来教你怎么玩武器",
-            "likes": 2389,
+            "likes": 2391,
             "user": "BLGWenbo",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "要不要让我的替补来教你怎么玩武器",
-              "likes": 2389,
+              "likes": 2391,
               "user": "BLGWenbo",
               "bo_label": "第3局"
             },
@@ -98828,9 +98828,9 @@
               "bo_label": "第1局"
             },
             {
-              "content": "毫无熟练度",
-              "likes": 139,
-              "user": "Daisy_yu_Step",
+              "content": "没啥熟练度，也没看出来这阵容有什么配合，瑞兹放传进去打？这种时机太难找了吧",
+              "likes": 212,
+              "user": "路过一缕风",
               "bo_label": "第2局"
             }
           ],
@@ -98926,7 +98926,7 @@
           "name": "Care",
           "team": "NIP",
           "avg": 9.1,
-          "total_count": 13878,
+          "total_count": 13880,
           "comments": 2135,
           "kda": "26/9/17",
           "kda_ratio": 4.78,
@@ -98966,7 +98966,7 @@
             },
             {
               "content": "王朝了，五杀亮fpx，最后的小凤凰",
-              "likes": 1009,
+              "likes": 1010,
               "user": "宇宙第一不能喷辅助kael",
               "bo_label": "第2局"
             },
@@ -98981,13 +98981,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 12252,
+            "s5": 12253,
             "s4": 95,
             "s3": 68,
             "s2": 174,
-            "s1": 1289
+            "s1": 1290
           },
-          "score_dist_total": 13878,
+          "score_dist_total": 13880,
           "best_radar": {
             "self": {
               "name": "Care",
@@ -99067,7 +99067,7 @@
           "name": "HOYA",
           "team": "NIP",
           "avg": 8.7,
-          "total_count": 9864,
+          "total_count": 9865,
           "comments": 2005,
           "kda": "15/10/21",
           "kda_ratio": 3.6,
@@ -99121,15 +99121,15 @@
             "s4": 1043,
             "s3": 637,
             "s2": 191,
-            "s1": 954
+            "s1": 955
           },
-          "score_dist_total": 9864,
+          "score_dist_total": 9865,
           "best_radar": {
             "self": {
               "name": "HOYA",
               "desc": "胜(4/4/5)",
               "score": "9.4",
-              "votes": "5710评分",
+              "votes": "5711评分",
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
               "team_id": "587",
@@ -99203,7 +99203,7 @@
           "name": "Photic",
           "team": "NIP",
           "avg": 5.5,
-          "total_count": 6121,
+          "total_count": 6122,
           "comments": 803,
           "kda": "13/11/27",
           "kda_ratio": 3.64,
@@ -99257,15 +99257,15 @@
             "s4": 364,
             "s3": 210,
             "s2": 322,
-            "s1": 3030
+            "s1": 3031
           },
-          "score_dist_total": 6121,
+          "score_dist_total": 6122,
           "best_radar": {
             "self": {
               "name": "Photic",
               "desc": "胜(6/2/6)",
               "score": "9.1",
-              "votes": "2579评分",
+              "votes": "2580评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
               "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
               "team_id": "587",
@@ -99339,7 +99339,7 @@
           "name": "fengyue",
           "team": "NIP",
           "avg": 5.5,
-          "total_count": 5015,
+          "total_count": 5016,
           "comments": 724,
           "kda": "1/9/46",
           "kda_ratio": 5.22,
@@ -99388,9 +99388,9 @@
             "s4": 566,
             "s3": 783,
             "s2": 693,
-            "s1": 1766
+            "s1": 1767
           },
-          "score_dist_total": 5015,
+          "score_dist_total": 5016,
           "best_radar": {
             "self": {
               "name": "fengyue",
@@ -99470,7 +99470,7 @@
           "name": "Guwon",
           "team": "NIP",
           "avg": 3.5,
-          "total_count": 5632,
+          "total_count": 5633,
           "comments": 1030,
           "kda": "4/16/28",
           "kda_ratio": 2.0,
@@ -99518,9 +99518,9 @@
             "s4": 223,
             "s3": 491,
             "s2": 585,
-            "s1": 3836
+            "s1": 3837
           },
-          "score_dist_total": 5632,
+          "score_dist_total": 5633,
           "best_radar": {
             "self": {
               "name": "Guwon",
@@ -99602,7 +99602,7 @@
           "name": "Rookie",
           "team": "IG",
           "avg": 8.0,
-          "total_count": 14592,
+          "total_count": 14594,
           "comments": 2028,
           "kda": "13/7/28",
           "kda_ratio": 5.86,
@@ -99652,13 +99652,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 9343,
+            "s5": 9344,
             "s4": 1241,
             "s3": 897,
             "s2": 589,
-            "s1": 2522
+            "s1": 2523
           },
-          "score_dist_total": 14592,
+          "score_dist_total": 14594,
           "best_radar": {
             "self": {
               "name": "Rookie",
@@ -99738,7 +99738,7 @@
           "name": "Meiko",
           "team": "IG",
           "avg": 6.8,
-          "total_count": 18247,
+          "total_count": 18249,
           "comments": 5959,
           "kda": "7/13/39",
           "kda_ratio": 3.54,
@@ -99781,19 +99781,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 7597,
+            "s5": 7598,
             "s4": 2783,
             "s3": 2157,
             "s2": 878,
-            "s1": 4832
+            "s1": 4833
           },
-          "score_dist_total": 18247,
+          "score_dist_total": 18249,
           "best_radar": {
             "self": {
               "name": "Meiko",
               "desc": "败(3/2/18)",
               "score": "7.1",
-              "votes": "6125评分",
+              "votes": "6127评分",
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
               "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
               "team_id": "2",
@@ -99829,7 +99829,7 @@
               "name": "fengyue",
               "desc": "胜(0/4/13)",
               "score": "5.3",
-              "votes": "1878评分",
+              "votes": "1879评分",
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
               "team_id": "587",
@@ -99867,7 +99867,7 @@
           "name": "Wei",
           "team": "IG",
           "avg": 6.8,
-          "total_count": 14016,
+          "total_count": 14017,
           "comments": 2032,
           "kda": "11/11/28",
           "kda_ratio": 3.55,
@@ -99921,9 +99921,9 @@
             "s4": 327,
             "s3": 694,
             "s2": 1009,
-            "s1": 4452
+            "s1": 4453
           },
-          "score_dist_total": 14016,
+          "score_dist_total": 14017,
           "best_radar": {
             "self": {
               "name": "Wei",
@@ -100166,14 +100166,14 @@
           ],
           "hot_comment": {
             "content": "要不要让我的替补来教你怎么玩武器",
-            "likes": 2389,
+            "likes": 2391,
             "user": "BLGWenbo",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "要不要让我的替补来教你怎么玩武器",
-              "likes": 2389,
+              "likes": 2391,
               "user": "BLGWenbo",
               "bo_label": "第3局"
             },
@@ -100184,9 +100184,9 @@
               "bo_label": "第1局"
             },
             {
-              "content": "毫无熟练度",
-              "likes": 139,
-              "user": "Daisy_yu_Step",
+              "content": "没啥熟练度，也没看出来这阵容有什么配合，瑞兹放传进去打？这种时机太难找了吧",
+              "likes": 212,
+              "user": "路过一缕风",
               "bo_label": "第2局"
             }
           ],
@@ -100282,7 +100282,7 @@
           "name": "Care",
           "team": "NIP",
           "avg": 9.1,
-          "total_count": 13878,
+          "total_count": 13880,
           "comments": 2135,
           "kda": "26/9/17",
           "kda_ratio": 4.78,
@@ -100322,7 +100322,7 @@
             },
             {
               "content": "王朝了，五杀亮fpx，最后的小凤凰",
-              "likes": 1009,
+              "likes": 1010,
               "user": "宇宙第一不能喷辅助kael",
               "bo_label": "第2局"
             },
@@ -100337,13 +100337,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 12252,
+            "s5": 12253,
             "s4": 95,
             "s3": 68,
             "s2": 174,
-            "s1": 1289
+            "s1": 1290
           },
-          "score_dist_total": 13878,
+          "score_dist_total": 13880,
           "best_radar": {
             "self": {
               "name": "Care",
@@ -100423,7 +100423,7 @@
           "name": "HOYA",
           "team": "NIP",
           "avg": 8.7,
-          "total_count": 9864,
+          "total_count": 9865,
           "comments": 2005,
           "kda": "15/10/21",
           "kda_ratio": 3.6,
@@ -100477,15 +100477,15 @@
             "s4": 1043,
             "s3": 637,
             "s2": 191,
-            "s1": 954
+            "s1": 955
           },
-          "score_dist_total": 9864,
+          "score_dist_total": 9865,
           "best_radar": {
             "self": {
               "name": "HOYA",
               "desc": "胜(4/4/5)",
               "score": "9.4",
-              "votes": "5710评分",
+              "votes": "5711评分",
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
               "team_id": "587",
@@ -100559,7 +100559,7 @@
           "name": "Photic",
           "team": "NIP",
           "avg": 5.5,
-          "total_count": 6121,
+          "total_count": 6122,
           "comments": 803,
           "kda": "13/11/27",
           "kda_ratio": 3.64,
@@ -100613,15 +100613,15 @@
             "s4": 364,
             "s3": 210,
             "s2": 322,
-            "s1": 3030
+            "s1": 3031
           },
-          "score_dist_total": 6121,
+          "score_dist_total": 6122,
           "best_radar": {
             "self": {
               "name": "Photic",
               "desc": "胜(6/2/6)",
               "score": "9.1",
-              "votes": "2579评分",
+              "votes": "2580评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
               "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
               "team_id": "587",
@@ -100695,7 +100695,7 @@
           "name": "fengyue",
           "team": "NIP",
           "avg": 5.5,
-          "total_count": 5015,
+          "total_count": 5016,
           "comments": 724,
           "kda": "1/9/46",
           "kda_ratio": 5.22,
@@ -100744,9 +100744,9 @@
             "s4": 566,
             "s3": 783,
             "s2": 693,
-            "s1": 1766
+            "s1": 1767
           },
-          "score_dist_total": 5015,
+          "score_dist_total": 5016,
           "best_radar": {
             "self": {
               "name": "fengyue",
@@ -100826,7 +100826,7 @@
           "name": "Guwon",
           "team": "NIP",
           "avg": 3.5,
-          "total_count": 5632,
+          "total_count": 5633,
           "comments": 1030,
           "kda": "4/16/28",
           "kda_ratio": 2.0,
@@ -100874,9 +100874,9 @@
             "s4": 223,
             "s3": 491,
             "s2": 585,
-            "s1": 3836
+            "s1": 3837
           },
-          "score_dist_total": 5632,
+          "score_dist_total": 5633,
           "best_radar": {
             "self": {
               "name": "Guwon",
@@ -100958,7 +100958,7 @@
           "name": "教练 Maizijian",
           "team": "NIP",
           "avg": 6.0,
-          "total_count": 1511,
+          "total_count": 1512,
           "comments": 108,
           "kda": "",
           "kda_ratio": 0,
@@ -101012,7 +101012,7 @@
           "name": "教练 Helper",
           "team": "IG",
           "avg": 4.1,
-          "total_count": 4552,
+          "total_count": 4553,
           "comments": 1208,
           "kda": "",
           "kda_ratio": 0,
@@ -101110,7 +101110,7 @@
           "name": "互动主持：阿芙",
           "team": "",
           "avg": 9.2,
-          "total_count": 276,
+          "total_count": 277,
           "comments": 20,
           "kda": "",
           "kda_ratio": 0,
@@ -101238,7 +101238,7 @@
           "name": "教练 Helper",
           "team": "IG",
           "avg": 4.1,
-          "total_count": 4552,
+          "total_count": 4553,
           "comments": 1208,
           "kda": "",
           "kda_ratio": 0,
@@ -101294,7 +101294,7 @@
           "name": "教练 Maizijian",
           "team": "NIP",
           "avg": 6.0,
-          "total_count": 1511,
+          "total_count": 1512,
           "comments": 108,
           "kda": "",
           "kda_ratio": 0,
@@ -102511,7 +102511,7 @@
               "hot_comments": [
                 {
                   "content": "王朝了，五杀亮fpx，最后的小凤凰",
-                  "likes": 1009,
+                  "likes": 1010,
                   "user": "宇宙第一不能喷辅助kael"
                 }
               ],
@@ -102615,9 +102615,9 @@
               "labels": [],
               "hot_comments": [
                 {
-                  "content": "毫无熟练度",
-                  "likes": 139,
-                  "user": "Daisy_yu_Step"
+                  "content": "没啥熟练度，也没看出来这阵容有什么配合，瑞兹放传进去打？这种时机太难找了吧",
+                  "likes": 212,
+                  "user": "路过一缕风"
                 }
               ],
               "bg_color": "#000000",
@@ -103639,7 +103639,7 @@
               "hot_comments": [
                 {
                   "content": "要不要让我的替补来教你怎么玩武器",
-                  "likes": 2389,
+                  "likes": 2391,
                   "user": "BLGWenbo"
                 }
               ],
@@ -103693,7 +103693,7 @@
                   "name": "HOYA",
                   "desc": "胜(4/4/5)",
                   "score": "9.4",
-                  "votes": "5710评分",
+                  "votes": "5711评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
                   "team_id": "587",
@@ -103733,7 +103733,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2100023007b8c948cad13705a4016f7102af2aeeprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a90185d25fe3c7ba9cae32afd612c98e.png",
               "score": 9.8,
-              "votes": 6542,
+              "votes": 6544,
               "comments": 961,
               "kills": 6,
               "deaths": 4,
@@ -103757,18 +103757,18 @@
               "bg_color": "#000006",
               "position": "",
               "score_dist": {
-                "s5": 6357,
+                "s5": 6358,
                 "s4": 61,
                 "s3": 11,
                 "s2": 8,
-                "s1": 105
+                "s1": 106
               },
               "radar": {
                 "self": {
                   "name": "Care",
                   "desc": "胜(6/4/5)",
                   "score": "9.8",
-                  "votes": "6542评分",
+                  "votes": "6544评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2100023007b8c948cad13705a4016f7102af2aeeprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a90185d25fe3c7ba9cae32afd612c98e.png",
                   "team_id": "587",
@@ -103804,7 +103804,7 @@
                   "name": "Rookie",
                   "desc": "败(7/2/10)",
                   "score": "7.6",
-                  "votes": "5396评分",
+                  "votes": "5398评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                   "champion": "https://i10.hoopchina.com.cn/editor/1e8ab10931088a08ed9d45776a62333f_w_120_h_120_.jpeg?x-oss-process=image/resize,w_800/format,webp",
                   "team_id": "2",
@@ -103844,7 +103844,7 @@
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
               "champion": "",
               "score": 7.1,
-              "votes": 6125,
+              "votes": 6127,
               "comments": 1810,
               "kills": 3,
               "deaths": 2,
@@ -103862,18 +103862,18 @@
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 2805,
+                "s5": 2806,
                 "s4": 923,
                 "s3": 738,
                 "s2": 237,
-                "s1": 1422
+                "s1": 1423
               },
               "radar": {
                 "self": {
                   "name": "Meiko",
                   "desc": "败(3/2/18)",
                   "score": "7.1",
-                  "votes": "6125评分",
+                  "votes": "6127评分",
                   "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                   "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
                   "team_id": "2",
@@ -103909,7 +103909,7 @@
                   "name": "fengyue",
                   "desc": "胜(0/4/13)",
                   "score": "5.3",
-                  "votes": "1878评分",
+                  "votes": "1879评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
                   "team_id": "587",
@@ -103949,7 +103949,7 @@
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
               "score": 9.4,
-              "votes": 5710,
+              "votes": 5711,
               "comments": 1088,
               "kills": 4,
               "deaths": 4,
@@ -103977,14 +103977,14 @@
                 "s4": 325,
                 "s3": 109,
                 "s2": 41,
-                "s1": 269
+                "s1": 270
               },
               "radar": {
                 "self": {
                   "name": "HOYA",
                   "desc": "胜(4/4/5)",
                   "score": "9.4",
-                  "votes": "5710评分",
+                  "votes": "5711评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/08c7094e2cb5bd141d5d478a9216a8f9.png",
                   "team_id": "587",
@@ -104060,7 +104060,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
               "champion": "",
               "score": 7.6,
-              "votes": 5396,
+              "votes": 5398,
               "comments": 909,
               "kills": 7,
               "deaths": 2,
@@ -104078,18 +104078,18 @@
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 2853,
+                "s5": 2854,
                 "s4": 931,
                 "s3": 427,
                 "s2": 154,
-                "s1": 1031
+                "s1": 1032
               },
               "radar": {
                 "self": {
                   "name": "Rookie",
                   "desc": "败(7/2/10)",
                   "score": "7.6",
-                  "votes": "5396评分",
+                  "votes": "5398评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                   "champion": "https://i10.hoopchina.com.cn/editor/1e8ab10931088a08ed9d45776a62333f_w_120_h_120_.jpeg?x-oss-process=image/resize,w_800/format,webp",
                   "team_id": "2",
@@ -104125,7 +104125,7 @@
                   "name": "Care",
                   "desc": "胜(6/4/5)",
                   "score": "9.8",
-                  "votes": "6542评分",
+                  "votes": "6544评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2100023007b8c948cad13705a4016f7102af2aeeprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a90185d25fe3c7ba9cae32afd612c98e.png",
                   "team_id": "587",
@@ -104236,7 +104236,7 @@
                   "name": "Photic",
                   "desc": "胜(6/2/6)",
                   "score": "9.1",
-                  "votes": "2579评分",
+                  "votes": "2580评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
                   "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
                   "team_id": "587",
@@ -104276,7 +104276,7 @@
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/7bcbc03b4702739e3b82efaba27d8f1d.png",
               "score": 4.4,
-              "votes": 3471,
+              "votes": 3472,
               "comments": 594,
               "kills": 4,
               "deaths": 3,
@@ -104298,14 +104298,14 @@
                 "s4": 210,
                 "s3": 584,
                 "s2": 646,
-                "s1": 1606
+                "s1": 1607
               },
               "radar": {
                 "self": {
                   "name": "Wei",
                   "desc": "败(4/3/11)",
                   "score": "4.4",
-                  "votes": "3471评分",
+                  "votes": "3472评分",
                   "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/7bcbc03b4702739e3b82efaba27d8f1d.png",
                   "team_id": "2",
@@ -104341,7 +104341,7 @@
                   "name": "Guwon",
                   "desc": "胜(0/7/6)",
                   "score": "2.8",
-                  "votes": "3458评分",
+                  "votes": "3459评分",
                   "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/331817002418176d7d19b9c427ecd08b2b8873ab80e2d3eprod.png",
                   "champion": "https://i5.hoopchina.com.cn/reply/1041ef16c0114cd1c6ed74ecf3915e15.jpeg",
                   "team_id": "587",
@@ -104381,7 +104381,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/331817002418176d7d19b9c427ecd08b2b8873ab80e2d3eprod.png",
               "champion": "",
               "score": 2.8,
-              "votes": 3458,
+              "votes": 3459,
               "comments": 853,
               "kills": 0,
               "deaths": 7,
@@ -104403,14 +104403,14 @@
                 "s4": 39,
                 "s3": 120,
                 "s2": 269,
-                "s1": 2832
+                "s1": 2833
               },
               "radar": {
                 "self": {
                   "name": "Guwon",
                   "desc": "胜(0/7/6)",
                   "score": "2.8",
-                  "votes": "3458评分",
+                  "votes": "3459评分",
                   "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/331817002418176d7d19b9c427ecd08b2b8873ab80e2d3eprod.png",
                   "champion": "https://i5.hoopchina.com.cn/reply/1041ef16c0114cd1c6ed74ecf3915e15.jpeg",
                   "team_id": "587",
@@ -104446,7 +104446,7 @@
                   "name": "Wei",
                   "desc": "败(4/3/11)",
                   "score": "4.4",
-                  "votes": "3471评分",
+                  "votes": "3472评分",
                   "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/7bcbc03b4702739e3b82efaba27d8f1d.png",
                   "team_id": "2",
@@ -104486,7 +104486,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
               "champion": "",
               "score": 9.1,
-              "votes": 2579,
+              "votes": 2580,
               "comments": 297,
               "kills": 6,
               "deaths": 2,
@@ -104508,14 +104508,14 @@
                 "s4": 324,
                 "s3": 109,
                 "s2": 37,
-                "s1": 134
+                "s1": 135
               },
               "radar": {
                 "self": {
                   "name": "Photic",
                   "desc": "胜(6/2/6)",
                   "score": "9.1",
-                  "votes": "2579评分",
+                  "votes": "2580评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/22761dbe516e3abd42d577ac0f1c0d4a7803prod.png",
                   "champion": "https://i3.hoopchina.com.cn/reply/0c1901e275d876fbcfcc1a4a38bdbef7.jpeg",
                   "team_id": "587",
@@ -104591,7 +104591,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
               "score": 5.3,
-              "votes": 1878,
+              "votes": 1879,
               "comments": 207,
               "kills": 0,
               "deaths": 4,
@@ -104613,14 +104613,14 @@
                 "s4": 139,
                 "s3": 445,
                 "s2": 349,
-                "s1": 592
+                "s1": 593
               },
               "radar": {
                 "self": {
                   "name": "fengyue",
                   "desc": "胜(0/4/13)",
                   "score": "5.3",
-                  "votes": "1878评分",
+                  "votes": "1879评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/454669761757184562027c6c4bb88c0ead5c6a1143f441eprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1c820711b201abd2bc4d3fd0dcc2fe8f.png",
                   "team_id": "587",
@@ -104656,7 +104656,7 @@
                   "name": "Meiko",
                   "desc": "败(3/2/18)",
                   "score": "7.1",
-                  "votes": "6125评分",
+                  "votes": "6127评分",
                   "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                   "champion": "https://i3.hoopchina.com.cn/blogfile/20228/25/BbsImg_80726298497789_1661424225_s_17894_o_w_120_h_120_22863.png?x-oss-process=image/resize,w_800/format,webp",
                   "team_id": "2",
@@ -104697,7 +104697,7 @@
               "name": "教练 Helper",
               "avatar": "https://i5.hoopchina.com.cn/newsPost/251215-pwwp7rrc-upload-1765799899322-2.png",
               "score": 2.7,
-              "votes": 2047,
+              "votes": 2048,
               "comments": 680,
               "team_id": "2",
               "labels": [],
@@ -104714,7 +104714,7 @@
               "name": "教练 Maizijian",
               "avatar": "https://i3.hoopchina.com.cn/newsPost/25323-dptg2arc-upload-1741169262185-28.JPG",
               "score": 7.5,
-              "votes": 644,
+              "votes": 645,
               "comments": 40,
               "team_id": "587",
               "labels": [],
@@ -104797,7 +104797,7 @@
               "name": "互动主持：阿芙",
               "avatar": "https://i3.hoopchina.com.cn/newsPost/1786019790593_o_w_297_h_416_978f55e8.png",
               "score": 9.2,
-              "votes": 276,
+              "votes": 277,
               "comments": 20,
               "labels": [],
               "hot_comments": [
@@ -104830,12 +104830,12 @@
           ]
         }
       ],
-      "total_scorers": 138416,
+      "total_scorers": 138430,
       "league_name": "职业联赛",
       "round_name": "第三赛段组内赛",
       "match_time": 1786006800000,
       "date_str": "08月06日",
-      "found_at": "2026-08-08T23:16:08.468573+08:00"
+      "found_at": "2026-08-08T23:48:59.716239+08:00"
     },
     "schedule": {
       "next_match": {
@@ -104861,7 +104861,7 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 15.7
+        "countdown_hours": 15.1
       },
       "upcoming": [
         {
@@ -104887,7 +104887,7 @@
           "is_live": false,
           "is_completed": false,
           "is_upcoming": true,
-          "countdown_hours": 15.7
+          "countdown_hours": 15.1
         },
         {
           "home": "WBG",
@@ -104912,7 +104912,7 @@
           "is_live": false,
           "is_completed": false,
           "is_upcoming": true,
-          "countdown_hours": 185.7
+          "countdown_hours": 185.1
         },
         {
           "home": "NIP",
@@ -104937,10 +104937,10 @@
           "is_live": false,
           "is_completed": false,
           "is_upcoming": true,
-          "countdown_hours": 329.7
+          "countdown_hours": 329.1
         }
       ],
-      "last_check": "2026-08-08T23:18:59.748322+08:00"
+      "last_check": "2026-08-08T23:51:49.260089+08:00"
     },
     "next_match": {
       "home": "IG",
@@ -104965,7 +104965,7 @@
       "is_live": false,
       "is_completed": false,
       "is_upcoming": true,
-      "countdown_hours": 15.7
+      "countdown_hours": 15.1
     },
     "upcoming": [
       {
@@ -104991,7 +104991,7 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 15.7
+        "countdown_hours": 15.1
       },
       {
         "home": "WBG",
@@ -105016,7 +105016,7 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 185.7
+        "countdown_hours": 185.1
       },
       {
         "home": "NIP",
@@ -105041,10 +105041,10 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 329.7
+        "countdown_hours": 329.1
       }
     ],
-    "last_check": "2026-08-08T23:16:08.468573+08:00"
+    "last_check": "2026-08-08T23:48:59.716239+08:00"
   },
   "daily_stats": {
     "main": {
