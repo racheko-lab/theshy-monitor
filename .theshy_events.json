@@ -3,6 +3,41 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-08-13T03:32:47+09:00",
+    "level": 94,
+    "is_active": true,
+    "timestamp": "2026-08-13T03:32:58.291586+09:00"
+  },
+  {
+    "type": "new_match",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "match_id": "qfvdWpGbi23fWvRwuivsxtzYOYFTX7wojg55j4oPZZc=",
+    "game_type": "SOLORANKED",
+    "champion": "狂战士",
+    "result": "LOSE",
+    "kda": "1.29",
+    "kill": 5,
+    "death": 7,
+    "assist": 4,
+    "created_at": "2026-08-13T03:18:28+09:00",
+    "game_length_second": 1748,
+    "position": "TOP",
+    "timestamp": "2026-08-13T03:32:57.441291+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-13T03:26:02+09:00",
+    "level": 295,
+    "is_active": false,
+    "timestamp": "2026-08-13T03:32:57.438279+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-08-13T02:07:19+09:00",
     "level": 94,
     "is_active": false,
@@ -3525,32 +3560,5 @@
     "level": 94,
     "is_active": false,
     "timestamp": "2026-08-11T00:45:16.701823+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-11T00:17:29+09:00",
-    "level": 295,
-    "is_active": false,
-    "timestamp": "2026-08-11T00:45:16.700875+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-10T23:39:38+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-08-10T23:50:10.793051+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-10T23:39:37+09:00",
-    "level": 295,
-    "is_active": false,
-    "timestamp": "2026-08-10T23:50:10.792196+09:00"
   }
 ]
