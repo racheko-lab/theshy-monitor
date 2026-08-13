@@ -8,30 +8,30 @@
   "name": "퐁당가지토마토",
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
-  "level": 295,
-  "updated_at": "2026-08-14T02:58:17+09:00",
-  "renewable_at": "2026-08-14T03:00:17+09:00",
-  "revision_at": "2026-08-14T00:26:41+09:00",
+  "level": 296,
+  "updated_at": "2026-08-14T04:03:42+09:00",
+  "renewable_at": "2026-08-14T04:05:42+09:00",
+  "revision_at": "2026-08-14T03:11:05+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 691,
-    "total": 2847771
+    "rank": 619,
+    "total": 2847922
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1488,
+      "lp": 1528,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-      "win": 108,
+      "win": 109,
       "lose": 67,
-      "play": 174,
-      "match_win": 108,
+      "play": 175,
+      "match_win": 109,
       "match_lose": 66,
-      "is_hot_streak": "false",
+      "is_hot_streak": "true",
       "is_fresh_blood": "false",
       "is_veteran": "false",
       "is_inactive": "false",
@@ -40,18 +40,18 @@
         {
           "_class": "HighLeague",
           "key": "CHALLENGER",
-          "current_count": 308,
-          "lp_threshold": 1818,
-          "promotion_candidate_count": 2,
-          "demotion_candidate_count": 10
+          "current_count": 306,
+          "lp_threshold": 1822,
+          "promotion_candidate_count": 3,
+          "demotion_candidate_count": 9
         },
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
-          "current_count": 706,
-          "lp_threshold": 1340,
-          "promotion_candidate_count": 8,
-          "demotion_candidate_count": 22
+          "current_count": 710,
+          "lp_threshold": 1341,
+          "promotion_candidate_count": 10,
+          "demotion_candidate_count": 26
         }
       ]
     },
@@ -527,11 +527,11 @@
   },
   "lp_histories": [
     {
-      "created_at": "2026-08-13T00:30:58+09:00",
-      "elo_point": 3538,
+      "created_at": "2026-08-14T03:14:31+09:00",
+      "elo_point": 3595,
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1428
+      "lp": 1528
     },
     {
       "created_at": "2026-08-08T03:11:09+09:00",
@@ -552,8 +552,8 @@
     "game_type": "RANKED",
     "season_id": 33,
     "year": null,
-    "play": 174,
-    "win": 108,
+    "play": 175,
+    "win": 109,
     "lose": 66,
     "champion_stats": [
       {
@@ -801,8 +801,8 @@
   "ranked_most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
-    "play": 174,
-    "win": 108,
+    "play": 175,
+    "win": 109,
     "lose": 66,
     "my_champion_stats": [
       {
@@ -1485,6 +1485,15 @@
       "kill": 3,
       "death": 0,
       "assist": 3
+    },
+    {
+      "champion_name": "魔蛇之拥",
+      "id": 69,
+      "play": 1,
+      "win": 1,
+      "kill": 6,
+      "death": 8,
+      "assist": 10
     }
   ]
 }
