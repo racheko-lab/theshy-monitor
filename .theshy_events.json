@@ -3,6 +3,53 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-08-15T03:57:15+09:00",
+    "level": 94,
+    "is_active": true,
+    "timestamp": "2026-08-15T03:57:26.151447+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "game_type": "SOLORANKED",
+    "old_lp": 1527,
+    "new_lp": 1547,
+    "delta": 20,
+    "tier": "GRANDMASTER",
+    "division": 1,
+    "timestamp": "2026-08-15T03:57:25.325027+09:00"
+  },
+  {
+    "type": "new_match",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "match_id": "qfvdWpGbi22Fza23u2AvGY45ZJaDciHhBJ4fdfiDnU4=",
+    "game_type": "SOLORANKED",
+    "champion": "未来守护者",
+    "result": "WIN",
+    "kda": "2.67",
+    "kill": 6,
+    "death": 6,
+    "assist": 10,
+    "created_at": "2026-08-15T03:09:30+09:00",
+    "game_length_second": 1706,
+    "position": "TOP",
+    "timestamp": "2026-08-15T03:57:24.296145+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-15T03:56:58+09:00",
+    "level": 296,
+    "is_active": true,
+    "timestamp": "2026-08-15T03:57:24.290255+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-08-15T02:02:59+09:00",
     "level": 94,
     "is_active": false,
@@ -5493,49 +5540,5 @@
     "level": 94,
     "is_active": true,
     "timestamp": "2026-08-13T01:38:25.559787+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-13T01:30:55+09:00",
-    "level": 295,
-    "is_active": false,
-    "timestamp": "2026-08-13T01:38:25.556042+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-13T00:28:19+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-08-13T00:45:04.357752+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi22-B2_kzc7qWnWeH9ITSuQ1ATec68LO4co=",
-    "game_type": "SOLORANKED",
-    "champion": "未来守护者",
-    "result": "WIN",
-    "kda": "Perfect",
-    "kill": 3,
-    "death": 0,
-    "assist": 3,
-    "created_at": "2026-08-13T00:38:17+09:00",
-    "game_length_second": 909,
-    "position": "TOP",
-    "timestamp": "2026-08-13T00:45:03.397988+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-13T00:43:34+09:00",
-    "level": 295,
-    "is_active": true,
-    "timestamp": "2026-08-13T00:45:03.395075+09:00"
   }
 ]
