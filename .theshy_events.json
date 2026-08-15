@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-08-16T06:47:50+09:00",
+    "level": 94,
+    "is_active": true,
+    "timestamp": "2026-08-16T06:47:59.558656+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-16T06:47:36+09:00",
+    "level": 296,
+    "is_active": true,
+    "timestamp": "2026-08-16T06:47:59.557764+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-08-16T06:29:48+09:00",
     "level": 94,
     "is_active": true,
@@ -880,34 +898,5 @@
     "level": 94,
     "is_active": true,
     "timestamp": "2026-08-15T04:46:31.519910+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "game_type": "SOLORANKED",
-    "old_lp": 1547,
-    "new_lp": 1526,
-    "delta": -21,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-08-15T04:46:30.468830+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi228GgGQu7tcemnyp6m0nO_e5Gb00yTVcHI=",
-    "game_type": "SOLORANKED",
-    "champion": "铁血狼母",
-    "result": "LOSE",
-    "kda": "1.29",
-    "kill": 5,
-    "death": 7,
-    "assist": 4,
-    "created_at": "2026-08-15T04:13:22+09:00",
-    "game_length_second": 1740,
-    "position": "TOP",
-    "timestamp": "2026-08-15T04:46:29.443168+09:00"
   }
 ]
