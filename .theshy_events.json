@@ -1,5 +1,17 @@
 [
   {
+    "type": "error",
+    "account": "은여하#1103",
+    "msg": "{'code': -32603, 'message': 'INTERNAL_ERROR', 'data': {'exception': 'Illuminate\\\\Http\\\\Client\\\\RequestException'}}",
+    "timestamp": "2026-08-17T00:10:03.636368+09:00"
+  },
+  {
+    "type": "error",
+    "account": "The shy#asdf",
+    "msg": "{'code': -32603, 'message': 'INTERNAL_ERROR', 'data': {'exception': 'Illuminate\\\\Http\\\\Client\\\\RequestException'}}",
+    "timestamp": "2026-08-17T00:10:02.606942+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -870,23 +882,5 @@
     "level": 296,
     "is_active": true,
     "timestamp": "2026-08-15T22:59:47.332977+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-15T22:10:37+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-08-15T22:42:49.662477+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-15T22:10:24+09:00",
-    "level": 296,
-    "is_active": true,
-    "timestamp": "2026-08-15T22:10:47.523320+09:00"
   }
 ]
