@@ -1,5 +1,30 @@
 [
   {
+    "type": "bilibili_live",
+    "kind": "ig_live_start",
+    "title": "【直播】WBG vs IG",
+    "room_id": 6,
+    "timestamp": "2026-08-16T18:59:13.988960+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-16T18:59:02+09:00",
+    "level": 94,
+    "is_active": true,
+    "timestamp": "2026-08-16T18:59:12.410503+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-16T18:40:45+09:00",
+    "level": 296,
+    "is_active": false,
+    "timestamp": "2026-08-16T18:59:12.409572+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -871,32 +896,5 @@
     "level": 94,
     "is_active": false,
     "timestamp": "2026-08-15T16:38:03.083022+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-15T15:20:54+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-08-15T16:03:26.656898+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-15T16:02:03+09:00",
-    "level": 296,
-    "is_active": true,
-    "timestamp": "2026-08-15T16:03:26.650980+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-15T14:54:26+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-08-15T15:21:03.322245+09:00"
   }
 ]
