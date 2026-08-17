@@ -1,6 +1,24 @@
 [
   {
     "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-17T23:25:40+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-08-17T23:37:29.974514+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-17T23:37:06+09:00",
+    "level": 296,
+    "is_active": true,
+    "timestamp": "2026-08-17T23:37:29.967305+09:00"
+  },
+  {
+    "type": "opgg_updated",
     "account": "The shy#asdf",
     "slug": "main",
     "updated_at": "2026-08-17T22:44:39+09:00",
@@ -6740,21 +6758,5 @@
     "level": 296,
     "is_active": false,
     "timestamp": "2026-08-16T19:26:03.290427+09:00"
-  },
-  {
-    "type": "bilibili_live",
-    "kind": "ig_live_start",
-    "title": "【直播】WBG vs IG",
-    "room_id": 6,
-    "timestamp": "2026-08-16T18:59:13.988960+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-16T18:59:02+09:00",
-    "level": 94,
-    "is_active": true,
-    "timestamp": "2026-08-16T18:59:12.410503+09:00"
   }
 ]
