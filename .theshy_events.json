@@ -3,6 +3,53 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-08-19T03:40:22+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-08-19T04:16:01.510442+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "game_type": "SOLORANKED",
+    "old_lp": 1563,
+    "new_lp": 1582,
+    "delta": 19,
+    "tier": "GRANDMASTER",
+    "division": 1,
+    "timestamp": "2026-08-19T04:16:00.511868+09:00"
+  },
+  {
+    "type": "new_match",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "match_id": "qfvdWpGbi21MQm03EZAkbu2zwvYSGzpqbDoaPlj6Qmg=",
+    "game_type": "SOLORANKED",
+    "champion": "未来守护者",
+    "result": "WIN",
+    "kda": "Perfect",
+    "kill": 5,
+    "death": 0,
+    "assist": 3,
+    "created_at": "2026-08-19T03:40:00+09:00",
+    "game_length_second": 1366,
+    "position": "TOP",
+    "timestamp": "2026-08-19T04:15:59.470948+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-19T04:15:32+09:00",
+    "level": 296,
+    "is_active": true,
+    "timestamp": "2026-08-19T04:15:59.467661+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-08-19T02:58:39+09:00",
     "level": 94,
     "is_active": false,
@@ -2904,41 +2951,5 @@
     "level": 296,
     "is_active": true,
     "timestamp": "2026-08-17T23:37:29.967305+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-17T22:44:39+09:00",
-    "level": 296,
-    "is_active": false,
-    "timestamp": "2026-08-17T23:02:48.522200+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-17T22:28:48+09:00",
-    "level": 94,
-    "is_active": true,
-    "timestamp": "2026-08-17T22:28:57.315024+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-17T22:28:34+09:00",
-    "level": 296,
-    "is_active": true,
-    "timestamp": "2026-08-17T22:28:57.309233+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-17T20:58:48+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-08-17T21:48:31.237579+09:00"
   }
 ]
