@@ -17,27 +17,27 @@
         "internal_name": "퐁당가지토마토",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
         "level": 296,
-        "updated_at": "2026-08-18T23:54:23+09:00",
-        "renewable_at": "2026-08-18T23:56:23+09:00",
-        "revision_at": "2026-08-15T04:13:38+09:00",
+        "updated_at": "2026-08-19T00:39:54+09:00",
+        "renewable_at": "2026-08-19T00:41:54+09:00",
+        "revision_at": "2026-08-19T00:08:45+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 618,
-          "total": 2873418
+          "rank": 585,
+          "total": 2873617
         },
         "league_stats": [
           {
             "game_type": "SOLORANKED",
             "tier": "GRANDMASTER",
             "division": 1,
-            "lp": 1526,
+            "lp": 1546,
             "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
             "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-            "win": 111,
+            "win": 112,
             "lose": 69,
-            "play": 179,
-            "match_win": 111,
+            "play": 180,
+            "match_win": 112,
             "match_lose": 68,
             "is_hot_streak": "false",
             "is_fresh_blood": "false",
@@ -48,10 +48,10 @@
               {
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
-                "current_count": 310,
-                "lp_threshold": 1831,
+                "current_count": 309,
+                "lp_threshold": 1826,
                 "promotion_candidate_count": 1,
-                "demotion_candidate_count": 11
+                "demotion_candidate_count": 10
               },
               {
                 "_class": "HighLeague",
@@ -535,6 +535,13 @@
         },
         "lp_histories": [
           {
+            "created_at": "2026-08-19T00:12:28+09:00",
+            "elo_point": 3605,
+            "tier": "GRANDMASTER",
+            "division": 1,
+            "lp": 1546
+          },
+          {
             "created_at": "2026-08-15T02:00:58+09:00",
             "elo_point": 3606,
             "tier": "GRANDMASTER",
@@ -560,8 +567,8 @@
           "game_type": "RANKED",
           "season_id": 33,
           "year": null,
-          "play": 179,
-          "win": 111,
+          "play": 180,
+          "win": 112,
           "lose": 68,
           "champion_stats": [
             {
@@ -809,8 +816,8 @@
         "ranked_most_champions": {
           "game_type": "RANKED",
           "season_id": 33,
-          "play": 179,
-          "win": 111,
+          "play": 180,
+          "win": 112,
           "lose": 68,
           "my_champion_stats": [
             {
@@ -1504,6 +1511,15 @@
             "assist": 10
           },
           {
+            "champion_name": "机械公敌",
+            "id": 68,
+            "play": 1,
+            "win": 1,
+            "kill": 8,
+            "death": 10,
+            "assist": 11
+          },
+          {
             "champion_name": "铁血狼母",
             "id": 799,
             "play": 1,
@@ -1515,6 +1531,670 @@
         ]
       },
       "matches": [
+        {
+          "id": "qfvdWpGbi20o06gcoLB8p0XBPvBwejAHNBuvK4cXliQ=",
+          "created_at": "2026-08-19T00:08:35+09:00",
+          "game_type": "SOLORANKED",
+          "game_length_second": 2026,
+          "game_map": "SUMMONERS_RIFT",
+          "champion_id": 68,
+          "champion": "机械公敌",
+          "team_key": "RED",
+          "position": "TOP",
+          "kill": 8,
+          "death": 10,
+          "assist": 11,
+          "kda": "1.90",
+          "result": "WIN",
+          "op_score": 4.36,
+          "op_score_rank": 8,
+          "gold_earned": 13690,
+          "minion_kill": 207,
+          "neutral_minion_kill": 4,
+          "total_damage_dealt_to_champions": 39916,
+          "total_damage_taken": 36554,
+          "total_heal": 4553,
+          "vision_wards_bought_in_game": 1,
+          "ward_place": 12,
+          "largest_killing_spree": 4,
+          "largest_multi_kill": 1,
+          "largest_critical_strike": 0,
+          "time_ccing_others": 21,
+          "champion_level": 18,
+          "items": [
+            3135,
+            3157,
+            1082,
+            6653,
+            3047,
+            3916
+          ],
+          "items_names": [
+            "虚空之杖",
+            "中娅沙漏",
+            "黑暗封印",
+            "兰德里的折磨",
+            "铁板靴",
+            "湮灭宝珠"
+          ],
+          "spells": [
+            4,
+            14
+          ],
+          "rune": {
+            "_class": "Rune",
+            "primary_page_id": 8200,
+            "primary_rune_id": 8230,
+            "secondary_page_id": 8000
+          },
+          "teams": [
+            {
+              "key": "BLUE",
+              "banned_champions": [
+                64,
+                107,
+                145,
+                517
+              ],
+              "banned_champions_names": [
+                "盲僧",
+                "傲之追猎者",
+                "虚空之女",
+                "解脱者"
+              ],
+              "game_stat": {
+                "is_win": "false",
+                "champion_kill": 48,
+                "tower_kill": 6,
+                "dragon_kill": 2,
+                "baron_kill": 1,
+                "inhibitor_kill": 1,
+                "rift_herald_kill": 1,
+                "atakhan_kill": 0,
+                "gold_earned": 76574,
+                "champion_first": "false",
+                "horde_kill": 3
+              }
+            },
+            {
+              "key": "RED",
+              "banned_champions": [
+                64,
+                134,
+                246,
+                555
+              ],
+              "banned_champions_names": [
+                "盲僧",
+                "暗黑元首",
+                "元素女皇",
+                "血港鬼影"
+              ],
+              "game_stat": {
+                "is_win": "true",
+                "champion_kill": 51,
+                "tower_kill": 7,
+                "dragon_kill": 3,
+                "baron_kill": 1,
+                "inhibitor_kill": 1,
+                "rift_herald_kill": 0,
+                "atakhan_kill": 0,
+                "gold_earned": 76373,
+                "champion_first": "true",
+                "horde_kill": 0
+              }
+            }
+          ],
+          "participants": [
+            {
+              "summoner_name": "woxinrubing",
+              "summoner_tag": "KR1",
+              "champion_id": 76,
+              "champion_name": "狂野女猎手",
+              "team_key": "BLUE",
+              "position": "JUNGLE",
+              "items": [
+                3152,
+                3157,
+                3102,
+                3135,
+                3100,
+                3089
+              ],
+              "items_names": [
+                "海克斯科技火箭腰带",
+                "中娅沙漏",
+                "女妖面纱",
+                "虚空之杖",
+                "巫妖之祸",
+                "灭世者的死亡之帽"
+              ],
+              "spells": [
+                11,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8100,
+                "primary_rune_id": 8128,
+                "secondary_page_id": 8000
+              },
+              "champion_level": 18,
+              "kill": 22,
+              "death": 5,
+              "assist": 13,
+              "kda": "7.00",
+              "result": "LOSE",
+              "op_score": 8.09,
+              "op_score_rank": 1,
+              "gold_earned": 21811,
+              "minion_kill": 44,
+              "neutral_minion_kill": 232,
+              "total_damage_dealt_to_champions": 45026,
+              "total_damage_taken": 42763,
+              "total_heal": 38616,
+              "vision_wards_bought_in_game": 1,
+              "ward_place": 3,
+              "largest_killing_spree": 10,
+              "largest_multi_kill": 3,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 21
+            },
+            {
+              "summoner_name": "超用力握拳",
+              "summoner_tag": "KR01",
+              "champion_id": 164,
+              "champion_name": "青钢影",
+              "team_key": "BLUE",
+              "position": "SUPPORT",
+              "items": [
+                3877,
+                6610,
+                3050,
+                2021,
+                1028,
+                3158
+              ],
+              "items_names": [
+                "血鸣",
+                "焚天",
+                "基克的聚合",
+                "掘道钻头",
+                "红水晶",
+                "明朗之靴"
+              ],
+              "spells": [
+                4,
+                14
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8100,
+                "primary_rune_id": 9923,
+                "secondary_page_id": 8400
+              },
+              "champion_level": 14,
+              "kill": 5,
+              "death": 10,
+              "assist": 23,
+              "kda": "2.80",
+              "result": "LOSE",
+              "op_score": 5.22,
+              "op_score_rank": 5,
+              "gold_earned": 11208,
+              "minion_kill": 27,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 20947,
+              "total_damage_taken": 45804,
+              "total_heal": 7243,
+              "vision_wards_bought_in_game": 33,
+              "ward_place": 69,
+              "largest_killing_spree": 2,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 185,
+              "time_ccing_others": 32
+            },
+            {
+              "summoner_name": "donk666",
+              "summoner_tag": "kr666",
+              "champion_id": 2,
+              "champion_name": "狂战士",
+              "team_key": "BLUE",
+              "position": "TOP",
+              "items": [
+                6333,
+                3156,
+                6631,
+                3073,
+                3008,
+                2055
+              ],
+              "items_names": [
+                "死亡之舞",
+                "玛莫提乌斯之噬",
+                "挺进破坏者",
+                "海克斯注力刚壁",
+                "暴食胫甲",
+                "控制守卫"
+              ],
+              "spells": [
+                4,
+                6
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8000,
+                "primary_rune_id": 8010,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 18,
+              "kill": 8,
+              "death": 8,
+              "assist": 12,
+              "kda": "2.50",
+              "result": "LOSE",
+              "op_score": 4.61,
+              "op_score_rank": 7,
+              "gold_earned": 14623,
+              "minion_kill": 212,
+              "neutral_minion_kill": 8,
+              "total_damage_dealt_to_champions": 32004,
+              "total_damage_taken": 45754,
+              "total_heal": 19962,
+              "vision_wards_bought_in_game": 4,
+              "ward_place": 9,
+              "largest_killing_spree": 3,
+              "largest_multi_kill": 2,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 21
+            },
+            {
+              "summoner_name": "心若不羁路亦无涯",
+              "summoner_tag": "2003",
+              "champion_id": 127,
+              "champion_name": "冰霜女巫",
+              "team_key": "BLUE",
+              "position": "MID",
+              "items": [
+                1058,
+                3152,
+                2503,
+                3175,
+                3135,
+                4005
+              ],
+              "items_names": [
+                "无用大棒",
+                "海克斯科技火箭腰带",
+                "黯炎火炬",
+                "灵能使之靴",
+                "虚空之杖",
+                "帝国指令"
+              ],
+              "spells": [
+                14,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8400,
+                "primary_rune_id": 8439,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 17,
+              "kill": 11,
+              "death": 11,
+              "assist": 22,
+              "kda": "3.00",
+              "result": "LOSE",
+              "op_score": 6.34,
+              "op_score_rank": 3,
+              "gold_earned": 15687,
+              "minion_kill": 247,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 43363,
+              "total_damage_taken": 37062,
+              "total_heal": 3905,
+              "vision_wards_bought_in_game": 0,
+              "ward_place": 11,
+              "largest_killing_spree": 6,
+              "largest_multi_kill": 3,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 74
+            },
+            {
+              "summoner_name": "西安小平平",
+              "summoner_tag": "CN1",
+              "champion_id": 27,
+              "champion_name": "炼金术士",
+              "team_key": "BLUE",
+              "position": "ADC",
+              "items": [
+                4633,
+                8010,
+                6653,
+                3147,
+                1057,
+                1029
+              ],
+              "items_names": [
+                "裂隙制造者",
+                "放血者的诅咒",
+                "兰德里的折磨",
+                "幽魂面具",
+                "负极斗篷",
+                "布甲"
+              ],
+              "spells": [
+                4,
+                6
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8200,
+                "primary_rune_id": 8992,
+                "secondary_page_id": 8000
+              },
+              "champion_level": 16,
+              "kill": 2,
+              "death": 17,
+              "assist": 16,
+              "kda": "1.06",
+              "result": "LOSE",
+              "op_score": 2.91,
+              "op_score_rank": 10,
+              "gold_earned": 13245,
+              "minion_kill": 188,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 26386,
+              "total_damage_taken": 48863,
+              "total_heal": 5420,
+              "vision_wards_bought_in_game": 0,
+              "ward_place": 12,
+              "largest_killing_spree": 0,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 31
+            },
+            {
+              "summoner_name": "작고귀엽다",
+              "summoner_tag": "KR1",
+              "champion_id": 115,
+              "champion_name": "爆破鬼才",
+              "team_key": "RED",
+              "position": "ADC",
+              "items": [
+                1056,
+                3157,
+                4630,
+                6653,
+                4645,
+                2503
+              ],
+              "items_names": [
+                "多兰之戒",
+                "中娅沙漏",
+                "枯萎珠宝",
+                "兰德里的折磨",
+                "影焰",
+                "黯炎火炬"
+              ],
+              "spells": [
+                12,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8200,
+                "primary_rune_id": 8229,
+                "secondary_page_id": 8000
+              },
+              "champion_level": 18,
+              "kill": 15,
+              "death": 8,
+              "assist": 11,
+              "kda": "3.25",
+              "result": "WIN",
+              "op_score": 6.14,
+              "op_score_rank": 4,
+              "gold_earned": 18126,
+              "minion_kill": 269,
+              "neutral_minion_kill": 1,
+              "total_damage_dealt_to_champions": 50791,
+              "total_damage_taken": 33430,
+              "total_heal": 2072,
+              "vision_wards_bought_in_game": 2,
+              "ward_place": 13,
+              "largest_killing_spree": 8,
+              "largest_multi_kill": 2,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 23
+            },
+            {
+              "summoner_name": "The shy",
+              "summoner_tag": "asdf",
+              "champion_id": 68,
+              "champion_name": "机械公敌",
+              "team_key": "RED",
+              "position": "TOP",
+              "items": [
+                3135,
+                3157,
+                1082,
+                6653,
+                3047,
+                3916
+              ],
+              "items_names": [
+                "虚空之杖",
+                "中娅沙漏",
+                "黑暗封印",
+                "兰德里的折磨",
+                "铁板靴",
+                "湮灭宝珠"
+              ],
+              "spells": [
+                4,
+                14
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8200,
+                "primary_rune_id": 8230,
+                "secondary_page_id": 8000
+              },
+              "champion_level": 18,
+              "kill": 8,
+              "death": 10,
+              "assist": 11,
+              "kda": "1.90",
+              "result": "WIN",
+              "op_score": 4.36,
+              "op_score_rank": 8,
+              "gold_earned": 13690,
+              "minion_kill": 207,
+              "neutral_minion_kill": 4,
+              "total_damage_dealt_to_champions": 39916,
+              "total_damage_taken": 36554,
+              "total_heal": 4553,
+              "vision_wards_bought_in_game": 1,
+              "ward_place": 12,
+              "largest_killing_spree": 4,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 21
+            },
+            {
+              "summoner_name": "紫皮大蒜",
+              "summoner_tag": "òωó",
+              "champion_id": 40,
+              "champion_name": "风暴之怒",
+              "team_key": "RED",
+              "position": "SUPPORT",
+              "items": [
+                3871,
+                3108,
+                3222,
+                3009,
+                6617,
+                4005
+              ],
+              "items_names": [
+                "扎兹沙克的溃口",
+                "恶魔法典",
+                "米凯尔的祝福",
+                "轻灵之靴",
+                "月石再生器",
+                "帝国指令"
+              ],
+              "spells": [
+                7,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8200,
+                "primary_rune_id": 8229,
+                "secondary_page_id": 8100
+              },
+              "champion_level": 16,
+              "kill": 5,
+              "death": 5,
+              "assist": 31,
+              "kda": "7.20",
+              "result": "WIN",
+              "op_score": 7.33,
+              "op_score_rank": 2,
+              "gold_earned": 12717,
+              "minion_kill": 38,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 19214,
+              "total_damage_taken": 25668,
+              "total_heal": 10541,
+              "vision_wards_bought_in_game": 23,
+              "ward_place": 56,
+              "largest_killing_spree": 3,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 49
+            },
+            {
+              "summoner_name": "진조 알퀘이드 ",
+              "summoner_tag": "KR1",
+              "champion_id": 62,
+              "champion_name": "齐天大圣",
+              "team_key": "RED",
+              "position": "JUNGLE",
+              "items": [
+                1036,
+                6631,
+                3071,
+                6333,
+                3078,
+                3111
+              ],
+              "items_names": [
+                "长剑",
+                "挺进破坏者",
+                "黑色切割者",
+                "死亡之舞",
+                "三相之力",
+                "水银之靴"
+              ],
+              "spells": [
+                4,
+                11
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8000,
+                "primary_rune_id": 8010,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 17,
+              "kill": 13,
+              "death": 10,
+              "assist": 9,
+              "kda": "2.20",
+              "result": "WIN",
+              "op_score": 4.78,
+              "op_score_rank": 6,
+              "gold_earned": 17506,
+              "minion_kill": 46,
+              "neutral_minion_kill": 180,
+              "total_damage_dealt_to_champions": 28440,
+              "total_damage_taken": 46573,
+              "total_heal": 12258,
+              "vision_wards_bought_in_game": 7,
+              "ward_place": 9,
+              "largest_killing_spree": 4,
+              "largest_multi_kill": 2,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 26
+            },
+            {
+              "summoner_name": "Karasu",
+              "summoner_tag": "333",
+              "champion_id": 91,
+              "champion_name": "刀锋之影",
+              "team_key": "RED",
+              "position": "MID",
+              "items": [
+                6692,
+                3161,
+                6610,
+                3173,
+                3123,
+                3035
+              ],
+              "items_names": [
+                "星蚀",
+                "朔极之矛",
+                "焚天",
+                "带链碾碎者",
+                "死刑宣告",
+                "最后的轻语"
+              ],
+              "spells": [
+                14,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8000,
+                "primary_rune_id": 8010,
+                "secondary_page_id": 8100
+              },
+              "champion_level": 17,
+              "kill": 10,
+              "death": 15,
+              "assist": 14,
+              "kda": "1.60",
+              "result": "WIN",
+              "op_score": 4.34,
+              "op_score_rank": 9,
+              "gold_earned": 14334,
+              "minion_kill": 221,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 37629,
+              "total_damage_taken": 52948,
+              "total_heal": 11292,
+              "vision_wards_bought_in_game": 2,
+              "ward_place": 5,
+              "largest_killing_spree": 2,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 598,
+              "time_ccing_others": 8
+            }
+          ],
+          "average_tier_info": {
+            "tier": "MASTER",
+            "division": 1,
+            "border_image_url": "https://opgg-static.akamaized.net/images/border_new/master.png"
+          },
+          "_account_slug": "main",
+          "_account_label": "The shy#asdf"
+        },
         {
           "id": "qfvdWpGbi228GgGQu7tcemnyp6m0nO_e5Gb00yTVcHI=",
           "created_at": "2026-08-15T04:13:22+09:00",
@@ -13968,678 +14648,12 @@
           },
           "_account_slug": "main",
           "_account_label": "The shy#asdf"
-        },
-        {
-          "id": "qfvdWpGbi20L5CRzZ3vvQFmbjyuUGwSEvtfsZozULas=",
-          "created_at": "2026-07-29T18:49:37+09:00",
-          "game_type": "SOLORANKED",
-          "game_length_second": 1873,
-          "game_map": "SUMMONERS_RIFT",
-          "champion_id": 22,
-          "champion": "寒冰射手",
-          "team_key": "RED",
-          "position": "SUPPORT",
-          "kill": 5,
-          "death": 8,
-          "assist": 13,
-          "kda": "2.25",
-          "result": "WIN",
-          "op_score": 4.19,
-          "op_score_rank": 7,
-          "gold_earned": 11374,
-          "minion_kill": 67,
-          "neutral_minion_kill": 0,
-          "total_damage_dealt_to_champions": 17745,
-          "total_damage_taken": 23603,
-          "total_heal": 4881,
-          "vision_wards_bought_in_game": 8,
-          "ward_place": 37,
-          "largest_killing_spree": 2,
-          "largest_multi_kill": 1,
-          "largest_critical_strike": 229,
-          "time_ccing_others": 48,
-          "champion_level": 15,
-          "items": [
-            3814,
-            6672,
-            3877,
-            3006,
-            3133,
-            3134
-          ],
-          "items_names": [
-            "夜之锋刃",
-            "海妖杀手",
-            "血鸣",
-            "狂战士胫甲",
-            "考尔菲德的战锤",
-            "锯齿短匕"
-          ],
-          "spells": [
-            4,
-            7
-          ],
-          "rune": {
-            "_class": "Rune",
-            "primary_page_id": 8000,
-            "primary_rune_id": 8008,
-            "secondary_page_id": 8300
-          },
-          "teams": [
-            {
-              "key": "BLUE",
-              "banned_champions": [
-                80,
-                134,
-                164,
-                555,
-                805
-              ],
-              "banned_champions_names": [
-                "不屈之枪",
-                "暗黑元首",
-                "青钢影",
-                "血港鬼影",
-                "灰烬驱魔人"
-              ],
-              "game_stat": {
-                "is_win": "false",
-                "champion_kill": 37,
-                "tower_kill": 2,
-                "dragon_kill": 0,
-                "baron_kill": 0,
-                "inhibitor_kill": 0,
-                "rift_herald_kill": 1,
-                "atakhan_kill": 0,
-                "gold_earned": 69927,
-                "champion_first": "false",
-                "horde_kill": 2
-              }
-            },
-            {
-              "key": "RED",
-              "banned_champions": [
-                7,
-                78,
-                142,
-                555
-              ],
-              "banned_champions_names": [
-                "诡术妖姬",
-                "圣锤之毅",
-                "暮光星灵",
-                "血港鬼影"
-              ],
-              "game_stat": {
-                "is_win": "true",
-                "champion_kill": 41,
-                "tower_kill": 11,
-                "dragon_kill": 5,
-                "baron_kill": 1,
-                "inhibitor_kill": 3,
-                "rift_herald_kill": 0,
-                "atakhan_kill": 0,
-                "gold_earned": 70215,
-                "champion_first": "true",
-                "horde_kill": 1
-              }
-            }
-          ],
-          "participants": [
-            {
-              "summoner_name": "고석현",
-              "summoner_tag": "0833",
-              "champion_id": 105,
-              "champion_name": "潮汐海灵",
-              "team_key": "BLUE",
-              "position": "MID",
-              "items": [
-                3157,
-                1082,
-                3171,
-                6655,
-                3113,
-                1056
-              ],
-              "items_names": [
-                "中娅沙漏",
-                "黑暗封印",
-                "猩红明朗",
-                "卢登的回声",
-                "以太精魂",
-                "多兰之戒"
-              ],
-              "spells": [
-                4,
-                14
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8100,
-                "primary_rune_id": 8112,
-                "secondary_page_id": 8000
-              },
-              "champion_level": 14,
-              "kill": 3,
-              "death": 16,
-              "assist": 10,
-              "kda": "0.81",
-              "result": "LOSE",
-              "op_score": 1.8,
-              "op_score_rank": 10,
-              "gold_earned": 9615,
-              "minion_kill": 142,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 22027,
-              "total_damage_taken": 33938,
-              "total_heal": 2590,
-              "vision_wards_bought_in_game": 1,
-              "ward_place": 2,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 15
-            },
-            {
-              "summoner_name": "vvi2",
-              "summoner_tag": "KR1",
-              "champion_id": 126,
-              "champion_name": "未来守护者",
-              "team_key": "BLUE",
-              "position": "JUNGLE",
-              "items": [
-                6699,
-                2520,
-                6695,
-                3814,
-                3033,
-                3047
-              ],
-              "items_names": [
-                "电震涡流剑",
-                "破垒者",
-                "巨蛇之牙",
-                "夜之锋刃",
-                "凡性的提醒",
-                "铁板靴"
-              ],
-              "spells": [
-                11,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8300,
-                "primary_rune_id": 8369,
-                "secondary_page_id": 8100
-              },
-              "champion_level": 17,
-              "kill": 10,
-              "death": 2,
-              "assist": 8,
-              "kda": "9.00",
-              "result": "LOSE",
-              "op_score": 6.44,
-              "op_score_rank": 1,
-              "gold_earned": 18299,
-              "minion_kill": 89,
-              "neutral_minion_kill": 172,
-              "total_damage_dealt_to_champions": 39053,
-              "total_damage_taken": 21892,
-              "total_heal": 9041,
-              "vision_wards_bought_in_game": 5,
-              "ward_place": 6,
-              "largest_killing_spree": 9,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 935,
-              "time_ccing_others": 18
-            },
-            {
-              "summoner_name": "FA Kartis",
-              "summoner_tag": "HK01",
-              "champion_id": 2,
-              "champion_name": "狂战士",
-              "team_key": "BLUE",
-              "position": "TOP",
-              "items": [
-                3143,
-                3073,
-                6631,
-                3047,
-                1055,
-                3133
-              ],
-              "items_names": [
-                "兰顿之兆",
-                "海克斯注力刚壁",
-                "挺进破坏者",
-                "铁板靴",
-                "多兰之刃",
-                "考尔菲德的战锤"
-              ],
-              "spells": [
-                3,
-                6
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8010,
-                "secondary_page_id": 8400
-              },
-              "champion_level": 17,
-              "kill": 7,
-              "death": 9,
-              "assist": 9,
-              "kda": "1.78",
-              "result": "LOSE",
-              "op_score": 3.89,
-              "op_score_rank": 8,
-              "gold_earned": 13169,
-              "minion_kill": 215,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 24054,
-              "total_damage_taken": 38826,
-              "total_heal": 12407,
-              "vision_wards_bought_in_game": 0,
-              "ward_place": 10,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 20
-            },
-            {
-              "summoner_name": "액션빔 지지직",
-              "summoner_tag": "KR1",
-              "champion_id": 161,
-              "champion_name": "虚空之眼",
-              "team_key": "BLUE",
-              "position": "SUPPORT",
-              "items": [
-                2065,
-                3009,
-                4628,
-                3876,
-                3916,
-                4632
-              ],
-              "items_names": [
-                "舒瑞娅的战歌",
-                "轻灵之靴",
-                "视界专注",
-                "摩天雪橇",
-                "湮灭宝珠",
-                "翠绿屏障"
-              ],
-              "spells": [
-                7,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8200,
-                "primary_rune_id": 8229,
-                "secondary_page_id": 8000
-              },
-              "champion_level": 14,
-              "kill": 4,
-              "death": 7,
-              "assist": 18,
-              "kda": "3.14",
-              "result": "LOSE",
-              "op_score": 5.12,
-              "op_score_rank": 5,
-              "gold_earned": 10175,
-              "minion_kill": 45,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 18130,
-              "total_damage_taken": 20436,
-              "total_heal": 4532,
-              "vision_wards_bought_in_game": 18,
-              "ward_place": 46,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 30
-            },
-            {
-              "summoner_name": "european visitor",
-              "summoner_tag": "deib",
-              "champion_id": 119,
-              "champion_name": "荣耀行刑官",
-              "team_key": "BLUE",
-              "position": "ADC",
-              "items": [
-                1086,
-                3072,
-                2523,
-                3031,
-                3036,
-                3094
-              ],
-              "items_names": [
-                "多兰之弓",
-                "饮血剑",
-                "海克斯镜片 C44",
-                "无尽之刃",
-                "多米尼克领主的致意",
-                "疾射火炮"
-              ],
-              "spells": [
-                1,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8008,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 16,
-              "kill": 13,
-              "death": 7,
-              "assist": 5,
-              "kda": "2.57",
-              "result": "LOSE",
-              "op_score": 5.19,
-              "op_score_rank": 4,
-              "gold_earned": 18669,
-              "minion_kill": 256,
-              "neutral_minion_kill": 4,
-              "total_damage_dealt_to_champions": 30166,
-              "total_damage_taken": 25792,
-              "total_heal": 9926,
-              "vision_wards_bought_in_game": 0,
-              "ward_place": 9,
-              "largest_killing_spree": 4,
-              "largest_multi_kill": 2,
-              "largest_critical_strike": 1431,
-              "time_ccing_others": 8
-            },
-            {
-              "summoner_name": "육개장 순대국",
-              "summoner_tag": "KR1",
-              "champion_id": 5,
-              "champion_name": "德邦总管",
-              "team_key": "RED",
-              "position": "JUNGLE",
-              "items": [
-                6610,
-                3748,
-                2055,
-                3111,
-                6333,
-                1036
-              ],
-              "items_names": [
-                "焚天",
-                "巨型九头蛇",
-                "控制守卫",
-                "水银之靴",
-                "死亡之舞",
-                "长剑"
-              ],
-              "spells": [
-                4,
-                11
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8010,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 17,
-              "kill": 10,
-              "death": 5,
-              "assist": 9,
-              "kda": "3.80",
-              "result": "WIN",
-              "op_score": 5.29,
-              "op_score_rank": 3,
-              "gold_earned": 14103,
-              "minion_kill": 22,
-              "neutral_minion_kill": 191,
-              "total_damage_dealt_to_champions": 21875,
-              "total_damage_taken": 47596,
-              "total_heal": 26430,
-              "vision_wards_bought_in_game": 7,
-              "ward_place": 8,
-              "largest_killing_spree": 4,
-              "largest_multi_kill": 2,
-              "largest_critical_strike": 277,
-              "time_ccing_others": 24
-            },
-            {
-              "summoner_name": "The shy",
-              "summoner_tag": "asdf",
-              "champion_id": 22,
-              "champion_name": "寒冰射手",
-              "team_key": "RED",
-              "position": "SUPPORT",
-              "items": [
-                3814,
-                6672,
-                3877,
-                3006,
-                3133,
-                3134
-              ],
-              "items_names": [
-                "夜之锋刃",
-                "海妖杀手",
-                "血鸣",
-                "狂战士胫甲",
-                "考尔菲德的战锤",
-                "锯齿短匕"
-              ],
-              "spells": [
-                4,
-                7
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8008,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 15,
-              "kill": 5,
-              "death": 8,
-              "assist": 13,
-              "kda": "2.25",
-              "result": "WIN",
-              "op_score": 4.19,
-              "op_score_rank": 7,
-              "gold_earned": 11374,
-              "minion_kill": 67,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 17745,
-              "total_damage_taken": 23603,
-              "total_heal": 4881,
-              "vision_wards_bought_in_game": 8,
-              "ward_place": 37,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 229,
-              "time_ccing_others": 48
-            },
-            {
-              "summoner_name": "Qnayia",
-              "summoner_tag": "ztmy",
-              "champion_id": 246,
-              "champion_name": "元素女皇",
-              "team_key": "RED",
-              "position": "MID",
-              "items": [
-                6698,
-                6333,
-                2055,
-                6694,
-                6697,
-                3168
-              ],
-              "items_names": [
-                "亵渎九头蛇",
-                "死亡之舞",
-                "控制守卫",
-                "赛瑞尔达的怨恨",
-                "狂妄",
-                "不朽之路"
-              ],
-              "spells": [
-                14,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8100,
-                "primary_rune_id": 8112,
-                "secondary_page_id": 8000
-              },
-              "champion_level": 18,
-              "kill": 14,
-              "death": 9,
-              "assist": 7,
-              "kda": "2.33",
-              "result": "WIN",
-              "op_score": 5.31,
-              "op_score_rank": 2,
-              "gold_earned": 15690,
-              "minion_kill": 210,
-              "neutral_minion_kill": 12,
-              "total_damage_dealt_to_champions": 35330,
-              "total_damage_taken": 36182,
-              "total_heal": 11700,
-              "vision_wards_bought_in_game": 4,
-              "ward_place": 7,
-              "largest_killing_spree": 5,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 18
-            },
-            {
-              "summoner_name": "망나니6974",
-              "summoner_tag": "KR3",
-              "champion_id": 23,
-              "champion_name": "蛮族之王",
-              "team_key": "RED",
-              "position": "TOP",
-              "items": [
-                6676,
-                6698,
-                3036,
-                3031,
-                3134,
-                3008
-              ],
-              "items_names": [
-                "收集者",
-                "亵渎九头蛇",
-                "多米尼克领主的致意",
-                "无尽之刃",
-                "锯齿短匕",
-                "暴食胫甲"
-              ],
-              "spells": [
-                4,
-                14
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8100,
-                "primary_rune_id": 9923,
-                "secondary_page_id": 8000
-              },
-              "champion_level": 18,
-              "kill": 9,
-              "death": 9,
-              "assist": 3,
-              "kda": "1.33",
-              "result": "WIN",
-              "op_score": 3.63,
-              "op_score_rank": 9,
-              "gold_earned": 16033,
-              "minion_kill": 228,
-              "neutral_minion_kill": 32,
-              "total_damage_dealt_to_champions": 29806,
-              "total_damage_taken": 42973,
-              "total_heal": 16354,
-              "vision_wards_bought_in_game": 1,
-              "ward_place": 5,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 2,
-              "largest_critical_strike": 1084,
-              "time_ccing_others": 19
-            },
-            {
-              "summoner_name": "지뢰계멘헤라정병뚱남",
-              "summoner_tag": "진짜임",
-              "champion_id": 147,
-              "champion_name": "星籁歌姬",
-              "team_key": "RED",
-              "position": "ADC",
-              "items": [
-                2420,
-                3040,
-                4005,
-                3116,
-                1056,
-                1058
-              ],
-              "items_names": [
-                "探索者的护臂",
-                "炽天使之拥",
-                "帝国指令",
-                "瑞莱的冰晶节杖",
-                "多兰之戒",
-                "无用大棒"
-              ],
-              "spells": [
-                12,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8010,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 16,
-              "kill": 3,
-              "death": 6,
-              "assist": 16,
-              "kda": "3.17",
-              "result": "WIN",
-              "op_score": 4.88,
-              "op_score_rank": 6,
-              "gold_earned": 13015,
-              "minion_kill": 204,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 21736,
-              "total_damage_taken": 19889,
-              "total_heal": 5465,
-              "vision_wards_bought_in_game": 0,
-              "ward_place": 4,
-              "largest_killing_spree": 0,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 49
-            }
-          ],
-          "average_tier_info": {
-            "tier": "MASTER",
-            "division": 1,
-            "border_image_url": "https://opgg-static.akamaized.net/images/border_new/master.png"
-          },
-          "_account_slug": "main",
-          "_account_label": "The shy#asdf"
         }
       ],
       "state": {
-        "is_active": false,
-        "last_check": "2026-08-19T00:02:02.897738+09:00",
-        "last_match_id": "qfvdWpGbi228GgGQu7tcemnyp6m0nO_e5Gb00yTVcHI=",
+        "is_active": true,
+        "last_check": "2026-08-19T00:40:09.316162+09:00",
+        "last_match_id": "qfvdWpGbi20o06gcoLB8p0XBPvBwejAHNBuvK4cXliQ=",
         "matches_count": 20
       }
     },
@@ -14660,14 +14674,14 @@
         "internal_name": "",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon7146.jpg",
         "level": 94,
-        "updated_at": "2026-08-18T23:28:06+09:00",
-        "renewable_at": "2026-08-18T23:30:06+09:00",
+        "updated_at": "2026-08-19T00:11:52+09:00",
+        "renewable_at": "2026-08-19T00:13:52+09:00",
         "revision_at": "2026-08-08T04:53:52+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 432,
-          "total": 2873419
+          "rank": 430,
+          "total": 2873617
         },
         "league_stats": [
           {
@@ -14691,10 +14705,10 @@
               {
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
-                "current_count": 310,
-                "lp_threshold": 1831,
+                "current_count": 309,
+                "lp_threshold": 1826,
                 "promotion_candidate_count": 1,
-                "demotion_candidate_count": 11
+                "demotion_candidate_count": 10
               },
               {
                 "_class": "HighLeague",
@@ -14735,9 +14749,9 @@
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
-                "current_count": 531,
+                "current_count": 533,
                 "lp_threshold": 200,
-                "promotion_candidate_count": 24,
+                "promotion_candidate_count": 22,
                 "demotion_candidate_count": 12
               }
             ]
@@ -28791,20 +28805,20 @@
       ],
       "state": {
         "is_active": false,
-        "last_check": "2026-08-19T00:02:13.896180+09:00",
+        "last_check": "2026-08-19T00:40:19.981216+09:00",
         "last_match_id": "qfvdWpGbi23niyYqxsdE2pARKVi-PsimcvATkug0LqQ=",
         "matches_count": 20
       }
     }
   ],
-  "last_update": "2026-08-19T00:02:13.896537+09:00",
+  "last_update": "2026-08-19T00:40:19.981552+09:00",
   "bilibili": {
     "is_live": false,
     "is_ig_live": false,
     "title": "【预告】19号15点LNG vs WBG",
     "live_time": "0000-00-00 00:00:00",
     "room_id": 7734200,
-    "last_check": "2026-08-18T23:02:14.238832+08:00",
+    "last_check": "2026-08-18T23:40:22.540878+08:00",
     "notified_title": ""
   },
   "hupu_ratings": {
@@ -28836,7 +28850,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.6,
-            "total_count": 20487,
+            "total_count": 20490,
             "comments": 3219,
             "kda": "19/11/22",
             "kda_ratio": 3.73,
@@ -28858,20 +28872,20 @@
             ],
             "hot_comment": {
               "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-              "likes": 1999,
+              "likes": 2000,
               "user": "虎扑JR0403366570",
               "bo_label": "第1局"
             },
             "hot_comments": [
               {
                 "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-                "likes": 1999,
+                "likes": 2000,
                 "user": "虎扑JR0403366570",
                 "bo_label": "第1局"
               },
               {
                 "content": "拉满了 喜欢嘉琪被你发现",
-                "likes": 1521,
+                "likes": 1522,
                 "user": "JR翾飞",
                 "bo_label": "第3局"
               },
@@ -28886,19 +28900,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 18688,
+              "s5": 18691,
               "s4": 486,
               "s3": 600,
               "s2": 217,
               "s1": 496
             },
-            "score_dist_total": 20487,
+            "score_dist_total": 20490,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
                 "desc": "胜(12/2/6)",
                 "score": "9.9",
-                "votes": "9948评分",
+                "votes": "9950评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                 "team_id": "2",
@@ -28972,7 +28986,7 @@
             "name": "Rookie",
             "team": "IG",
             "avg": 9.4,
-            "total_count": 14976,
+            "total_count": 14977,
             "comments": 1471,
             "kda": "18/8/25",
             "kda_ratio": 5.38,
@@ -28987,20 +29001,20 @@
             "labels": [],
             "hot_comment": {
               "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-              "likes": 766,
+              "likes": 767,
               "user": "虎扑JR2046307013",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-                "likes": 766,
+                "likes": 767,
                 "user": "虎扑JR2046307013",
                 "bo_label": "第3局"
               },
               {
                 "content": "要不是后期jiaqi表现太好这把mvp一定是你 对线快给小虎打成孙子了 打团支援哪都有你太猛了宋圣",
-                "likes": 592,
+                "likes": 593,
                 "user": "理班冠马",
                 "bo_label": "第1局"
               },
@@ -29015,13 +29029,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 13061,
+              "s5": 13062,
               "s4": 842,
               "s3": 257,
               "s2": 109,
               "s1": 707
             },
-            "score_dist_total": 14976,
+            "score_dist_total": 14977,
             "best_radar": {
               "self": {
                 "name": "Rookie",
@@ -29101,7 +29115,7 @@
             "name": "Wei",
             "team": "IG",
             "avg": 9.3,
-            "total_count": 11006,
+            "total_count": 11007,
             "comments": 1133,
             "kda": "15/9/36",
             "kda_ratio": 5.67,
@@ -29118,14 +29132,14 @@
             "labels": [],
             "hot_comment": {
               "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-              "likes": 891,
+              "likes": 892,
               "user": "黍离川",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-                "likes": 891,
+                "likes": 892,
                 "user": "黍离川",
                 "bo_label": "第3局"
               },
@@ -29137,7 +29151,7 @@
               },
               {
                 "content": "巨魔：你跑不过我你信吗？",
-                "likes": 305,
+                "likes": 306,
                 "user": "BLG传奇辅助牢ON",
                 "bo_label": "第2局"
               }
@@ -29146,13 +29160,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 9006,
+              "s5": 9007,
               "s4": 1136,
               "s3": 271,
               "s2": 90,
               "s1": 503
             },
-            "score_dist_total": 11006,
+            "score_dist_total": 11007,
             "best_radar": {
               "self": {
                 "name": "Wei",
@@ -29232,8 +29246,8 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 8.9,
-            "total_count": 12247,
-            "comments": 1489,
+            "total_count": 12248,
+            "comments": 1490,
             "kda": "1/11/45",
             "kda_ratio": 4.18,
             "kills": 1,
@@ -29248,26 +29262,26 @@
             "labels": [],
             "hot_comment": {
               "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-              "likes": 764,
+              "likes": 765,
               "user": "Dr最快速度",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-                "likes": 764,
+                "likes": 765,
                 "user": "Dr最快速度",
                 "bo_label": "第3局"
               },
               {
                 "content": "劳累了",
-                "likes": 299,
+                "likes": 300,
                 "user": "J三car戟",
                 "bo_label": "第2局"
               },
               {
                 "content": "有公有过也还好吧，解说下意识的把每次巴德做到事都闭口混过去了显得什么都没干，但上路抓个一换二、小龙团r两个把要秀的vn定墙、带人抓死三次女警都挺重要的",
-                "likes": 281,
+                "likes": 282,
                 "user": "虎扑JR2068414343",
                 "bo_label": "第1局"
               }
@@ -29280,9 +29294,9 @@
               "s4": 1579,
               "s3": 721,
               "s2": 183,
-              "s1": 832
+              "s1": 833
             },
-            "score_dist_total": 12247,
+            "score_dist_total": 12248,
             "best_radar": {
               "self": {
                 "name": "Meiko",
@@ -29324,7 +29338,7 @@
                 "name": "Moham",
                 "desc": "败(0/2/10)",
                 "score": "3.7",
-                "votes": "1477评分",
+                "votes": "1478评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
                 "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
                 "team_id": "41",
@@ -29362,7 +29376,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 6.1,
-            "total_count": 19622,
+            "total_count": 19623,
             "comments": 5061,
             "kda": "6/11/18",
             "kda_ratio": 2.18,
@@ -29378,14 +29392,14 @@
             "labels": [],
             "hot_comment": {
               "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-              "likes": 1183,
+              "likes": 1184,
               "user": "虎扑JR1149242444",
               "bo_label": "第1局"
             },
             "hot_comments": [
               {
                 "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-                "likes": 1183,
+                "likes": 1184,
                 "user": "虎扑JR1149242444",
                 "bo_label": "第1局"
               },
@@ -29406,13 +29420,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 8211,
+              "s5": 8212,
               "s4": 1246,
               "s3": 1393,
               "s2": 1434,
               "s1": 7338
             },
-            "score_dist_total": 19622,
+            "score_dist_total": 19623,
             "best_radar": {
               "self": {
                 "name": "TheShy",
@@ -29454,7 +29468,7 @@
                 "name": "Zika",
                 "desc": "败(1/3/3)",
                 "score": "2.9",
-                "votes": "2183评分",
+                "votes": "2184评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                 "team_id": "41",
@@ -29623,7 +29637,7 @@
             "name": "Elk",
             "team": "WBG",
             "avg": 5.0,
-            "total_count": 15061,
+            "total_count": 15063,
             "comments": 4977,
             "kda": "16/15/17",
             "kda_ratio": 2.2,
@@ -29680,12 +29694,12 @@
             "kind": "player",
             "score_dist": {
               "s5": 5140,
-              "s4": 191,
-              "s3": 318,
+              "s4": 192,
+              "s3": 319,
               "s2": 619,
               "s1": 8793
             },
-            "score_dist_total": 15061,
+            "score_dist_total": 15063,
             "best_radar": {
               "self": {
                 "name": "Elk",
@@ -29765,7 +29779,7 @@
             "name": "Moham",
             "team": "WBG",
             "avg": 5.0,
-            "total_count": 3718,
+            "total_count": 3719,
             "comments": 230,
             "kda": "3/8/39",
             "kda_ratio": 5.25,
@@ -29812,9 +29826,9 @@
               "s4": 438,
               "s3": 459,
               "s2": 561,
-              "s1": 1559
+              "s1": 1560
             },
-            "score_dist_total": 3718,
+            "score_dist_total": 3719,
             "best_radar": {
               "self": {
                 "name": "Moham",
@@ -29894,7 +29908,7 @@
             "name": "Zika",
             "team": "WBG",
             "avg": 4.8,
-            "total_count": 6385,
+            "total_count": 6386,
             "comments": 1469,
             "kda": "13/12/10",
             "kda_ratio": 1.92,
@@ -29942,9 +29956,9 @@
               "s4": 650,
               "s3": 553,
               "s2": 685,
-              "s1": 3259
+              "s1": 3260
             },
-            "score_dist_total": 6385,
+            "score_dist_total": 6386,
             "best_radar": {
               "self": {
                 "name": "Zika",
@@ -30291,7 +30305,7 @@
             "name": "Elk",
             "team": "WBG",
             "avg": 5.0,
-            "total_count": 15061,
+            "total_count": 15063,
             "comments": 4977,
             "kda": "16/15/17",
             "kda_ratio": 2.2,
@@ -30348,12 +30362,12 @@
             "kind": "player",
             "score_dist": {
               "s5": 5140,
-              "s4": 191,
-              "s3": 318,
+              "s4": 192,
+              "s3": 319,
               "s2": 619,
               "s1": 8793
             },
-            "score_dist_total": 15061,
+            "score_dist_total": 15063,
             "best_radar": {
               "self": {
                 "name": "Elk",
@@ -30433,7 +30447,7 @@
             "name": "Moham",
             "team": "WBG",
             "avg": 5.0,
-            "total_count": 3718,
+            "total_count": 3719,
             "comments": 230,
             "kda": "3/8/39",
             "kda_ratio": 5.25,
@@ -30480,9 +30494,9 @@
               "s4": 438,
               "s3": 459,
               "s2": 561,
-              "s1": 1559
+              "s1": 1560
             },
-            "score_dist_total": 3718,
+            "score_dist_total": 3719,
             "best_radar": {
               "self": {
                 "name": "Moham",
@@ -30562,7 +30576,7 @@
             "name": "Zika",
             "team": "WBG",
             "avg": 4.8,
-            "total_count": 6385,
+            "total_count": 6386,
             "comments": 1469,
             "kda": "13/12/10",
             "kda_ratio": 1.92,
@@ -30610,9 +30624,9 @@
               "s4": 650,
               "s3": 553,
               "s2": 685,
-              "s1": 3259
+              "s1": 3260
             },
-            "score_dist_total": 6385,
+            "score_dist_total": 6386,
             "best_radar": {
               "self": {
                 "name": "Zika",
@@ -30830,7 +30844,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.6,
-            "total_count": 20487,
+            "total_count": 20490,
             "comments": 3219,
             "kda": "19/11/22",
             "kda_ratio": 3.73,
@@ -30852,20 +30866,20 @@
             ],
             "hot_comment": {
               "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-              "likes": 1999,
+              "likes": 2000,
               "user": "虎扑JR0403366570",
               "bo_label": "第1局"
             },
             "hot_comments": [
               {
                 "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-                "likes": 1999,
+                "likes": 2000,
                 "user": "虎扑JR0403366570",
                 "bo_label": "第1局"
               },
               {
                 "content": "拉满了 喜欢嘉琪被你发现",
-                "likes": 1521,
+                "likes": 1522,
                 "user": "JR翾飞",
                 "bo_label": "第3局"
               },
@@ -30880,19 +30894,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 18688,
+              "s5": 18691,
               "s4": 486,
               "s3": 600,
               "s2": 217,
               "s1": 496
             },
-            "score_dist_total": 20487,
+            "score_dist_total": 20490,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
                 "desc": "胜(12/2/6)",
                 "score": "9.9",
-                "votes": "9948评分",
+                "votes": "9950评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                 "team_id": "2",
@@ -30966,7 +30980,7 @@
             "name": "Rookie",
             "team": "IG",
             "avg": 9.4,
-            "total_count": 14976,
+            "total_count": 14977,
             "comments": 1471,
             "kda": "18/8/25",
             "kda_ratio": 5.38,
@@ -30981,20 +30995,20 @@
             "labels": [],
             "hot_comment": {
               "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-              "likes": 766,
+              "likes": 767,
               "user": "虎扑JR2046307013",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-                "likes": 766,
+                "likes": 767,
                 "user": "虎扑JR2046307013",
                 "bo_label": "第3局"
               },
               {
                 "content": "要不是后期jiaqi表现太好这把mvp一定是你 对线快给小虎打成孙子了 打团支援哪都有你太猛了宋圣",
-                "likes": 592,
+                "likes": 593,
                 "user": "理班冠马",
                 "bo_label": "第1局"
               },
@@ -31009,13 +31023,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 13061,
+              "s5": 13062,
               "s4": 842,
               "s3": 257,
               "s2": 109,
               "s1": 707
             },
-            "score_dist_total": 14976,
+            "score_dist_total": 14977,
             "best_radar": {
               "self": {
                 "name": "Rookie",
@@ -31095,7 +31109,7 @@
             "name": "Wei",
             "team": "IG",
             "avg": 9.3,
-            "total_count": 11006,
+            "total_count": 11007,
             "comments": 1133,
             "kda": "15/9/36",
             "kda_ratio": 5.67,
@@ -31112,14 +31126,14 @@
             "labels": [],
             "hot_comment": {
               "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-              "likes": 891,
+              "likes": 892,
               "user": "黍离川",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-                "likes": 891,
+                "likes": 892,
                 "user": "黍离川",
                 "bo_label": "第3局"
               },
@@ -31131,7 +31145,7 @@
               },
               {
                 "content": "巨魔：你跑不过我你信吗？",
-                "likes": 305,
+                "likes": 306,
                 "user": "BLG传奇辅助牢ON",
                 "bo_label": "第2局"
               }
@@ -31140,13 +31154,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 9006,
+              "s5": 9007,
               "s4": 1136,
               "s3": 271,
               "s2": 90,
               "s1": 503
             },
-            "score_dist_total": 11006,
+            "score_dist_total": 11007,
             "best_radar": {
               "self": {
                 "name": "Wei",
@@ -31226,8 +31240,8 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 8.9,
-            "total_count": 12247,
-            "comments": 1489,
+            "total_count": 12248,
+            "comments": 1490,
             "kda": "1/11/45",
             "kda_ratio": 4.18,
             "kills": 1,
@@ -31242,26 +31256,26 @@
             "labels": [],
             "hot_comment": {
               "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-              "likes": 764,
+              "likes": 765,
               "user": "Dr最快速度",
               "bo_label": "第3局"
             },
             "hot_comments": [
               {
                 "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-                "likes": 764,
+                "likes": 765,
                 "user": "Dr最快速度",
                 "bo_label": "第3局"
               },
               {
                 "content": "劳累了",
-                "likes": 299,
+                "likes": 300,
                 "user": "J三car戟",
                 "bo_label": "第2局"
               },
               {
                 "content": "有公有过也还好吧，解说下意识的把每次巴德做到事都闭口混过去了显得什么都没干，但上路抓个一换二、小龙团r两个把要秀的vn定墙、带人抓死三次女警都挺重要的",
-                "likes": 281,
+                "likes": 282,
                 "user": "虎扑JR2068414343",
                 "bo_label": "第1局"
               }
@@ -31274,9 +31288,9 @@
               "s4": 1579,
               "s3": 721,
               "s2": 183,
-              "s1": 832
+              "s1": 833
             },
-            "score_dist_total": 12247,
+            "score_dist_total": 12248,
             "best_radar": {
               "self": {
                 "name": "Meiko",
@@ -31318,7 +31332,7 @@
                 "name": "Moham",
                 "desc": "败(0/2/10)",
                 "score": "3.7",
-                "votes": "1477评分",
+                "votes": "1478评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
                 "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
                 "team_id": "41",
@@ -31356,7 +31370,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 6.1,
-            "total_count": 19622,
+            "total_count": 19623,
             "comments": 5061,
             "kda": "6/11/18",
             "kda_ratio": 2.18,
@@ -31372,14 +31386,14 @@
             "labels": [],
             "hot_comment": {
               "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-              "likes": 1183,
+              "likes": 1184,
               "user": "虎扑JR1149242444",
               "bo_label": "第1局"
             },
             "hot_comments": [
               {
                 "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-                "likes": 1183,
+                "likes": 1184,
                 "user": "虎扑JR1149242444",
                 "bo_label": "第1局"
               },
@@ -31400,13 +31414,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 8211,
+              "s5": 8212,
               "s4": 1246,
               "s3": 1393,
               "s2": 1434,
               "s1": 7338
             },
-            "score_dist_total": 19622,
+            "score_dist_total": 19623,
             "best_radar": {
               "self": {
                 "name": "TheShy",
@@ -31448,7 +31462,7 @@
                 "name": "Zika",
                 "desc": "败(1/3/3)",
                 "score": "2.9",
-                "votes": "2183评分",
+                "votes": "2184评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                 "team_id": "41",
@@ -31488,7 +31502,7 @@
             "name": "教练 Clearlove",
             "team": "WBG",
             "avg": 5.7,
-            "total_count": 5194,
+            "total_count": 5195,
             "comments": 1240,
             "kda": "",
             "kda_ratio": 0,
@@ -31568,13 +31582,13 @@
               },
               {
                 "content": "我问你个问题，你现在是ig的ad选手，你是个寒冰，请问当对方梦魇关灯飞，加里奥飞梦魇，狼母接个大招，烈娜塔再放个恶意收购控一下队友的情况下，ad能发挥的作用是啥，为什么，为什么选个寒冰去坐牢？？？",
-                "likes": 153,
+                "likes": 154,
                 "user": "传奇电竞选手蒙古上单",
                 "bo_label": "第2局"
               },
               {
                 "content": "这两边团战难度一目了然，这能怪bp的啊",
-                "likes": 58,
+                "likes": 59,
                 "user": "ASaKuSa2016",
                 "bo_label": "第1局"
               }
@@ -31794,13 +31808,13 @@
               },
               {
                 "content": "我问你个问题，你现在是ig的ad选手，你是个寒冰，请问当对方梦魇关灯飞，加里奥飞梦魇，狼母接个大招，烈娜塔再放个恶意收购控一下队友的情况下，ad能发挥的作用是啥，为什么，为什么选个寒冰去坐牢？？？",
-                "likes": 153,
+                "likes": 154,
                 "user": "传奇电竞选手蒙古上单",
                 "bo_label": "第2局"
               },
               {
                 "content": "这两边团战难度一目了然，这能怪bp的啊",
-                "likes": 58,
+                "likes": 59,
                 "user": "ASaKuSa2016",
                 "bo_label": "第1局"
               }
@@ -31824,7 +31838,7 @@
             "name": "教练 Clearlove",
             "team": "WBG",
             "avg": 5.7,
-            "total_count": 5194,
+            "total_count": 5195,
             "comments": 1240,
             "kda": "",
             "kda_ratio": 0,
@@ -31890,7 +31904,7 @@
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                 "score": 9.9,
-                "votes": 9948,
+                "votes": 9950,
                 "comments": 1876,
                 "kills": 12,
                 "deaths": 2,
@@ -31907,14 +31921,14 @@
                 "hot_comments": [
                   {
                     "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-                    "likes": 1999,
+                    "likes": 2000,
                     "user": "虎扑JR0403366570"
                   }
                 ],
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 9762,
+                  "s5": 9764,
                   "s4": 49,
                   "s3": 12,
                   "s2": 13,
@@ -31925,7 +31939,7 @@
                     "name": "JiaQi",
                     "desc": "胜(12/2/6)",
                     "score": "9.9",
-                    "votes": "9948评分",
+                    "votes": "9950评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                     "team_id": "2",
@@ -32012,7 +32026,7 @@
                 "hot_comments": [
                   {
                     "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-                    "likes": 1183,
+                    "likes": 1184,
                     "user": "虎扑JR1149242444"
                   }
                 ],
@@ -32117,7 +32131,7 @@
                 "hot_comments": [
                   {
                     "content": "要不是后期jiaqi表现太好这把mvp一定是你 对线快给小虎打成孙子了 打团支援哪都有你太猛了宋圣",
-                    "likes": 592,
+                    "likes": 593,
                     "user": "理班冠马"
                   }
                 ],
@@ -32211,7 +32225,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                 "score": 7.7,
-                "votes": 3852,
+                "votes": 3853,
                 "comments": 558,
                 "kills": 0,
                 "deaths": 6,
@@ -32222,7 +32236,7 @@
                 "hot_comments": [
                   {
                     "content": "有公有过也还好吧，解说下意识的把每次巴德做到事都闭口混过去了显得什么都没干，但上路抓个一换二、小龙团r两个把要秀的vn定墙、带人抓死三次女警都挺重要的",
-                    "likes": 281,
+                    "likes": 282,
                     "user": "虎扑JR2068414343"
                   }
                 ],
@@ -32233,14 +32247,14 @@
                   "s4": 957,
                   "s3": 577,
                   "s2": 136,
-                  "s1": 459
+                  "s1": 460
                 },
                 "radar": {
                   "self": {
                     "name": "Meiko",
                     "desc": "胜(0/6/16)",
                     "score": "7.7",
-                    "votes": "3852评分",
+                    "votes": "3853评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                     "team_id": "2",
@@ -32486,7 +32500,7 @@
                     "name": "JiaQi",
                     "desc": "胜(12/2/6)",
                     "score": "9.9",
-                    "votes": "9948评分",
+                    "votes": "9950评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                     "team_id": "2",
@@ -32906,7 +32920,7 @@
                     "name": "Meiko",
                     "desc": "胜(0/6/16)",
                     "score": "7.7",
-                    "votes": "3852评分",
+                    "votes": "3853评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                     "team_id": "2",
@@ -32971,7 +32985,7 @@
                 "hot_comments": [
                   {
                     "content": "这两边团战难度一目了然，这能怪bp的啊",
-                    "likes": 58,
+                    "likes": 59,
                     "user": "ASaKuSa2016"
                   }
                 ],
@@ -33134,7 +33148,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/380d436eed7666075c7bb58a58b30580.png",
                 "score": 9.4,
-                "votes": 4916,
+                "votes": 4917,
                 "comments": 1216,
                 "kills": 10,
                 "deaths": 3,
@@ -33160,7 +33174,7 @@
                 "score_dist": {
                   "s5": 4451,
                   "s4": 78,
-                  "s3": 39,
+                  "s3": 40,
                   "s2": 26,
                   "s1": 322
                 },
@@ -33351,7 +33365,7 @@
                 "champion": "",
                 "score": 9.0,
                 "votes": 2845,
-                "comments": 332,
+                "comments": 333,
                 "kills": 1,
                 "deaths": 3,
                 "assists": 10,
@@ -33361,7 +33375,7 @@
                 "hot_comments": [
                   {
                     "content": "劳累了",
-                    "likes": 299,
+                    "likes": 300,
                     "user": "J三car戟"
                   }
                 ],
@@ -33571,7 +33585,7 @@
                 "hot_comments": [
                   {
                     "content": "巨魔：你跑不过我你信吗？",
-                    "likes": 305,
+                    "likes": 306,
                     "user": "BLG传奇辅助牢ON"
                   }
                 ],
@@ -34110,7 +34124,7 @@
                 "hot_comments": [
                   {
                     "content": "我问你个问题，你现在是ig的ad选手，你是个寒冰，请问当对方梦魇关灯飞，加里奥飞梦魇，狼母接个大招，烈娜塔再放个恶意收购控一下队友的情况下，ad能发挥的作用是啥，为什么，为什么选个寒冰去坐牢？？？",
-                    "likes": 153,
+                    "likes": 154,
                     "user": "传奇电竞选手蒙古上单"
                   }
                 ],
@@ -34184,7 +34198,7 @@
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                 "champion": "",
                 "score": 9.9,
-                "votes": 8675,
+                "votes": 8676,
                 "comments": 1074,
                 "kills": 5,
                 "deaths": 3,
@@ -34195,14 +34209,14 @@
                 "hot_comments": [
                   {
                     "content": "拉满了 喜欢嘉琪被你发现",
-                    "likes": 1521,
+                    "likes": 1522,
                     "user": "JR翾飞"
                   }
                 ],
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 8406,
+                  "s5": 8407,
                   "s4": 144,
                   "s3": 23,
                   "s2": 20,
@@ -34249,7 +34263,7 @@
                     "name": "Elk",
                     "desc": "败(3/5/5)",
                     "score": "2.9",
-                    "votes": "6510评分",
+                    "votes": "6511评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ffe6f26bd9eeeb3c195ff0ded4d79700.png",
                     "team_id": "41",
@@ -34289,7 +34303,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "",
                 "score": 8.8,
-                "votes": 7356,
+                "votes": 7357,
                 "comments": 1325,
                 "kills": 3,
                 "deaths": 2,
@@ -34307,7 +34321,7 @@
                 "bg_color": "#000000",
                 "position": "",
                 "score_dist": {
-                  "s5": 5563,
+                  "s5": 5564,
                   "s4": 868,
                   "s3": 251,
                   "s2": 87,
@@ -34354,7 +34368,7 @@
                     "name": "Zika",
                     "desc": "败(1/3/3)",
                     "score": "2.9",
-                    "votes": "2183评分",
+                    "votes": "2184评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                     "team_id": "41",
@@ -34394,7 +34408,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                 "champion": "",
                 "score": 9.8,
-                "votes": 6895,
+                "votes": 6896,
                 "comments": 647,
                 "kills": 8,
                 "deaths": 2,
@@ -34405,14 +34419,14 @@
                 "hot_comments": [
                   {
                     "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-                    "likes": 766,
+                    "likes": 767,
                     "user": "虎扑JR2046307013"
                   }
                 ],
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 6604,
+                  "s5": 6605,
                   "s4": 82,
                   "s3": 25,
                   "s2": 31,
@@ -34499,7 +34513,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ffe6f26bd9eeeb3c195ff0ded4d79700.png",
                 "score": 2.9,
-                "votes": 6510,
+                "votes": 6511,
                 "comments": 2581,
                 "kills": 3,
                 "deaths": 5,
@@ -34524,7 +34538,7 @@
                 "position": "",
                 "score_dist": {
                   "s5": 456,
-                  "s4": 83,
+                  "s4": 84,
                   "s3": 204,
                   "s2": 380,
                   "s1": 5387
@@ -34534,7 +34548,7 @@
                     "name": "Elk",
                     "desc": "败(3/5/5)",
                     "score": "2.9",
-                    "votes": "6510评分",
+                    "votes": "6511评分",
                     "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ffe6f26bd9eeeb3c195ff0ded4d79700.png",
                     "team_id": "41",
@@ -34621,7 +34635,7 @@
                 "hot_comments": [
                   {
                     "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-                    "likes": 764,
+                    "likes": 765,
                     "user": "Dr最快速度"
                   }
                 ],
@@ -34675,7 +34689,7 @@
                     "name": "Moham",
                     "desc": "败(0/2/10)",
                     "score": "3.7",
-                    "votes": "1477评分",
+                    "votes": "1478评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
                     "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
                     "team_id": "41",
@@ -34715,7 +34729,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
                 "score": 9.3,
-                "votes": 4930,
+                "votes": 4931,
                 "comments": 709,
                 "kills": 5,
                 "deaths": 3,
@@ -34726,14 +34740,14 @@
                 "hot_comments": [
                   {
                     "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-                    "likes": 891,
+                    "likes": 892,
                     "user": "黍离川"
                   }
                 ],
                 "bg_color": "#000003",
                 "position": "",
                 "score_dist": {
-                  "s5": 4014,
+                  "s5": 4015,
                   "s4": 491,
                   "s3": 144,
                   "s2": 52,
@@ -35036,7 +35050,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                 "score": 2.9,
-                "votes": 2183,
+                "votes": 2184,
                 "comments": 411,
                 "kills": 1,
                 "deaths": 3,
@@ -35058,14 +35072,14 @@
                   "s4": 27,
                   "s3": 99,
                   "s2": 214,
-                  "s1": 1731
+                  "s1": 1732
                 },
                 "radar": {
                   "self": {
                     "name": "Zika",
                     "desc": "败(1/3/3)",
                     "score": "2.9",
-                    "votes": "2183评分",
+                    "votes": "2184评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                     "team_id": "41",
@@ -35141,7 +35155,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
                 "champion": "",
                 "score": 3.7,
-                "votes": 1477,
+                "votes": 1478,
                 "comments": 85,
                 "kills": 0,
                 "deaths": 2,
@@ -35163,14 +35177,14 @@
                   "s4": 46,
                   "s3": 186,
                   "s2": 288,
-                  "s1": 844
+                  "s1": 845
                 },
                 "radar": {
                   "self": {
                     "name": "Moham",
                     "desc": "败(0/2/10)",
                     "score": "3.7",
-                    "votes": "1477评分",
+                    "votes": "1478评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
                     "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
                     "team_id": "41",
@@ -35264,7 +35278,7 @@
                 "name": "教练 Clearlove",
                 "avatar": "https://i1.hoopchina.com.cn/newsPost/25718-pl718jrc-upload-1752757849624-26.JPG",
                 "score": 7.7,
-                "votes": 2744,
+                "votes": 2745,
                 "comments": 519,
                 "team_id": "41",
                 "labels": [],
@@ -35284,12 +35298,12 @@
                 "avatar": "https://i3.hoopchina.com.cn/newsPost/1786882704735_o_w_178_h_250_f99628d1.png",
                 "score": 9.5,
                 "votes": 1660,
-                "comments": 164,
+                "comments": 165,
                 "labels": [],
                 "hot_comments": [
                   {
                     "content": "佳琪cos嘎啦，你cos杰克。双AD是对的",
-                    "likes": 421,
+                    "likes": 422,
                     "user": "虎扑JR1964446204"
                   }
                 ],
@@ -35388,7 +35402,7 @@
               {
                 "name": "卡西奥佩娅/瑞兹/蔚/安妮/阿卡丽",
                 "score": 3.9,
-                "votes": 398,
+                "votes": 399,
                 "comments": 45,
                 "team_id": "41",
                 "bg_color": "#939394"
@@ -35396,12 +35410,12 @@
             ]
           }
         ],
-        "total_scorers": 137073,
+        "total_scorers": 137087,
         "league_name": "职业联赛",
         "round_name": "第三赛段组内赛",
         "match_time": 1786870800000,
         "date_str": "08月16日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3804",
@@ -40657,7 +40671,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786258800000,
         "date_str": "08月09日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3717",
@@ -47274,7 +47288,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786006800000,
         "date_str": "08月06日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3692",
@@ -52542,7 +52556,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1785661200000,
         "date_str": "08月02日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3678",
@@ -59125,7 +59139,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1784970000000,
         "date_str": "07月25日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3552",
@@ -65560,7 +65574,7 @@
         "round_name": "第二赛段骑士之路",
         "match_time": 1779526800000,
         "date_str": "05月23日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3545",
@@ -71769,7 +71783,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1779008400000,
         "date_str": "05月17日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3534",
@@ -78016,7 +78030,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778583600000,
         "date_str": "05月12日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3530",
@@ -78623,7 +78637,7 @@
                 "desc": "败(3/4/3)",
                 "score": "4.0",
                 "votes": "230评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/f2837da31787a5c3085e36cfc24e5d55.png",
                 "team_id": "587",
                 "camp": "blue",
@@ -78837,7 +78851,7 @@
                 "desc": "败(3/4/3)",
                 "score": "4.0",
                 "votes": "230评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/f2837da31787a5c3085e36cfc24e5d55.png",
                 "team_id": "587",
                 "camp": "blue",
@@ -79458,7 +79472,7 @@
                 "desc": "败(3/4/3)",
                 "score": "4.0",
                 "votes": "230评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/f2837da31787a5c3085e36cfc24e5d55.png",
                 "team_id": "587",
                 "camp": "blue",
@@ -80483,7 +80497,7 @@
                 "desc": "败(3/4/3)",
                 "score": "4.0",
                 "votes": "230评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/f2837da31787a5c3085e36cfc24e5d55.png",
                 "team_id": "587",
                 "camp": "blue",
@@ -81112,7 +81126,7 @@
                     "desc": "败(0/4/2)",
                     "score": "2.8",
                     "votes": "227评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                    "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/93bb2bed46156b89e7f032574347c31e.png",
                     "team_id": "587",
                     "camp": "red",
@@ -81706,7 +81720,7 @@
                     "desc": "败(0/4/2)",
                     "score": "2.8",
                     "votes": "227评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                    "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/93bb2bed46156b89e7f032574347c31e.png",
                     "team_id": "587",
                     "camp": "red",
@@ -82228,7 +82242,7 @@
                     "desc": "败(3/4/3)",
                     "score": "4.0",
                     "votes": "230评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                    "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/f2837da31787a5c3085e36cfc24e5d55.png",
                     "team_id": "587",
                     "camp": "blue",
@@ -82822,7 +82836,7 @@
                     "desc": "败(3/4/3)",
                     "score": "4.0",
                     "votes": "230评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
+                    "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/14449206235916964be7111ad1dc2fb590519484243f3b0prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/f2837da31787a5c3085e36cfc24e5d55.png",
                     "team_id": "587",
                     "camp": "blue",
@@ -82955,7 +82969,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778317200000,
         "date_str": "05月09日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3612",
@@ -89010,7 +89024,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778058000000,
         "date_str": "05月06日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3610",
@@ -93947,7 +93961,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777719600000,
         "date_str": "05月02日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3606",
@@ -100160,7 +100174,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777633200000,
         "date_str": "05月01日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3512",
@@ -105093,7 +105107,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777366800000,
         "date_str": "04月28日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       },
       {
         "id": "3506",
@@ -105455,7 +105469,7 @@
                 "desc": "胜(5/3/6)",
                 "score": "3.4",
                 "votes": "699评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                 "champion": "https://activity-static.hoopchina.com.cn/images/241216-qhbl9hrc-upload-1734337217986-2.jpg",
                 "team_id": "29",
                 "camp": "blue",
@@ -106286,7 +106300,7 @@
                 "desc": "胜(6/1/6)",
                 "score": "9.3",
                 "votes": "835评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/efba1d3b9d93ec724ee2c8fb43da0ba4.png",
                 "team_id": "29",
                 "camp": "blue",
@@ -106695,7 +106709,7 @@
                 "desc": "胜(5/3/6)",
                 "score": "3.4",
                 "votes": "699评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                 "champion": "https://activity-static.hoopchina.com.cn/images/241216-qhbl9hrc-upload-1734337217986-2.jpg",
                 "team_id": "29",
                 "camp": "blue",
@@ -107526,7 +107540,7 @@
                 "desc": "胜(6/1/6)",
                 "score": "9.3",
                 "votes": "835评分",
-                "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/efba1d3b9d93ec724ee2c8fb43da0ba4.png",
                 "team_id": "29",
                 "camp": "blue",
@@ -108260,7 +108274,7 @@
                     "desc": "胜(5/3/6)",
                     "score": "3.4",
                     "votes": "699评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                    "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                     "champion": "https://activity-static.hoopchina.com.cn/images/241216-qhbl9hrc-upload-1734337217986-2.jpg",
                     "team_id": "29",
                     "camp": "blue",
@@ -108716,7 +108730,7 @@
                     "desc": "胜(5/3/6)",
                     "score": "3.4",
                     "votes": "699评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                    "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                     "champion": "https://activity-static.hoopchina.com.cn/images/241216-qhbl9hrc-upload-1734337217986-2.jpg",
                     "team_id": "29",
                     "camp": "blue",
@@ -109517,7 +109531,7 @@
                     "desc": "胜(6/1/6)",
                     "score": "9.3",
                     "votes": "835评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                    "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/efba1d3b9d93ec724ee2c8fb43da0ba4.png",
                     "team_id": "29",
                     "camp": "blue",
@@ -109691,7 +109705,7 @@
                     "desc": "胜(6/1/6)",
                     "score": "9.3",
                     "votes": "835评分",
-                    "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
+                    "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/107406175290c46d7259139bdb4ec602e96ff8908prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/efba1d3b9d93ec724ee2c8fb43da0ba4.png",
                     "team_id": "29",
                     "camp": "blue",
@@ -110034,7 +110048,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777028400000,
         "date_str": "04月24日",
-        "found_at": "2026-08-18T23:02:14.269721+08:00"
+        "found_at": "2026-08-18T23:40:22.570429+08:00"
       }
     ],
     "latest_match": {
@@ -110063,7 +110077,7 @@
           "name": "JiaQi",
           "team": "IG",
           "avg": 9.6,
-          "total_count": 20487,
+          "total_count": 20490,
           "comments": 3219,
           "kda": "19/11/22",
           "kda_ratio": 3.73,
@@ -110085,20 +110099,20 @@
           ],
           "hot_comment": {
             "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-            "likes": 1999,
+            "likes": 2000,
             "user": "虎扑JR0403366570",
             "bo_label": "第1局"
           },
           "hot_comments": [
             {
               "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-              "likes": 1999,
+              "likes": 2000,
               "user": "虎扑JR0403366570",
               "bo_label": "第1局"
             },
             {
               "content": "拉满了 喜欢嘉琪被你发现",
-              "likes": 1521,
+              "likes": 1522,
               "user": "JR翾飞",
               "bo_label": "第3局"
             },
@@ -110113,19 +110127,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 18688,
+            "s5": 18691,
             "s4": 486,
             "s3": 600,
             "s2": 217,
             "s1": 496
           },
-          "score_dist_total": 20487,
+          "score_dist_total": 20490,
           "best_radar": {
             "self": {
               "name": "JiaQi",
               "desc": "胜(12/2/6)",
               "score": "9.9",
-              "votes": "9948评分",
+              "votes": "9950评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
               "team_id": "2",
@@ -110199,7 +110213,7 @@
           "name": "Rookie",
           "team": "IG",
           "avg": 9.4,
-          "total_count": 14976,
+          "total_count": 14977,
           "comments": 1471,
           "kda": "18/8/25",
           "kda_ratio": 5.38,
@@ -110214,20 +110228,20 @@
           "labels": [],
           "hot_comment": {
             "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-            "likes": 766,
+            "likes": 767,
             "user": "虎扑JR2046307013",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-              "likes": 766,
+              "likes": 767,
               "user": "虎扑JR2046307013",
               "bo_label": "第3局"
             },
             {
               "content": "要不是后期jiaqi表现太好这把mvp一定是你 对线快给小虎打成孙子了 打团支援哪都有你太猛了宋圣",
-              "likes": 592,
+              "likes": 593,
               "user": "理班冠马",
               "bo_label": "第1局"
             },
@@ -110242,13 +110256,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 13061,
+            "s5": 13062,
             "s4": 842,
             "s3": 257,
             "s2": 109,
             "s1": 707
           },
-          "score_dist_total": 14976,
+          "score_dist_total": 14977,
           "best_radar": {
             "self": {
               "name": "Rookie",
@@ -110328,7 +110342,7 @@
           "name": "Wei",
           "team": "IG",
           "avg": 9.3,
-          "total_count": 11006,
+          "total_count": 11007,
           "comments": 1133,
           "kda": "15/9/36",
           "kda_ratio": 5.67,
@@ -110345,14 +110359,14 @@
           "labels": [],
           "hot_comment": {
             "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-            "likes": 891,
+            "likes": 892,
             "user": "黍离川",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-              "likes": 891,
+              "likes": 892,
               "user": "黍离川",
               "bo_label": "第3局"
             },
@@ -110364,7 +110378,7 @@
             },
             {
               "content": "巨魔：你跑不过我你信吗？",
-              "likes": 305,
+              "likes": 306,
               "user": "BLG传奇辅助牢ON",
               "bo_label": "第2局"
             }
@@ -110373,13 +110387,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 9006,
+            "s5": 9007,
             "s4": 1136,
             "s3": 271,
             "s2": 90,
             "s1": 503
           },
-          "score_dist_total": 11006,
+          "score_dist_total": 11007,
           "best_radar": {
             "self": {
               "name": "Wei",
@@ -110459,8 +110473,8 @@
           "name": "Meiko",
           "team": "IG",
           "avg": 8.9,
-          "total_count": 12247,
-          "comments": 1489,
+          "total_count": 12248,
+          "comments": 1490,
           "kda": "1/11/45",
           "kda_ratio": 4.18,
           "kills": 1,
@@ -110475,26 +110489,26 @@
           "labels": [],
           "hot_comment": {
             "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-            "likes": 764,
+            "likes": 765,
             "user": "Dr最快速度",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-              "likes": 764,
+              "likes": 765,
               "user": "Dr最快速度",
               "bo_label": "第3局"
             },
             {
               "content": "劳累了",
-              "likes": 299,
+              "likes": 300,
               "user": "J三car戟",
               "bo_label": "第2局"
             },
             {
               "content": "有公有过也还好吧，解说下意识的把每次巴德做到事都闭口混过去了显得什么都没干，但上路抓个一换二、小龙团r两个把要秀的vn定墙、带人抓死三次女警都挺重要的",
-              "likes": 281,
+              "likes": 282,
               "user": "虎扑JR2068414343",
               "bo_label": "第1局"
             }
@@ -110507,9 +110521,9 @@
             "s4": 1579,
             "s3": 721,
             "s2": 183,
-            "s1": 832
+            "s1": 833
           },
-          "score_dist_total": 12247,
+          "score_dist_total": 12248,
           "best_radar": {
             "self": {
               "name": "Meiko",
@@ -110551,7 +110565,7 @@
               "name": "Moham",
               "desc": "败(0/2/10)",
               "score": "3.7",
-              "votes": "1477评分",
+              "votes": "1478评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
               "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
               "team_id": "41",
@@ -110589,7 +110603,7 @@
           "name": "TheShy",
           "team": "IG",
           "avg": 6.1,
-          "total_count": 19622,
+          "total_count": 19623,
           "comments": 5061,
           "kda": "6/11/18",
           "kda_ratio": 2.18,
@@ -110605,14 +110619,14 @@
           "labels": [],
           "hot_comment": {
             "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-            "likes": 1183,
+            "likes": 1184,
             "user": "虎扑JR1149242444",
             "bo_label": "第1局"
           },
           "hot_comments": [
             {
               "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-              "likes": 1183,
+              "likes": 1184,
               "user": "虎扑JR1149242444",
               "bo_label": "第1局"
             },
@@ -110633,13 +110647,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 8211,
+            "s5": 8212,
             "s4": 1246,
             "s3": 1393,
             "s2": 1434,
             "s1": 7338
           },
-          "score_dist_total": 19622,
+          "score_dist_total": 19623,
           "best_radar": {
             "self": {
               "name": "TheShy",
@@ -110681,7 +110695,7 @@
               "name": "Zika",
               "desc": "败(1/3/3)",
               "score": "2.9",
-              "votes": "2183评分",
+              "votes": "2184评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
               "team_id": "41",
@@ -110850,7 +110864,7 @@
           "name": "Elk",
           "team": "WBG",
           "avg": 5.0,
-          "total_count": 15061,
+          "total_count": 15063,
           "comments": 4977,
           "kda": "16/15/17",
           "kda_ratio": 2.2,
@@ -110907,12 +110921,12 @@
           "kind": "player",
           "score_dist": {
             "s5": 5140,
-            "s4": 191,
-            "s3": 318,
+            "s4": 192,
+            "s3": 319,
             "s2": 619,
             "s1": 8793
           },
-          "score_dist_total": 15061,
+          "score_dist_total": 15063,
           "best_radar": {
             "self": {
               "name": "Elk",
@@ -110992,7 +111006,7 @@
           "name": "Moham",
           "team": "WBG",
           "avg": 5.0,
-          "total_count": 3718,
+          "total_count": 3719,
           "comments": 230,
           "kda": "3/8/39",
           "kda_ratio": 5.25,
@@ -111039,9 +111053,9 @@
             "s4": 438,
             "s3": 459,
             "s2": 561,
-            "s1": 1559
+            "s1": 1560
           },
-          "score_dist_total": 3718,
+          "score_dist_total": 3719,
           "best_radar": {
             "self": {
               "name": "Moham",
@@ -111121,7 +111135,7 @@
           "name": "Zika",
           "team": "WBG",
           "avg": 4.8,
-          "total_count": 6385,
+          "total_count": 6386,
           "comments": 1469,
           "kda": "13/12/10",
           "kda_ratio": 1.92,
@@ -111169,9 +111183,9 @@
             "s4": 650,
             "s3": 553,
             "s2": 685,
-            "s1": 3259
+            "s1": 3260
           },
-          "score_dist_total": 6385,
+          "score_dist_total": 6386,
           "best_radar": {
             "self": {
               "name": "Zika",
@@ -111518,7 +111532,7 @@
           "name": "Elk",
           "team": "WBG",
           "avg": 5.0,
-          "total_count": 15061,
+          "total_count": 15063,
           "comments": 4977,
           "kda": "16/15/17",
           "kda_ratio": 2.2,
@@ -111575,12 +111589,12 @@
           "kind": "player",
           "score_dist": {
             "s5": 5140,
-            "s4": 191,
-            "s3": 318,
+            "s4": 192,
+            "s3": 319,
             "s2": 619,
             "s1": 8793
           },
-          "score_dist_total": 15061,
+          "score_dist_total": 15063,
           "best_radar": {
             "self": {
               "name": "Elk",
@@ -111660,7 +111674,7 @@
           "name": "Moham",
           "team": "WBG",
           "avg": 5.0,
-          "total_count": 3718,
+          "total_count": 3719,
           "comments": 230,
           "kda": "3/8/39",
           "kda_ratio": 5.25,
@@ -111707,9 +111721,9 @@
             "s4": 438,
             "s3": 459,
             "s2": 561,
-            "s1": 1559
+            "s1": 1560
           },
-          "score_dist_total": 3718,
+          "score_dist_total": 3719,
           "best_radar": {
             "self": {
               "name": "Moham",
@@ -111789,7 +111803,7 @@
           "name": "Zika",
           "team": "WBG",
           "avg": 4.8,
-          "total_count": 6385,
+          "total_count": 6386,
           "comments": 1469,
           "kda": "13/12/10",
           "kda_ratio": 1.92,
@@ -111837,9 +111851,9 @@
             "s4": 650,
             "s3": 553,
             "s2": 685,
-            "s1": 3259
+            "s1": 3260
           },
-          "score_dist_total": 6385,
+          "score_dist_total": 6386,
           "best_radar": {
             "self": {
               "name": "Zika",
@@ -112057,7 +112071,7 @@
           "name": "JiaQi",
           "team": "IG",
           "avg": 9.6,
-          "total_count": 20487,
+          "total_count": 20490,
           "comments": 3219,
           "kda": "19/11/22",
           "kda_ratio": 3.73,
@@ -112079,20 +112093,20 @@
           ],
           "hot_comment": {
             "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-            "likes": 1999,
+            "likes": 2000,
             "user": "虎扑JR0403366570",
             "bo_label": "第1局"
           },
           "hot_comments": [
             {
               "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-              "likes": 1999,
+              "likes": 2000,
               "user": "虎扑JR0403366570",
               "bo_label": "第1局"
             },
             {
               "content": "拉满了 喜欢嘉琪被你发现",
-              "likes": 1521,
+              "likes": 1522,
               "user": "JR翾飞",
               "bo_label": "第3局"
             },
@@ -112107,19 +112121,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 18688,
+            "s5": 18691,
             "s4": 486,
             "s3": 600,
             "s2": 217,
             "s1": 496
           },
-          "score_dist_total": 20487,
+          "score_dist_total": 20490,
           "best_radar": {
             "self": {
               "name": "JiaQi",
               "desc": "胜(12/2/6)",
               "score": "9.9",
-              "votes": "9948评分",
+              "votes": "9950评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
               "team_id": "2",
@@ -112193,7 +112207,7 @@
           "name": "Rookie",
           "team": "IG",
           "avg": 9.4,
-          "total_count": 14976,
+          "total_count": 14977,
           "comments": 1471,
           "kda": "18/8/25",
           "kda_ratio": 5.38,
@@ -112208,20 +112222,20 @@
           "labels": [],
           "hot_comment": {
             "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-            "likes": 766,
+            "likes": 767,
             "user": "虎扑JR2046307013",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-              "likes": 766,
+              "likes": 767,
               "user": "虎扑JR2046307013",
               "bo_label": "第3局"
             },
             {
               "content": "要不是后期jiaqi表现太好这把mvp一定是你 对线快给小虎打成孙子了 打团支援哪都有你太猛了宋圣",
-              "likes": 592,
+              "likes": 593,
               "user": "理班冠马",
               "bo_label": "第1局"
             },
@@ -112236,13 +112250,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 13061,
+            "s5": 13062,
             "s4": 842,
             "s3": 257,
             "s2": 109,
             "s1": 707
           },
-          "score_dist_total": 14976,
+          "score_dist_total": 14977,
           "best_radar": {
             "self": {
               "name": "Rookie",
@@ -112322,7 +112336,7 @@
           "name": "Wei",
           "team": "IG",
           "avg": 9.3,
-          "total_count": 11006,
+          "total_count": 11007,
           "comments": 1133,
           "kda": "15/9/36",
           "kda_ratio": 5.67,
@@ -112339,14 +112353,14 @@
           "labels": [],
           "hot_comment": {
             "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-            "likes": 891,
+            "likes": 892,
             "user": "黍离川",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-              "likes": 891,
+              "likes": 892,
               "user": "黍离川",
               "bo_label": "第3局"
             },
@@ -112358,7 +112372,7 @@
             },
             {
               "content": "巨魔：你跑不过我你信吗？",
-              "likes": 305,
+              "likes": 306,
               "user": "BLG传奇辅助牢ON",
               "bo_label": "第2局"
             }
@@ -112367,13 +112381,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 9006,
+            "s5": 9007,
             "s4": 1136,
             "s3": 271,
             "s2": 90,
             "s1": 503
           },
-          "score_dist_total": 11006,
+          "score_dist_total": 11007,
           "best_radar": {
             "self": {
               "name": "Wei",
@@ -112453,8 +112467,8 @@
           "name": "Meiko",
           "team": "IG",
           "avg": 8.9,
-          "total_count": 12247,
-          "comments": 1489,
+          "total_count": 12248,
+          "comments": 1490,
           "kda": "1/11/45",
           "kda_ratio": 4.18,
           "kills": 1,
@@ -112469,26 +112483,26 @@
           "labels": [],
           "hot_comment": {
             "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-            "likes": 764,
+            "likes": 765,
             "user": "Dr最快速度",
             "bo_label": "第3局"
           },
           "hot_comments": [
             {
               "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-              "likes": 764,
+              "likes": 765,
               "user": "Dr最快速度",
               "bo_label": "第3局"
             },
             {
               "content": "劳累了",
-              "likes": 299,
+              "likes": 300,
               "user": "J三car戟",
               "bo_label": "第2局"
             },
             {
               "content": "有公有过也还好吧，解说下意识的把每次巴德做到事都闭口混过去了显得什么都没干，但上路抓个一换二、小龙团r两个把要秀的vn定墙、带人抓死三次女警都挺重要的",
-              "likes": 281,
+              "likes": 282,
               "user": "虎扑JR2068414343",
               "bo_label": "第1局"
             }
@@ -112501,9 +112515,9 @@
             "s4": 1579,
             "s3": 721,
             "s2": 183,
-            "s1": 832
+            "s1": 833
           },
-          "score_dist_total": 12247,
+          "score_dist_total": 12248,
           "best_radar": {
             "self": {
               "name": "Meiko",
@@ -112545,7 +112559,7 @@
               "name": "Moham",
               "desc": "败(0/2/10)",
               "score": "3.7",
-              "votes": "1477评分",
+              "votes": "1478评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
               "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
               "team_id": "41",
@@ -112583,7 +112597,7 @@
           "name": "TheShy",
           "team": "IG",
           "avg": 6.1,
-          "total_count": 19622,
+          "total_count": 19623,
           "comments": 5061,
           "kda": "6/11/18",
           "kda_ratio": 2.18,
@@ -112599,14 +112613,14 @@
           "labels": [],
           "hot_comment": {
             "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-            "likes": 1183,
+            "likes": 1184,
             "user": "虎扑JR1149242444",
             "bo_label": "第1局"
           },
           "hot_comments": [
             {
               "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-              "likes": 1183,
+              "likes": 1184,
               "user": "虎扑JR1149242444",
               "bo_label": "第1局"
             },
@@ -112627,13 +112641,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 8211,
+            "s5": 8212,
             "s4": 1246,
             "s3": 1393,
             "s2": 1434,
             "s1": 7338
           },
-          "score_dist_total": 19622,
+          "score_dist_total": 19623,
           "best_radar": {
             "self": {
               "name": "TheShy",
@@ -112675,7 +112689,7 @@
               "name": "Zika",
               "desc": "败(1/3/3)",
               "score": "2.9",
-              "votes": "2183评分",
+              "votes": "2184评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
               "team_id": "41",
@@ -112715,7 +112729,7 @@
           "name": "教练 Clearlove",
           "team": "WBG",
           "avg": 5.7,
-          "total_count": 5194,
+          "total_count": 5195,
           "comments": 1240,
           "kda": "",
           "kda_ratio": 0,
@@ -112795,13 +112809,13 @@
             },
             {
               "content": "我问你个问题，你现在是ig的ad选手，你是个寒冰，请问当对方梦魇关灯飞，加里奥飞梦魇，狼母接个大招，烈娜塔再放个恶意收购控一下队友的情况下，ad能发挥的作用是啥，为什么，为什么选个寒冰去坐牢？？？",
-              "likes": 153,
+              "likes": 154,
               "user": "传奇电竞选手蒙古上单",
               "bo_label": "第2局"
             },
             {
               "content": "这两边团战难度一目了然，这能怪bp的啊",
-              "likes": 58,
+              "likes": 59,
               "user": "ASaKuSa2016",
               "bo_label": "第1局"
             }
@@ -113021,13 +113035,13 @@
             },
             {
               "content": "我问你个问题，你现在是ig的ad选手，你是个寒冰，请问当对方梦魇关灯飞，加里奥飞梦魇，狼母接个大招，烈娜塔再放个恶意收购控一下队友的情况下，ad能发挥的作用是啥，为什么，为什么选个寒冰去坐牢？？？",
-              "likes": 153,
+              "likes": 154,
               "user": "传奇电竞选手蒙古上单",
               "bo_label": "第2局"
             },
             {
               "content": "这两边团战难度一目了然，这能怪bp的啊",
-              "likes": 58,
+              "likes": 59,
               "user": "ASaKuSa2016",
               "bo_label": "第1局"
             }
@@ -113051,7 +113065,7 @@
           "name": "教练 Clearlove",
           "team": "WBG",
           "avg": 5.7,
-          "total_count": 5194,
+          "total_count": 5195,
           "comments": 1240,
           "kda": "",
           "kda_ratio": 0,
@@ -113117,7 +113131,7 @@
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
               "score": 9.9,
-              "votes": 9948,
+              "votes": 9950,
               "comments": 1876,
               "kills": 12,
               "deaths": 2,
@@ -113134,14 +113148,14 @@
               "hot_comments": [
                 {
                   "content": "佳琪:TM劳资正赛上去一枪一个，打了两分钟我想起来自己以前也是登封ad",
-                  "likes": 1999,
+                  "likes": 2000,
                   "user": "虎扑JR0403366570"
                 }
               ],
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 9762,
+                "s5": 9764,
                 "s4": 49,
                 "s3": 12,
                 "s2": 13,
@@ -113152,7 +113166,7 @@
                   "name": "JiaQi",
                   "desc": "胜(12/2/6)",
                   "score": "9.9",
-                  "votes": "9948评分",
+                  "votes": "9950评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                   "team_id": "2",
@@ -113239,7 +113253,7 @@
               "hot_comments": [
                 {
                   "content": "shy哥，我是你粉丝，但我要说，这把是区😭下把能让白子高兴吗",
-                  "likes": 1183,
+                  "likes": 1184,
                   "user": "虎扑JR1149242444"
                 }
               ],
@@ -113344,7 +113358,7 @@
               "hot_comments": [
                 {
                   "content": "要不是后期jiaqi表现太好这把mvp一定是你 对线快给小虎打成孙子了 打团支援哪都有你太猛了宋圣",
-                  "likes": 592,
+                  "likes": 593,
                   "user": "理班冠马"
                 }
               ],
@@ -113438,7 +113452,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
               "score": 7.7,
-              "votes": 3852,
+              "votes": 3853,
               "comments": 558,
               "kills": 0,
               "deaths": 6,
@@ -113449,7 +113463,7 @@
               "hot_comments": [
                 {
                   "content": "有公有过也还好吧，解说下意识的把每次巴德做到事都闭口混过去了显得什么都没干，但上路抓个一换二、小龙团r两个把要秀的vn定墙、带人抓死三次女警都挺重要的",
-                  "likes": 281,
+                  "likes": 282,
                   "user": "虎扑JR2068414343"
                 }
               ],
@@ -113460,14 +113474,14 @@
                 "s4": 957,
                 "s3": 577,
                 "s2": 136,
-                "s1": 459
+                "s1": 460
               },
               "radar": {
                 "self": {
                   "name": "Meiko",
                   "desc": "胜(0/6/16)",
                   "score": "7.7",
-                  "votes": "3852评分",
+                  "votes": "3853评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                   "team_id": "2",
@@ -113713,7 +113727,7 @@
                   "name": "JiaQi",
                   "desc": "胜(12/2/6)",
                   "score": "9.9",
-                  "votes": "9948评分",
+                  "votes": "9950评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                   "team_id": "2",
@@ -114133,7 +114147,7 @@
                   "name": "Meiko",
                   "desc": "胜(0/6/16)",
                   "score": "7.7",
-                  "votes": "3852评分",
+                  "votes": "3853评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                   "team_id": "2",
@@ -114198,7 +114212,7 @@
               "hot_comments": [
                 {
                   "content": "这两边团战难度一目了然，这能怪bp的啊",
-                  "likes": 58,
+                  "likes": 59,
                   "user": "ASaKuSa2016"
                 }
               ],
@@ -114361,7 +114375,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/380d436eed7666075c7bb58a58b30580.png",
               "score": 9.4,
-              "votes": 4916,
+              "votes": 4917,
               "comments": 1216,
               "kills": 10,
               "deaths": 3,
@@ -114387,7 +114401,7 @@
               "score_dist": {
                 "s5": 4451,
                 "s4": 78,
-                "s3": 39,
+                "s3": 40,
                 "s2": 26,
                 "s1": 322
               },
@@ -114578,7 +114592,7 @@
               "champion": "",
               "score": 9.0,
               "votes": 2845,
-              "comments": 332,
+              "comments": 333,
               "kills": 1,
               "deaths": 3,
               "assists": 10,
@@ -114588,7 +114602,7 @@
               "hot_comments": [
                 {
                   "content": "劳累了",
-                  "likes": 299,
+                  "likes": 300,
                   "user": "J三car戟"
                 }
               ],
@@ -114798,7 +114812,7 @@
               "hot_comments": [
                 {
                   "content": "巨魔：你跑不过我你信吗？",
-                  "likes": 305,
+                  "likes": 306,
                   "user": "BLG传奇辅助牢ON"
                 }
               ],
@@ -115337,7 +115351,7 @@
               "hot_comments": [
                 {
                   "content": "我问你个问题，你现在是ig的ad选手，你是个寒冰，请问当对方梦魇关灯飞，加里奥飞梦魇，狼母接个大招，烈娜塔再放个恶意收购控一下队友的情况下，ad能发挥的作用是啥，为什么，为什么选个寒冰去坐牢？？？",
-                  "likes": 153,
+                  "likes": 154,
                   "user": "传奇电竞选手蒙古上单"
                 }
               ],
@@ -115411,7 +115425,7 @@
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
               "champion": "",
               "score": 9.9,
-              "votes": 8675,
+              "votes": 8676,
               "comments": 1074,
               "kills": 5,
               "deaths": 3,
@@ -115422,14 +115436,14 @@
               "hot_comments": [
                 {
                   "content": "拉满了 喜欢嘉琪被你发现",
-                  "likes": 1521,
+                  "likes": 1522,
                   "user": "JR翾飞"
                 }
               ],
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 8406,
+                "s5": 8407,
                 "s4": 144,
                 "s3": 23,
                 "s2": 20,
@@ -115476,7 +115490,7 @@
                   "name": "Elk",
                   "desc": "败(3/5/5)",
                   "score": "2.9",
-                  "votes": "6510评分",
+                  "votes": "6511评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ffe6f26bd9eeeb3c195ff0ded4d79700.png",
                   "team_id": "41",
@@ -115516,7 +115530,7 @@
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "",
               "score": 8.8,
-              "votes": 7356,
+              "votes": 7357,
               "comments": 1325,
               "kills": 3,
               "deaths": 2,
@@ -115534,7 +115548,7 @@
               "bg_color": "#000000",
               "position": "",
               "score_dist": {
-                "s5": 5563,
+                "s5": 5564,
                 "s4": 868,
                 "s3": 251,
                 "s2": 87,
@@ -115581,7 +115595,7 @@
                   "name": "Zika",
                   "desc": "败(1/3/3)",
                   "score": "2.9",
-                  "votes": "2183评分",
+                  "votes": "2184评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                   "team_id": "41",
@@ -115621,7 +115635,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
               "champion": "",
               "score": 9.8,
-              "votes": 6895,
+              "votes": 6896,
               "comments": 647,
               "kills": 8,
               "deaths": 2,
@@ -115632,14 +115646,14 @@
               "hot_comments": [
                 {
                   "content": "老宋的常规赛越猛，季后赛越让人害怕，不过这次队友的水平，我感觉季后赛马头和妹妹出问题的概率比你大的多",
-                  "likes": 766,
+                  "likes": 767,
                   "user": "虎扑JR2046307013"
                 }
               ],
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 6604,
+                "s5": 6605,
                 "s4": 82,
                 "s3": 25,
                 "s2": 31,
@@ -115726,7 +115740,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ffe6f26bd9eeeb3c195ff0ded4d79700.png",
               "score": 2.9,
-              "votes": 6510,
+              "votes": 6511,
               "comments": 2581,
               "kills": 3,
               "deaths": 5,
@@ -115751,7 +115765,7 @@
               "position": "",
               "score_dist": {
                 "s5": 456,
-                "s4": 83,
+                "s4": 84,
                 "s3": 204,
                 "s2": 380,
                 "s1": 5387
@@ -115761,7 +115775,7 @@
                   "name": "Elk",
                   "desc": "败(3/5/5)",
                   "score": "2.9",
-                  "votes": "6510评分",
+                  "votes": "6511评分",
                   "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/2272238ddbe6cdab2a13c343ad1e77f57374prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ffe6f26bd9eeeb3c195ff0ded4d79700.png",
                   "team_id": "41",
@@ -115848,7 +115862,7 @@
               "hot_comments": [
                 {
                   "content": "这个露露玩的真牛逼吧，对线前期空了点Q，但是每一个变羊都恰到好处，这个我不喷",
-                  "likes": 764,
+                  "likes": 765,
                   "user": "Dr最快速度"
                 }
               ],
@@ -115902,7 +115916,7 @@
                   "name": "Moham",
                   "desc": "败(0/2/10)",
                   "score": "3.7",
-                  "votes": "1477评分",
+                  "votes": "1478评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
                   "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
                   "team_id": "41",
@@ -115942,7 +115956,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
               "score": 9.3,
-              "votes": 4930,
+              "votes": 4931,
               "comments": 709,
               "kills": 5,
               "deaths": 3,
@@ -115953,14 +115967,14 @@
               "hot_comments": [
                 {
                   "content": "你以后干什么都会成功的wei哥，这种bp都能打赢的啊",
-                  "likes": 891,
+                  "likes": 892,
                   "user": "黍离川"
                 }
               ],
               "bg_color": "#000003",
               "position": "",
               "score_dist": {
-                "s5": 4014,
+                "s5": 4015,
                 "s4": 491,
                 "s3": 144,
                 "s2": 52,
@@ -116263,7 +116277,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
               "score": 2.9,
-              "votes": 2183,
+              "votes": 2184,
               "comments": 411,
               "kills": 1,
               "deaths": 3,
@@ -116285,14 +116299,14 @@
                 "s4": 27,
                 "s3": 99,
                 "s2": 214,
-                "s1": 1731
+                "s1": 1732
               },
               "radar": {
                 "self": {
                   "name": "Zika",
                   "desc": "败(1/3/3)",
                   "score": "2.9",
-                  "votes": "2183评分",
+                  "votes": "2184评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21000239ba7a1b0f1e0bd2e0ba5118e238d77c81prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                   "team_id": "41",
@@ -116368,7 +116382,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
               "champion": "",
               "score": 3.7,
-              "votes": 1477,
+              "votes": 1478,
               "comments": 85,
               "kills": 0,
               "deaths": 2,
@@ -116390,14 +116404,14 @@
                 "s4": 46,
                 "s3": 186,
                 "s2": 288,
-                "s1": 844
+                "s1": 845
               },
               "radar": {
                 "self": {
                   "name": "Moham",
                   "desc": "败(0/2/10)",
                   "score": "3.7",
-                  "votes": "1477评分",
+                  "votes": "1478评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/630806678552576b3bec6f4786ab684d63d21846a794f22prod.png",
                   "champion": "https://activity-static.hoopchina.com.cn/images/23529-hv5upprc-upload-1685355687370-2.jpg",
                   "team_id": "41",
@@ -116491,7 +116505,7 @@
               "name": "教练 Clearlove",
               "avatar": "https://i1.hoopchina.com.cn/newsPost/25718-pl718jrc-upload-1752757849624-26.JPG",
               "score": 7.7,
-              "votes": 2744,
+              "votes": 2745,
               "comments": 519,
               "team_id": "41",
               "labels": [],
@@ -116511,12 +116525,12 @@
               "avatar": "https://i3.hoopchina.com.cn/newsPost/1786882704735_o_w_178_h_250_f99628d1.png",
               "score": 9.5,
               "votes": 1660,
-              "comments": 164,
+              "comments": 165,
               "labels": [],
               "hot_comments": [
                 {
                   "content": "佳琪cos嘎啦，你cos杰克。双AD是对的",
-                  "likes": 421,
+                  "likes": 422,
                   "user": "虎扑JR1964446204"
                 }
               ],
@@ -116615,7 +116629,7 @@
             {
               "name": "卡西奥佩娅/瑞兹/蔚/安妮/阿卡丽",
               "score": 3.9,
-              "votes": 398,
+              "votes": 399,
               "comments": 45,
               "team_id": "41",
               "bg_color": "#939394"
@@ -116623,12 +116637,12 @@
           ]
         }
       ],
-      "total_scorers": 137073,
+      "total_scorers": 137087,
       "league_name": "职业联赛",
       "round_name": "第三赛段组内赛",
       "match_time": 1786870800000,
       "date_str": "08月16日",
-      "found_at": "2026-08-18T23:02:14.269721+08:00"
+      "found_at": "2026-08-18T23:40:22.570429+08:00"
     },
     "schedule": {
       "next_match": {
@@ -116654,7 +116668,7 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 89.9
+        "countdown_hours": 89.3
       },
       "upcoming": [
         {
@@ -116680,10 +116694,10 @@
           "is_live": false,
           "is_completed": false,
           "is_upcoming": true,
-          "countdown_hours": 89.9
+          "countdown_hours": 89.3
         }
       ],
-      "last_check": "2026-08-18T23:05:30.652274+08:00"
+      "last_check": "2026-08-18T23:43:16.411826+08:00"
     },
     "next_match": {
       "home": "NIP",
@@ -116708,7 +116722,7 @@
       "is_live": false,
       "is_completed": false,
       "is_upcoming": true,
-      "countdown_hours": 89.9
+      "countdown_hours": 89.3
     },
     "upcoming": [
       {
@@ -116734,20 +116748,20 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 89.9
+        "countdown_hours": 89.3
       }
     ],
-    "last_check": "2026-08-18T23:02:14.269721+08:00"
+    "last_check": "2026-08-18T23:40:22.570429+08:00"
   },
   "daily_stats": {
     "main": {
       "label": "The shy#asdf",
-      "today_matches": 0,
-      "win": 0,
+      "today_matches": 1,
+      "win": 1,
       "lose": 0,
-      "win_rate": "0%",
-      "streak": 0,
-      "streak_type": null
+      "win_rate": "100%",
+      "streak": 1,
+      "streak_type": "WIN"
     },
     "smurf": {
       "label": "은여하#1103",

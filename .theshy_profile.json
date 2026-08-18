@@ -9,27 +9,27 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 296,
-  "updated_at": "2026-08-18T23:54:23+09:00",
-  "renewable_at": "2026-08-18T23:56:23+09:00",
-  "revision_at": "2026-08-15T04:13:38+09:00",
+  "updated_at": "2026-08-19T00:39:54+09:00",
+  "renewable_at": "2026-08-19T00:41:54+09:00",
+  "revision_at": "2026-08-19T00:08:45+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 618,
-    "total": 2873418
+    "rank": 585,
+    "total": 2873617
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1526,
+      "lp": 1546,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-      "win": 111,
+      "win": 112,
       "lose": 69,
-      "play": 179,
-      "match_win": 111,
+      "play": 180,
+      "match_win": 112,
       "match_lose": 68,
       "is_hot_streak": "false",
       "is_fresh_blood": "false",
@@ -40,10 +40,10 @@
         {
           "_class": "HighLeague",
           "key": "CHALLENGER",
-          "current_count": 310,
-          "lp_threshold": 1831,
+          "current_count": 309,
+          "lp_threshold": 1826,
           "promotion_candidate_count": 1,
-          "demotion_candidate_count": 11
+          "demotion_candidate_count": 10
         },
         {
           "_class": "HighLeague",
@@ -527,6 +527,13 @@
   },
   "lp_histories": [
     {
+      "created_at": "2026-08-19T00:12:28+09:00",
+      "elo_point": 3605,
+      "tier": "GRANDMASTER",
+      "division": 1,
+      "lp": 1546
+    },
+    {
       "created_at": "2026-08-15T02:00:58+09:00",
       "elo_point": 3606,
       "tier": "GRANDMASTER",
@@ -552,8 +559,8 @@
     "game_type": "RANKED",
     "season_id": 33,
     "year": null,
-    "play": 179,
-    "win": 111,
+    "play": 180,
+    "win": 112,
     "lose": 68,
     "champion_stats": [
       {
@@ -801,8 +808,8 @@
   "ranked_most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
-    "play": 179,
-    "win": 111,
+    "play": 180,
+    "win": 112,
     "lose": 68,
     "my_champion_stats": [
       {
@@ -1494,6 +1501,15 @@
       "kill": 6,
       "death": 8,
       "assist": 10
+    },
+    {
+      "champion_name": "机械公敌",
+      "id": 68,
+      "play": 1,
+      "win": 1,
+      "kill": 8,
+      "death": 10,
+      "assist": 11
     },
     {
       "champion_name": "铁血狼母",
