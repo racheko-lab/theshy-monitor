@@ -9,28 +9,28 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 296,
-  "updated_at": "2026-08-19T01:58:22+09:00",
-  "renewable_at": "2026-08-19T02:00:22+09:00",
-  "revision_at": "2026-08-19T01:14:00+09:00",
+  "updated_at": "2026-08-19T02:35:15+09:00",
+  "renewable_at": "2026-08-19T02:37:15+09:00",
+  "revision_at": "2026-08-19T02:23:43+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 523,
-    "total": 2873973
+    "rank": 524,
+    "total": 2874124
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1586,
+      "lp": 1584,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-      "win": 113,
-      "lose": 69,
-      "play": 181,
-      "match_win": 113,
-      "match_lose": 68,
+      "win": 114,
+      "lose": 70,
+      "play": 183,
+      "match_win": 114,
+      "match_lose": 69,
       "is_hot_streak": "false",
       "is_fresh_blood": "false",
       "is_veteran": "false",
@@ -43,7 +43,7 @@
           "current_count": 306,
           "lp_threshold": 1822,
           "promotion_candidate_count": 3,
-          "demotion_candidate_count": 9
+          "demotion_candidate_count": 8
         },
         {
           "_class": "HighLeague",
@@ -516,7 +516,7 @@
           "_class": "RankInfo",
           "tier": "GRANDMASTER",
           "division": 1,
-          "lp": 1586,
+          "lp": 1605,
           "win": null,
           "lose": null,
           "elo": null,
@@ -559,9 +559,9 @@
     "game_type": "RANKED",
     "season_id": 33,
     "year": null,
-    "play": 181,
-    "win": 113,
-    "lose": 68,
+    "play": 183,
+    "win": 114,
+    "lose": 69,
     "champion_stats": [
       {
         "id": 126,
@@ -808,9 +808,9 @@
   "ranked_most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
-    "play": 181,
-    "win": 113,
-    "lose": 68,
+    "play": 183,
+    "win": 114,
+    "lose": 69,
     "my_champion_stats": [
       {
         "id": 126,
@@ -1519,6 +1519,15 @@
       "kill": 4,
       "death": 5,
       "assist": 19
+    },
+    {
+      "champion_name": "戏命师",
+      "id": 202,
+      "play": 1,
+      "win": 1,
+      "kill": 9,
+      "death": 9,
+      "assist": 13
     },
     {
       "champion_name": "铁血狼母",
