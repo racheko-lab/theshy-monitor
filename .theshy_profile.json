@@ -9,24 +9,24 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 297,
-  "updated_at": "2026-08-20T00:03:55+09:00",
-  "renewable_at": "2026-08-20T00:05:55+09:00",
-  "revision_at": "2026-08-19T23:46:44+09:00",
+  "updated_at": "2026-08-20T00:40:27+09:00",
+  "renewable_at": "2026-08-20T00:42:27+09:00",
+  "revision_at": "2026-08-20T00:18:47+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 567,
-    "total": 2878363
+    "rank": 542,
+    "total": 2878576
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1561,
+      "lp": 1580,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-      "win": 115,
+      "win": 116,
       "lose": 72,
       "play": 186,
       "match_win": 115,
@@ -40,18 +40,18 @@
         {
           "_class": "HighLeague",
           "key": "CHALLENGER",
-          "current_count": 305,
-          "lp_threshold": 1828,
+          "current_count": 312,
+          "lp_threshold": 1833,
           "promotion_candidate_count": 1,
-          "demotion_candidate_count": 11
+          "demotion_candidate_count": 13
         },
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
           "current_count": 700,
-          "lp_threshold": 1333,
-          "promotion_candidate_count": 13,
-          "demotion_candidate_count": 26
+          "lp_threshold": 1332,
+          "promotion_candidate_count": 11,
+          "demotion_candidate_count": 22
         }
       ]
     },
@@ -527,11 +527,11 @@
   },
   "lp_histories": [
     {
-      "created_at": "2026-08-19T00:12:28+09:00",
-      "elo_point": 3605,
+      "created_at": "2026-08-20T00:21:31+09:00",
+      "elo_point": 3625,
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1546
+      "lp": 1580
     },
     {
       "created_at": "2026-08-15T02:00:58+09:00",
@@ -1471,11 +1471,11 @@
     {
       "champion_name": "狂战士",
       "id": 2,
-      "play": 6,
-      "win": 3,
-      "kill": 34,
-      "death": 35,
-      "assist": 27
+      "play": 7,
+      "win": 4,
+      "kill": 40,
+      "death": 38,
+      "assist": 34
     },
     {
       "champion_name": "未来守护者",
