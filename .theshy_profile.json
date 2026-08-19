@@ -9,14 +9,14 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 297,
-  "updated_at": "2026-08-20T02:24:35+09:00",
-  "renewable_at": "2026-08-20T02:26:35+09:00",
-  "revision_at": "2026-08-20T02:20:39+09:00",
+  "updated_at": "2026-08-20T02:54:09+09:00",
+  "renewable_at": "2026-08-20T02:56:09+09:00",
+  "revision_at": "2026-08-20T02:50:21+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 595,
-    "total": 2879106
+    "rank": 593,
+    "total": 2879189
   },
   "league_stats": [
     {
@@ -48,9 +48,9 @@
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
-          "current_count": 700,
+          "current_count": 701,
           "lp_threshold": 1332,
-          "promotion_candidate_count": 12,
+          "promotion_candidate_count": 11,
           "demotion_candidate_count": 22
         }
       ]
@@ -1505,6 +1505,15 @@
       "assist": 10
     },
     {
+      "champion_name": "狂暴之心",
+      "id": 85,
+      "play": 1,
+      "win": 1,
+      "kill": 10,
+      "death": 3,
+      "assist": 6
+    },
+    {
       "champion_name": "机械公敌",
       "id": 68,
       "play": 1,
@@ -1521,15 +1530,6 @@
       "kill": 4,
       "death": 5,
       "assist": 19
-    },
-    {
-      "champion_name": "迷失之牙",
-      "id": 150,
-      "play": 1,
-      "win": 1,
-      "kill": 1,
-      "death": 7,
-      "assist": 4
     }
   ]
 }
