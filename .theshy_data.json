@@ -17,28 +17,28 @@
         "internal_name": "퐁당가지토마토",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
         "level": 297,
-        "updated_at": "2026-08-20T03:09:16+09:00",
-        "renewable_at": "2026-08-20T03:11:16+09:00",
-        "revision_at": "2026-08-20T02:50:21+09:00",
+        "updated_at": "2026-08-20T03:52:07+09:00",
+        "renewable_at": "2026-08-20T03:54:07+09:00",
+        "revision_at": "2026-08-20T03:32:22+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 575,
-          "total": 2879288
+          "rank": 598,
+          "total": 2879428
         },
         "league_stats": [
           {
             "game_type": "SOLORANKED",
             "tier": "GRANDMASTER",
             "division": 1,
-            "lp": 1555,
+            "lp": 1534,
             "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
             "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
             "win": 118,
-            "lose": 75,
-            "play": 190,
-            "match_win": 117,
-            "match_lose": 73,
+            "lose": 76,
+            "play": 192,
+            "match_win": 118,
+            "match_lose": 74,
             "is_hot_streak": "false",
             "is_fresh_blood": "false",
             "is_veteran": "false",
@@ -48,17 +48,17 @@
               {
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
-                "current_count": 310,
+                "current_count": 309,
                 "lp_threshold": 1830,
                 "promotion_candidate_count": 2,
-                "demotion_candidate_count": 12
+                "demotion_candidate_count": 11
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
-                "current_count": 703,
-                "lp_threshold": 1333,
-                "promotion_candidate_count": 12,
+                "current_count": 704,
+                "lp_threshold": 1334,
+                "promotion_candidate_count": 13,
                 "demotion_candidate_count": 25
               }
             ]
@@ -560,9 +560,9 @@
           "game_type": "RANKED",
           "season_id": 33,
           "year": null,
-          "play": 190,
-          "win": 117,
-          "lose": 73,
+          "play": 192,
+          "win": 118,
+          "lose": 74,
           "champion_stats": [
             {
               "id": 126,
@@ -781,37 +781,37 @@
               "op_score": 39
             },
             {
-              "id": 893,
-              "champion_name": "双界灵兔",
+              "id": 202,
+              "champion_name": "戏命师",
               "play": 7,
-              "win": 4,
-              "lose": 3,
-              "kill": 60,
-              "death": 21,
-              "assist": 49,
-              "kda": "5.19",
-              "win_rate": "57.1%",
-              "game_length_second": 10940,
-              "gold_earned": 85954,
-              "minion_kill": 1443,
-              "neutral_minion_kill": 0,
-              "damage_dealt_to_champions": 229295,
-              "damage_taken": 147185,
-              "double_kill": 3,
-              "triple_kill": 0,
+              "win": 5,
+              "lose": 2,
+              "kill": 54,
+              "death": 43,
+              "assist": 68,
+              "kda": "2.84",
+              "win_rate": "71.4%",
+              "game_length_second": 11193,
+              "gold_earned": 97178,
+              "minion_kill": 1554,
+              "neutral_minion_kill": 10,
+              "damage_dealt_to_champions": 187964,
+              "damage_taken": 142945,
+              "double_kill": 6,
+              "triple_kill": 1,
               "quadra_kill": 0,
               "penta_kill": 0,
-              "vision_wards_bought_in_game": 11,
-              "op_score": 48
+              "vision_wards_bought_in_game": 14,
+              "op_score": 41
             }
           ]
         },
         "ranked_most_champions": {
           "game_type": "RANKED",
           "season_id": 33,
-          "play": 190,
-          "win": 117,
-          "lose": 73,
+          "play": 192,
+          "win": 118,
+          "lose": 74,
           "my_champion_stats": [
             {
               "id": 126,
@@ -1408,69 +1408,69 @@
               "faster_support_quest": 0
             },
             {
-              "id": 893,
-              "champion_name": "双界灵兔",
+              "id": 202,
+              "champion_name": "戏命师",
               "play": 7,
-              "win": 4,
-              "lose": 3,
-              "game_second": 10940,
-              "b_kill": 60,
-              "b_death": 21,
-              "b_assist": 49,
-              "kda": "5.19",
-              "win_rate": "57.1%",
-              "kill_participation": 3.22,
-              "damage_to_champion": 229295,
-              "damage_participation": 2.06,
-              "cs": 1443,
-              "gold": 85954,
-              "vision_score": 179,
-              "vision_ward": 11,
-              "ward_placed": 66,
+              "win": 5,
+              "lose": 2,
+              "game_second": 11193,
+              "b_kill": 54,
+              "b_death": 43,
+              "b_assist": 68,
+              "kda": "2.84",
+              "win_rate": "71.4%",
+              "kill_participation": 3.26,
+              "damage_to_champion": 187964,
+              "damage_participation": 1.61,
+              "cs": 1554,
+              "gold": 97178,
+              "vision_score": 129,
+              "vision_ward": 14,
+              "ward_placed": 57,
               "ward_kill": 21,
-              "op_score": 48.08,
-              "op_score_rank": 26,
-              "mvp": 2,
-              "ace": 1,
-              "lane_score": 469.18,
-              "lane_lead": 7,
-              "double_kill": 3,
-              "triple_kill": 0,
+              "op_score": 41,
+              "op_score_rank": 36,
+              "mvp": 1,
+              "ace": 0,
+              "lane_score": 407.01,
+              "lane_lead": 4,
+              "double_kill": 6,
+              "triple_kill": 1,
               "quadra_kill": 0,
               "penta_kill": 0,
-              "damage_taken": 147185,
-              "damage_self_mitigated": 75138,
-              "heal": 38695,
-              "heal_to_team": 190,
+              "damage_taken": 142945,
+              "damage_self_mitigated": 81032,
+              "heal": 32965,
+              "heal_to_team": 0,
               "shield_to_team": 0,
-              "physical_damage_to_champion": 19544,
-              "magic_damage_to_champion": 191321,
-              "true_damage_to_champion": 229295,
-              "damage_to_objective": 63791,
-              "damage_to_turret": 59959,
-              "damage_to_building": 59959,
-              "turret_kill": 11,
+              "physical_damage_to_champion": 178994,
+              "magic_damage_to_champion": 5672,
+              "true_damage_to_champion": 187964,
+              "damage_to_objective": 73985,
+              "damage_to_turret": 59715,
+              "damage_to_building": 59715,
+              "turret_kill": 9,
               "inhibitor_kill": 2,
               "object_steal": 0,
-              "cc_score": 71,
-              "solo_kill": 26,
-              "make_solo_kill": 7,
-              "invade_kill": 1,
-              "invade_play": 3,
-              "neutral_cs": 0,
+              "cc_score": 178,
+              "solo_kill": 5,
+              "make_solo_kill": 4,
+              "invade_kill": 0,
+              "invade_play": 0,
+              "neutral_cs": 10,
               "buff_steal": 0,
-              "enemy_jungle_monster_kill": 0,
+              "enemy_jungle_monster_kill": 9,
               "epic_monster_kill_near_enemy_jungler": 0,
               "epic_monster_steal_no_smite": 0,
               "initial_crab_kill": 0,
               "jungle_cs_10_minute": 0,
-              "lane_advantage_7_minute": 4,
-              "lane_cs_10_minute": 517,
-              "turret_plate": 76,
-              "cc": 2,
-              "cc_make_kill": 1,
+              "lane_advantage_7_minute": 2,
+              "lane_cs_10_minute": 531,
+              "turret_plate": 68,
+              "cc": 89,
+              "cc_make_kill": 38,
               "save_ally": 0,
-              "ward_guard": 0,
+              "ward_guard": 2,
               "faster_support_quest": 0
             }
           ]
@@ -1479,11 +1479,11 @@
           {
             "champion_name": "狂战士",
             "id": 2,
-            "play": 7,
+            "play": 8,
             "win": 4,
-            "kill": 40,
-            "death": 38,
-            "assist": 34
+            "kill": 47,
+            "death": 46,
+            "assist": 35
           },
           {
             "champion_name": "未来守护者",
@@ -1542,6 +1542,646 @@
         ]
       },
       "matches": [
+        {
+          "id": "qfvdWpGbi21Z_1-iVPebJwrO7IcbQj5J8nt28oFUQxs=",
+          "created_at": "2026-08-20T03:32:00+09:00",
+          "game_type": "SOLORANKED",
+          "game_length_second": 1357,
+          "game_map": "SUMMONERS_RIFT",
+          "champion_id": 2,
+          "champion": "狂战士",
+          "team_key": "BLUE",
+          "position": "TOP",
+          "kill": 7,
+          "death": 8,
+          "assist": 1,
+          "kda": "1.00",
+          "result": "LOSE",
+          "op_score": 4.69,
+          "op_score_rank": 6,
+          "gold_earned": 9059,
+          "minion_kill": 171,
+          "neutral_minion_kill": 0,
+          "total_damage_dealt_to_champions": 19861,
+          "total_damage_taken": 25256,
+          "total_heal": 4382,
+          "vision_wards_bought_in_game": 1,
+          "ward_place": 8,
+          "largest_killing_spree": 3,
+          "largest_multi_kill": 1,
+          "largest_critical_strike": 0,
+          "time_ccing_others": 15,
+          "champion_level": 14,
+          "items": [
+            1120,
+            6333,
+            6631,
+            3047
+          ],
+          "items_names": [
+            "多兰之盔",
+            "死亡之舞",
+            "挺进破坏者",
+            "铁板靴"
+          ],
+          "spells": [
+            4,
+            14
+          ],
+          "rune": {
+            "_class": "Rune",
+            "primary_page_id": 8200,
+            "primary_rune_id": 8230,
+            "secondary_page_id": 8300
+          },
+          "teams": [
+            {
+              "key": "BLUE",
+              "banned_champions": [
+                3,
+                51,
+                76,
+                78
+              ],
+              "banned_champions_names": [
+                "正义巨像",
+                "皮城女警",
+                "狂野女猎手",
+                "圣锤之毅"
+              ],
+              "game_stat": {
+                "is_win": "false",
+                "champion_kill": 16,
+                "tower_kill": 0,
+                "dragon_kill": 0,
+                "baron_kill": 0,
+                "inhibitor_kill": 0,
+                "rift_herald_kill": 0,
+                "atakhan_kill": 0,
+                "gold_earned": 40424,
+                "champion_first": "false",
+                "horde_kill": 0
+              }
+            },
+            {
+              "key": "RED",
+              "banned_champions": [
+                76,
+                120,
+                555
+              ],
+              "banned_champions_names": [
+                "狂野女猎手",
+                "战争之影",
+                "血港鬼影"
+              ],
+              "game_stat": {
+                "is_win": "true",
+                "champion_kill": 31,
+                "tower_kill": 9,
+                "dragon_kill": 2,
+                "baron_kill": 1,
+                "inhibitor_kill": 1,
+                "rift_herald_kill": 1,
+                "atakhan_kill": 0,
+                "gold_earned": 56165,
+                "champion_first": "true",
+                "horde_kill": 3
+              }
+            }
+          ],
+          "participants": [
+            {
+              "summoner_name": "Ghost",
+              "summoner_tag": "올라갑니다",
+              "champion_id": 145,
+              "champion_name": "虚空之女",
+              "team_key": "BLUE",
+              "position": "ADC",
+              "items": [
+                6672,
+                3124,
+                1043,
+                1036,
+                1083,
+                1086
+              ],
+              "items_names": [
+                "海妖杀手",
+                "鬼索的狂暴之刃",
+                "反曲之弓",
+                "长剑",
+                "萃取",
+                "多兰之弓"
+              ],
+              "spells": [
+                1,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8000,
+                "primary_rune_id": 8008,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 12,
+              "kill": 2,
+              "death": 6,
+              "assist": 5,
+              "kda": "1.17",
+              "result": "LOSE",
+              "op_score": 4.6,
+              "op_score_rank": 7,
+              "gold_earned": 10625,
+              "minion_kill": 202,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 11995,
+              "total_damage_taken": 17392,
+              "total_heal": 2300,
+              "vision_wards_bought_in_game": 0,
+              "ward_place": 8,
+              "largest_killing_spree": 0,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 0
+            },
+            {
+              "summoner_name": "모든일은같이",
+              "summoner_tag": "KR1",
+              "champion_id": 805,
+              "champion_name": "灰烬驱魔人",
+              "team_key": "BLUE",
+              "position": "MID",
+              "items": [
+                1052,
+                2055,
+                3152,
+                3100,
+                1082,
+                3175
+              ],
+              "items_names": [
+                "增幅典籍",
+                "控制守卫",
+                "海克斯科技火箭腰带",
+                "巫妖之祸",
+                "黑暗封印",
+                "灵能使之靴"
+              ],
+              "spells": [
+                12,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8100,
+                "primary_rune_id": 8112,
+                "secondary_page_id": 8400
+              },
+              "champion_level": 12,
+              "kill": 5,
+              "death": 7,
+              "assist": 1,
+              "kda": "0.86",
+              "result": "LOSE",
+              "op_score": 3.82,
+              "op_score_rank": 9,
+              "gold_earned": 8281,
+              "minion_kill": 159,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 13655,
+              "total_damage_taken": 25081,
+              "total_heal": 8201,
+              "vision_wards_bought_in_game": 4,
+              "ward_place": 6,
+              "largest_killing_spree": 2,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 14
+            },
+            {
+              "summoner_name": "The shy",
+              "summoner_tag": "asdf",
+              "champion_id": 2,
+              "champion_name": "狂战士",
+              "team_key": "BLUE",
+              "position": "TOP",
+              "items": [
+                1120,
+                6333,
+                6631,
+                3047
+              ],
+              "items_names": [
+                "多兰之盔",
+                "死亡之舞",
+                "挺进破坏者",
+                "铁板靴"
+              ],
+              "spells": [
+                4,
+                14
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8200,
+                "primary_rune_id": 8230,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 14,
+              "kill": 7,
+              "death": 8,
+              "assist": 1,
+              "kda": "1.00",
+              "result": "LOSE",
+              "op_score": 4.69,
+              "op_score_rank": 6,
+              "gold_earned": 9059,
+              "minion_kill": 171,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 19861,
+              "total_damage_taken": 25256,
+              "total_heal": 4382,
+              "vision_wards_bought_in_game": 1,
+              "ward_place": 8,
+              "largest_killing_spree": 3,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 15
+            },
+            {
+              "summoner_name": "左特稻草人",
+              "summoner_tag": "520",
+              "champion_id": 9,
+              "champion_name": "远古恐惧",
+              "team_key": "BLUE",
+              "position": "JUNGLE",
+              "items": [
+                3152,
+                2421,
+                1082,
+                3020
+              ],
+              "items_names": [
+                "海克斯科技火箭腰带",
+                "碎裂的护臂",
+                "黑暗封印",
+                "法师之靴"
+              ],
+              "spells": [
+                4,
+                11
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8100,
+                "primary_rune_id": 8112,
+                "secondary_page_id": 8200
+              },
+              "champion_level": 12,
+              "kill": 2,
+              "death": 4,
+              "assist": 5,
+              "kda": "1.75",
+              "result": "LOSE",
+              "op_score": 4.42,
+              "op_score_rank": 8,
+              "gold_earned": 7245,
+              "minion_kill": 13,
+              "neutral_minion_kill": 98,
+              "total_damage_dealt_to_champions": 4395,
+              "total_damage_taken": 20106,
+              "total_heal": 7201,
+              "vision_wards_bought_in_game": 4,
+              "ward_place": 4,
+              "largest_killing_spree": 0,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 21
+            },
+            {
+              "summoner_name": "Asa",
+              "summoner_tag": "ε з",
+              "champion_id": 12,
+              "champion_name": "牛头酋长",
+              "team_key": "BLUE",
+              "position": "SUPPORT",
+              "items": [
+                3876,
+                3050,
+                3158,
+                1029,
+                3067
+              ],
+              "items_names": [
+                "摩天雪橇",
+                "基克的聚合",
+                "明朗之靴",
+                "布甲",
+                "燃烧宝石"
+              ],
+              "spells": [
+                4,
+                7
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8400,
+                "primary_rune_id": 8439,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 10,
+              "kill": 0,
+              "death": 6,
+              "assist": 5,
+              "kda": "0.83",
+              "result": "LOSE",
+              "op_score": 2.88,
+              "op_score_rank": 10,
+              "gold_earned": 5214,
+              "minion_kill": 32,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 3478,
+              "total_damage_taken": 17163,
+              "total_heal": 4931,
+              "vision_wards_bought_in_game": 11,
+              "ward_place": 19,
+              "largest_killing_spree": 0,
+              "largest_multi_kill": 0,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 33
+            },
+            {
+              "summoner_name": "김구거",
+              "summoner_tag": "0207",
+              "champion_id": 89,
+              "champion_name": "曙光女神",
+              "team_key": "RED",
+              "position": "SUPPORT",
+              "items": [
+                3869,
+                3111,
+                2525,
+                1028
+              ],
+              "items_names": [
+                "星界据守",
+                "水银之靴",
+                "原生质护带",
+                "红水晶"
+              ],
+              "spells": [
+                4,
+                14
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8400,
+                "primary_rune_id": 8439,
+                "secondary_page_id": 8000
+              },
+              "champion_level": 11,
+              "kill": 1,
+              "death": 3,
+              "assist": 9,
+              "kda": "3.33",
+              "result": "WIN",
+              "op_score": 5.78,
+              "op_score_rank": 4,
+              "gold_earned": 6769,
+              "minion_kill": 21,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 6307,
+              "total_damage_taken": 13892,
+              "total_heal": 3129,
+              "vision_wards_bought_in_game": 15,
+              "ward_place": 31,
+              "largest_killing_spree": 0,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 37
+            },
+            {
+              "summoner_name": "구름다리농장",
+              "summoner_tag": "0120",
+              "champion_id": 69,
+              "champion_name": "魔蛇之拥",
+              "team_key": "RED",
+              "position": "MID",
+              "items": [
+                6653,
+                3040,
+                1082,
+                6657,
+                3173
+              ],
+              "items_names": [
+                "兰德里的折磨",
+                "炽天使之拥",
+                "黑暗封印",
+                "时光之杖",
+                "带链碾碎者"
+              ],
+              "spells": [
+                12,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8200,
+                "primary_rune_id": 8992,
+                "secondary_page_id": 8000
+              },
+              "champion_level": 17,
+              "kill": 9,
+              "death": 2,
+              "assist": 5,
+              "kda": "7.00",
+              "result": "WIN",
+              "op_score": 8.86,
+              "op_score_rank": 1,
+              "gold_earned": 12110,
+              "minion_kill": 204,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 26974,
+              "total_damage_taken": 21449,
+              "total_heal": 11195,
+              "vision_wards_bought_in_game": 3,
+              "ward_place": 10,
+              "largest_killing_spree": 7,
+              "largest_multi_kill": 3,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 20
+            },
+            {
+              "summoner_name": "haerin",
+              "summoner_tag": "하이린",
+              "champion_id": 246,
+              "champion_name": "元素女皇",
+              "team_key": "RED",
+              "position": "JUNGLE",
+              "items": [
+                6695,
+                6698,
+                3111,
+                3814,
+                2019,
+                6699
+              ],
+              "items_names": [
+                "巨蛇之牙",
+                "亵渎九头蛇",
+                "水银之靴",
+                "夜之锋刃",
+                "钢铁印章",
+                "电震涡流剑"
+              ],
+              "spells": [
+                11,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8300,
+                "primary_rune_id": 8369,
+                "secondary_page_id": 8100
+              },
+              "champion_level": 16,
+              "kill": 10,
+              "death": 3,
+              "assist": 3,
+              "kda": "4.33",
+              "result": "WIN",
+              "op_score": 8.07,
+              "op_score_rank": 3,
+              "gold_earned": 14555,
+              "minion_kill": 18,
+              "neutral_minion_kill": 206,
+              "total_damage_dealt_to_champions": 18448,
+              "total_damage_taken": 20396,
+              "total_heal": 10014,
+              "vision_wards_bought_in_game": 4,
+              "ward_place": 8,
+              "largest_killing_spree": 8,
+              "largest_multi_kill": 3,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 17
+            },
+            {
+              "summoner_name": "누군가의 개입을 받고 있습니다",
+              "summoner_tag": "매튜렁",
+              "champion_id": 126,
+              "champion_name": "未来守护者",
+              "team_key": "RED",
+              "position": "TOP",
+              "items": [
+                6692,
+                3042,
+                3009,
+                2020,
+                1036,
+                1055
+              ],
+              "items_names": [
+                "星蚀",
+                "魔切",
+                "轻灵之靴",
+                "残暴之力",
+                "长剑",
+                "多兰之刃"
+              ],
+              "spells": [
+                4,
+                14
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8200,
+                "primary_rune_id": 8230,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 15,
+              "kill": 7,
+              "death": 6,
+              "assist": 2,
+              "kda": "1.50",
+              "result": "WIN",
+              "op_score": 5.31,
+              "op_score_rank": 5,
+              "gold_earned": 10118,
+              "minion_kill": 139,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 14615,
+              "total_damage_taken": 19579,
+              "total_heal": 4157,
+              "vision_wards_bought_in_game": 0,
+              "ward_place": 7,
+              "largest_killing_spree": 4,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 12
+            },
+            {
+              "summoner_name": "Comfy",
+              "summoner_tag": "KR2",
+              "champion_id": 81,
+              "champion_name": "探险家",
+              "team_key": "RED",
+              "position": "ADC",
+              "items": [
+                3078,
+                3042,
+                2517,
+                1055,
+                1036
+              ],
+              "items_names": [
+                "三相之力",
+                "魔切",
+                "无穷饥渴",
+                "多兰之刃",
+                "长剑"
+              ],
+              "spells": [
+                21,
+                4
+              ],
+              "rune": {
+                "_class": "Rune",
+                "primary_page_id": 8000,
+                "primary_rune_id": 8008,
+                "secondary_page_id": 8300
+              },
+              "champion_level": 14,
+              "kill": 4,
+              "death": 2,
+              "assist": 9,
+              "kda": "6.50",
+              "result": "WIN",
+              "op_score": 8.21,
+              "op_score_rank": 2,
+              "gold_earned": 12613,
+              "minion_kill": 218,
+              "neutral_minion_kill": 0,
+              "total_damage_dealt_to_champions": 20964,
+              "total_damage_taken": 9033,
+              "total_heal": 2624,
+              "vision_wards_bought_in_game": 2,
+              "ward_place": 10,
+              "largest_killing_spree": 3,
+              "largest_multi_kill": 1,
+              "largest_critical_strike": 0,
+              "time_ccing_others": 2
+            }
+          ],
+          "average_tier_info": {
+            "tier": "GRANDMASTER",
+            "division": 1,
+            "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png"
+          },
+          "_account_slug": "main",
+          "_account_label": "The shy#asdf"
+        },
         {
           "id": "qfvdWpGbi21vN9uJ3d6PSTy7YkhXYPP4lZcuITm4_1Y=",
           "created_at": "2026-08-20T02:50:11+09:00",
@@ -13897,666 +14537,12 @@
           },
           "_account_slug": "main",
           "_account_label": "The shy#asdf"
-        },
-        {
-          "id": "qfvdWpGbi23LGllcGD0f1NSNg4yzuGpA9E1nds907tU=",
-          "created_at": "2026-08-13T04:29:05+09:00",
-          "game_type": "SOLORANKED",
-          "game_length_second": 1694,
-          "game_map": "SUMMONERS_RIFT",
-          "champion_id": 2,
-          "champion": "狂战士",
-          "team_key": "BLUE",
-          "position": "TOP",
-          "kill": 12,
-          "death": 4,
-          "assist": 9,
-          "kda": "5.25",
-          "result": "WIN",
-          "op_score": 6.9,
-          "op_score_rank": 2,
-          "gold_earned": 16155,
-          "minion_kill": 212,
-          "neutral_minion_kill": 0,
-          "total_damage_dealt_to_champions": 33891,
-          "total_damage_taken": 33220,
-          "total_heal": 21748,
-          "vision_wards_bought_in_game": 1,
-          "ward_place": 10,
-          "largest_killing_spree": 8,
-          "largest_multi_kill": 3,
-          "largest_critical_strike": 638,
-          "time_ccing_others": 25,
-          "champion_level": 17,
-          "items": [
-            3036,
-            3143,
-            6631,
-            3073,
-            3047,
-            3155
-          ],
-          "items_names": [
-            "多米尼克领主的致意",
-            "兰顿之兆",
-            "挺进破坏者",
-            "海克斯注力刚壁",
-            "铁板靴",
-            "海克斯饮魔刀"
-          ],
-          "spells": [
-            4,
-            6
-          ],
-          "rune": {
-            "_class": "Rune",
-            "primary_page_id": 8000,
-            "primary_rune_id": 8010,
-            "secondary_page_id": 8300
-          },
-          "teams": [
-            {
-              "key": "BLUE",
-              "banned_champions": [
-                67,
-                78,
-                107,
-                805
-              ],
-              "banned_champions_names": [
-                "暗夜猎手",
-                "圣锤之毅",
-                "傲之追猎者",
-                "灰烬驱魔人"
-              ],
-              "game_stat": {
-                "is_win": "true",
-                "champion_kill": 42,
-                "tower_kill": 10,
-                "dragon_kill": 4,
-                "baron_kill": 1,
-                "inhibitor_kill": 2,
-                "rift_herald_kill": 1,
-                "atakhan_kill": 0,
-                "gold_earned": 66101,
-                "champion_first": "false",
-                "horde_kill": 3
-              }
-            },
-            {
-              "key": "RED",
-              "banned_champions": [
-                69,
-                78,
-                421,
-                805
-              ],
-              "banned_champions_names": [
-                "魔蛇之拥",
-                "圣锤之毅",
-                "虚空遁地兽",
-                "灰烬驱魔人"
-              ],
-              "game_stat": {
-                "is_win": "false",
-                "champion_kill": 28,
-                "tower_kill": 2,
-                "dragon_kill": 0,
-                "baron_kill": 0,
-                "inhibitor_kill": 0,
-                "rift_herald_kill": 0,
-                "atakhan_kill": 0,
-                "gold_earned": 57968,
-                "champion_first": "true",
-                "horde_kill": 0
-              }
-            }
-          ],
-          "participants": [
-            {
-              "summoner_name": "The shy",
-              "summoner_tag": "asdf",
-              "champion_id": 2,
-              "champion_name": "狂战士",
-              "team_key": "BLUE",
-              "position": "TOP",
-              "items": [
-                3036,
-                3143,
-                6631,
-                3073,
-                3047,
-                3155
-              ],
-              "items_names": [
-                "多米尼克领主的致意",
-                "兰顿之兆",
-                "挺进破坏者",
-                "海克斯注力刚壁",
-                "铁板靴",
-                "海克斯饮魔刀"
-              ],
-              "spells": [
-                4,
-                6
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8010,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 17,
-              "kill": 12,
-              "death": 4,
-              "assist": 9,
-              "kda": "5.25",
-              "result": "WIN",
-              "op_score": 6.9,
-              "op_score_rank": 2,
-              "gold_earned": 16155,
-              "minion_kill": 212,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 33891,
-              "total_damage_taken": 33220,
-              "total_heal": 21748,
-              "vision_wards_bought_in_game": 1,
-              "ward_place": 10,
-              "largest_killing_spree": 8,
-              "largest_multi_kill": 3,
-              "largest_critical_strike": 638,
-              "time_ccing_others": 25
-            },
-            {
-              "summoner_name": "srysrymb",
-              "summoner_tag": "1065",
-              "champion_id": 134,
-              "champion_name": "暗黑元首",
-              "team_key": "BLUE",
-              "position": "MID",
-              "items": [
-                4645,
-                2508,
-                4632,
-                3171,
-                3041,
-                6655
-              ],
-              "items_names": [
-                "影焰",
-                "命定灰烬",
-                "翠绿屏障",
-                "猩红明朗",
-                "梅贾的窃魂卷",
-                "卢登的回声"
-              ],
-              "spells": [
-                12,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8200,
-                "primary_rune_id": 8214,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 15,
-              "kill": 11,
-              "death": 7,
-              "assist": 5,
-              "kda": "2.29",
-              "result": "WIN",
-              "op_score": 5.05,
-              "op_score_rank": 5,
-              "gold_earned": 13250,
-              "minion_kill": 244,
-              "neutral_minion_kill": 2,
-              "total_damage_dealt_to_champions": 29776,
-              "total_damage_taken": 23354,
-              "total_heal": 4915,
-              "vision_wards_bought_in_game": 4,
-              "ward_place": 13,
-              "largest_killing_spree": 4,
-              "largest_multi_kill": 2,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 55
-            },
-            {
-              "summoner_name": "노익스강",
-              "summoner_tag": "noex",
-              "champion_id": 3,
-              "champion_name": "正义巨像",
-              "team_key": "BLUE",
-              "position": "ADC",
-              "items": [
-                3157,
-                3152,
-                3147,
-                1056,
-                4005,
-                3108
-              ],
-              "items_names": [
-                "中娅沙漏",
-                "海克斯科技火箭腰带",
-                "幽魂面具",
-                "多兰之戒",
-                "帝国指令",
-                "恶魔法典"
-              ],
-              "spells": [
-                4,
-                12
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8200,
-                "primary_rune_id": 8230,
-                "secondary_page_id": 8400
-              },
-              "champion_level": 16,
-              "kill": 6,
-              "death": 2,
-              "assist": 16,
-              "kda": "11.00",
-              "result": "WIN",
-              "op_score": 7.12,
-              "op_score_rank": 1,
-              "gold_earned": 13762,
-              "minion_kill": 203,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 23779,
-              "total_damage_taken": 19110,
-              "total_heal": 5198,
-              "vision_wards_bought_in_game": 3,
-              "ward_place": 9,
-              "largest_killing_spree": 5,
-              "largest_multi_kill": 2,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 49
-            },
-            {
-              "summoner_name": "Kimman",
-              "summoner_tag": "zxfkk",
-              "champion_id": 64,
-              "champion_name": "盲僧",
-              "team_key": "BLUE",
-              "position": "JUNGLE",
-              "items": [
-                6610,
-                6333,
-                3111,
-                3155,
-                6692
-              ],
-              "items_names": [
-                "焚天",
-                "死亡之舞",
-                "水银之靴",
-                "海克斯饮魔刀",
-                "星蚀"
-              ],
-              "spells": [
-                11,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8010,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 16,
-              "kill": 7,
-              "death": 6,
-              "assist": 10,
-              "kda": "2.83",
-              "result": "WIN",
-              "op_score": 5.17,
-              "op_score_rank": 3,
-              "gold_earned": 12947,
-              "minion_kill": 14,
-              "neutral_minion_kill": 177,
-              "total_damage_dealt_to_champions": 20132,
-              "total_damage_taken": 32864,
-              "total_heal": 17650,
-              "vision_wards_bought_in_game": 6,
-              "ward_place": 16,
-              "largest_killing_spree": 3,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 261,
-              "time_ccing_others": 23
-            },
-            {
-              "summoner_name": "1Jiang",
-              "summoner_tag": "2003",
-              "champion_id": 164,
-              "champion_name": "青钢影",
-              "team_key": "BLUE",
-              "position": "SUPPORT",
-              "items": [
-                3053,
-                3877,
-                6610,
-                1028,
-                3111
-              ],
-              "items_names": [
-                "斯特拉克的挑战护手",
-                "血鸣",
-                "焚天",
-                "红水晶",
-                "水银之靴"
-              ],
-              "spells": [
-                4,
-                14
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8100,
-                "primary_rune_id": 9923,
-                "secondary_page_id": 8400
-              },
-              "champion_level": 12,
-              "kill": 6,
-              "death": 9,
-              "assist": 15,
-              "kda": "2.33",
-              "result": "WIN",
-              "op_score": 4.95,
-              "op_score_rank": 6,
-              "gold_earned": 9987,
-              "minion_kill": 16,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 13572,
-              "total_damage_taken": 28421,
-              "total_heal": 4846,
-              "vision_wards_bought_in_game": 24,
-              "ward_place": 48,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 2,
-              "largest_critical_strike": 187,
-              "time_ccing_others": 15
-            },
-            {
-              "summoner_name": "ParisVan",
-              "summoner_tag": "不知名歌手",
-              "champion_id": 111,
-              "champion_name": "深海泰坦",
-              "team_key": "RED",
-              "position": "SUPPORT",
-              "items": [
-                3869,
-                3190,
-                2525,
-                1001,
-                1057,
-                1028
-              ],
-              "items_names": [
-                "星界据守",
-                "钢铁烈阳之匣",
-                "原生质护带",
-                "鞋子",
-                "负极斗篷",
-                "红水晶"
-              ],
-              "spells": [
-                4,
-                14
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8400,
-                "primary_rune_id": 8439,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 12,
-              "kill": 3,
-              "death": 13,
-              "assist": 9,
-              "kda": "0.92",
-              "result": "LOSE",
-              "op_score": 1.83,
-              "op_score_rank": 10,
-              "gold_earned": 7826,
-              "minion_kill": 28,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 8379,
-              "total_damage_taken": 35809,
-              "total_heal": 2184,
-              "vision_wards_bought_in_game": 13,
-              "ward_place": 26,
-              "largest_killing_spree": 0,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 62
-            },
-            {
-              "summoner_name": "해 태",
-              "summoner_tag": "T 1",
-              "champion_id": 24,
-              "champion_name": "武器大师",
-              "team_key": "RED",
-              "position": "TOP",
-              "items": [
-                1043,
-                3181,
-                3047,
-                1057,
-                3078,
-                1043
-              ],
-              "items_names": [
-                "反曲之弓",
-                "破舰者",
-                "铁板靴",
-                "负极斗篷",
-                "三相之力",
-                "反曲之弓"
-              ],
-              "spells": [
-                14,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8000,
-                "primary_rune_id": 8008,
-                "secondary_page_id": 8400
-              },
-              "champion_level": 16,
-              "kill": 6,
-              "death": 7,
-              "assist": 7,
-              "kda": "1.86",
-              "result": "LOSE",
-              "op_score": 3.98,
-              "op_score_rank": 9,
-              "gold_earned": 10863,
-              "minion_kill": 157,
-              "neutral_minion_kill": 3,
-              "total_damage_dealt_to_champions": 21543,
-              "total_damage_taken": 34494,
-              "total_heal": 4925,
-              "vision_wards_bought_in_game": 2,
-              "ward_place": 10,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 18
-            },
-            {
-              "summoner_name": "Departures",
-              "summoner_tag": "Kami",
-              "champion_id": 55,
-              "champion_name": "不祥之刃",
-              "team_key": "RED",
-              "position": "ADC",
-              "items": [
-                3100,
-                3157,
-                3135,
-                1082,
-                4645,
-                1056
-              ],
-              "items_names": [
-                "巫妖之祸",
-                "中娅沙漏",
-                "虚空之杖",
-                "黑暗封印",
-                "影焰",
-                "多兰之戒"
-              ],
-              "spells": [
-                12,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8100,
-                "primary_rune_id": 8112,
-                "secondary_page_id": 8000
-              },
-              "champion_level": 15,
-              "kill": 9,
-              "death": 6,
-              "assist": 7,
-              "kda": "2.67",
-              "result": "LOSE",
-              "op_score": 5.13,
-              "op_score_rank": 4,
-              "gold_earned": 14963,
-              "minion_kill": 244,
-              "neutral_minion_kill": 2,
-              "total_damage_dealt_to_champions": 22438,
-              "total_damage_taken": 19655,
-              "total_heal": 2045,
-              "vision_wards_bought_in_game": 2,
-              "ward_place": 5,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 2,
-              "largest_critical_strike": 0,
-              "time_ccing_others": 4
-            },
-            {
-              "summoner_name": "람곰치",
-              "summoner_tag": "BONK",
-              "champion_id": 4,
-              "champion_name": "卡牌大师",
-              "team_key": "RED",
-              "position": "MID",
-              "items": [
-                3094,
-                3152,
-                3170,
-                3100
-              ],
-              "items_names": [
-                "疾射火炮",
-                "海克斯科技火箭腰带",
-                "迅速进军",
-                "巫妖之祸"
-              ],
-              "spells": [
-                6,
-                4
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8200,
-                "primary_rune_id": 8229,
-                "secondary_page_id": 8300
-              },
-              "champion_level": 14,
-              "kill": 2,
-              "death": 7,
-              "assist": 16,
-              "kda": "2.57",
-              "result": "LOSE",
-              "op_score": 4.92,
-              "op_score_rank": 7,
-              "gold_earned": 10301,
-              "minion_kill": 174,
-              "neutral_minion_kill": 0,
-              "total_damage_dealt_to_champions": 21300,
-              "total_damage_taken": 25436,
-              "total_heal": 2844,
-              "vision_wards_bought_in_game": 1,
-              "ward_place": 9,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 116,
-              "time_ccing_others": 53
-            },
-            {
-              "summoner_name": "add",
-              "summoner_tag": "ary",
-              "champion_id": 104,
-              "champion_name": "法外狂徒",
-              "team_key": "RED",
-              "position": "JUNGLE",
-              "items": [
-                6676,
-                3033,
-                6697,
-                6673,
-                3111
-              ],
-              "items_names": [
-                "收集者",
-                "凡性的提醒",
-                "狂妄",
-                "不朽盾弓",
-                "水银之靴"
-              ],
-              "spells": [
-                4,
-                11
-              ],
-              "rune": {
-                "_class": "Rune",
-                "primary_page_id": 8100,
-                "primary_rune_id": 8128,
-                "secondary_page_id": 8000
-              },
-              "champion_level": 14,
-              "kill": 8,
-              "death": 9,
-              "assist": 9,
-              "kda": "1.89",
-              "result": "LOSE",
-              "op_score": 4.8,
-              "op_score_rank": 8,
-              "gold_earned": 14015,
-              "minion_kill": 39,
-              "neutral_minion_kill": 146,
-              "total_damage_dealt_to_champions": 27048,
-              "total_damage_taken": 25739,
-              "total_heal": 6358,
-              "vision_wards_bought_in_game": 4,
-              "ward_place": 6,
-              "largest_killing_spree": 2,
-              "largest_multi_kill": 1,
-              "largest_critical_strike": 521,
-              "time_ccing_others": 30
-            }
-          ],
-          "average_tier_info": {
-            "tier": "GRANDMASTER",
-            "division": 1,
-            "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png"
-          },
-          "_account_slug": "main",
-          "_account_label": "The shy#asdf"
         }
       ],
       "state": {
         "is_active": false,
-        "last_check": "2026-08-20T03:19:24.392515+09:00",
-        "last_match_id": "qfvdWpGbi21vN9uJ3d6PSTy7YkhXYPP4lZcuITm4_1Y=",
+        "last_check": "2026-08-20T03:57:21.356224+09:00",
+        "last_match_id": "qfvdWpGbi21Z_1-iVPebJwrO7IcbQj5J8nt28oFUQxs=",
         "matches_count": 20
       }
     },
@@ -14577,14 +14563,14 @@
         "internal_name": "",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon7146.jpg",
         "level": 94,
-        "updated_at": "2026-08-20T02:54:26+09:00",
-        "renewable_at": "2026-08-20T02:56:26+09:00",
+        "updated_at": "2026-08-20T03:19:25+09:00",
+        "renewable_at": "2026-08-20T03:21:25+09:00",
         "revision_at": "2026-08-08T04:53:52+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
           "rank": 440,
-          "total": 2879290
+          "total": 2879430
         },
         "league_stats": [
           {
@@ -14608,17 +14594,17 @@
               {
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
-                "current_count": 310,
+                "current_count": 309,
                 "lp_threshold": 1830,
                 "promotion_candidate_count": 2,
-                "demotion_candidate_count": 12
+                "demotion_candidate_count": 11
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
-                "current_count": 703,
-                "lp_threshold": 1333,
-                "promotion_candidate_count": 12,
+                "current_count": 704,
+                "lp_threshold": 1334,
+                "promotion_candidate_count": 13,
                 "demotion_candidate_count": 25
               }
             ]
@@ -28708,20 +28694,20 @@
       ],
       "state": {
         "is_active": false,
-        "last_check": "2026-08-20T03:19:35.059737+09:00",
+        "last_check": "2026-08-20T03:57:30.905027+09:00",
         "last_match_id": "qfvdWpGbi23niyYqxsdE2pARKVi-PsimcvATkug0LqQ=",
         "matches_count": 20
       }
     }
   ],
-  "last_update": "2026-08-20T03:19:35.060152+09:00",
+  "last_update": "2026-08-20T03:57:30.905422+09:00",
   "bilibili": {
     "is_live": true,
     "is_ig_live": false,
     "title": "【预告】20号17点JDG vs TT",
     "live_time": "2026-08-19 14:04:07",
     "room_id": 7734200,
-    "last_check": "2026-08-20T02:19:36.485221+08:00",
+    "last_check": "2026-08-20T02:57:33.470148+08:00",
     "notified_title": ""
   },
   "hupu_ratings": {
@@ -28753,7 +28739,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.6,
-            "total_count": 20571,
+            "total_count": 20572,
             "comments": 3224,
             "kda": "19/11/22",
             "kda_ratio": 3.73,
@@ -28803,19 +28789,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 18767,
-              "s4": 487,
+              "s5": 18769,
+              "s4": 486,
               "s3": 602,
               "s2": 218,
               "s1": 497
             },
-            "score_dist_total": 20571,
+            "score_dist_total": 20572,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
                 "desc": "胜(12/2/6)",
                 "score": "9.9",
-                "votes": "9979评分",
+                "votes": "9980评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                 "team_id": "2",
@@ -28889,7 +28875,7 @@
             "name": "Rookie",
             "team": "IG",
             "avg": 9.4,
-            "total_count": 15029,
+            "total_count": 15030,
             "comments": 1472,
             "kda": "18/8/25",
             "kda_ratio": 5.38,
@@ -28932,19 +28918,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 13110,
+              "s5": 13111,
               "s4": 844,
               "s3": 257,
               "s2": 109,
               "s1": 709
             },
-            "score_dist_total": 15029,
+            "score_dist_total": 15030,
             "best_radar": {
               "self": {
                 "name": "Rookie",
                 "desc": "胜(8/2/6)",
                 "score": "9.8",
-                "votes": "6925评分",
+                "votes": "6926评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                 "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
                 "team_id": "2",
@@ -29018,7 +29004,7 @@
             "name": "Wei",
             "team": "IG",
             "avg": 9.3,
-            "total_count": 11044,
+            "total_count": 11045,
             "comments": 1136,
             "kda": "15/9/36",
             "kda_ratio": 5.67,
@@ -29063,13 +29049,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 9040,
+              "s5": 9041,
               "s4": 1138,
               "s3": 271,
               "s2": 92,
               "s1": 503
             },
-            "score_dist_total": 11044,
+            "score_dist_total": 11045,
             "best_radar": {
               "self": {
                 "name": "Wei",
@@ -29149,7 +29135,7 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 8.9,
-            "total_count": 12288,
+            "total_count": 12289,
             "comments": 1496,
             "kda": "1/11/45",
             "kda_ratio": 4.18,
@@ -29193,19 +29179,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 8967,
+              "s5": 8968,
               "s4": 1580,
               "s3": 723,
               "s2": 184,
               "s1": 834
             },
-            "score_dist_total": 12288,
+            "score_dist_total": 12289,
             "best_radar": {
               "self": {
                 "name": "Meiko",
                 "desc": "胜(0/2/19)",
                 "score": "9.6",
-                "votes": "5570评分",
+                "votes": "5571评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
                 "team_id": "2",
@@ -29279,7 +29265,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 6.1,
-            "total_count": 19693,
+            "total_count": 19697,
             "comments": 5062,
             "kda": "6/11/18",
             "kda_ratio": 2.18,
@@ -29323,19 +29309,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 8267,
+              "s5": 8271,
               "s4": 1248,
               "s3": 1394,
               "s2": 1437,
               "s1": 7347
             },
-            "score_dist_total": 19693,
+            "score_dist_total": 19697,
             "best_radar": {
               "self": {
                 "name": "TheShy",
                 "desc": "胜(3/2/7)",
                 "score": "8.8",
-                "votes": "7392评分",
+                "votes": "7394评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
                 "team_id": "2",
@@ -29903,7 +29889,7 @@
                 "name": "TheShy",
                 "desc": "败(2/4/2)",
                 "score": "3.3",
-                "votes": "5274评分",
+                "votes": "5275评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
                 "team_id": "2",
@@ -30571,7 +30557,7 @@
                 "name": "TheShy",
                 "desc": "败(2/4/2)",
                 "score": "3.3",
-                "votes": "5274评分",
+                "votes": "5275评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
                 "team_id": "2",
@@ -30747,7 +30733,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.6,
-            "total_count": 20571,
+            "total_count": 20572,
             "comments": 3224,
             "kda": "19/11/22",
             "kda_ratio": 3.73,
@@ -30797,19 +30783,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 18767,
-              "s4": 487,
+              "s5": 18769,
+              "s4": 486,
               "s3": 602,
               "s2": 218,
               "s1": 497
             },
-            "score_dist_total": 20571,
+            "score_dist_total": 20572,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
                 "desc": "胜(12/2/6)",
                 "score": "9.9",
-                "votes": "9979评分",
+                "votes": "9980评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                 "team_id": "2",
@@ -30883,7 +30869,7 @@
             "name": "Rookie",
             "team": "IG",
             "avg": 9.4,
-            "total_count": 15029,
+            "total_count": 15030,
             "comments": 1472,
             "kda": "18/8/25",
             "kda_ratio": 5.38,
@@ -30926,19 +30912,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 13110,
+              "s5": 13111,
               "s4": 844,
               "s3": 257,
               "s2": 109,
               "s1": 709
             },
-            "score_dist_total": 15029,
+            "score_dist_total": 15030,
             "best_radar": {
               "self": {
                 "name": "Rookie",
                 "desc": "胜(8/2/6)",
                 "score": "9.8",
-                "votes": "6925评分",
+                "votes": "6926评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                 "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
                 "team_id": "2",
@@ -31012,7 +30998,7 @@
             "name": "Wei",
             "team": "IG",
             "avg": 9.3,
-            "total_count": 11044,
+            "total_count": 11045,
             "comments": 1136,
             "kda": "15/9/36",
             "kda_ratio": 5.67,
@@ -31057,13 +31043,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 9040,
+              "s5": 9041,
               "s4": 1138,
               "s3": 271,
               "s2": 92,
               "s1": 503
             },
-            "score_dist_total": 11044,
+            "score_dist_total": 11045,
             "best_radar": {
               "self": {
                 "name": "Wei",
@@ -31143,7 +31129,7 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 8.9,
-            "total_count": 12288,
+            "total_count": 12289,
             "comments": 1496,
             "kda": "1/11/45",
             "kda_ratio": 4.18,
@@ -31187,19 +31173,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 8967,
+              "s5": 8968,
               "s4": 1580,
               "s3": 723,
               "s2": 184,
               "s1": 834
             },
-            "score_dist_total": 12288,
+            "score_dist_total": 12289,
             "best_radar": {
               "self": {
                 "name": "Meiko",
                 "desc": "胜(0/2/19)",
                 "score": "9.6",
-                "votes": "5570评分",
+                "votes": "5571评分",
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
                 "team_id": "2",
@@ -31273,7 +31259,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 6.1,
-            "total_count": 19693,
+            "total_count": 19697,
             "comments": 5062,
             "kda": "6/11/18",
             "kda_ratio": 2.18,
@@ -31317,19 +31303,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 8267,
+              "s5": 8271,
               "s4": 1248,
               "s3": 1394,
               "s2": 1437,
               "s1": 7347
             },
-            "score_dist_total": 19693,
+            "score_dist_total": 19697,
             "best_radar": {
               "self": {
                 "name": "TheShy",
                 "desc": "胜(3/2/7)",
                 "score": "8.8",
-                "votes": "7392评分",
+                "votes": "7394评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
                 "team_id": "2",
@@ -31807,7 +31793,7 @@
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                 "score": 9.9,
-                "votes": 9979,
+                "votes": 9980,
                 "comments": 1876,
                 "kills": 12,
                 "deaths": 2,
@@ -31831,7 +31817,7 @@
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 9793,
+                  "s5": 9794,
                   "s4": 49,
                   "s3": 12,
                   "s2": 13,
@@ -31842,7 +31828,7 @@
                     "name": "JiaQi",
                     "desc": "胜(12/2/6)",
                     "score": "9.9",
-                    "votes": "9979评分",
+                    "votes": "9980评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                     "team_id": "2",
@@ -31918,7 +31904,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/2e1bf8b0c741792246d86b105c10b4ad.png",
                 "score": 5.4,
-                "votes": 7027,
+                "votes": 7028,
                 "comments": 1997,
                 "kills": 1,
                 "deaths": 5,
@@ -31936,7 +31922,7 @@
                 "bg_color": "#000000",
                 "position": "",
                 "score_dist": {
-                  "s5": 2027,
+                  "s5": 2028,
                   "s4": 339,
                   "s3": 1015,
                   "s2": 940,
@@ -31947,7 +31933,7 @@
                     "name": "TheShy",
                     "desc": "胜(1/5/9)",
                     "score": "5.4",
-                    "votes": "7027评分",
+                    "votes": "7028评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/2e1bf8b0c741792246d86b105c10b4ad.png",
                     "team_id": "2",
@@ -32403,7 +32389,7 @@
                     "name": "JiaQi",
                     "desc": "胜(12/2/6)",
                     "score": "9.9",
-                    "votes": "9979评分",
+                    "votes": "9980评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                     "team_id": "2",
@@ -32508,7 +32494,7 @@
                     "name": "TheShy",
                     "desc": "胜(1/5/9)",
                     "score": "5.4",
-                    "votes": "7027评分",
+                    "votes": "7028评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/2e1bf8b0c741792246d86b105c10b4ad.png",
                     "team_id": "2",
@@ -32946,7 +32932,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
                 "score": 3.3,
-                "votes": 5274,
+                "votes": 5275,
                 "comments": 1740,
                 "kills": 2,
                 "deaths": 4,
@@ -32964,7 +32950,7 @@
                 "bg_color": "#000000",
                 "position": "",
                 "score_dist": {
-                  "s5": 641,
+                  "s5": 642,
                   "s4": 42,
                   "s3": 128,
                   "s2": 410,
@@ -32975,7 +32961,7 @@
                     "name": "TheShy",
                     "desc": "败(2/4/2)",
                     "score": "3.3",
-                    "votes": "5274评分",
+                    "votes": "5275评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
                     "team_id": "2",
@@ -33857,7 +33843,7 @@
                     "name": "TheShy",
                     "desc": "败(2/4/2)",
                     "score": "3.3",
-                    "votes": "5274评分",
+                    "votes": "5275评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
                     "team_id": "2",
@@ -34119,8 +34105,8 @@
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 8450,
-                  "s4": 144,
+                  "s5": 8451,
+                  "s4": 143,
                   "s3": 23,
                   "s2": 21,
                   "s1": 82
@@ -34206,7 +34192,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "",
                 "score": 8.8,
-                "votes": 7392,
+                "votes": 7394,
                 "comments": 1325,
                 "kills": 3,
                 "deaths": 2,
@@ -34224,7 +34210,7 @@
                 "bg_color": "#000000",
                 "position": "",
                 "score_dist": {
-                  "s5": 5599,
+                  "s5": 5601,
                   "s4": 867,
                   "s3": 251,
                   "s2": 87,
@@ -34235,7 +34221,7 @@
                     "name": "TheShy",
                     "desc": "胜(3/2/7)",
                     "score": "8.8",
-                    "votes": "7392评分",
+                    "votes": "7394评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                     "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
                     "team_id": "2",
@@ -34311,7 +34297,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                 "champion": "",
                 "score": 9.8,
-                "votes": 6925,
+                "votes": 6926,
                 "comments": 647,
                 "kills": 8,
                 "deaths": 2,
@@ -34329,7 +34315,7 @@
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 6633,
+                  "s5": 6634,
                   "s4": 82,
                   "s3": 25,
                   "s2": 31,
@@ -34340,7 +34326,7 @@
                     "name": "Rookie",
                     "desc": "胜(8/2/6)",
                     "score": "9.8",
-                    "votes": "6925评分",
+                    "votes": "6926评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                     "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
                     "team_id": "2",
@@ -34527,7 +34513,7 @@
                 "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
                 "score": 9.6,
-                "votes": 5570,
+                "votes": 5571,
                 "comments": 599,
                 "kills": 0,
                 "deaths": 2,
@@ -34545,7 +34531,7 @@
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 5068,
+                  "s5": 5069,
                   "s4": 248,
                   "s3": 43,
                   "s2": 26,
@@ -34556,7 +34542,7 @@
                     "name": "Meiko",
                     "desc": "胜(0/2/19)",
                     "score": "9.6",
-                    "votes": "5570评分",
+                    "votes": "5571评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
                     "team_id": "2",
@@ -34632,7 +34618,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
                 "score": 9.3,
-                "votes": 4952,
+                "votes": 4953,
                 "comments": 709,
                 "kills": 5,
                 "deaths": 3,
@@ -34650,7 +34636,7 @@
                 "bg_color": "#000003",
                 "position": "",
                 "score_dist": {
-                  "s5": 4033,
+                  "s5": 4034,
                   "s4": 492,
                   "s3": 144,
                   "s2": 54,
@@ -34661,7 +34647,7 @@
                     "name": "Wei",
                     "desc": "胜(5/3/12)",
                     "score": "9.3",
-                    "votes": "4952评分",
+                    "votes": "4953评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
                     "team_id": "2",
@@ -34808,7 +34794,7 @@
                     "name": "Rookie",
                     "desc": "胜(8/2/6)",
                     "score": "9.8",
-                    "votes": "6925评分",
+                    "votes": "6926评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                     "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
                     "team_id": "2",
@@ -34913,7 +34899,7 @@
                     "name": "Wei",
                     "desc": "胜(5/3/12)",
                     "score": "9.3",
-                    "votes": "4952评分",
+                    "votes": "4953评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
                     "team_id": "2",
@@ -35018,7 +35004,7 @@
                     "name": "TheShy",
                     "desc": "胜(3/2/7)",
                     "score": "8.8",
-                    "votes": "7392评分",
+                    "votes": "7394评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                     "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
                     "team_id": "2",
@@ -35123,7 +35109,7 @@
                     "name": "Meiko",
                     "desc": "胜(0/2/19)",
                     "score": "9.6",
-                    "votes": "5570评分",
+                    "votes": "5571评分",
                     "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
                     "team_id": "2",
@@ -35313,12 +35299,12 @@
             ]
           }
         ],
-        "total_scorers": 137526,
+        "total_scorers": 137534,
         "league_name": "职业联赛",
         "round_name": "第三赛段组内赛",
         "match_time": 1786870800000,
         "date_str": "08月16日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3804",
@@ -40574,7 +40560,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786258800000,
         "date_str": "08月09日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3717",
@@ -47191,7 +47177,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786006800000,
         "date_str": "08月06日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3692",
@@ -52459,7 +52445,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1785661200000,
         "date_str": "08月02日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3678",
@@ -59042,7 +59028,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1784970000000,
         "date_str": "07月25日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3552",
@@ -65477,7 +65463,7 @@
         "round_name": "第二赛段骑士之路",
         "match_time": 1779526800000,
         "date_str": "05月23日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3545",
@@ -71686,7 +71672,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1779008400000,
         "date_str": "05月17日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3534",
@@ -77933,7 +77919,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778583600000,
         "date_str": "05月12日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3530",
@@ -82872,7 +82858,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778317200000,
         "date_str": "05月09日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3612",
@@ -88927,7 +88913,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778058000000,
         "date_str": "05月06日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3610",
@@ -93864,7 +93850,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777719600000,
         "date_str": "05月02日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3606",
@@ -100077,7 +100063,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777633200000,
         "date_str": "05月01日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3512",
@@ -105010,7 +104996,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777366800000,
         "date_str": "04月28日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       },
       {
         "id": "3506",
@@ -109951,7 +109937,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777028400000,
         "date_str": "04月24日",
-        "found_at": "2026-08-20T02:19:36.514034+08:00"
+        "found_at": "2026-08-20T02:57:33.501159+08:00"
       }
     ],
     "latest_match": {
@@ -109980,7 +109966,7 @@
           "name": "JiaQi",
           "team": "IG",
           "avg": 9.6,
-          "total_count": 20571,
+          "total_count": 20572,
           "comments": 3224,
           "kda": "19/11/22",
           "kda_ratio": 3.73,
@@ -110030,19 +110016,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 18767,
-            "s4": 487,
+            "s5": 18769,
+            "s4": 486,
             "s3": 602,
             "s2": 218,
             "s1": 497
           },
-          "score_dist_total": 20571,
+          "score_dist_total": 20572,
           "best_radar": {
             "self": {
               "name": "JiaQi",
               "desc": "胜(12/2/6)",
               "score": "9.9",
-              "votes": "9979评分",
+              "votes": "9980评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
               "team_id": "2",
@@ -110116,7 +110102,7 @@
           "name": "Rookie",
           "team": "IG",
           "avg": 9.4,
-          "total_count": 15029,
+          "total_count": 15030,
           "comments": 1472,
           "kda": "18/8/25",
           "kda_ratio": 5.38,
@@ -110159,19 +110145,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 13110,
+            "s5": 13111,
             "s4": 844,
             "s3": 257,
             "s2": 109,
             "s1": 709
           },
-          "score_dist_total": 15029,
+          "score_dist_total": 15030,
           "best_radar": {
             "self": {
               "name": "Rookie",
               "desc": "胜(8/2/6)",
               "score": "9.8",
-              "votes": "6925评分",
+              "votes": "6926评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
               "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
               "team_id": "2",
@@ -110245,7 +110231,7 @@
           "name": "Wei",
           "team": "IG",
           "avg": 9.3,
-          "total_count": 11044,
+          "total_count": 11045,
           "comments": 1136,
           "kda": "15/9/36",
           "kda_ratio": 5.67,
@@ -110290,13 +110276,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 9040,
+            "s5": 9041,
             "s4": 1138,
             "s3": 271,
             "s2": 92,
             "s1": 503
           },
-          "score_dist_total": 11044,
+          "score_dist_total": 11045,
           "best_radar": {
             "self": {
               "name": "Wei",
@@ -110376,7 +110362,7 @@
           "name": "Meiko",
           "team": "IG",
           "avg": 8.9,
-          "total_count": 12288,
+          "total_count": 12289,
           "comments": 1496,
           "kda": "1/11/45",
           "kda_ratio": 4.18,
@@ -110420,19 +110406,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 8967,
+            "s5": 8968,
             "s4": 1580,
             "s3": 723,
             "s2": 184,
             "s1": 834
           },
-          "score_dist_total": 12288,
+          "score_dist_total": 12289,
           "best_radar": {
             "self": {
               "name": "Meiko",
               "desc": "胜(0/2/19)",
               "score": "9.6",
-              "votes": "5570评分",
+              "votes": "5571评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
               "team_id": "2",
@@ -110506,7 +110492,7 @@
           "name": "TheShy",
           "team": "IG",
           "avg": 6.1,
-          "total_count": 19693,
+          "total_count": 19697,
           "comments": 5062,
           "kda": "6/11/18",
           "kda_ratio": 2.18,
@@ -110550,19 +110536,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 8267,
+            "s5": 8271,
             "s4": 1248,
             "s3": 1394,
             "s2": 1437,
             "s1": 7347
           },
-          "score_dist_total": 19693,
+          "score_dist_total": 19697,
           "best_radar": {
             "self": {
               "name": "TheShy",
               "desc": "胜(3/2/7)",
               "score": "8.8",
-              "votes": "7392评分",
+              "votes": "7394评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
               "team_id": "2",
@@ -111130,7 +111116,7 @@
               "name": "TheShy",
               "desc": "败(2/4/2)",
               "score": "3.3",
-              "votes": "5274评分",
+              "votes": "5275评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
               "team_id": "2",
@@ -111798,7 +111784,7 @@
               "name": "TheShy",
               "desc": "败(2/4/2)",
               "score": "3.3",
-              "votes": "5274评分",
+              "votes": "5275评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
               "team_id": "2",
@@ -111974,7 +111960,7 @@
           "name": "JiaQi",
           "team": "IG",
           "avg": 9.6,
-          "total_count": 20571,
+          "total_count": 20572,
           "comments": 3224,
           "kda": "19/11/22",
           "kda_ratio": 3.73,
@@ -112024,19 +112010,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 18767,
-            "s4": 487,
+            "s5": 18769,
+            "s4": 486,
             "s3": 602,
             "s2": 218,
             "s1": 497
           },
-          "score_dist_total": 20571,
+          "score_dist_total": 20572,
           "best_radar": {
             "self": {
               "name": "JiaQi",
               "desc": "胜(12/2/6)",
               "score": "9.9",
-              "votes": "9979评分",
+              "votes": "9980评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
               "team_id": "2",
@@ -112110,7 +112096,7 @@
           "name": "Rookie",
           "team": "IG",
           "avg": 9.4,
-          "total_count": 15029,
+          "total_count": 15030,
           "comments": 1472,
           "kda": "18/8/25",
           "kda_ratio": 5.38,
@@ -112153,19 +112139,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 13110,
+            "s5": 13111,
             "s4": 844,
             "s3": 257,
             "s2": 109,
             "s1": 709
           },
-          "score_dist_total": 15029,
+          "score_dist_total": 15030,
           "best_radar": {
             "self": {
               "name": "Rookie",
               "desc": "胜(8/2/6)",
               "score": "9.8",
-              "votes": "6925评分",
+              "votes": "6926评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
               "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
               "team_id": "2",
@@ -112239,7 +112225,7 @@
           "name": "Wei",
           "team": "IG",
           "avg": 9.3,
-          "total_count": 11044,
+          "total_count": 11045,
           "comments": 1136,
           "kda": "15/9/36",
           "kda_ratio": 5.67,
@@ -112284,13 +112270,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 9040,
+            "s5": 9041,
             "s4": 1138,
             "s3": 271,
             "s2": 92,
             "s1": 503
           },
-          "score_dist_total": 11044,
+          "score_dist_total": 11045,
           "best_radar": {
             "self": {
               "name": "Wei",
@@ -112370,7 +112356,7 @@
           "name": "Meiko",
           "team": "IG",
           "avg": 8.9,
-          "total_count": 12288,
+          "total_count": 12289,
           "comments": 1496,
           "kda": "1/11/45",
           "kda_ratio": 4.18,
@@ -112414,19 +112400,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 8967,
+            "s5": 8968,
             "s4": 1580,
             "s3": 723,
             "s2": 184,
             "s1": 834
           },
-          "score_dist_total": 12288,
+          "score_dist_total": 12289,
           "best_radar": {
             "self": {
               "name": "Meiko",
               "desc": "胜(0/2/19)",
               "score": "9.6",
-              "votes": "5570评分",
+              "votes": "5571评分",
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
               "team_id": "2",
@@ -112500,7 +112486,7 @@
           "name": "TheShy",
           "team": "IG",
           "avg": 6.1,
-          "total_count": 19693,
+          "total_count": 19697,
           "comments": 5062,
           "kda": "6/11/18",
           "kda_ratio": 2.18,
@@ -112544,19 +112530,19 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 8267,
+            "s5": 8271,
             "s4": 1248,
             "s3": 1394,
             "s2": 1437,
             "s1": 7347
           },
-          "score_dist_total": 19693,
+          "score_dist_total": 19697,
           "best_radar": {
             "self": {
               "name": "TheShy",
               "desc": "胜(3/2/7)",
               "score": "8.8",
-              "votes": "7392评分",
+              "votes": "7394评分",
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
               "team_id": "2",
@@ -113034,7 +113020,7 @@
               "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
               "score": 9.9,
-              "votes": 9979,
+              "votes": 9980,
               "comments": 1876,
               "kills": 12,
               "deaths": 2,
@@ -113058,7 +113044,7 @@
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 9793,
+                "s5": 9794,
                 "s4": 49,
                 "s3": 12,
                 "s2": 13,
@@ -113069,7 +113055,7 @@
                   "name": "JiaQi",
                   "desc": "胜(12/2/6)",
                   "score": "9.9",
-                  "votes": "9979评分",
+                  "votes": "9980评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                   "team_id": "2",
@@ -113145,7 +113131,7 @@
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/2e1bf8b0c741792246d86b105c10b4ad.png",
               "score": 5.4,
-              "votes": 7027,
+              "votes": 7028,
               "comments": 1997,
               "kills": 1,
               "deaths": 5,
@@ -113163,7 +113149,7 @@
               "bg_color": "#000000",
               "position": "",
               "score_dist": {
-                "s5": 2027,
+                "s5": 2028,
                 "s4": 339,
                 "s3": 1015,
                 "s2": 940,
@@ -113174,7 +113160,7 @@
                   "name": "TheShy",
                   "desc": "胜(1/5/9)",
                   "score": "5.4",
-                  "votes": "7027评分",
+                  "votes": "7028评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/2e1bf8b0c741792246d86b105c10b4ad.png",
                   "team_id": "2",
@@ -113630,7 +113616,7 @@
                   "name": "JiaQi",
                   "desc": "胜(12/2/6)",
                   "score": "9.9",
-                  "votes": "9979评分",
+                  "votes": "9980评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/73656212602880022d87a0d1e3f6580346ed7558f4dc271prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/1bc4b7ebdf499095fd121f8f65980310.png",
                   "team_id": "2",
@@ -113735,7 +113721,7 @@
                   "name": "TheShy",
                   "desc": "胜(1/5/9)",
                   "score": "5.4",
-                  "votes": "7027评分",
+                  "votes": "7028评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/2e1bf8b0c741792246d86b105c10b4ad.png",
                   "team_id": "2",
@@ -114173,7 +114159,7 @@
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
               "score": 3.3,
-              "votes": 5274,
+              "votes": 5275,
               "comments": 1740,
               "kills": 2,
               "deaths": 4,
@@ -114191,7 +114177,7 @@
               "bg_color": "#000000",
               "position": "",
               "score_dist": {
-                "s5": 641,
+                "s5": 642,
                 "s4": 42,
                 "s3": 128,
                 "s2": 410,
@@ -114202,7 +114188,7 @@
                   "name": "TheShy",
                   "desc": "败(2/4/2)",
                   "score": "3.3",
-                  "votes": "5274评分",
+                  "votes": "5275评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
                   "team_id": "2",
@@ -115084,7 +115070,7 @@
                   "name": "TheShy",
                   "desc": "败(2/4/2)",
                   "score": "3.3",
-                  "votes": "5274评分",
+                  "votes": "5275评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/ca00f5f1a4a727dbb6e1e43afd3a81bb.png",
                   "team_id": "2",
@@ -115346,8 +115332,8 @@
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 8450,
-                "s4": 144,
+                "s5": 8451,
+                "s4": 143,
                 "s3": 23,
                 "s2": 21,
                 "s1": 82
@@ -115433,7 +115419,7 @@
               "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
               "champion": "",
               "score": 8.8,
-              "votes": 7392,
+              "votes": 7394,
               "comments": 1325,
               "kills": 3,
               "deaths": 2,
@@ -115451,7 +115437,7 @@
               "bg_color": "#000000",
               "position": "",
               "score_dist": {
-                "s5": 5599,
+                "s5": 5601,
                 "s4": 867,
                 "s3": 251,
                 "s2": 87,
@@ -115462,7 +115448,7 @@
                   "name": "TheShy",
                   "desc": "胜(3/2/7)",
                   "score": "8.8",
-                  "votes": "7392评分",
+                  "votes": "7394评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                   "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
                   "team_id": "2",
@@ -115538,7 +115524,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
               "champion": "",
               "score": 9.8,
-              "votes": 6925,
+              "votes": 6926,
               "comments": 647,
               "kills": 8,
               "deaths": 2,
@@ -115556,7 +115542,7 @@
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 6633,
+                "s5": 6634,
                 "s4": 82,
                 "s3": 25,
                 "s2": 31,
@@ -115567,7 +115553,7 @@
                   "name": "Rookie",
                   "desc": "胜(8/2/6)",
                   "score": "9.8",
-                  "votes": "6925评分",
+                  "votes": "6926评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                   "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
                   "team_id": "2",
@@ -115754,7 +115740,7 @@
               "avatar": "https://i3.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
               "score": 9.6,
-              "votes": 5570,
+              "votes": 5571,
               "comments": 599,
               "kills": 0,
               "deaths": 2,
@@ -115772,7 +115758,7 @@
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 5068,
+                "s5": 5069,
                 "s4": 248,
                 "s3": 43,
                 "s2": 26,
@@ -115783,7 +115769,7 @@
                   "name": "Meiko",
                   "desc": "胜(0/2/19)",
                   "score": "9.6",
-                  "votes": "5570评分",
+                  "votes": "5571评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
                   "team_id": "2",
@@ -115859,7 +115845,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
               "score": 9.3,
-              "votes": 4952,
+              "votes": 4953,
               "comments": 709,
               "kills": 5,
               "deaths": 3,
@@ -115877,7 +115863,7 @@
               "bg_color": "#000003",
               "position": "",
               "score_dist": {
-                "s5": 4033,
+                "s5": 4034,
                 "s4": 492,
                 "s3": 144,
                 "s2": 54,
@@ -115888,7 +115874,7 @@
                   "name": "Wei",
                   "desc": "胜(5/3/12)",
                   "score": "9.3",
-                  "votes": "4952评分",
+                  "votes": "4953评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
                   "team_id": "2",
@@ -116035,7 +116021,7 @@
                   "name": "Rookie",
                   "desc": "胜(8/2/6)",
                   "score": "9.8",
-                  "votes": "6925评分",
+                  "votes": "6926评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/6347c25c9d00caeb90dc15bcfbf167a4eaprod.png",
                   "champion": "https://activity-static.hoopchina.com.cn/images/2485-nmh04nrc-upload-1722855532823-2.jpg",
                   "team_id": "2",
@@ -116140,7 +116126,7 @@
                   "name": "Wei",
                   "desc": "胜(5/3/12)",
                   "score": "9.3",
-                  "votes": "4952评分",
+                  "votes": "4953评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/21538d011ab3f764bb3b4f791a125177abdfprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/b9d58c4123b720b0442daead8a0c2b32.png",
                   "team_id": "2",
@@ -116245,7 +116231,7 @@
                   "name": "TheShy",
                   "desc": "胜(3/2/7)",
                   "score": "8.8",
-                  "votes": "7392评分",
+                  "votes": "7394评分",
                   "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                   "champion": "https://i4.hoopchina.com.cn/reply/1671007894306-cb540ad1-3365-4ac7-be8a-2bab12ef787f.png?x-oss-process=image/resize,w_800/format,webp",
                   "team_id": "2",
@@ -116350,7 +116336,7 @@
                   "name": "Meiko",
                   "desc": "胜(0/2/19)",
                   "score": "9.6",
-                  "votes": "5570评分",
+                  "votes": "5571评分",
                   "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/5a5328de27ad679eed133d0d2f08b437aprod.png",
                   "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/a9018ae2e7c84222a3c911b55618d1ed.png",
                   "team_id": "2",
@@ -116540,12 +116526,12 @@
           ]
         }
       ],
-      "total_scorers": 137526,
+      "total_scorers": 137534,
       "league_name": "职业联赛",
       "round_name": "第三赛段组内赛",
       "match_time": 1786870800000,
       "date_str": "08月16日",
-      "found_at": "2026-08-20T02:19:36.514034+08:00"
+      "found_at": "2026-08-20T02:57:33.501159+08:00"
     },
     "schedule": {
       "next_match": {
@@ -116571,7 +116557,7 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 62.6
+        "countdown_hours": 62.0
       },
       "upcoming": [
         {
@@ -116597,10 +116583,10 @@
           "is_live": false,
           "is_completed": false,
           "is_upcoming": true,
-          "countdown_hours": 62.6
+          "countdown_hours": 62.0
         }
       ],
-      "last_check": "2026-08-20T02:23:06.219212+08:00"
+      "last_check": "2026-08-20T03:00:25.112163+08:00"
     },
     "next_match": {
       "home": "NIP",
@@ -116625,7 +116611,7 @@
       "is_live": false,
       "is_completed": false,
       "is_upcoming": true,
-      "countdown_hours": 62.6
+      "countdown_hours": 62.0
     },
     "upcoming": [
       {
@@ -116651,20 +116637,20 @@
         "is_live": false,
         "is_completed": false,
         "is_upcoming": true,
-        "countdown_hours": 62.6
+        "countdown_hours": 62.0
       }
     ],
-    "last_check": "2026-08-20T02:19:36.514034+08:00"
+    "last_check": "2026-08-20T02:57:33.501159+08:00"
   },
   "daily_stats": {
     "main": {
       "label": "The shy#asdf",
-      "today_matches": 4,
+      "today_matches": 5,
       "win": 2,
-      "lose": 2,
-      "win_rate": "50%",
+      "lose": 3,
+      "win_rate": "40%",
       "streak": 1,
-      "streak_type": "WIN"
+      "streak_type": "LOSE"
     },
     "smurf": {
       "label": "은여하#1103",
