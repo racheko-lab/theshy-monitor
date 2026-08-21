@@ -9,14 +9,14 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 298,
-  "updated_at": "2026-08-21T23:58:27+09:00",
-  "renewable_at": "2026-08-22T00:00:27+09:00",
+  "updated_at": "2026-08-22T00:28:05+09:00",
+  "renewable_at": "2026-08-22T00:30:05+09:00",
   "revision_at": "2026-08-21T04:16:22+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
     "rank": 582,
-    "total": 2889829
+    "total": 2890040
   },
   "league_stats": [
     {
@@ -40,18 +40,18 @@
         {
           "_class": "HighLeague",
           "key": "CHALLENGER",
-          "current_count": 308,
-          "lp_threshold": 1828,
-          "promotion_candidate_count": 8,
-          "demotion_candidate_count": 15
+          "current_count": 318,
+          "lp_threshold": 1830,
+          "promotion_candidate_count": 1,
+          "demotion_candidate_count": 19
         },
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
-          "current_count": 707,
+          "current_count": 697,
           "lp_threshold": 1331,
-          "promotion_candidate_count": 17,
-          "demotion_candidate_count": 30
+          "promotion_candidate_count": 16,
+          "demotion_candidate_count": 29
         }
       ]
     },
@@ -1505,15 +1505,6 @@
       "assist": 21
     },
     {
-      "champion_name": "魔蛇之拥",
-      "id": 69,
-      "play": 1,
-      "win": 1,
-      "kill": 6,
-      "death": 8,
-      "assist": 10
-    },
-    {
       "champion_name": "机械公敌",
       "id": 68,
       "play": 1,
@@ -1530,6 +1521,15 @@
       "kill": 4,
       "death": 5,
       "assist": 19
+    },
+    {
+      "champion_name": "狂暴之心",
+      "id": 85,
+      "play": 1,
+      "win": 1,
+      "kill": 10,
+      "death": 3,
+      "assist": 6
     }
   ]
 }
