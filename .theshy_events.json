@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-08-22T06:55:33+09:00",
+    "level": 94,
+    "is_active": true,
+    "timestamp": "2026-08-22T06:55:43.382715+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-22T06:34:29+09:00",
+    "level": 298,
+    "is_active": false,
+    "timestamp": "2026-08-22T06:55:43.381781+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-08-22T06:05:01+09:00",
     "level": 94,
     "is_active": false,
@@ -923,34 +941,5 @@
     "level": 297,
     "is_active": true,
     "timestamp": "2026-08-21T01:05:40.599513+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "game_type": "SOLORANKED",
-    "old_lp": 1554,
-    "new_lp": 1553,
-    "delta": -1,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-08-21T00:43:40.538932+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi21qgat0rrtUu-G67ORk5dSd0i9w5RM_bj0=",
-    "game_type": "SOLORANKED",
-    "champion": "未来守护者",
-    "result": "LOSE",
-    "kda": "1.60",
-    "kill": 3,
-    "death": 5,
-    "assist": 5,
-    "created_at": "2026-08-21T00:37:44+09:00",
-    "game_length_second": 996,
-    "position": "TOP",
-    "timestamp": "2026-08-21T00:43:39.614729+09:00"
   }
 ]
