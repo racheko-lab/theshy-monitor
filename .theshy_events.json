@@ -1,6 +1,24 @@
 [
   {
     "type": "lpl_match",
+    "kind": "start",
+    "team_a": "NIP",
+    "team_b": "IG",
+    "stage": "2026 LPL 第三赛段",
+    "match_time": "2026-08-22 17:00 CST",
+    "timestamp": "2026-08-22T18:12:33.789043+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-08-22T17:47:53+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-08-22T18:12:32.687378+09:00"
+  },
+  {
+    "type": "lpl_match",
     "kind": "pre_urgent",
     "team_a": "NIP",
     "team_b": "IG",
@@ -880,23 +898,5 @@
     "level": 298,
     "is_active": false,
     "timestamp": "2026-08-21T08:40:37.859867+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-21T08:12:30+09:00",
-    "level": 94,
-    "is_active": true,
-    "timestamp": "2026-08-21T08:12:40.128464+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-21T07:50:39+09:00",
-    "level": 298,
-    "is_active": false,
-    "timestamp": "2026-08-21T08:12:40.127486+09:00"
   }
 ]
