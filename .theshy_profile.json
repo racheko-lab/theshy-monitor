@@ -9,14 +9,14 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 298,
-  "updated_at": "2026-08-22T23:32:50+09:00",
-  "renewable_at": "2026-08-22T23:34:50+09:00",
+  "updated_at": "2026-08-22T23:52:19+09:00",
+  "renewable_at": "2026-08-22T23:54:19+09:00",
   "revision_at": "2026-08-21T04:16:22+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 590,
-    "total": 2896923
+    "rank": 589,
+    "total": 2897047
   },
   "league_stats": [
     {
@@ -40,15 +40,15 @@
         {
           "_class": "HighLeague",
           "key": "CHALLENGER",
-          "current_count": 305,
+          "current_count": 306,
           "lp_threshold": 1823,
-          "promotion_candidate_count": 7,
-          "demotion_candidate_count": 11
+          "promotion_candidate_count": 0,
+          "demotion_candidate_count": 10
         },
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
-          "current_count": 705,
+          "current_count": 693,
           "lp_threshold": 1331,
           "promotion_candidate_count": 17,
           "demotion_candidate_count": 26
@@ -1469,15 +1469,6 @@
   },
   "recent_champion_stats": [
     {
-      "champion_name": "未来守护者",
-      "id": 126,
-      "play": 4,
-      "win": 3,
-      "kill": 20,
-      "death": 18,
-      "assist": 27
-    },
-    {
       "champion_name": "青钢影",
       "id": 164,
       "play": 3,
@@ -1487,15 +1478,6 @@
       "assist": 6
     },
     {
-      "champion_name": "狂战士",
-      "id": 2,
-      "play": 3,
-      "win": 1,
-      "kill": 21,
-      "death": 16,
-      "assist": 15
-    },
-    {
       "champion_name": "戏命师",
       "id": 202,
       "play": 3,
@@ -1503,6 +1485,24 @@
       "kill": 11,
       "death": 19,
       "assist": 21
+    },
+    {
+      "champion_name": "未来守护者",
+      "id": 126,
+      "play": 2,
+      "win": 1,
+      "kill": 8,
+      "death": 5,
+      "assist": 8
+    },
+    {
+      "champion_name": "狂战士",
+      "id": 2,
+      "play": 2,
+      "win": 1,
+      "kill": 13,
+      "death": 11,
+      "assist": 8
     },
     {
       "champion_name": "机械公敌",
