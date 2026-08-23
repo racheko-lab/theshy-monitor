@@ -1,6 +1,15 @@
 [
   {
     "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-08-23T22:26:35+09:00",
+    "level": 298,
+    "is_active": true,
+    "timestamp": "2026-08-23T22:27:00.997898+09:00"
+  },
+  {
+    "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
     "updated_at": "2026-08-23T21:55:20+09:00",
@@ -884,12 +893,5 @@
     "level": 298,
     "is_active": false,
     "timestamp": "2026-08-22T18:59:59.176067+09:00"
-  },
-  {
-    "type": "bilibili_live",
-    "kind": "ig_live_start",
-    "title": "【直播】NIP vs IG",
-    "room_id": 6,
-    "timestamp": "2026-08-22T18:42:44.520217+09:00"
   }
 ]
