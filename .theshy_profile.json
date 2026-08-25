@@ -9,28 +9,28 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 298,
-  "updated_at": "2026-08-26T03:03:02+09:00",
-  "renewable_at": "2026-08-26T03:05:02+09:00",
-  "revision_at": "2026-08-26T02:41:47+09:00",
+  "updated_at": "2026-08-26T03:38:22+09:00",
+  "renewable_at": "2026-08-26T03:40:22+09:00",
+  "revision_at": "2026-08-26T03:23:01+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 632,
-    "total": 2917214
+    "rank": 634,
+    "total": 2917408
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1525,
+      "lp": 1523,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-      "win": 124,
-      "lose": 83,
-      "play": 206,
-      "match_win": 124,
-      "match_lose": 82,
+      "win": 125,
+      "lose": 84,
+      "play": 208,
+      "match_win": 125,
+      "match_lose": 83,
       "is_hot_streak": "false",
       "is_fresh_blood": "false",
       "is_veteran": "false",
@@ -41,7 +41,7 @@
           "_class": "HighLeague",
           "key": "CHALLENGER",
           "current_count": 307,
-          "lp_threshold": 1832,
+          "lp_threshold": 1831,
           "promotion_candidate_count": 2,
           "demotion_candidate_count": 9
         },
@@ -49,9 +49,9 @@
           "_class": "HighLeague",
           "key": "GRANDMASTER",
           "current_count": 708,
-          "lp_threshold": 1332,
-          "promotion_candidate_count": 16,
-          "demotion_candidate_count": 28
+          "lp_threshold": 1333,
+          "promotion_candidate_count": 17,
+          "demotion_candidate_count": 31
         }
       ]
     },
@@ -552,9 +552,9 @@
     "game_type": "RANKED",
     "season_id": 33,
     "year": null,
-    "play": 206,
-    "win": 124,
-    "lose": 82,
+    "play": 208,
+    "win": 125,
+    "lose": 83,
     "champion_stats": [
       {
         "id": 126,
@@ -801,9 +801,9 @@
   "ranked_most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
-    "play": 206,
-    "win": 124,
-    "lose": 82,
+    "play": 208,
+    "win": 125,
+    "lose": 83,
     "my_champion_stats": [
       {
         "id": 126,
@@ -1514,6 +1514,15 @@
       "assist": 8
     },
     {
+      "champion_name": "战争女神",
+      "id": 15,
+      "play": 1,
+      "win": 1,
+      "kill": 8,
+      "death": 10,
+      "assist": 10
+    },
+    {
       "champion_name": "酒桶",
       "id": 79,
       "play": 1,
@@ -1521,15 +1530,6 @@
       "kill": 4,
       "death": 5,
       "assist": 19
-    },
-    {
-      "champion_name": "狂暴之心",
-      "id": 85,
-      "play": 1,
-      "win": 1,
-      "kill": 10,
-      "death": 3,
-      "assist": 6
     }
   ]
 }
