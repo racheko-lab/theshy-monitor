@@ -8,28 +8,28 @@
   "name": "퐁당가지토마토",
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
-  "level": 298,
-  "updated_at": "2026-08-26T16:42:16+09:00",
-  "renewable_at": "2026-08-26T16:44:16+09:00",
-  "revision_at": "2026-08-26T03:23:06+09:00",
+  "level": 299,
+  "updated_at": "2026-08-26T17:29:18+09:00",
+  "renewable_at": "2026-08-26T17:31:18+09:00",
+  "revision_at": "2026-08-26T17:03:23+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 632,
-    "total": 2919607
+    "rank": 596,
+    "total": 2919777
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1523,
+      "lp": 1542,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
-      "win": 125,
+      "win": 126,
       "lose": 84,
-      "play": 208,
-      "match_win": 125,
+      "play": 209,
+      "match_win": 126,
       "match_lose": 83,
       "is_hot_streak": "false",
       "is_fresh_blood": "false",
@@ -50,7 +50,7 @@
           "key": "GRANDMASTER",
           "current_count": 713,
           "lp_threshold": 1333,
-          "promotion_candidate_count": 14,
+          "promotion_candidate_count": 15,
           "demotion_candidate_count": 29
         }
       ]
@@ -552,8 +552,8 @@
     "game_type": "RANKED",
     "season_id": 33,
     "year": null,
-    "play": 208,
-    "win": 125,
+    "play": 209,
+    "win": 126,
     "lose": 83,
     "champion_stats": [
       {
@@ -801,8 +801,8 @@
   "ranked_most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
-    "play": 208,
-    "win": 125,
+    "play": 209,
+    "win": 126,
     "lose": 83,
     "my_champion_stats": [
       {
@@ -1505,6 +1505,15 @@
       "assist": 12
     },
     {
+      "champion_name": "纳祖芒荣耀",
+      "id": 897,
+      "play": 2,
+      "win": 1,
+      "kill": 6,
+      "death": 7,
+      "assist": 11
+    },
+    {
       "champion_name": "未来守护者",
       "id": 126,
       "play": 2,
@@ -1521,15 +1530,6 @@
       "kill": 8,
       "death": 10,
       "assist": 10
-    },
-    {
-      "champion_name": "酒桶",
-      "id": 79,
-      "play": 1,
-      "win": 1,
-      "kill": 4,
-      "death": 5,
-      "assist": 19
     }
   ]
 }
