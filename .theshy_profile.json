@@ -9,14 +9,14 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 299,
-  "updated_at": "2026-08-28T14:03:31+09:00",
-  "renewable_at": "2026-08-28T14:05:31+09:00",
+  "updated_at": "2026-08-29T03:38:33+09:00",
+  "renewable_at": "2026-08-29T03:40:33+09:00",
   "revision_at": "2026-08-27T02:19:51+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 570,
-    "total": 2929052
+    "rank": 575,
+    "total": 2931339
   },
   "league_stats": [
     {
@@ -40,18 +40,18 @@
         {
           "_class": "HighLeague",
           "key": "CHALLENGER",
-          "current_count": 304,
-          "lp_threshold": 1833,
-          "promotion_candidate_count": 6,
-          "demotion_candidate_count": 10
+          "current_count": 309,
+          "lp_threshold": 1832,
+          "promotion_candidate_count": 1,
+          "demotion_candidate_count": 8
         },
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
-          "current_count": 708,
-          "lp_threshold": 1332,
-          "promotion_candidate_count": 14,
-          "demotion_candidate_count": 24
+          "current_count": 706,
+          "lp_threshold": 1333,
+          "promotion_candidate_count": 9,
+          "demotion_candidate_count": 23
         }
       ]
     },
@@ -1464,47 +1464,11 @@
     {
       "champion_name": "冰晶凤凰",
       "id": 34,
-      "play": 4,
-      "win": 3,
-      "kill": 10,
-      "death": 23,
-      "assist": 38
-    },
-    {
-      "champion_name": "青钢影",
-      "id": 164,
       "play": 3,
-      "win": 1,
-      "kill": 7,
-      "death": 14,
-      "assist": 6
-    },
-    {
-      "champion_name": "英勇投弹手",
-      "id": 42,
-      "play": 1,
-      "win": 1,
-      "kill": 13,
-      "death": 4,
-      "assist": 8
-    },
-    {
-      "champion_name": "炼金男爵",
-      "id": 888,
-      "play": 1,
-      "win": 1,
-      "kill": 5,
-      "death": 4,
-      "assist": 21
-    },
-    {
-      "champion_name": "纳祖芒荣耀",
-      "id": 897,
-      "play": 1,
-      "win": 1,
-      "kill": 4,
-      "death": 5,
-      "assist": 11
+      "win": 2,
+      "kill": 8,
+      "death": 19,
+      "assist": 28
     },
     {
       "champion_name": "战争女神",
@@ -1516,13 +1480,49 @@
       "assist": 10
     },
     {
-      "champion_name": "戏命师",
-      "id": 202,
+      "champion_name": "纳祖芒荣耀",
+      "id": 897,
+      "play": 1,
+      "win": 1,
+      "kill": 4,
+      "death": 5,
+      "assist": 11
+    },
+    {
+      "champion_name": "英勇投弹手",
+      "id": 42,
+      "play": 1,
+      "win": 1,
+      "kill": 13,
+      "death": 4,
+      "assist": 8
+    },
+    {
+      "champion_name": "深海泰坦",
+      "id": 111,
       "play": 1,
       "win": 0,
       "kill": 1,
       "death": 5,
+      "assist": 10
+    },
+    {
+      "champion_name": "狂战士",
+      "id": 2,
+      "play": 1,
+      "win": 0,
+      "kill": 4,
+      "death": 6,
       "assist": 4
+    },
+    {
+      "champion_name": "青钢影",
+      "id": 164,
+      "play": 1,
+      "win": 0,
+      "kill": 1,
+      "death": 6,
+      "assist": 1
     }
   ]
 }
