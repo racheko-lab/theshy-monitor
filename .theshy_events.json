@@ -3,6 +3,2676 @@
     "type": "winning_streak",
     "account": "The shy#asdf",
     "slug": "main",
+    "streak": 4,
+    "matches": [
+      {
+        "id": "qfvdWpGbi21ffyqY5_lRnm6STwmET_9nEkmk2_9X6Qk=",
+        "created_at": "2026-09-01T02:29:40+09:00",
+        "game_type": "SOLORANKED",
+        "game_length_second": 1143,
+        "game_map": "SUMMONERS_RIFT",
+        "champion_id": 2,
+        "champion": "狂战士",
+        "team_key": "BLUE",
+        "position": "TOP",
+        "kill": 6,
+        "death": 2,
+        "assist": 3,
+        "kda": "4.50",
+        "result": "WIN",
+        "op_score": 4.9,
+        "op_score_rank": 6,
+        "gold_earned": 9090,
+        "minion_kill": 145,
+        "neutral_minion_kill": 0,
+        "total_damage_dealt_to_champions": 13113,
+        "total_damage_taken": 12130,
+        "total_heal": 7434,
+        "vision_wards_bought_in_game": 1,
+        "ward_place": 8,
+        "largest_killing_spree": 3,
+        "largest_multi_kill": 1,
+        "largest_critical_strike": 0,
+        "time_ccing_others": 12,
+        "champion_level": 13,
+        "items": [
+          1120,
+          3044,
+          3073,
+          3047
+        ],
+        "items_names": [
+          "多兰之盔",
+          "净蚀",
+          "海克斯注力刚壁",
+          "铁板靴"
+        ],
+        "spells": [
+          4,
+          3
+        ],
+        "rune": {
+          "_class": "Rune",
+          "primary_page_id": 8000,
+          "primary_rune_id": 8010,
+          "secondary_page_id": 8400
+        },
+        "teams": [
+          {
+            "key": "BLUE",
+            "banned_champions": [
+              64,
+              238
+            ],
+            "banned_champions_names": [
+              "盲僧",
+              "影流之主"
+            ],
+            "game_stat": {
+              "is_win": "true",
+              "champion_kill": 30,
+              "tower_kill": 6,
+              "dragon_kill": 1,
+              "baron_kill": 0,
+              "inhibitor_kill": 0,
+              "rift_herald_kill": 1,
+              "atakhan_kill": 0,
+              "gold_earned": 46237,
+              "champion_first": "false",
+              "horde_kill": 3
+            }
+          },
+          {
+            "key": "RED",
+            "banned_champions": [
+              39,
+              78,
+              246,
+              432
+            ],
+            "banned_champions_names": [
+              "刀锋舞者",
+              "圣锤之毅",
+              "元素女皇",
+              "星界游神"
+            ],
+            "game_stat": {
+              "is_win": "false",
+              "champion_kill": 14,
+              "tower_kill": 0,
+              "dragon_kill": 1,
+              "baron_kill": 0,
+              "inhibitor_kill": 0,
+              "rift_herald_kill": 0,
+              "atakhan_kill": 0,
+              "gold_earned": 34742,
+              "champion_first": "true",
+              "horde_kill": 0
+            }
+          }
+        ],
+        "participants": [
+          {
+            "summoner_name": "The shy",
+            "summoner_tag": "asdf",
+            "champion_id": 2,
+            "champion_name": "狂战士",
+            "team_key": "BLUE",
+            "position": "TOP",
+            "items": [
+              1120,
+              3044,
+              3073,
+              3047
+            ],
+            "items_names": [
+              "多兰之盔",
+              "净蚀",
+              "海克斯注力刚壁",
+              "铁板靴"
+            ],
+            "spells": [
+              4,
+              3
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8010,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 13,
+            "kill": 6,
+            "death": 2,
+            "assist": 3,
+            "kda": "4.50",
+            "result": "WIN",
+            "op_score": 4.9,
+            "op_score_rank": 6,
+            "gold_earned": 9090,
+            "minion_kill": 145,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 13113,
+            "total_damage_taken": 12130,
+            "total_heal": 7434,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 8,
+            "largest_killing_spree": 3,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 12
+          },
+          {
+            "summoner_name": "Last Sumnner",
+            "summoner_tag": "KR1",
+            "champion_id": 53,
+            "champion_name": "蒸汽机器人",
+            "team_key": "BLUE",
+            "position": "SUPPORT",
+            "items": [
+              3222,
+              3877,
+              3067,
+              3009,
+              1029,
+              1033
+            ],
+            "items_names": [
+              "米凯尔的祝福",
+              "血鸣",
+              "燃烧宝石",
+              "轻灵之靴",
+              "布甲",
+              "抗魔斗篷"
+            ],
+            "spells": [
+              4,
+              14
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8300,
+              "primary_rune_id": 8351,
+              "secondary_page_id": 8200
+            },
+            "champion_level": 9,
+            "kill": 4,
+            "death": 4,
+            "assist": 10,
+            "kda": "3.50",
+            "result": "WIN",
+            "op_score": 5.1,
+            "op_score_rank": 5,
+            "gold_earned": 6469,
+            "minion_kill": 31,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 3891,
+            "total_damage_taken": 12189,
+            "total_heal": 1422,
+            "vision_wards_bought_in_game": 14,
+            "ward_place": 32,
+            "largest_killing_spree": 3,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 19
+          },
+          {
+            "summoner_name": "딸깍푸슝맨",
+            "summoner_tag": "一炊之夢",
+            "champion_id": 4,
+            "champion_name": "卡牌大师",
+            "team_key": "BLUE",
+            "position": "MID",
+            "items": [
+              3041,
+              3146,
+              1056,
+              3100,
+              3170
+            ],
+            "items_names": [
+              "梅贾的窃魂卷",
+              "海克斯科技枪刃",
+              "多兰之戒",
+              "巫妖之祸",
+              "迅速进军"
+            ],
+            "spells": [
+              6,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8200,
+              "primary_rune_id": 8229,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 13,
+            "kill": 6,
+            "death": 1,
+            "assist": 11,
+            "kda": "17.00",
+            "result": "WIN",
+            "op_score": 8.1,
+            "op_score_rank": 1,
+            "gold_earned": 9828,
+            "minion_kill": 155,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 15151,
+            "total_damage_taken": 9186,
+            "total_heal": 2831,
+            "vision_wards_bought_in_game": 3,
+            "ward_place": 8,
+            "largest_killing_spree": 4,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 31
+          },
+          {
+            "summoner_name": "sk하이닉스",
+            "summoner_tag": "9486",
+            "champion_id": 523,
+            "champion_name": "残月之肃",
+            "team_key": "BLUE",
+            "position": "ADC",
+            "items": [
+              1086,
+              2523,
+              3031,
+              1036,
+              1018
+            ],
+            "items_names": [
+              "多兰之弓",
+              "海克斯镜片 C44",
+              "无尽之刃",
+              "长剑",
+              "灵巧披风"
+            ],
+            "spells": [
+              4,
+              1
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8005,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 12,
+            "kill": 10,
+            "death": 4,
+            "assist": 6,
+            "kda": "4.00",
+            "result": "WIN",
+            "op_score": 7.49,
+            "op_score_rank": 2,
+            "gold_earned": 11847,
+            "minion_kill": 169,
+            "neutral_minion_kill": 4,
+            "total_damage_dealt_to_champions": 21731,
+            "total_damage_taken": 8010,
+            "total_heal": 2049,
+            "vision_wards_bought_in_game": 4,
+            "ward_place": 11,
+            "largest_killing_spree": 4,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 658,
+            "time_ccing_others": 11
+          },
+          {
+            "summoner_name": "qwerdfb",
+            "summoner_tag": "qvq",
+            "champion_id": 799,
+            "champion_name": "铁血狼母",
+            "team_key": "BLUE",
+            "position": "JUNGLE",
+            "items": [
+              2520,
+              6698,
+              1036,
+              1001
+            ],
+            "items_names": [
+              "破垒者",
+              "亵渎九头蛇",
+              "长剑",
+              "鞋子"
+            ],
+            "spells": [
+              11,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8010,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 12,
+            "kill": 4,
+            "death": 3,
+            "assist": 9,
+            "kda": "4.33",
+            "result": "WIN",
+            "op_score": 5.97,
+            "op_score_rank": 3,
+            "gold_earned": 9003,
+            "minion_kill": 5,
+            "neutral_minion_kill": 133,
+            "total_damage_dealt_to_champions": 13056,
+            "total_damage_taken": 14844,
+            "total_heal": 6697,
+            "vision_wards_bought_in_game": 4,
+            "ward_place": 6,
+            "largest_killing_spree": 3,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 10
+          },
+          {
+            "summoner_name": "Let me sup",
+            "summoner_tag": "KR1",
+            "champion_id": 412,
+            "champion_name": "魂锁典狱长",
+            "team_key": "RED",
+            "position": "SUPPORT",
+            "items": [
+              3869,
+              3009,
+              3222,
+              2031,
+              3067,
+              1028
+            ],
+            "items_names": [
+              "星界据守",
+              "轻灵之靴",
+              "米凯尔的祝福",
+              "复用型药水",
+              "燃烧宝石",
+              "红水晶"
+            ],
+            "spells": [
+              7,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8400,
+              "primary_rune_id": 8439,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 9,
+            "kill": 2,
+            "death": 5,
+            "assist": 10,
+            "kda": "2.40",
+            "result": "LOSE",
+            "op_score": 4.1,
+            "op_score_rank": 7,
+            "gold_earned": 5913,
+            "minion_kill": 25,
+            "neutral_minion_kill": 2,
+            "total_damage_dealt_to_champions": 5280,
+            "total_damage_taken": 13542,
+            "total_heal": 2499,
+            "vision_wards_bought_in_game": 11,
+            "ward_place": 27,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 23
+          },
+          {
+            "summoner_name": "zhongdan xiumin",
+            "summoner_tag": "KR1",
+            "champion_id": 3,
+            "champion_name": "正义巨像",
+            "team_key": "RED",
+            "position": "MID",
+            "items": [
+              1056,
+              3173,
+              8020,
+              2031,
+              1052,
+              1052
+            ],
+            "items_names": [
+              "多兰之戒",
+              "带链碾碎者",
+              "深渊面具",
+              "复用型药水",
+              "增幅典籍",
+              "增幅典籍"
+            ],
+            "spells": [
+              12,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8200,
+              "primary_rune_id": 8230,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 11,
+            "kill": 2,
+            "death": 7,
+            "assist": 3,
+            "kda": "0.71",
+            "result": "LOSE",
+            "op_score": 1.33,
+            "op_score_rank": 9,
+            "gold_earned": 6093,
+            "minion_kill": 130,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 8218,
+            "total_damage_taken": 18123,
+            "total_heal": 768,
+            "vision_wards_bought_in_game": 3,
+            "ward_place": 9,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 22
+          },
+          {
+            "summoner_name": "14小孩幻想赢对线",
+            "summoner_tag": "4453",
+            "champion_id": 24,
+            "champion_name": "武器大师",
+            "team_key": "RED",
+            "position": "TOP",
+            "items": [
+              2031,
+              3078,
+              1001,
+              1055
+            ],
+            "items_names": [
+              "复用型药水",
+              "三相之力",
+              "鞋子",
+              "多兰之刃"
+            ],
+            "spells": [
+              4,
+              14
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 10,
+            "kill": 1,
+            "death": 7,
+            "assist": 1,
+            "kda": "0.29",
+            "result": "LOSE",
+            "op_score": 0.31,
+            "op_score_rank": 10,
+            "gold_earned": 4713,
+            "minion_kill": 82,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 6410,
+            "total_damage_taken": 14725,
+            "total_heal": 1196,
+            "vision_wards_bought_in_game": 0,
+            "ward_place": 6,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 8
+          },
+          {
+            "summoner_name": "치무식",
+            "summoner_tag": "목을뽑다",
+            "champion_id": 234,
+            "champion_name": "破败之王",
+            "team_key": "RED",
+            "position": "JUNGLE",
+            "items": [
+              1001,
+              2055,
+              6672,
+              1036,
+              6676
+            ],
+            "items_names": [
+              "鞋子",
+              "控制守卫",
+              "海妖杀手",
+              "长剑",
+              "收集者"
+            ],
+            "spells": [
+              11,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8010,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 10,
+            "kill": 4,
+            "death": 7,
+            "assist": 6,
+            "kda": "1.43",
+            "result": "LOSE",
+            "op_score": 3.05,
+            "op_score_rank": 8,
+            "gold_earned": 7898,
+            "minion_kill": 2,
+            "neutral_minion_kill": 96,
+            "total_damage_dealt_to_champions": 6576,
+            "total_damage_taken": 17610,
+            "total_heal": 5653,
+            "vision_wards_bought_in_game": 11,
+            "ward_place": 8,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 333,
+            "time_ccing_others": 13
+          },
+          {
+            "summoner_name": "마문2",
+            "summoner_tag": "0310",
+            "champion_id": 804,
+            "champion_name": "不破之誓",
+            "team_key": "RED",
+            "position": "ADC",
+            "items": [
+              2055,
+              6670,
+              6672,
+              1036,
+              1086,
+              3085
+            ],
+            "items_names": [
+              "控制守卫",
+              "正午箭袋",
+              "海妖杀手",
+              "长剑",
+              "多兰之弓",
+              "卢安娜的飓风"
+            ],
+            "spells": [
+              6,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 10,
+            "kill": 5,
+            "death": 4,
+            "assist": 6,
+            "kda": "2.75",
+            "result": "LOSE",
+            "op_score": 5.17,
+            "op_score_rank": 4,
+            "gold_earned": 10125,
+            "minion_kill": 140,
+            "neutral_minion_kill": 4,
+            "total_damage_dealt_to_champions": 14530,
+            "total_damage_taken": 13471,
+            "total_heal": 4572,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 5,
+            "largest_killing_spree": 4,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 332,
+            "time_ccing_others": 4
+          }
+        ],
+        "average_tier_info": {
+          "tier": "GRANDMASTER",
+          "division": 1,
+          "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png"
+        },
+        "_account_slug": "main",
+        "_account_label": "The shy#asdf"
+      },
+      {
+        "id": "qfvdWpGbi21Hu4No2bTAr3SMXjTjfiD3nybw1SqXSlU=",
+        "created_at": "2026-08-31T16:28:53+09:00",
+        "game_type": "SOLORANKED",
+        "game_length_second": 1510,
+        "game_map": "SUMMONERS_RIFT",
+        "champion_id": 34,
+        "champion": "冰晶凤凰",
+        "team_key": "BLUE",
+        "position": "TOP",
+        "kill": 4,
+        "death": 2,
+        "assist": 12,
+        "kda": "8.00",
+        "result": "WIN",
+        "op_score": 6.09,
+        "op_score_rank": 5,
+        "gold_earned": 10774,
+        "minion_kill": 190,
+        "neutral_minion_kill": 0,
+        "total_damage_dealt_to_champions": 18064,
+        "total_damage_taken": 16397,
+        "total_heal": 3744,
+        "vision_wards_bought_in_game": 1,
+        "ward_place": 10,
+        "largest_killing_spree": 3,
+        "largest_multi_kill": 1,
+        "largest_critical_strike": 0,
+        "time_ccing_others": 48,
+        "champion_level": 18,
+        "items": [
+          1056,
+          2421,
+          3040,
+          6657,
+          3009,
+          1058
+        ],
+        "items_names": [
+          "多兰之戒",
+          "碎裂的护臂",
+          "炽天使之拥",
+          "时光之杖",
+          "轻灵之靴",
+          "无用大棒"
+        ],
+        "spells": [
+          4,
+          12
+        ],
+        "rune": {
+          "_class": "Rune",
+          "primary_page_id": 8100,
+          "primary_rune_id": 8112,
+          "secondary_page_id": 8200
+        },
+        "teams": [
+          {
+            "key": "BLUE",
+            "banned_champions": [
+              78,
+              142,
+              246
+            ],
+            "banned_champions_names": [
+              "圣锤之毅",
+              "暮光星灵",
+              "元素女皇"
+            ],
+            "game_stat": {
+              "is_win": "true",
+              "champion_kill": 31,
+              "tower_kill": 4,
+              "dragon_kill": 2,
+              "baron_kill": 1,
+              "inhibitor_kill": 0,
+              "rift_herald_kill": 1,
+              "atakhan_kill": 0,
+              "gold_earned": 59177,
+              "champion_first": "true",
+              "horde_kill": 2
+            }
+          },
+          {
+            "key": "RED",
+            "banned_champions": [
+              24,
+              69,
+              81,
+              164
+            ],
+            "banned_champions_names": [
+              "武器大师",
+              "魔蛇之拥",
+              "探险家",
+              "青钢影"
+            ],
+            "game_stat": {
+              "is_win": "false",
+              "champion_kill": 18,
+              "tower_kill": 2,
+              "dragon_kill": 1,
+              "baron_kill": 0,
+              "inhibitor_kill": 0,
+              "rift_herald_kill": 0,
+              "atakhan_kill": 0,
+              "gold_earned": 49969,
+              "champion_first": "false",
+              "horde_kill": 1
+            }
+          }
+        ],
+        "participants": [
+          {
+            "summoner_name": "렐복치",
+            "summoner_tag": "KR1",
+            "champion_id": 888,
+            "champion_name": "炼金男爵",
+            "team_key": "BLUE",
+            "position": "SUPPORT",
+            "items": [
+              3158,
+              3190,
+              3222,
+              3869,
+              3113,
+              2022
+            ],
+            "items_names": [
+              "明朗之靴",
+              "钢铁烈阳之匣",
+              "米凯尔的祝福",
+              "星界据守",
+              "以太精魂",
+              "荧尘"
+            ],
+            "spells": [
+              7,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8400,
+              "primary_rune_id": 8465,
+              "secondary_page_id": 8100
+            },
+            "champion_level": 13,
+            "kill": 1,
+            "death": 2,
+            "assist": 23,
+            "kda": "12.00",
+            "result": "WIN",
+            "op_score": 8.28,
+            "op_score_rank": 2,
+            "gold_earned": 8153,
+            "minion_kill": 23,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 7585,
+            "total_damage_taken": 14057,
+            "total_heal": 4402,
+            "vision_wards_bought_in_game": 14,
+            "ward_place": 34,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 22
+          },
+          {
+            "summoner_name": "The shy",
+            "summoner_tag": "asdf",
+            "champion_id": 34,
+            "champion_name": "冰晶凤凰",
+            "team_key": "BLUE",
+            "position": "TOP",
+            "items": [
+              1056,
+              2421,
+              3040,
+              6657,
+              3009,
+              1058
+            ],
+            "items_names": [
+              "多兰之戒",
+              "碎裂的护臂",
+              "炽天使之拥",
+              "时光之杖",
+              "轻灵之靴",
+              "无用大棒"
+            ],
+            "spells": [
+              4,
+              12
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8100,
+              "primary_rune_id": 8112,
+              "secondary_page_id": 8200
+            },
+            "champion_level": 18,
+            "kill": 4,
+            "death": 2,
+            "assist": 12,
+            "kda": "8.00",
+            "result": "WIN",
+            "op_score": 6.09,
+            "op_score_rank": 5,
+            "gold_earned": 10774,
+            "minion_kill": 190,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 18064,
+            "total_damage_taken": 16397,
+            "total_heal": 3744,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 10,
+            "largest_killing_spree": 3,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 48
+          },
+          {
+            "summoner_name": "시트라",
+            "summoner_tag": "S T",
+            "champion_id": 3,
+            "champion_name": "正义巨像",
+            "team_key": "BLUE",
+            "position": "MID",
+            "items": [
+              1056,
+              3916,
+              3157,
+              3173,
+              1082,
+              6664
+            ],
+            "items_names": [
+              "多兰之戒",
+              "湮灭宝珠",
+              "中娅沙漏",
+              "带链碾碎者",
+              "黑暗封印",
+              "璀璨回响"
+            ],
+            "spells": [
+              4,
+              12
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8400,
+              "primary_rune_id": 8439,
+              "secondary_page_id": 8200
+            },
+            "champion_level": 16,
+            "kill": 4,
+            "death": 4,
+            "assist": 15,
+            "kda": "4.75",
+            "result": "WIN",
+            "op_score": 6.49,
+            "op_score_rank": 4,
+            "gold_earned": 10532,
+            "minion_kill": 235,
+            "neutral_minion_kill": 2,
+            "total_damage_dealt_to_champions": 15340,
+            "total_damage_taken": 23149,
+            "total_heal": 2900,
+            "vision_wards_bought_in_game": 4,
+            "ward_place": 7,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 31
+          },
+          {
+            "summoner_name": "丸丸宝",
+            "summoner_tag": "317",
+            "champion_id": 429,
+            "champion_name": "复仇之矛",
+            "team_key": "BLUE",
+            "position": "ADC",
+            "items": [
+              3124,
+              3302,
+              6665,
+              1086,
+              3087
+            ],
+            "items_names": [
+              "鬼索的狂暴之刃",
+              "界弓",
+              "千变者贾修",
+              "多兰之弓",
+              "斯塔缇克电刃"
+            ],
+            "spells": [
+              21,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8100
+            },
+            "champion_level": 14,
+            "kill": 15,
+            "death": 5,
+            "assist": 8,
+            "kda": "4.60",
+            "result": "WIN",
+            "op_score": 8.55,
+            "op_score_rank": 1,
+            "gold_earned": 16846,
+            "minion_kill": 229,
+            "neutral_minion_kill": 8,
+            "total_damage_dealt_to_champions": 30326,
+            "total_damage_taken": 23353,
+            "total_heal": 7208,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 9,
+            "largest_killing_spree": 6,
+            "largest_multi_kill": 3,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 21
+          },
+          {
+            "summoner_name": "君莫笑",
+            "summoner_tag": "0701",
+            "champion_id": 126,
+            "champion_name": "未来守护者",
+            "team_key": "BLUE",
+            "position": "JUNGLE",
+            "items": [
+              6695,
+              3035,
+              1036,
+              2520,
+              1001,
+              6699
+            ],
+            "items_names": [
+              "巨蛇之牙",
+              "最后的轻语",
+              "长剑",
+              "破垒者",
+              "鞋子",
+              "电震涡流剑"
+            ],
+            "spells": [
+              4,
+              11
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8300,
+              "primary_rune_id": 8369,
+              "secondary_page_id": 8100
+            },
+            "champion_level": 15,
+            "kill": 7,
+            "death": 5,
+            "assist": 11,
+            "kda": "3.60",
+            "result": "WIN",
+            "op_score": 6.55,
+            "op_score_rank": 3,
+            "gold_earned": 12872,
+            "minion_kill": 9,
+            "neutral_minion_kill": 177,
+            "total_damage_dealt_to_champions": 23054,
+            "total_damage_taken": 24708,
+            "total_heal": 7809,
+            "vision_wards_bought_in_game": 3,
+            "ward_place": 5,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 10
+          },
+          {
+            "summoner_name": "aierlanlaozhu",
+            "summoner_tag": "KR1",
+            "champion_id": 2,
+            "champion_name": "狂战士",
+            "team_key": "RED",
+            "position": "TOP",
+            "items": [
+              6631,
+              3073,
+              3158,
+              1054,
+              1036,
+              1036
+            ],
+            "items_names": [
+              "挺进破坏者",
+              "海克斯注力刚壁",
+              "明朗之靴",
+              "多兰之盾",
+              "长剑",
+              "长剑"
+            ],
+            "spells": [
+              4,
+              6
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8010,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 15,
+            "kill": 3,
+            "death": 8,
+            "assist": 3,
+            "kda": "0.75",
+            "result": "LOSE",
+            "op_score": 1.64,
+            "op_score_rank": 10,
+            "gold_earned": 9619,
+            "minion_kill": 191,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 14868,
+            "total_damage_taken": 27154,
+            "total_heal": 5750,
+            "vision_wards_bought_in_game": 0,
+            "ward_place": 1,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 11
+          },
+          {
+            "summoner_name": "결 혼",
+            "summoner_tag": "KR1",
+            "champion_id": 804,
+            "champion_name": "不破之誓",
+            "team_key": "RED",
+            "position": "ADC",
+            "items": [
+              1037,
+              3036,
+              3085,
+              6672
+            ],
+            "items_names": [
+              "十字镐",
+              "多米尼克领主的致意",
+              "卢安娜的飓风",
+              "海妖杀手"
+            ],
+            "spells": [
+              3,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 13,
+            "kill": 5,
+            "death": 8,
+            "assist": 4,
+            "kda": "1.12",
+            "result": "LOSE",
+            "op_score": 2.82,
+            "op_score_rank": 9,
+            "gold_earned": 11445,
+            "minion_kill": 189,
+            "neutral_minion_kill": 10,
+            "total_damage_dealt_to_champions": 21312,
+            "total_damage_taken": 20680,
+            "total_heal": 4012,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 11,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 375,
+            "time_ccing_others": 18
+          },
+          {
+            "summoner_name": "choice2",
+            "summoner_tag": "3929",
+            "champion_id": 526,
+            "champion_name": "镕铁少女",
+            "team_key": "RED",
+            "position": "SUPPORT",
+            "items": [
+              3869,
+              3190,
+              3050,
+              3111
+            ],
+            "items_names": [
+              "星界据守",
+              "钢铁烈阳之匣",
+              "基克的聚合",
+              "水银之靴"
+            ],
+            "spells": [
+              7,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8400,
+              "primary_rune_id": 8439,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 11,
+            "kill": 1,
+            "death": 5,
+            "assist": 9,
+            "kda": "2.00",
+            "result": "LOSE",
+            "op_score": 2.9,
+            "op_score_rank": 8,
+            "gold_earned": 6710,
+            "minion_kill": 35,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 6479,
+            "total_damage_taken": 15430,
+            "total_heal": 2395,
+            "vision_wards_bought_in_game": 12,
+            "ward_place": 28,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 37
+          },
+          {
+            "summoner_name": "fifjmo",
+            "summoner_tag": "zypp",
+            "champion_id": 4,
+            "champion_name": "卡牌大师",
+            "team_key": "RED",
+            "position": "MID",
+            "items": [
+              3094,
+              1058,
+              6657,
+              3100,
+              1082,
+              3173
+            ],
+            "items_names": [
+              "疾射火炮",
+              "无用大棒",
+              "时光之杖",
+              "巫妖之祸",
+              "黑暗封印",
+              "带链碾碎者"
+            ],
+            "spells": [
+              4,
+              12
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8300,
+              "primary_rune_id": 8360,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 15,
+            "kill": 4,
+            "death": 5,
+            "assist": 6,
+            "kda": "2.00",
+            "result": "LOSE",
+            "op_score": 3.91,
+            "op_score_rank": 6,
+            "gold_earned": 12371,
+            "minion_kill": 208,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 18668,
+            "total_damage_taken": 21685,
+            "total_heal": 4598,
+            "vision_wards_bought_in_game": 2,
+            "ward_place": 10,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 170,
+            "time_ccing_others": 43
+          },
+          {
+            "summoner_name": "xiaogaoQvQ",
+            "summoner_tag": "2007",
+            "champion_id": 64,
+            "champion_name": "盲僧",
+            "team_key": "RED",
+            "position": "JUNGLE",
+            "items": [
+              2022,
+              3044,
+              6610,
+              6692,
+              3111
+            ],
+            "items_names": [
+              "荧尘",
+              "净蚀",
+              "焚天",
+              "星蚀",
+              "水银之靴"
+            ],
+            "spells": [
+              4,
+              11
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8010,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 14,
+            "kill": 5,
+            "death": 5,
+            "assist": 4,
+            "kda": "1.80",
+            "result": "LOSE",
+            "op_score": 3.22,
+            "op_score_rank": 7,
+            "gold_earned": 9824,
+            "minion_kill": 22,
+            "neutral_minion_kill": 147,
+            "total_damage_dealt_to_champions": 15023,
+            "total_damage_taken": 24336,
+            "total_heal": 10337,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 9,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 204,
+            "time_ccing_others": 23
+          }
+        ],
+        "average_tier_info": {
+          "tier": "MASTER",
+          "division": 1,
+          "border_image_url": "https://opgg-static.akamaized.net/images/border_new/master.png"
+        },
+        "_account_slug": "main",
+        "_account_label": "The shy#asdf"
+      },
+      {
+        "id": "qfvdWpGbi20HD5h3wc4WkivJpIXNXBxv10LRccOvuMk=",
+        "created_at": "2026-08-31T15:58:34+09:00",
+        "game_type": "SOLORANKED",
+        "game_length_second": 1541,
+        "game_map": "SUMMONERS_RIFT",
+        "champion_id": 34,
+        "champion": "冰晶凤凰",
+        "team_key": "BLUE",
+        "position": "TOP",
+        "kill": 4,
+        "death": 5,
+        "assist": 16,
+        "kda": "4.00",
+        "result": "WIN",
+        "op_score": 5.7,
+        "op_score_rank": 4,
+        "gold_earned": 11129,
+        "minion_kill": 156,
+        "neutral_minion_kill": 4,
+        "total_damage_dealt_to_champions": 29025,
+        "total_damage_taken": 25795,
+        "total_heal": 6328,
+        "vision_wards_bought_in_game": 4,
+        "ward_place": 13,
+        "largest_killing_spree": 2,
+        "largest_multi_kill": 1,
+        "largest_critical_strike": 0,
+        "time_ccing_others": 75,
+        "champion_level": 17,
+        "items": [
+          1056,
+          3009,
+          3040,
+          6657,
+          3118,
+          1082
+        ],
+        "items_names": [
+          "多兰之戒",
+          "轻灵之靴",
+          "炽天使之拥",
+          "时光之杖",
+          "残疫",
+          "黑暗封印"
+        ],
+        "spells": [
+          4,
+          12
+        ],
+        "rune": {
+          "_class": "Rune",
+          "primary_page_id": 8100,
+          "primary_rune_id": 8112,
+          "secondary_page_id": 8200
+        },
+        "teams": [
+          {
+            "key": "BLUE",
+            "banned_champions": [
+              78,
+              119,
+              246,
+              432
+            ],
+            "banned_champions_names": [
+              "圣锤之毅",
+              "荣耀行刑官",
+              "元素女皇",
+              "星界游神"
+            ],
+            "game_stat": {
+              "is_win": "true",
+              "champion_kill": 43,
+              "tower_kill": 11,
+              "dragon_kill": 3,
+              "baron_kill": 1,
+              "inhibitor_kill": 3,
+              "rift_herald_kill": 1,
+              "atakhan_kill": 0,
+              "gold_earned": 66398,
+              "champion_first": "true",
+              "horde_kill": 0
+            }
+          },
+          {
+            "key": "RED",
+            "banned_champions": [
+              24,
+              39,
+              76,
+              81,
+              119
+            ],
+            "banned_champions_names": [
+              "武器大师",
+              "刀锋舞者",
+              "狂野女猎手",
+              "探险家",
+              "荣耀行刑官"
+            ],
+            "game_stat": {
+              "is_win": "false",
+              "champion_kill": 22,
+              "tower_kill": 1,
+              "dragon_kill": 0,
+              "baron_kill": 0,
+              "inhibitor_kill": 0,
+              "rift_herald_kill": 0,
+              "atakhan_kill": 0,
+              "gold_earned": 46794,
+              "champion_first": "false",
+              "horde_kill": 3
+            }
+          }
+        ],
+        "participants": [
+          {
+            "summoner_name": "말티즈카와이",
+            "summoner_tag": "KR1",
+            "champion_id": 145,
+            "champion_name": "虚空之女",
+            "team_key": "BLUE",
+            "position": "ADC",
+            "items": [
+              3046,
+              3124,
+              6665,
+              6672,
+              3302
+            ],
+            "items_names": [
+              "幻影之舞",
+              "鬼索的狂暴之刃",
+              "千变者贾修",
+              "海妖杀手",
+              "界弓"
+            ],
+            "spells": [
+              6,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 16,
+            "kill": 17,
+            "death": 4,
+            "assist": 8,
+            "kda": "6.25",
+            "result": "WIN",
+            "op_score": 8.28,
+            "op_score_rank": 1,
+            "gold_earned": 19736,
+            "minion_kill": 253,
+            "neutral_minion_kill": 12,
+            "total_damage_dealt_to_champions": 39691,
+            "total_damage_taken": 19311,
+            "total_heal": 9042,
+            "vision_wards_bought_in_game": 0,
+            "ward_place": 8,
+            "largest_killing_spree": 10,
+            "largest_multi_kill": 3,
+            "largest_critical_strike": 446,
+            "time_ccing_others": 0
+          },
+          {
+            "summoner_name": "The shy",
+            "summoner_tag": "asdf",
+            "champion_id": 34,
+            "champion_name": "冰晶凤凰",
+            "team_key": "BLUE",
+            "position": "TOP",
+            "items": [
+              1056,
+              3009,
+              3040,
+              6657,
+              3118,
+              1082
+            ],
+            "items_names": [
+              "多兰之戒",
+              "轻灵之靴",
+              "炽天使之拥",
+              "时光之杖",
+              "残疫",
+              "黑暗封印"
+            ],
+            "spells": [
+              4,
+              12
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8100,
+              "primary_rune_id": 8112,
+              "secondary_page_id": 8200
+            },
+            "champion_level": 17,
+            "kill": 4,
+            "death": 5,
+            "assist": 16,
+            "kda": "4.00",
+            "result": "WIN",
+            "op_score": 5.7,
+            "op_score_rank": 4,
+            "gold_earned": 11129,
+            "minion_kill": 156,
+            "neutral_minion_kill": 4,
+            "total_damage_dealt_to_champions": 29025,
+            "total_damage_taken": 25795,
+            "total_heal": 6328,
+            "vision_wards_bought_in_game": 4,
+            "ward_place": 13,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 75
+          },
+          {
+            "summoner_name": "Soy un perdedor",
+            "summoner_tag": "3079",
+            "champion_id": 53,
+            "champion_name": "蒸汽机器人",
+            "team_key": "BLUE",
+            "position": "SUPPORT",
+            "items": [
+              3190,
+              3877,
+              3109,
+              3067,
+              1029,
+              3009
+            ],
+            "items_names": [
+              "钢铁烈阳之匣",
+              "血鸣",
+              "骑士之誓",
+              "燃烧宝石",
+              "布甲",
+              "轻灵之靴"
+            ],
+            "spells": [
+              14,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8400,
+              "primary_rune_id": 8439,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 13,
+            "kill": 3,
+            "death": 7,
+            "assist": 21,
+            "kda": "3.43",
+            "result": "WIN",
+            "op_score": 5.47,
+            "op_score_rank": 5,
+            "gold_earned": 8700,
+            "minion_kill": 20,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 8293,
+            "total_damage_taken": 22325,
+            "total_heal": 4240,
+            "vision_wards_bought_in_game": 8,
+            "ward_place": 34,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 42
+          },
+          {
+            "summoner_name": "RUI",
+            "summoner_tag": "케이크",
+            "champion_id": 84,
+            "champion_name": "离群之刺",
+            "team_key": "BLUE",
+            "position": "MID",
+            "items": [
+              3146,
+              3041,
+              4645,
+              3089,
+              3175
+            ],
+            "items_names": [
+              "海克斯科技枪刃",
+              "梅贾的窃魂卷",
+              "影焰",
+              "灭世者的死亡之帽",
+              "灵能使之靴"
+            ],
+            "spells": [
+              4,
+              12
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8100,
+              "primary_rune_id": 8112,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 16,
+            "kill": 12,
+            "death": 3,
+            "assist": 5,
+            "kda": "5.67",
+            "result": "WIN",
+            "op_score": 5.83,
+            "op_score_rank": 2,
+            "gold_earned": 14430,
+            "minion_kill": 222,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 26530,
+            "total_damage_taken": 26026,
+            "total_heal": 7500,
+            "vision_wards_bought_in_game": 5,
+            "ward_place": 8,
+            "largest_killing_spree": 6,
+            "largest_multi_kill": 3,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 6
+          },
+          {
+            "summoner_name": "FatTiger",
+            "summoner_tag": "888",
+            "champion_id": 80,
+            "champion_name": "不屈之枪",
+            "team_key": "BLUE",
+            "position": "JUNGLE",
+            "items": [
+              3071,
+              3053,
+              6610,
+              3111
+            ],
+            "items_names": [
+              "黑色切割者",
+              "斯特拉克的挑战护手",
+              "焚天",
+              "水银之靴"
+            ],
+            "spells": [
+              4,
+              11
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8010,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 16,
+            "kill": 7,
+            "death": 3,
+            "assist": 12,
+            "kda": "6.33",
+            "result": "WIN",
+            "op_score": 5.78,
+            "op_score_rank": 3,
+            "gold_earned": 12403,
+            "minion_kill": 11,
+            "neutral_minion_kill": 184,
+            "total_damage_dealt_to_champions": 16084,
+            "total_damage_taken": 24601,
+            "total_heal": 13444,
+            "vision_wards_bought_in_game": 2,
+            "ward_place": 5,
+            "largest_killing_spree": 4,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 256,
+            "time_ccing_others": 22
+          },
+          {
+            "summoner_name": "배 러",
+            "summoner_tag": "than",
+            "champion_id": 157,
+            "champion_name": "疾风剑豪",
+            "team_key": "RED",
+            "position": "TOP",
+            "items": [
+              3006,
+              3153,
+              6673,
+              6670,
+              2055,
+              1036
+            ],
+            "items_names": [
+              "狂战士胫甲",
+              "破败王者之刃",
+              "不朽盾弓",
+              "正午箭袋",
+              "控制守卫",
+              "长剑"
+            ],
+            "spells": [
+              3,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 14,
+            "kill": 6,
+            "death": 9,
+            "assist": 5,
+            "kda": "1.22",
+            "result": "LOSE",
+            "op_score": 2.53,
+            "op_score_rank": 8,
+            "gold_earned": 9804,
+            "minion_kill": 168,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 17296,
+            "total_damage_taken": 25077,
+            "total_heal": 4929,
+            "vision_wards_bought_in_game": 2,
+            "ward_place": 7,
+            "largest_killing_spree": 3,
+            "largest_multi_kill": 3,
+            "largest_critical_strike": 510,
+            "time_ccing_others": 23
+          },
+          {
+            "summoner_name": "choice2",
+            "summoner_tag": "3929",
+            "champion_id": 201,
+            "champion_name": "弗雷尔卓德之心",
+            "team_key": "RED",
+            "position": "SUPPORT",
+            "items": [
+              3869,
+              3067,
+              3109,
+              3190,
+              3009,
+              1028
+            ],
+            "items_names": [
+              "星界据守",
+              "燃烧宝石",
+              "骑士之誓",
+              "钢铁烈阳之匣",
+              "轻灵之靴",
+              "红水晶"
+            ],
+            "spells": [
+              7,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8300,
+              "primary_rune_id": 8360,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 11,
+            "kill": 3,
+            "death": 8,
+            "assist": 13,
+            "kda": "2.00",
+            "result": "LOSE",
+            "op_score": 3.23,
+            "op_score_rank": 7,
+            "gold_earned": 7458,
+            "minion_kill": 25,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 6753,
+            "total_damage_taken": 27068,
+            "total_heal": 3470,
+            "vision_wards_bought_in_game": 8,
+            "ward_place": 33,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 42
+          },
+          {
+            "summoner_name": "Desire",
+            "summoner_tag": "Tired",
+            "champion_id": 112,
+            "champion_name": "奥术先驱",
+            "team_key": "RED",
+            "position": "MID",
+            "items": [
+              1056,
+              2503,
+              3173,
+              3113,
+              1026,
+              2055
+            ],
+            "items_names": [
+              "多兰之戒",
+              "黯炎火炬",
+              "带链碾碎者",
+              "以太精魂",
+              "爆裂魔杖",
+              "控制守卫"
+            ],
+            "spells": [
+              12,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8200,
+              "primary_rune_id": 8992,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 13,
+            "kill": 0,
+            "death": 10,
+            "assist": 4,
+            "kda": "0.40",
+            "result": "LOSE",
+            "op_score": 0.63,
+            "op_score_rank": 10,
+            "gold_earned": 7739,
+            "minion_kill": 194,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 19958,
+            "total_damage_taken": 19882,
+            "total_heal": 838,
+            "vision_wards_bought_in_game": 3,
+            "ward_place": 8,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 0,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 22
+          },
+          {
+            "summoner_name": "Jinx",
+            "summoner_tag": "wzq",
+            "champion_id": 15,
+            "champion_name": "战争女神",
+            "team_key": "RED",
+            "position": "ADC",
+            "items": [
+              3032,
+              6675,
+              2523,
+              1086,
+              1036,
+              1036
+            ],
+            "items_names": [
+              "育恩塔尔荒野箭",
+              "纳沃利烁刃",
+              "海克斯镜片 C44",
+              "多兰之弓",
+              "长剑",
+              "长剑"
+            ],
+            "spells": [
+              3,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 13,
+            "kill": 4,
+            "death": 10,
+            "assist": 3,
+            "kda": "0.70",
+            "result": "LOSE",
+            "op_score": 1.45,
+            "op_score_rank": 9,
+            "gold_earned": 10821,
+            "minion_kill": 202,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 16118,
+            "total_damage_taken": 20761,
+            "total_heal": 2821,
+            "vision_wards_bought_in_game": 0,
+            "ward_place": 6,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 459,
+            "time_ccing_others": 2
+          },
+          {
+            "summoner_name": "Mitsuki",
+            "summoner_tag": "TES1",
+            "champion_id": 31,
+            "champion_name": "虚空恐惧",
+            "team_key": "RED",
+            "position": "JUNGLE",
+            "items": [
+              3009,
+              2421,
+              2055,
+              3742,
+              3084,
+              1058
+            ],
+            "items_names": [
+              "轻灵之靴",
+              "碎裂的护臂",
+              "控制守卫",
+              "亡者的板甲",
+              "心之钢",
+              "无用大棒"
+            ],
+            "spells": [
+              11,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8100,
+              "primary_rune_id": 9923,
+              "secondary_page_id": 8200
+            },
+            "champion_level": 13,
+            "kill": 9,
+            "death": 6,
+            "assist": 7,
+            "kda": "2.67",
+            "result": "LOSE",
+            "op_score": 4.53,
+            "op_score_rank": 6,
+            "gold_earned": 10972,
+            "minion_kill": 15,
+            "neutral_minion_kill": 107,
+            "total_damage_dealt_to_champions": 22847,
+            "total_damage_taken": 43947,
+            "total_heal": 9346,
+            "vision_wards_bought_in_game": 5,
+            "ward_place": 4,
+            "largest_killing_spree": 4,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 89
+          }
+        ],
+        "average_tier_info": {
+          "tier": "MASTER",
+          "division": 1,
+          "border_image_url": "https://opgg-static.akamaized.net/images/border_new/master.png"
+        },
+        "_account_slug": "main",
+        "_account_label": "The shy#asdf"
+      },
+      {
+        "id": "qfvdWpGbi20WSlRfGMPbAbw0GoOFRvwnqWjvVwJiiQo=",
+        "created_at": "2026-08-31T01:21:46+09:00",
+        "game_type": "SOLORANKED",
+        "game_length_second": 1671,
+        "game_map": "SUMMONERS_RIFT",
+        "champion_id": 34,
+        "champion": "冰晶凤凰",
+        "team_key": "RED",
+        "position": "TOP",
+        "kill": 4,
+        "death": 7,
+        "assist": 13,
+        "kda": "2.43",
+        "result": "WIN",
+        "op_score": 5.25,
+        "op_score_rank": 5,
+        "gold_earned": 11088,
+        "minion_kill": 162,
+        "neutral_minion_kill": 8,
+        "total_damage_dealt_to_champions": 28685,
+        "total_damage_taken": 33676,
+        "total_heal": 4385,
+        "vision_wards_bought_in_game": 2,
+        "ward_place": 11,
+        "largest_killing_spree": 2,
+        "largest_multi_kill": 1,
+        "largest_critical_strike": 0,
+        "time_ccing_others": 77,
+        "champion_level": 16,
+        "items": [
+          3009,
+          3040,
+          3118,
+          6657,
+          3140
+        ],
+        "items_names": [
+          "轻灵之靴",
+          "炽天使之拥",
+          "残疫",
+          "时光之杖",
+          "水银饰带"
+        ],
+        "spells": [
+          4,
+          12
+        ],
+        "rune": {
+          "_class": "Rune",
+          "primary_page_id": 8300,
+          "primary_rune_id": 8369,
+          "secondary_page_id": 8200
+        },
+        "teams": [
+          {
+            "key": "BLUE",
+            "banned_champions": [
+              51,
+              126,
+              142,
+              246,
+              876
+            ],
+            "banned_champions_names": [
+              "皮城女警",
+              "未来守护者",
+              "暮光星灵",
+              "元素女皇",
+              "含羞蓓蕾"
+            ],
+            "game_stat": {
+              "is_win": "false",
+              "champion_kill": 24,
+              "tower_kill": 0,
+              "dragon_kill": 1,
+              "baron_kill": 0,
+              "inhibitor_kill": 0,
+              "rift_herald_kill": 0,
+              "atakhan_kill": 0,
+              "gold_earned": 54510,
+              "champion_first": "true",
+              "horde_kill": 1
+            }
+          },
+          {
+            "key": "RED",
+            "banned_champions": [
+              44,
+              78,
+              89,
+              142,
+              238
+            ],
+            "banned_champions_names": [
+              "瓦洛兰之盾",
+              "圣锤之毅",
+              "曙光女神",
+              "暮光星灵",
+              "影流之主"
+            ],
+            "game_stat": {
+              "is_win": "true",
+              "champion_kill": 32,
+              "tower_kill": 9,
+              "dragon_kill": 3,
+              "baron_kill": 1,
+              "inhibitor_kill": 1,
+              "rift_herald_kill": 1,
+              "atakhan_kill": 0,
+              "gold_earned": 62432,
+              "champion_first": "false",
+              "horde_kill": 2
+            }
+          }
+        ],
+        "participants": [
+          {
+            "summoner_name": "惊喜惊喜",
+            "summoner_tag": "KR3",
+            "champion_id": 63,
+            "champion_name": "复仇焰魂",
+            "team_key": "BLUE",
+            "position": "SUPPORT",
+            "items": [
+              2503,
+              3871,
+              1082,
+              3020,
+              6653,
+              1052
+            ],
+            "items_names": [
+              "黯炎火炬",
+              "扎兹沙克的溃口",
+              "黑暗封印",
+              "法师之靴",
+              "兰德里的折磨",
+              "增幅典籍"
+            ],
+            "spells": [
+              4,
+              7
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8200,
+              "primary_rune_id": 8992,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 12,
+            "kill": 3,
+            "death": 8,
+            "assist": 11,
+            "kda": "1.75",
+            "result": "LOSE",
+            "op_score": 3.94,
+            "op_score_rank": 9,
+            "gold_earned": 9018,
+            "minion_kill": 58,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 22964,
+            "total_damage_taken": 20875,
+            "total_heal": 2725,
+            "vision_wards_bought_in_game": 15,
+            "ward_place": 38,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 20
+          },
+          {
+            "summoner_name": "alwind",
+            "summoner_tag": "wind",
+            "champion_id": 19,
+            "champion_name": "祖安怒兽",
+            "team_key": "BLUE",
+            "position": "TOP",
+            "items": [
+              1054,
+              6631,
+              3111,
+              6672,
+              2019
+            ],
+            "items_names": [
+              "多兰之盾",
+              "挺进破坏者",
+              "水银之靴",
+              "海妖杀手",
+              "钢铁印章"
+            ],
+            "spells": [
+              4,
+              21
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 16,
+            "kill": 2,
+            "death": 7,
+            "assist": 4,
+            "kda": "0.86",
+            "result": "LOSE",
+            "op_score": 2.1,
+            "op_score_rank": 10,
+            "gold_earned": 9372,
+            "minion_kill": 203,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 16001,
+            "total_damage_taken": 33207,
+            "total_heal": 9996,
+            "vision_wards_bought_in_game": 0,
+            "ward_place": 9,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 24
+          },
+          {
+            "summoner_name": "PpCheng",
+            "summoner_tag": "장군님",
+            "champion_id": 221,
+            "champion_name": "祖安花火",
+            "team_key": "BLUE",
+            "position": "ADC",
+            "items": [
+              3085,
+              1086,
+              3032,
+              3031,
+              3035,
+              3123
+            ],
+            "items_names": [
+              "卢安娜的飓风",
+              "多兰之弓",
+              "育恩塔尔荒野箭",
+              "无尽之刃",
+              "最后的轻语",
+              "死刑宣告"
+            ],
+            "spells": [
+              4,
+              3
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 14,
+            "kill": 5,
+            "death": 9,
+            "assist": 8,
+            "kda": "1.44",
+            "result": "LOSE",
+            "op_score": 4.07,
+            "op_score_rank": 8,
+            "gold_earned": 13563,
+            "minion_kill": 235,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 29314,
+            "total_damage_taken": 23649,
+            "total_heal": 4282,
+            "vision_wards_bought_in_game": 0,
+            "ward_place": 11,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 523,
+            "time_ccing_others": 5
+          },
+          {
+            "summoner_name": "KRX MINO",
+            "summoner_tag": "KRX",
+            "champion_id": 805,
+            "champion_name": "灰烬驱魔人",
+            "team_key": "BLUE",
+            "position": "MID",
+            "items": [
+              3157,
+              4630,
+              3100,
+              4646,
+              3175
+            ],
+            "items_names": [
+              "中娅沙漏",
+              "枯萎珠宝",
+              "巫妖之祸",
+              "风暴狂涌",
+              "灵能使之靴"
+            ],
+            "spells": [
+              14,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8100,
+              "primary_rune_id": 8112,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 15,
+            "kill": 12,
+            "death": 3,
+            "assist": 2,
+            "kda": "4.67",
+            "result": "LOSE",
+            "op_score": 5.43,
+            "op_score_rank": 3,
+            "gold_earned": 12187,
+            "minion_kill": 155,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 21275,
+            "total_damage_taken": 26674,
+            "total_heal": 14690,
+            "vision_wards_bought_in_game": 5,
+            "ward_place": 10,
+            "largest_killing_spree": 8,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 16
+          },
+          {
+            "summoner_name": "999ss",
+            "summoner_tag": "Miss",
+            "champion_id": 33,
+            "champion_name": "披甲龙龟",
+            "team_key": "BLUE",
+            "position": "JUNGLE",
+            "items": [
+              6664,
+              3075,
+              1031,
+              1011,
+              1057,
+              3047
+            ],
+            "items_names": [
+              "璀璨回响",
+              "荆棘之甲",
+              "锁子甲",
+              "巨人腰带",
+              "负极斗篷",
+              "铁板靴"
+            ],
+            "spells": [
+              4,
+              11
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8400,
+              "primary_rune_id": 8439,
+              "secondary_page_id": 8000
+            },
+            "champion_level": 14,
+            "kill": 2,
+            "death": 5,
+            "assist": 11,
+            "kda": "2.60",
+            "result": "LOSE",
+            "op_score": 4.24,
+            "op_score_rank": 7,
+            "gold_earned": 10370,
+            "minion_kill": 12,
+            "neutral_minion_kill": 148,
+            "total_damage_dealt_to_champions": 12027,
+            "total_damage_taken": 26055,
+            "total_heal": 8305,
+            "vision_wards_bought_in_game": 3,
+            "ward_place": 5,
+            "largest_killing_spree": 0,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 37,
+            "time_ccing_others": 33
+          },
+          {
+            "summoner_name": "qweasdqweasdb",
+            "summoner_tag": "1372",
+            "champion_id": 12,
+            "champion_name": "牛头酋长",
+            "team_key": "RED",
+            "position": "SUPPORT",
+            "items": [
+              3876,
+              3190,
+              3050,
+              3009,
+              8020,
+              1028
+            ],
+            "items_names": [
+              "摩天雪橇",
+              "钢铁烈阳之匣",
+              "基克的聚合",
+              "轻灵之靴",
+              "深渊面具",
+              "红水晶"
+            ],
+            "spells": [
+              4,
+              7
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8300,
+              "primary_rune_id": 8351,
+              "secondary_page_id": 8200
+            },
+            "champion_level": 13,
+            "kill": 6,
+            "death": 2,
+            "assist": 20,
+            "kda": "13.00",
+            "result": "WIN",
+            "op_score": 8.5,
+            "op_score_rank": 1,
+            "gold_earned": 9890,
+            "minion_kill": 22,
+            "neutral_minion_kill": 0,
+            "total_damage_dealt_to_champions": 10716,
+            "total_damage_taken": 28679,
+            "total_heal": 15781,
+            "vision_wards_bought_in_game": 14,
+            "ward_place": 48,
+            "largest_killing_spree": 3,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 79
+          },
+          {
+            "summoner_name": "The shy",
+            "summoner_tag": "asdf",
+            "champion_id": 34,
+            "champion_name": "冰晶凤凰",
+            "team_key": "RED",
+            "position": "TOP",
+            "items": [
+              3009,
+              3040,
+              3118,
+              6657,
+              3140
+            ],
+            "items_names": [
+              "轻灵之靴",
+              "炽天使之拥",
+              "残疫",
+              "时光之杖",
+              "水银饰带"
+            ],
+            "spells": [
+              4,
+              12
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8300,
+              "primary_rune_id": 8369,
+              "secondary_page_id": 8200
+            },
+            "champion_level": 16,
+            "kill": 4,
+            "death": 7,
+            "assist": 13,
+            "kda": "2.43",
+            "result": "WIN",
+            "op_score": 5.25,
+            "op_score_rank": 5,
+            "gold_earned": 11088,
+            "minion_kill": 162,
+            "neutral_minion_kill": 8,
+            "total_damage_dealt_to_champions": 28685,
+            "total_damage_taken": 33676,
+            "total_heal": 4385,
+            "vision_wards_bought_in_game": 2,
+            "ward_place": 11,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 77
+          },
+          {
+            "summoner_name": "perilla leaf",
+            "summoner_tag": "123",
+            "champion_id": 18,
+            "champion_name": "麦林炮手",
+            "team_key": "RED",
+            "position": "MID",
+            "items": [
+              1120,
+              6675,
+              2523,
+              3173,
+              3031
+            ],
+            "items_names": [
+              "多兰之盔",
+              "纳沃利烁刃",
+              "海克斯镜片 C44",
+              "带链碾碎者",
+              "无尽之刃"
+            ],
+            "spells": [
+              3,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8400
+            },
+            "champion_level": 15,
+            "kill": 3,
+            "death": 7,
+            "assist": 12,
+            "kda": "2.14",
+            "result": "WIN",
+            "op_score": 4.75,
+            "op_score_rank": 6,
+            "gold_earned": 11639,
+            "minion_kill": 187,
+            "neutral_minion_kill": 16,
+            "total_damage_dealt_to_champions": 24777,
+            "total_damage_taken": 25065,
+            "total_heal": 5264,
+            "vision_wards_bought_in_game": 0,
+            "ward_place": 7,
+            "largest_killing_spree": 2,
+            "largest_multi_kill": 1,
+            "largest_critical_strike": 635,
+            "time_ccing_others": 13
+          },
+          {
+            "summoner_name": "서폿 야스오",
+            "summoner_tag": "123",
+            "champion_id": 157,
+            "champion_name": "疾风剑豪",
+            "team_key": "RED",
+            "position": "ADC",
+            "items": [
+              3156,
+              3046,
+              3026,
+              3031,
+              1036
+            ],
+            "items_names": [
+              "玛莫提乌斯之噬",
+              "幻影之舞",
+              "守护天使",
+              "无尽之刃",
+              "长剑"
+            ],
+            "spells": [
+              3,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8000,
+              "primary_rune_id": 8008,
+              "secondary_page_id": 8300
+            },
+            "champion_level": 15,
+            "kill": 11,
+            "death": 6,
+            "assist": 4,
+            "kda": "2.50",
+            "result": "WIN",
+            "op_score": 5.28,
+            "op_score_rank": 4,
+            "gold_earned": 14951,
+            "minion_kill": 228,
+            "neutral_minion_kill": 12,
+            "total_damage_dealt_to_champions": 25263,
+            "total_damage_taken": 27808,
+            "total_heal": 5963,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 8,
+            "largest_killing_spree": 6,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 804,
+            "time_ccing_others": 29
+          },
+          {
+            "summoner_name": "qianzaoche",
+            "summoner_tag": "23512",
+            "champion_id": 76,
+            "champion_name": "狂野女猎手",
+            "team_key": "RED",
+            "position": "JUNGLE",
+            "items": [
+              3137,
+              3152,
+              3157,
+              3111,
+              1082,
+              3100
+            ],
+            "items_names": [
+              "蜕生",
+              "海克斯科技火箭腰带",
+              "中娅沙漏",
+              "水银之靴",
+              "黑暗封印",
+              "巫妖之祸"
+            ],
+            "spells": [
+              11,
+              4
+            ],
+            "rune": {
+              "_class": "Rune",
+              "primary_page_id": 8100,
+              "primary_rune_id": 8128,
+              "secondary_page_id": 8000
+            },
+            "champion_level": 16,
+            "kill": 8,
+            "death": 2,
+            "assist": 15,
+            "kda": "11.50",
+            "result": "WIN",
+            "op_score": 8.44,
+            "op_score_rank": 2,
+            "gold_earned": 14864,
+            "minion_kill": 35,
+            "neutral_minion_kill": 177,
+            "total_damage_dealt_to_champions": 22804,
+            "total_damage_taken": 22008,
+            "total_heal": 23739,
+            "vision_wards_bought_in_game": 1,
+            "ward_place": 3,
+            "largest_killing_spree": 4,
+            "largest_multi_kill": 2,
+            "largest_critical_strike": 0,
+            "time_ccing_others": 2
+          }
+        ],
+        "average_tier_info": {
+          "tier": "MASTER",
+          "division": 1,
+          "border_image_url": "https://opgg-static.akamaized.net/images/border_new/master.png"
+        },
+        "_account_slug": "main",
+        "_account_label": "The shy#asdf"
+      }
+    ],
+    "timestamp": "2026-09-01T03:13:01.934531+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "game_type": "SOLORANKED",
+    "old_lp": 761,
+    "new_lp": 686,
+    "delta": -75,
+    "tier": "MASTER",
+    "division": 1,
+    "timestamp": "2026-09-01T03:13:00.876786+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-09-01T02:39:45+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-01T03:13:00.871308+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "game_type": "SOLORANKED",
+    "old_lp": 1597,
+    "new_lp": 1616,
+    "delta": 19,
+    "tier": "GRANDMASTER",
+    "division": 1,
+    "timestamp": "2026-09-01T03:12:59.836221+09:00"
+  },
+  {
+    "type": "new_match",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "match_id": "qfvdWpGbi21ffyqY5_lRnm6STwmET_9nEkmk2_9X6Qk=",
+    "game_type": "SOLORANKED",
+    "champion": "狂战士",
+    "result": "WIN",
+    "kda": "4.50",
+    "kill": 6,
+    "death": 2,
+    "assist": 3,
+    "created_at": "2026-09-01T02:29:40+09:00",
+    "game_length_second": 1143,
+    "position": "TOP",
+    "timestamp": "2026-09-01T03:12:58.864060+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-01T03:12:29+09:00",
+    "level": 299,
+    "is_active": true,
+    "timestamp": "2026-09-01T03:12:58.858724+09:00"
+  },
+  {
+    "type": "winning_streak",
+    "account": "The shy#asdf",
+    "slug": "main",
     "streak": 3,
     "matches": [
       {
@@ -4838,59 +7508,5 @@
     "level": 298,
     "is_active": true,
     "timestamp": "2026-08-26T10:51:11.293252+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-26T09:01:34+09:00",
-    "level": 94,
-    "is_active": true,
-    "timestamp": "2026-08-26T09:01:42.889306+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-26T08:45:28+09:00",
-    "level": 298,
-    "is_active": true,
-    "timestamp": "2026-08-26T08:45:52.830655+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-26T08:24:19+09:00",
-    "level": 94,
-    "is_active": true,
-    "timestamp": "2026-08-26T08:24:29.429917+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-26T08:24:05+09:00",
-    "level": 298,
-    "is_active": true,
-    "timestamp": "2026-08-26T08:24:29.426857+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-08-26T07:57:33+09:00",
-    "level": 94,
-    "is_active": true,
-    "timestamp": "2026-08-26T07:57:42.948396+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-26T07:57:19+09:00",
-    "level": 298,
-    "is_active": true,
-    "timestamp": "2026-08-26T07:57:42.945181+09:00"
   }
 ]
