@@ -9,28 +9,28 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 300,
-  "updated_at": "2026-09-02T04:03:44+09:00",
-  "renewable_at": "2026-09-02T04:05:44+09:00",
-  "revision_at": "2026-09-02T03:57:51+09:00",
+  "updated_at": "2026-09-02T06:23:38+09:00",
+  "renewable_at": "2026-09-02T06:25:38+09:00",
+  "revision_at": "2026-09-02T04:23:41+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 497,
-    "total": 2953172
+    "rank": 528,
+    "total": 2953461
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
       "tier": "GRANDMASTER",
       "division": 1,
-      "lp": 1613,
+      "lp": 1592,
       "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
       "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
       "win": 134,
-      "lose": 88,
-      "play": 221,
+      "lose": 89,
+      "play": 222,
       "match_win": 134,
-      "match_lose": 87,
+      "match_lose": 88,
       "is_hot_streak": "false",
       "is_fresh_blood": "false",
       "is_veteran": "false",
@@ -42,7 +42,7 @@
           "key": "CHALLENGER",
           "current_count": 312,
           "lp_threshold": 1832,
-          "promotion_candidate_count": 3,
+          "promotion_candidate_count": 4,
           "demotion_candidate_count": 14
         },
         {
@@ -50,8 +50,8 @@
           "key": "GRANDMASTER",
           "current_count": 711,
           "lp_threshold": 1336,
-          "promotion_candidate_count": 17,
-          "demotion_candidate_count": 39
+          "promotion_candidate_count": 16,
+          "demotion_candidate_count": 38
         }
       ]
     },
@@ -545,9 +545,9 @@
     "game_type": "RANKED",
     "season_id": 33,
     "year": null,
-    "play": 221,
+    "play": 222,
     "win": 134,
-    "lose": 87,
+    "lose": 88,
     "champion_stats": [
       {
         "id": 126,
@@ -794,9 +794,9 @@
   "ranked_most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
-    "play": 221,
+    "play": 222,
     "win": 134,
-    "lose": 87,
+    "lose": 88,
     "my_champion_stats": [
       {
         "id": 126,
@@ -1489,6 +1489,15 @@
       "assist": 14
     },
     {
+      "champion_name": "黑暗之女",
+      "id": 1,
+      "play": 2,
+      "win": 1,
+      "kill": 1,
+      "death": 8,
+      "assist": 15
+    },
+    {
       "champion_name": "青钢影",
       "id": 164,
       "play": 2,
@@ -1514,15 +1523,6 @@
       "kill": 4,
       "death": 5,
       "assist": 11
-    },
-    {
-      "champion_name": "黑暗之女",
-      "id": 1,
-      "play": 1,
-      "win": 1,
-      "kill": 0,
-      "death": 5,
-      "assist": 14
     }
   ]
 }
