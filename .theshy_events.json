@@ -1,6 +1,24 @@
 [
   {
     "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-09-05T13:59:14+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-05T14:35:23.426190+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-05T13:59:22+09:00",
+    "level": 302,
+    "is_active": false,
+    "timestamp": "2026-09-05T14:35:23.420191+09:00"
+  },
+  {
+    "type": "opgg_updated",
     "account": "The shy#asdf",
     "slug": "main",
     "updated_at": "2026-09-05T09:04:00+09:00",
@@ -5596,31 +5614,5 @@
     "tier": "GRANDMASTER",
     "division": 1,
     "timestamp": "2026-08-31T01:44:57.986033+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi20WSlRfGMPbAbw0GoOFRvwnqWjvVwJiiQo=",
-    "game_type": "SOLORANKED",
-    "champion": "冰晶凤凰",
-    "result": "WIN",
-    "kda": "2.43",
-    "kill": 4,
-    "death": 7,
-    "assist": 13,
-    "created_at": "2026-08-31T01:21:46+09:00",
-    "game_length_second": 1671,
-    "position": "TOP",
-    "timestamp": "2026-08-31T01:44:56.951529+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-08-31T01:43:47+09:00",
-    "level": 299,
-    "is_active": true,
-    "timestamp": "2026-08-31T01:44:56.948353+09:00"
   }
 ]
