@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-09-07T08:41:24+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-07T08:55:30.207130+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-07T08:27:52+09:00",
+    "level": 302,
+    "is_active": false,
+    "timestamp": "2026-09-07T08:55:30.206146+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-09-07T05:27:44+09:00",
     "level": 94,
     "is_active": false,
@@ -964,34 +982,5 @@
     "level": 94,
     "is_active": false,
     "timestamp": "2026-09-02T04:23:59.146655+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "game_type": "SOLORANKED",
-    "old_lp": 1635,
-    "new_lp": 1613,
-    "delta": -22,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-09-02T04:23:58.231032+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi23yeWL7hO9wJnya294o14MAF5UVVdhiL6o=",
-    "game_type": "SOLORANKED",
-    "champion": "英勇投弹手",
-    "result": "LOSE",
-    "kda": "1.86",
-    "kill": 7,
-    "death": 7,
-    "assist": 6,
-    "created_at": "2026-09-02T03:57:42+09:00",
-    "game_length_second": 2107,
-    "position": "TOP",
-    "timestamp": "2026-09-02T04:23:57.299685+09:00"
   }
 ]
