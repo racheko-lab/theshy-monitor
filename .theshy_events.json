@@ -1,5 +1,30 @@
 [
   {
+    "type": "bilibili_live",
+    "kind": "ig_live_start",
+    "title": "【直播】LGD vs IG",
+    "room_id": 6,
+    "timestamp": "2026-09-08T20:16:07.763335+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-09-08T15:11:04+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-08T20:16:06.041648+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-08T19:55:38+09:00",
+    "level": 302,
+    "is_active": false,
+    "timestamp": "2026-09-08T20:16:06.040851+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -945,31 +970,5 @@
     "game_length_second": 916,
     "position": "TOP",
     "timestamp": "2026-09-03T03:05:06.694870+09:00"
-  },
-  {
-    "type": "level_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "old": 300,
-    "new": 301,
-    "timestamp": "2026-09-03T03:05:05.634801+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-09-03T03:04:30+09:00",
-    "level": 301,
-    "is_active": true,
-    "timestamp": "2026-09-03T03:05:05.625858+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-09-02T19:40:42+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-09-02T23:42:27.741460+09:00"
   }
 ]
