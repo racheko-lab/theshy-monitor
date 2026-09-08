@@ -1,6 +1,31 @@
 [
   {
     "type": "bilibili_live",
+    "kind": "ig_live_end",
+    "title": "【直播】LGD vs IG",
+    "room_id": 6,
+    "timestamp": "2026-09-09T00:09:44.036761+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-09-08T20:15:59+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-09T00:09:42.349382+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-09T00:02:28+09:00",
+    "level": 302,
+    "is_active": false,
+    "timestamp": "2026-09-09T00:09:42.348396+09:00"
+  },
+  {
+    "type": "bilibili_live",
     "kind": "ig_live_start",
     "title": "【直播】LGD vs IG",
     "room_id": 6,
@@ -932,43 +957,5 @@
     "level": 301,
     "is_active": true,
     "timestamp": "2026-09-03T05:58:19.414226+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-09-02T23:42:20+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-09-03T03:05:08.886694+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "game_type": "SOLORANKED",
-    "old_lp": 1528,
-    "new_lp": 1586,
-    "delta": 58,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-09-03T03:05:07.832813+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi22F072EIBDVgBtCDb5uvgL9mJO6mQ9AW0I=",
-    "game_type": "SOLORANKED",
-    "champion": "冰晶凤凰",
-    "result": "WIN",
-    "kda": "Perfect",
-    "kill": 0,
-    "death": 0,
-    "assist": 4,
-    "created_at": "2026-09-03T02:13:39+09:00",
-    "game_length_second": 916,
-    "position": "TOP",
-    "timestamp": "2026-09-03T03:05:06.694870+09:00"
   }
 ]
