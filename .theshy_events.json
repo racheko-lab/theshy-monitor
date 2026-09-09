@@ -1,5 +1,23 @@
 [
   {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-09-10T06:08:19+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-10T08:12:06.784465+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-10T06:08:04+09:00",
+    "level": 302,
+    "is_active": false,
+    "timestamp": "2026-09-10T08:12:06.783573+09:00"
+  },
+  {
     "type": "lp_changed",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -921,22 +939,5 @@
     "game_length_second": 1411,
     "position": "TOP",
     "timestamp": "2026-09-04T02:58:13.394032+09:00"
-  },
-  {
-    "type": "level_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "old": 301,
-    "new": 302,
-    "timestamp": "2026-09-04T02:58:12.423275+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-09-04T02:55:52+09:00",
-    "level": 302,
-    "is_active": true,
-    "timestamp": "2026-09-04T02:58:12.419258+09:00"
   }
 ]
