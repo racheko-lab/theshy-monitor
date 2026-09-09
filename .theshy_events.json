@@ -1,5 +1,35 @@
 [
   {
+    "type": "lp_changed",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "game_type": "SOLORANKED",
+    "old_lp": 161,
+    "new_lp": 86,
+    "delta": -75,
+    "tier": "MASTER",
+    "division": 1,
+    "timestamp": "2026-09-10T00:10:16.184815+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-09-09T20:19:03+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-10T00:10:16.104688+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-10T00:02:01+09:00",
+    "level": 302,
+    "is_active": false,
+    "timestamp": "2026-09-10T00:10:16.103660+09:00"
+  },
+  {
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
@@ -916,43 +946,5 @@
     "level": 301,
     "is_active": true,
     "timestamp": "2026-09-03T23:27:33.110400+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-09-03T19:05:36+09:00",
-    "level": 94,
-    "is_active": true,
-    "timestamp": "2026-09-03T19:05:46.302523+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "game_type": "SOLORANKED",
-    "old_lp": 1586,
-    "new_lp": 1605,
-    "delta": 19,
-    "tier": "GRANDMASTER",
-    "division": 1,
-    "timestamp": "2026-09-03T19:05:45.409520+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi23XlHCpgKCR5rTx3nbQeATXKbeMiPSL1HQ=",
-    "game_type": "SOLORANKED",
-    "champion": 904,
-    "result": "WIN",
-    "kda": "Perfect",
-    "kill": 6,
-    "death": 0,
-    "assist": 1,
-    "created_at": "2026-09-03T17:43:14+09:00",
-    "game_length_second": 924,
-    "position": "TOP",
-    "timestamp": "2026-09-03T19:05:44.583487+09:00"
   }
 ]
