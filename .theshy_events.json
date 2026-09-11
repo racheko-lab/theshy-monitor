@@ -3,6 +3,61 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-09-11T23:12:41+09:00",
+    "level": 94,
+    "is_active": false,
+    "timestamp": "2026-09-12T02:11:49.887739+09:00"
+  },
+  {
+    "type": "lp_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "game_type": "SOLORANKED",
+    "old_lp": 1634,
+    "new_lp": 1673,
+    "delta": 39,
+    "tier": "GRANDMASTER",
+    "division": 1,
+    "timestamp": "2026-09-12T02:11:49.080535+09:00"
+  },
+  {
+    "type": "new_match",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "match_id": "qfvdWpGbi22_IZKNuLAQaGBsm0NuTHA52yAJuEjtdNw=",
+    "game_type": "SOLORANKED",
+    "champion": "炼金男爵",
+    "result": "WIN",
+    "kda": "4.60",
+    "kill": 2,
+    "death": 5,
+    "assist": 21,
+    "created_at": "2026-09-12T00:27:14+09:00",
+    "game_length_second": 1759,
+    "position": "SUPPORT",
+    "timestamp": "2026-09-12T02:11:48.134093+09:00"
+  },
+  {
+    "type": "level_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "old": 302,
+    "new": 303,
+    "timestamp": "2026-09-12T02:11:47.284266+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-12T02:11:15+09:00",
+    "level": 303,
+    "is_active": true,
+    "timestamp": "2026-09-12T02:11:47.283432+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-09-11T21:49:36+09:00",
     "level": 94,
     "is_active": false,
@@ -860,45 +915,5 @@
     "level": 94,
     "is_active": false,
     "timestamp": "2026-09-05T21:47:50.245698+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-09-05T21:44:27+09:00",
-    "level": 302,
-    "is_active": true,
-    "timestamp": "2026-09-05T21:47:50.239320+09:00"
-  },
-  {
-    "type": "hupu_rating",
-    "kind": "hupu_rating",
-    "title": "TES 1-2 IG",
-    "timestamp": "2026-09-05T18:23:43.101425+09:00"
-  },
-  {
-    "type": "bilibili_live",
-    "kind": "ig_live_start",
-    "title": "【直播】TES vs IG",
-    "room_id": 6,
-    "timestamp": "2026-09-05T18:18:24.681482+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-09-05T14:35:16+09:00",
-    "level": 94,
-    "is_active": false,
-    "timestamp": "2026-09-05T18:18:22.853969+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-09-05T17:14:53+09:00",
-    "level": 302,
-    "is_active": false,
-    "timestamp": "2026-09-05T18:18:22.847934+09:00"
   }
 ]
