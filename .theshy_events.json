@@ -1,5 +1,23 @@
 [
   {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-09-18T03:56:20+09:00",
+    "level": 96,
+    "is_active": true,
+    "timestamp": "2026-09-18T03:56:30.754840+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-18T03:56:04+09:00",
+    "level": 303,
+    "is_active": true,
+    "timestamp": "2026-09-18T03:56:30.751742+09:00"
+  },
+  {
     "type": "bilibili_live",
     "kind": "ig_live_end",
     "title": "【直播】TES vs IG",
@@ -2880,30 +2898,5 @@
     "tier": "GRANDMASTER",
     "division": 1,
     "timestamp": "2026-09-12T02:11:49.080535+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "match_id": "qfvdWpGbi22_IZKNuLAQaGBsm0NuTHA52yAJuEjtdNw=",
-    "game_type": "SOLORANKED",
-    "champion": "炼金男爵",
-    "result": "WIN",
-    "kda": "4.60",
-    "kill": 2,
-    "death": 5,
-    "assist": 21,
-    "created_at": "2026-09-12T00:27:14+09:00",
-    "game_length_second": 1759,
-    "position": "SUPPORT",
-    "timestamp": "2026-09-12T02:11:48.134093+09:00"
-  },
-  {
-    "type": "level_changed",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "old": 302,
-    "new": 303,
-    "timestamp": "2026-09-12T02:11:47.284266+09:00"
   }
 ]
