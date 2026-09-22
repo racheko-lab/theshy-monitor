@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-09-22T15:08:22+09:00",
+    "level": 96,
+    "is_active": false,
+    "timestamp": "2026-09-22T20:30:48.253274+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-22T20:30:23+09:00",
+    "level": 303,
+    "is_active": true,
+    "timestamp": "2026-09-22T20:30:48.249559+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-09-22T10:07:31+09:00",
     "level": 96,
     "is_active": false,
@@ -2844,34 +2862,5 @@
     "level": 303,
     "is_active": false,
     "timestamp": "2026-09-16T06:47:54.411579+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "game_type": "SOLORANKED",
-    "old_lp": 75,
-    "new_lp": 175,
-    "delta": 100,
-    "tier": "MASTER",
-    "division": 1,
-    "timestamp": "2026-09-16T03:47:46.195886+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "match_id": "qfvdWpGbi20FiubExsvj--5bZdc5Y1BMSD20BwiIVhc=",
-    "game_type": "SOLORANKED",
-    "champion": "牛头酋长",
-    "result": "WIN",
-    "kda": "5.75",
-    "kill": 2,
-    "death": 4,
-    "assist": 21,
-    "created_at": "2026-09-16T02:46:00+09:00",
-    "game_length_second": 1724,
-    "position": "SUPPORT",
-    "timestamp": "2026-09-16T03:47:45.184331+09:00"
   }
 ]
