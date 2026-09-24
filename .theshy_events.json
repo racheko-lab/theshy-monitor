@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-09-24T08:58:25+09:00",
+    "level": 96,
+    "is_active": false,
+    "timestamp": "2026-09-24T12:32:02.180759+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-09-24T12:31:39+09:00",
+    "level": 303,
+    "is_active": true,
+    "timestamp": "2026-09-24T12:32:02.179831+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-09-24T06:41:41+09:00",
     "level": 96,
     "is_active": false,
@@ -875,30 +893,5 @@
     "tier": "MASTER",
     "division": 1,
     "timestamp": "2026-09-17T04:47:29.903152+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "match_id": "qfvdWpGbi21ypcmApRcQwIQu9Hfws4aY-iFdVnkPpYg=",
-    "game_type": "SOLORANKED",
-    "champion": "惩戒之箭",
-    "result": "LOSE",
-    "kda": "0.20",
-    "kill": 1,
-    "death": 5,
-    "assist": 0,
-    "created_at": "2026-09-17T02:21:34+09:00",
-    "game_length_second": 918,
-    "position": "TOP",
-    "timestamp": "2026-09-17T04:47:28.876904+09:00"
-  },
-  {
-    "type": "level_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "old": 95,
-    "new": 96,
-    "timestamp": "2026-09-17T04:47:27.878530+09:00"
   }
 ]
