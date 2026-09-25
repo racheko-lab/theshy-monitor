@@ -17,14 +17,14 @@
         "internal_name": "퐁당가지토마토",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
         "level": 303,
-        "updated_at": "2026-09-25T21:17:44+09:00",
-        "renewable_at": "2026-09-25T21:19:44+09:00",
+        "updated_at": "2026-09-26T03:05:10+09:00",
+        "renewable_at": "2026-09-26T03:07:10+09:00",
         "revision_at": "2026-09-12T01:31:51+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
           "rank": 434,
-          "total": 3057090
+          "total": 3058246
         },
         "league_stats": [
           {
@@ -48,18 +48,18 @@
               {
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
-                "current_count": 308,
-                "lp_threshold": 1854,
-                "promotion_candidate_count": 7,
-                "demotion_candidate_count": 14
+                "current_count": 316,
+                "lp_threshold": 1855,
+                "promotion_candidate_count": 0,
+                "demotion_candidate_count": 16
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
-                "current_count": 714,
-                "lp_threshold": 1343,
-                "promotion_candidate_count": 10,
-                "demotion_candidate_count": 32
+                "current_count": 703,
+                "lp_threshold": 1342,
+                "promotion_candidate_count": 11,
+                "demotion_candidate_count": 28
               }
             ]
           },
@@ -14458,8 +14458,8 @@
         }
       ],
       "state": {
-        "is_active": false,
-        "last_check": "2026-09-25T22:44:24.483235+09:00",
+        "is_active": true,
+        "last_check": "2026-09-26T03:05:27.435693+09:00",
         "last_match_id": "qfvdWpGbi22_IZKNuLAQaGBsm0NuTHA52yAJuEjtdNw=",
         "matches_count": 20
       }
@@ -14481,14 +14481,14 @@
         "internal_name": "",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon7178.jpg",
         "level": 96,
-        "updated_at": "2026-09-25T17:10:38+09:00",
-        "renewable_at": "2026-09-25T17:12:38+09:00",
+        "updated_at": "2026-09-25T22:44:25+09:00",
+        "renewable_at": "2026-09-25T22:46:25+09:00",
         "revision_at": "2026-09-21T20:16:34+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 14736,
-          "total": 3057090
+          "rank": 14741,
+          "total": 3058247
         },
         "league_stats": [
           {
@@ -14512,18 +14512,18 @@
               {
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
-                "current_count": 308,
-                "lp_threshold": 1854,
-                "promotion_candidate_count": 7,
-                "demotion_candidate_count": 14
+                "current_count": 316,
+                "lp_threshold": 1855,
+                "promotion_candidate_count": 0,
+                "demotion_candidate_count": 16
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
-                "current_count": 714,
-                "lp_threshold": 1343,
-                "promotion_candidate_count": 10,
-                "demotion_candidate_count": 32
+                "current_count": 703,
+                "lp_threshold": 1342,
+                "promotion_candidate_count": 11,
+                "demotion_candidate_count": 28
               }
             ]
           },
@@ -14556,10 +14556,10 @@
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
-                "current_count": 507,
+                "current_count": 510,
                 "lp_threshold": 200,
-                "promotion_candidate_count": 34,
-                "demotion_candidate_count": 4
+                "promotion_candidate_count": 29,
+                "demotion_candidate_count": 3
               }
             ]
           },
@@ -27926,20 +27926,20 @@
       ],
       "state": {
         "is_active": false,
-        "last_check": "2026-09-25T22:44:34.469813+09:00",
+        "last_check": "2026-09-26T03:05:40.300706+09:00",
         "last_match_id": "qfvdWpGbi21ypcmApRcQwIQu9Hfws4aY-iFdVnkPpYg=",
         "matches_count": 19
       }
     }
   ],
-  "last_update": "2026-09-25T22:44:34.470183+09:00",
+  "last_update": "2026-09-26T03:05:40.301216+09:00",
   "bilibili": {
     "is_live": true,
     "is_ig_live": false,
     "title": "【预告】10月15号全球总决赛入围赛",
     "live_time": "2026-09-07 14:22:39",
     "room_id": 7734200,
-    "last_check": "2026-09-25T21:44:35.049278+08:00",
+    "last_check": "2026-09-26T02:05:40.778789+08:00",
     "notified_title": ""
   },
   "hupu_ratings": {
@@ -28118,7 +28118,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.4,
-            "total_count": 31912,
+            "total_count": 31913,
             "comments": 1880,
             "kda": "22/10/19",
             "kda_ratio": 4.1,
@@ -28175,13 +28175,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 28539,
+              "s5": 28540,
               "s4": 800,
               "s3": 554,
               "s2": 643,
               "s1": 1376
             },
-            "score_dist_total": 31912,
+            "score_dist_total": 31913,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
@@ -29553,7 +29553,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.4,
-            "total_count": 31912,
+            "total_count": 31913,
             "comments": 1880,
             "kda": "22/10/19",
             "kda_ratio": 4.1,
@@ -29610,13 +29610,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 28539,
+              "s5": 28540,
               "s4": 800,
               "s3": 554,
               "s2": 643,
               "s1": 1376
             },
-            "score_dist_total": 31912,
+            "score_dist_total": 31913,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
@@ -35188,7 +35188,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/736562126028800e14478d01882a294c446467b6df19879prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/380d436eed7666075c7bb58a58b30580.png",
                 "score": 9.8,
-                "votes": 10619,
+                "votes": 10620,
                 "comments": 410,
                 "kills": 4,
                 "deaths": 2,
@@ -35206,7 +35206,7 @@
                 "bg_color": "#000004",
                 "position": "",
                 "score_dist": {
-                  "s5": 10159,
+                  "s5": 10160,
                   "s4": 230,
                   "s3": 65,
                   "s2": 38,
@@ -35974,12 +35974,12 @@
             ]
           }
         ],
-        "total_scorers": 281004,
+        "total_scorers": 281005,
         "league_name": "职业联赛",
         "round_name": "2026赛季季后赛",
         "match_time": 1788674400000,
         "date_str": "09月06日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3838",
@@ -45618,7 +45618,7 @@
         "round_name": "2026赛季季后赛",
         "match_time": 1788588000000,
         "date_str": "09月05日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3834",
@@ -45646,7 +45646,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.9,
-            "total_count": 21305,
+            "total_count": 21306,
             "comments": 1538,
             "kda": "21/6/23",
             "kda_ratio": 7.33,
@@ -45698,11 +45698,11 @@
             "score_dist": {
               "s5": 20817,
               "s4": 206,
-              "s3": 44,
+              "s3": 45,
               "s2": 39,
               "s1": 199
             },
-            "score_dist_total": 21305,
+            "score_dist_total": 21306,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
@@ -46016,7 +46016,7 @@
                 "name": "Feather",
                 "desc": "败(0/3/4)",
                 "score": "2.7",
-                "votes": "790评分",
+                "votes": "791评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/122791392f5448df0ca952cedcd1d7235e6392d21prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                 "team_id": "438",
@@ -46322,7 +46322,7 @@
             "name": "Junhao",
             "team": "TT",
             "avg": 7.9,
-            "total_count": 4379,
+            "total_count": 4380,
             "comments": 548,
             "kda": "9/11/10",
             "kda_ratio": 1.73,
@@ -46367,19 +46367,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 2404,
+              "s5": 2405,
               "s4": 605,
               "s3": 671,
               "s2": 227,
               "s1": 472
             },
-            "score_dist_total": 4379,
+            "score_dist_total": 4380,
             "best_radar": {
               "self": {
                 "name": "Junhao",
                 "desc": "败(4/4/3)",
                 "score": "9.1",
-                "votes": "2341评分",
+                "votes": "2342评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/229298669731840ba29292150897cabfbe503df2db4ae8aprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/032a2510c54f42f170b13c5d0525f047.png",
                 "team_id": "438",
@@ -46590,7 +46590,7 @@
             "name": "Feather",
             "team": "TT",
             "avg": 2.6,
-            "total_count": 2959,
+            "total_count": 2960,
             "comments": 198,
             "kda": "0/13/16",
             "kda_ratio": 1.23,
@@ -46639,15 +46639,15 @@
               "s4": 29,
               "s3": 54,
               "s2": 219,
-              "s1": 2537
+              "s1": 2538
             },
-            "score_dist_total": 2959,
+            "score_dist_total": 2960,
             "best_radar": {
               "self": {
                 "name": "Feather",
                 "desc": "败(0/3/4)",
                 "score": "2.7",
-                "votes": "790评分",
+                "votes": "791评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/122791392f5448df0ca952cedcd1d7235e6392d21prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                 "team_id": "438",
@@ -46990,7 +46990,7 @@
             "name": "Junhao",
             "team": "TT",
             "avg": 7.9,
-            "total_count": 4379,
+            "total_count": 4380,
             "comments": 548,
             "kda": "9/11/10",
             "kda_ratio": 1.73,
@@ -47035,19 +47035,19 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 2404,
+              "s5": 2405,
               "s4": 605,
               "s3": 671,
               "s2": 227,
               "s1": 472
             },
-            "score_dist_total": 4379,
+            "score_dist_total": 4380,
             "best_radar": {
               "self": {
                 "name": "Junhao",
                 "desc": "败(4/4/3)",
                 "score": "9.1",
-                "votes": "2341评分",
+                "votes": "2342评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/229298669731840ba29292150897cabfbe503df2db4ae8aprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/032a2510c54f42f170b13c5d0525f047.png",
                 "team_id": "438",
@@ -47258,7 +47258,7 @@
             "name": "Feather",
             "team": "TT",
             "avg": 2.6,
-            "total_count": 2959,
+            "total_count": 2960,
             "comments": 198,
             "kda": "0/13/16",
             "kda_ratio": 1.23,
@@ -47307,15 +47307,15 @@
               "s4": 29,
               "s3": 54,
               "s2": 219,
-              "s1": 2537
+              "s1": 2538
             },
-            "score_dist_total": 2959,
+            "score_dist_total": 2960,
             "best_radar": {
               "self": {
                 "name": "Feather",
                 "desc": "败(0/3/4)",
                 "score": "2.7",
-                "votes": "790评分",
+                "votes": "791评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/122791392f5448df0ca952cedcd1d7235e6392d21prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                 "team_id": "438",
@@ -47658,7 +47658,7 @@
             "name": "JiaQi",
             "team": "IG",
             "avg": 9.9,
-            "total_count": 21305,
+            "total_count": 21306,
             "comments": 1538,
             "kda": "21/6/23",
             "kda_ratio": 7.33,
@@ -47710,11 +47710,11 @@
             "score_dist": {
               "s5": 20817,
               "s4": 206,
-              "s3": 44,
+              "s3": 45,
               "s2": 39,
               "s1": 199
             },
-            "score_dist_total": 21305,
+            "score_dist_total": 21306,
             "best_radar": {
               "self": {
                 "name": "JiaQi",
@@ -48028,7 +48028,7 @@
                 "name": "Feather",
                 "desc": "败(0/3/4)",
                 "score": "2.7",
-                "votes": "790评分",
+                "votes": "791评分",
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/122791392f5448df0ca952cedcd1d7235e6392d21prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                 "team_id": "438",
@@ -49122,7 +49122,7 @@
                     "name": "Feather",
                     "desc": "败(0/3/4)",
                     "score": "2.7",
-                    "votes": "790评分",
+                    "votes": "791评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/122791392f5448df0ca952cedcd1d7235e6392d21prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                     "team_id": "438",
@@ -49687,7 +49687,7 @@
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/122791392f5448df0ca952cedcd1d7235e6392d21prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                 "score": 2.7,
-                "votes": 790,
+                "votes": 791,
                 "comments": 35,
                 "kills": 0,
                 "deaths": 3,
@@ -49709,14 +49709,14 @@
                   "s4": 9,
                   "s3": 11,
                   "s2": 68,
-                  "s1": 658
+                  "s1": 659
                 },
                 "radar": {
                   "self": {
                     "name": "Feather",
                     "desc": "败(0/3/4)",
                     "score": "2.7",
-                    "votes": "790评分",
+                    "votes": "791评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/122791392f5448df0ca952cedcd1d7235e6392d21prod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/d427c224420e63038c6eb8572fcbc029.png",
                     "team_id": "438",
@@ -51032,7 +51032,7 @@
                 "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/736562126028800e14478d01882a294c446467b6df19879prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/380d436eed7666075c7bb58a58b30580.png",
                 "score": 9.9,
-                "votes": 13436,
+                "votes": 13437,
                 "comments": 1278,
                 "kills": 10,
                 "deaths": 2,
@@ -51058,7 +51058,7 @@
                 "score_dist": {
                   "s5": 13282,
                   "s4": 35,
-                  "s3": 12,
+                  "s3": 13,
                   "s2": 20,
                   "s1": 87
                 },
@@ -51523,7 +51523,7 @@
                     "name": "Junhao",
                     "desc": "败(4/4/3)",
                     "score": "9.1",
-                    "votes": "2341评分",
+                    "votes": "2342评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/229298669731840ba29292150897cabfbe503df2db4ae8aprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/032a2510c54f42f170b13c5d0525f047.png",
                     "team_id": "438",
@@ -51668,7 +51668,7 @@
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/229298669731840ba29292150897cabfbe503df2db4ae8aprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/032a2510c54f42f170b13c5d0525f047.png",
                 "score": 9.1,
-                "votes": 2341,
+                "votes": 2342,
                 "comments": 370,
                 "kills": 4,
                 "deaths": 4,
@@ -51686,7 +51686,7 @@
                 "bg_color": "#000306",
                 "position": "",
                 "score_dist": {
-                  "s5": 1864,
+                  "s5": 1865,
                   "s4": 221,
                   "s3": 79,
                   "s2": 33,
@@ -51697,7 +51697,7 @@
                     "name": "Junhao",
                     "desc": "败(4/4/3)",
                     "score": "9.1",
-                    "votes": "2341评分",
+                    "votes": "2342评分",
                     "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/229298669731840ba29292150897cabfbe503df2db4ae8aprod.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/032a2510c54f42f170b13c5d0525f047.png",
                     "team_id": "438",
@@ -52222,12 +52222,12 @@
             ]
           }
         ],
-        "total_scorers": 128901,
+        "total_scorers": 128904,
         "league_name": "职业联赛",
         "round_name": "第三赛段骑士之路",
         "match_time": 1787907600000,
         "date_str": "08月28日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3826",
@@ -57519,7 +57519,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1787389200000,
         "date_str": "08月22日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3734",
@@ -64112,7 +64112,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786870800000,
         "date_str": "08月16日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3804",
@@ -67489,7 +67489,7 @@
                     "name": "Wei",
                     "desc": "胜(2/1/21)",
                     "score": "9.2",
-                    "votes": "2775评分",
+                    "votes": "2776评分",
                     "avatar": "https://i1.hoopchina.com.cn/newsPost/26912-4gzuasrc-upload-1789141919667-22.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/55f2c3657e2d22f54c1af58d050afc30.png",
                     "team_id": "2",
@@ -67840,7 +67840,7 @@
                     "name": "Wei",
                     "desc": "胜(2/1/21)",
                     "score": "9.2",
-                    "votes": "2775评分",
+                    "votes": "2776评分",
                     "avatar": "https://i1.hoopchina.com.cn/newsPost/26912-4gzuasrc-upload-1789141919667-22.png",
                     "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/55f2c3657e2d22f54c1af58d050afc30.png",
                     "team_id": "2",
@@ -69368,7 +69368,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786258800000,
         "date_str": "08月09日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3717",
@@ -75985,7 +75985,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786006800000,
         "date_str": "08月06日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3692",
@@ -81253,7 +81253,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1785661200000,
         "date_str": "08月02日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3678",
@@ -87836,7 +87836,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1784970000000,
         "date_str": "07月25日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3552",
@@ -94271,7 +94271,7 @@
         "round_name": "第二赛段骑士之路",
         "match_time": 1779526800000,
         "date_str": "05月23日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3545",
@@ -100480,7 +100480,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1779008400000,
         "date_str": "05月17日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3534",
@@ -106727,7 +106727,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778583600000,
         "date_str": "05月12日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3530",
@@ -111666,7 +111666,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778317200000,
         "date_str": "05月09日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3612",
@@ -117721,7 +117721,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778058000000,
         "date_str": "05月06日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3610",
@@ -122658,7 +122658,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777719600000,
         "date_str": "05月02日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3606",
@@ -128871,7 +128871,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777633200000,
         "date_str": "05月01日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3512",
@@ -133804,7 +133804,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777366800000,
         "date_str": "04月28日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "3506",
@@ -138745,7 +138745,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777028400000,
         "date_str": "04月24日",
-        "found_at": "2026-09-25T21:44:35.080506+08:00"
+        "found_at": "2026-09-26T02:05:40.812026+08:00"
       },
       {
         "id": "642331126",
@@ -138995,7 +138995,7 @@
           "name": "JiaQi",
           "team": "IG",
           "avg": 9.4,
-          "total_count": 31912,
+          "total_count": 31913,
           "comments": 1880,
           "kda": "22/10/19",
           "kda_ratio": 4.1,
@@ -139052,13 +139052,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 28539,
+            "s5": 28540,
             "s4": 800,
             "s3": 554,
             "s2": 643,
             "s1": 1376
           },
-          "score_dist_total": 31912,
+          "score_dist_total": 31913,
           "best_radar": {
             "self": {
               "name": "JiaQi",
@@ -140430,7 +140430,7 @@
           "name": "JiaQi",
           "team": "IG",
           "avg": 9.4,
-          "total_count": 31912,
+          "total_count": 31913,
           "comments": 1880,
           "kda": "22/10/19",
           "kda_ratio": 4.1,
@@ -140487,13 +140487,13 @@
           "position": "",
           "kind": "player",
           "score_dist": {
-            "s5": 28539,
+            "s5": 28540,
             "s4": 800,
             "s3": 554,
             "s2": 643,
             "s1": 1376
           },
-          "score_dist_total": 31912,
+          "score_dist_total": 31913,
           "best_radar": {
             "self": {
               "name": "JiaQi",
@@ -146065,7 +146065,7 @@
               "avatar": "https://i5.hoopchina.com.cn/eg-game/lol/game/player/pic/736562126028800e14478d01882a294c446467b6df19879prod.png",
               "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/380d436eed7666075c7bb58a58b30580.png",
               "score": 9.8,
-              "votes": 10619,
+              "votes": 10620,
               "comments": 410,
               "kills": 4,
               "deaths": 2,
@@ -146083,7 +146083,7 @@
               "bg_color": "#000004",
               "position": "",
               "score_dist": {
-                "s5": 10159,
+                "s5": 10160,
                 "s4": 230,
                 "s3": 65,
                 "s2": 38,
@@ -146851,21 +146851,21 @@
           ]
         }
       ],
-      "total_scorers": 281004,
+      "total_scorers": 281005,
       "league_name": "职业联赛",
       "round_name": "2026赛季季后赛",
       "match_time": 1788674400000,
       "date_str": "09月06日",
-      "found_at": "2026-09-25T21:44:35.080506+08:00"
+      "found_at": "2026-09-26T02:05:40.812026+08:00"
     },
     "schedule": {
       "next_match": null,
       "upcoming": [],
-      "last_check": "2026-09-25T21:48:00.306691+08:00"
+      "last_check": "2026-09-26T02:10:56.769648+08:00"
     },
     "next_match": null,
     "upcoming": [],
-    "last_check": "2026-09-25T21:44:35.080506+08:00"
+    "last_check": "2026-09-26T02:05:40.812026+08:00"
   },
   "daily_stats": {
     "main": {
