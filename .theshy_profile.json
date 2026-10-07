@@ -9,23 +9,23 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 303,
-  "updated_at": "2026-10-07T16:45:04+09:00",
-  "renewable_at": "2026-10-07T16:47:04+09:00",
+  "updated_at": "2026-10-07T23:45:45+09:00",
+  "renewable_at": "2026-10-07T23:47:45+09:00",
   "revision_at": "2026-09-12T01:31:51+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 431,
-    "total": 3105583
+    "rank": 6167,
+    "total": 3107219
   },
   "league_stats": [
     {
       "game_type": "SOLORANKED",
-      "tier": "GRANDMASTER",
+      "tier": "MASTER",
       "division": 1,
-      "lp": 1673,
-      "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/grandmaster.png",
-      "border_image_url": "https://opgg-static.akamaized.net/images/border_new/grandmaster.png",
+      "lp": 548,
+      "tier_image_url": "https://opgg-static.akamaized.net/images/medals_new/master.png",
+      "border_image_url": "https://opgg-static.akamaized.net/images/border_new/master.png",
       "win": 149,
       "lose": 101,
       "play": 249,
@@ -40,17 +40,17 @@
         {
           "_class": "HighLeague",
           "key": "CHALLENGER",
-          "current_count": 307,
-          "lp_threshold": 1840,
-          "promotion_candidate_count": 5,
-          "demotion_candidate_count": 12
+          "current_count": 306,
+          "lp_threshold": 1834,
+          "promotion_candidate_count": 10,
+          "demotion_candidate_count": 16
         },
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
-          "current_count": 703,
-          "lp_threshold": 1345,
-          "promotion_candidate_count": 22,
+          "current_count": 704,
+          "lp_threshold": 1342,
+          "promotion_candidate_count": 24,
           "demotion_candidate_count": 32
         }
       ]
@@ -525,7 +525,15 @@
       }
     ]
   },
-  "lp_histories": [],
+  "lp_histories": [
+    {
+      "created_at": "2026-10-07T19:07:47+09:00",
+      "elo_point": 2808,
+      "tier": "MASTER",
+      "division": 1,
+      "lp": 548
+    }
+  ],
   "most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
