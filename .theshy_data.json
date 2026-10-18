@@ -17,14 +17,14 @@
         "internal_name": "퐁당가지토마토",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
         "level": 303,
-        "updated_at": "2026-10-18T22:09:59+09:00",
-        "renewable_at": "2026-10-18T22:11:59+09:00",
+        "updated_at": "2026-10-19T01:10:48+09:00",
+        "renewable_at": "2026-10-19T01:12:48+09:00",
         "revision_at": "2026-09-12T01:31:51+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 19690,
-          "total": 3159770
+          "rank": 19672,
+          "total": 3160783
         },
         "league_stats": [
           {
@@ -49,17 +49,17 @@
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
                 "current_count": 300,
-                "lp_threshold": 1852,
-                "promotion_candidate_count": 9,
-                "demotion_candidate_count": 9
+                "lp_threshold": 1849,
+                "promotion_candidate_count": 3,
+                "demotion_candidate_count": 2
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
                 "current_count": 700,
-                "lp_threshold": 1353,
-                "promotion_candidate_count": 28,
-                "demotion_candidate_count": 27
+                "lp_threshold": 1356,
+                "promotion_candidate_count": 7,
+                "demotion_candidate_count": 7
               }
             ]
           },
@@ -1472,8 +1472,8 @@
       },
       "matches": [],
       "state": {
-        "is_active": true,
-        "last_check": "2026-10-18T22:10:36.402301+09:00",
+        "is_active": false,
+        "last_check": "2026-10-19T01:30:44.873096+09:00",
         "last_match_id": "qfvdWpGbi22_IZKNuLAQaGBsm0NuTHA52yAJuEjtdNw=",
         "matches_count": 0
       }
@@ -1495,14 +1495,14 @@
         "internal_name": "",
         "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon7178.jpg",
         "level": 99,
-        "updated_at": "2026-10-18T19:03:11+09:00",
-        "renewable_at": "2026-10-18T19:05:11+09:00",
+        "updated_at": "2026-10-18T22:32:14+09:00",
+        "renewable_at": "2026-10-18T22:34:14+09:00",
         "revision_at": "2026-10-16T17:53:48+09:00",
         "recent_videos_added_count": 0,
         "has_highlight": "false",
         "ladder_rank": {
-          "rank": 7104,
-          "total": 3159771
+          "rank": 7069,
+          "total": 3160784
         },
         "league_stats": [
           {
@@ -1527,17 +1527,17 @@
                 "_class": "HighLeague",
                 "key": "CHALLENGER",
                 "current_count": 300,
-                "lp_threshold": 1852,
-                "promotion_candidate_count": 9,
-                "demotion_candidate_count": 9
+                "lp_threshold": 1849,
+                "promotion_candidate_count": 3,
+                "demotion_candidate_count": 2
               },
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
                 "current_count": 700,
-                "lp_threshold": 1353,
-                "promotion_candidate_count": 28,
-                "demotion_candidate_count": 27
+                "lp_threshold": 1356,
+                "promotion_candidate_count": 7,
+                "demotion_candidate_count": 7
               }
             ]
           },
@@ -1570,10 +1570,10 @@
               {
                 "_class": "HighLeague",
                 "key": "GRANDMASTER",
-                "current_count": 535,
+                "current_count": 532,
                 "lp_threshold": 200,
-                "promotion_candidate_count": 50,
-                "demotion_candidate_count": 8
+                "promotion_candidate_count": 54,
+                "demotion_candidate_count": 7
               }
             ]
           },
@@ -2571,11 +2571,11 @@
           {
             "champion_name": "英勇投弹手",
             "id": 42,
-            "play": 6,
-            "win": 5,
-            "kill": 31,
-            "death": 31,
-            "assist": 37
+            "play": 4,
+            "win": 3,
+            "kill": 13,
+            "death": 19,
+            "assist": 20
           },
           {
             "champion_name": "未来守护者",
@@ -2587,15 +2587,6 @@
             "assist": 22
           },
           {
-            "champion_name": "双界灵兔",
-            "id": 893,
-            "play": 2,
-            "win": 1,
-            "kill": 8,
-            "death": 7,
-            "assist": 3
-          },
-          {
             "champion_name": "圣枪游侠",
             "id": 236,
             "play": 2,
@@ -2605,30 +2596,39 @@
             "assist": 11
           },
           {
-            "champion_name": "铁血狼母",
-            "id": 799,
-            "play": 1,
-            "win": 1,
-            "kill": 5,
-            "death": 2,
-            "assist": 2
-          },
-          {
-            "champion_name": "元素女皇",
-            "id": 246,
-            "play": 1,
-            "win": 1,
-            "kill": 16,
-            "death": 5,
-            "assist": 8
-          },
-          {
             "champion_name": "青钢影",
             "id": 164,
             "play": 1,
             "win": 1,
             "kill": 3,
             "death": 11,
+            "assist": 11
+          },
+          {
+            "champion_name": "麦林炮手",
+            "id": 18,
+            "play": 1,
+            "win": 1,
+            "kill": 8,
+            "death": 4,
+            "assist": 4
+          },
+          {
+            "champion_name": "弗雷尔卓德之心",
+            "id": 201,
+            "play": 1,
+            "win": 1,
+            "kill": 2,
+            "death": 4,
+            "assist": 23
+          },
+          {
+            "champion_name": "纳祖芒荣耀",
+            "id": 897,
+            "play": 1,
+            "win": 1,
+            "kill": 2,
+            "death": 6,
             "assist": 11
           }
         ]
@@ -15709,20 +15709,20 @@
       ],
       "state": {
         "is_active": false,
-        "last_check": "2026-10-18T22:10:46.384858+09:00",
+        "last_check": "2026-10-19T01:30:55.480312+09:00",
         "last_match_id": "m_eaDVNbCj-wz3_QnUGrfZv7DD0HhSA0Cf-pE-uNEzw=",
         "matches_count": 20
       }
     }
   ],
-  "last_update": "2026-10-18T22:10:46.385209+09:00",
+  "last_update": "2026-10-19T01:30:55.480898+09:00",
   "bilibili": {
     "is_live": true,
     "is_ig_live": false,
     "title": "【预告】19日2:00 KC vs MVK",
     "live_time": "2026-10-15 15:50:15",
     "room_id": 7734200,
-    "last_check": "2026-10-18T21:10:46.791719+08:00",
+    "last_check": "2026-10-19T00:30:56.003531+08:00",
     "notified_title": ""
   },
   "hupu_ratings": {
@@ -23762,7 +23762,7 @@
         "round_name": "2026赛季季后赛",
         "match_time": 1788674400000,
         "date_str": "09月06日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3838",
@@ -24100,7 +24100,7 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 9.0,
-            "total_count": 46274,
+            "total_count": 46275,
             "comments": 4196,
             "kda": "5/19/62",
             "kda_ratio": 3.53,
@@ -26354,7 +26354,7 @@
             "name": "Meiko",
             "team": "IG",
             "avg": 9.0,
-            "total_count": 46274,
+            "total_count": 46275,
             "comments": 4196,
             "kda": "5/19/62",
             "kda_ratio": 3.53,
@@ -32225,7 +32225,7 @@
                 "avatar": "https://i1.hoopchina.com.cn/eg-game/lol/game/player/pic/545269620b44fd4e26e3acd5583a3048fprod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/7c19f06ddf012e3f28e9b663e6617f8b.png",
                 "score": 10.0,
-                "votes": 24812,
+                "votes": 24813,
                 "comments": 1690,
                 "kills": 0,
                 "deaths": 1,
@@ -33396,12 +33396,12 @@
             ]
           }
         ],
-        "total_scorers": 395222,
+        "total_scorers": 395223,
         "league_name": "职业联赛",
         "round_name": "2026赛季季后赛",
         "match_time": 1788588000000,
         "date_str": "09月05日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3834",
@@ -40010,7 +40010,7 @@
         "round_name": "第三赛段骑士之路",
         "match_time": 1787907600000,
         "date_str": "08月28日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3826",
@@ -45302,7 +45302,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1787389200000,
         "date_str": "08月22日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3734",
@@ -51895,7 +51895,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786870800000,
         "date_str": "08月16日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3804",
@@ -57151,7 +57151,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786258800000,
         "date_str": "08月09日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3717",
@@ -63768,7 +63768,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1786006800000,
         "date_str": "08月06日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3692",
@@ -69036,7 +69036,7 @@
         "round_name": "第三赛段组内赛",
         "match_time": 1785661200000,
         "date_str": "08月02日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3678",
@@ -69064,7 +69064,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 9.2,
-            "total_count": 56163,
+            "total_count": 56162,
             "comments": 9210,
             "kda": "8/8/10",
             "kda_ratio": 2.25,
@@ -69124,13 +69124,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 48232,
+              "s5": 48231,
               "s4": 1965,
               "s3": 1257,
               "s2": 521,
               "s1": 4188
             },
-            "score_dist_total": 56163,
+            "score_dist_total": 56162,
             "best_radar": {
               "self": {
                 "name": "TheShy",
@@ -70414,7 +70414,7 @@
             "name": "TheShy",
             "team": "IG",
             "avg": 9.2,
-            "total_count": 56163,
+            "total_count": 56162,
             "comments": 9210,
             "kda": "8/8/10",
             "kda_ratio": 2.25,
@@ -70474,13 +70474,13 @@
             "position": "",
             "kind": "player",
             "score_dist": {
-              "s5": 48232,
+              "s5": 48231,
               "s4": 1965,
               "s3": 1257,
               "s2": 521,
               "s1": 4188
             },
-            "score_dist_total": 56163,
+            "score_dist_total": 56162,
             "best_radar": {
               "self": {
                 "name": "TheShy",
@@ -74440,7 +74440,7 @@
                 "avatar": "https://i10.hoopchina.com.cn/eg-game/lol/game/player/pic/147848d36f3a9ed3805a98a3214345784974prod.png",
                 "champion": "https://p1.hoopchina.com.cn/gdc/lol/champion/pic/84392a0e3db4ec73e6d764cfbad534be.png",
                 "score": 9.8,
-                "votes": 23962,
+                "votes": 23961,
                 "comments": 3120,
                 "kills": 2,
                 "deaths": 0,
@@ -74464,7 +74464,7 @@
                 "bg_color": "#000000",
                 "position": "",
                 "score_dist": {
-                  "s5": 23236,
+                  "s5": 23235,
                   "s4": 123,
                   "s3": 58,
                   "s2": 56,
@@ -75614,12 +75614,12 @@
             ]
           }
         ],
-        "total_scorers": 195508,
+        "total_scorers": 195507,
         "league_name": "职业联赛",
         "round_name": "第三赛段组内赛",
         "match_time": 1784970000000,
         "date_str": "07月25日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3552",
@@ -82054,7 +82054,7 @@
         "round_name": "第二赛段骑士之路",
         "match_time": 1779526800000,
         "date_str": "05月23日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3545",
@@ -88263,7 +88263,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1779008400000,
         "date_str": "05月17日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3534",
@@ -94510,7 +94510,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778583600000,
         "date_str": "05月12日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3530",
@@ -99449,7 +99449,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778317200000,
         "date_str": "05月09日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3612",
@@ -105504,7 +105504,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1778058000000,
         "date_str": "05月06日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3610",
@@ -110441,7 +110441,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777719600000,
         "date_str": "05月02日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3606",
@@ -116654,7 +116654,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777633200000,
         "date_str": "05月01日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3512",
@@ -121587,7 +121587,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777366800000,
         "date_str": "04月28日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "3506",
@@ -126528,7 +126528,7 @@
         "round_name": "第二赛段组内赛",
         "match_time": 1777028400000,
         "date_str": "04月24日",
-        "found_at": "2026-10-18T21:10:46.819021+08:00"
+        "found_at": "2026-10-19T00:30:56.035939+08:00"
       },
       {
         "id": "642331126",
@@ -134639,16 +134639,16 @@
       "round_name": "2026赛季季后赛",
       "match_time": 1788674400000,
       "date_str": "09月06日",
-      "found_at": "2026-10-18T21:10:46.819021+08:00"
+      "found_at": "2026-10-19T00:30:56.035939+08:00"
     },
     "schedule": {
       "next_match": null,
       "upcoming": [],
-      "last_check": "2026-10-18T21:16:08.575902+08:00"
+      "last_check": "2026-10-19T00:36:16.190530+08:00"
     },
     "next_match": null,
     "upcoming": [],
-    "last_check": "2026-10-18T21:10:46.819021+08:00"
+    "last_check": "2026-10-19T00:30:56.035939+08:00"
   },
   "daily_stats": {
     "main": {
