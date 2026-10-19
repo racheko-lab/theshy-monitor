@@ -1,6 +1,24 @@
 [
   {
     "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-10-19T08:03:54+09:00",
+    "level": 99,
+    "is_active": false,
+    "timestamp": "2026-10-19T10:06:28.223355+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-10-19T10:06:08+09:00",
+    "level": 303,
+    "is_active": true,
+    "timestamp": "2026-10-19T10:06:28.222498+09:00"
+  },
+  {
+    "type": "opgg_updated",
     "account": "The shy#asdf",
     "slug": "main",
     "updated_at": "2026-10-19T07:09:44+09:00",
@@ -930,34 +948,5 @@
     "level": 303,
     "is_active": true,
     "timestamp": "2026-10-12T06:04:21.182833+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "game_type": "SOLORANKED",
-    "old_lp": 315,
-    "new_lp": 365,
-    "delta": 50,
-    "tier": "MASTER",
-    "division": 1,
-    "timestamp": "2026-10-12T02:43:10.085037+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "match_id": "m_eaDVNbCj8CvM4YfQXVVW0z1K0ngDRUPbOZ_61oYHY=",
-    "game_type": "SOLORANKED",
-    "champion": "青钢影",
-    "result": "WIN",
-    "kda": "1.27",
-    "kill": 3,
-    "death": 11,
-    "assist": 11,
-    "created_at": "2026-10-12T02:21:48+09:00",
-    "game_length_second": 2286,
-    "position": "SUPPORT",
-    "timestamp": "2026-10-12T02:43:09.054295+09:00"
   }
 ]
