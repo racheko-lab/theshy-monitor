@@ -9,14 +9,14 @@
   "internal_name": "퐁당가지토마토",
   "profile_image_url": "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon6921.jpg",
   "level": 303,
-  "updated_at": "2026-10-23T19:27:25+09:00",
-  "renewable_at": "2026-10-23T19:29:25+09:00",
+  "updated_at": "2026-10-24T00:14:35+09:00",
+  "renewable_at": "2026-10-24T00:16:35+09:00",
   "revision_at": "2026-09-12T01:31:51+09:00",
   "recent_videos_added_count": 0,
   "has_highlight": "false",
   "ladder_rank": {
-    "rank": 19741,
-    "total": 3182171
+    "rank": 19754,
+    "total": 3183162
   },
   "league_stats": [
     {
@@ -41,17 +41,17 @@
           "_class": "HighLeague",
           "key": "CHALLENGER",
           "current_count": 300,
-          "lp_threshold": 1856,
-          "promotion_candidate_count": 7,
-          "demotion_candidate_count": 7
+          "lp_threshold": 1862,
+          "promotion_candidate_count": 1,
+          "demotion_candidate_count": 1
         },
         {
           "_class": "HighLeague",
           "key": "GRANDMASTER",
           "current_count": 700,
-          "lp_threshold": 1360,
-          "promotion_candidate_count": 23,
-          "demotion_candidate_count": 23
+          "lp_threshold": 1358,
+          "promotion_candidate_count": 7,
+          "demotion_candidate_count": 3
         }
       ]
     },
@@ -525,15 +525,7 @@
       }
     ]
   },
-  "lp_histories": [
-    {
-      "created_at": "2026-10-12T12:12:41+09:00",
-      "elo_point": 2595,
-      "tier": "MASTER",
-      "division": 1,
-      "lp": 173
-    }
-  ],
+  "lp_histories": [],
   "most_champions": {
     "game_type": "RANKED",
     "season_id": 33,
