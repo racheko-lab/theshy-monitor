@@ -1,6 +1,24 @@
 [
   {
     "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
+    "updated_at": "2026-10-24T04:21:10+09:00",
+    "level": 99,
+    "is_active": false,
+    "timestamp": "2026-10-24T07:23:13.720506+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-10-24T07:13:30+09:00",
+    "level": 303,
+    "is_active": false,
+    "timestamp": "2026-10-24T07:23:13.719612+09:00"
+  },
+  {
+    "type": "opgg_updated",
     "account": "The shy#asdf",
     "slug": "main",
     "updated_at": "2026-10-24T04:13:09+09:00",
@@ -880,31 +898,5 @@
     "level": 99,
     "is_active": false,
     "timestamp": "2026-10-16T06:48:24.901619+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-10-16T06:48:07+09:00",
-    "level": 303,
-    "is_active": true,
-    "timestamp": "2026-10-16T06:48:24.895632+09:00"
-  },
-  {
-    "type": "new_match",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "match_id": "m_eaDVNbCj-wz3_QnUGrfZv7DD0HhSA0Cf-pE-uNEzw=",
-    "game_type": "SOLORANKED",
-    "champion": "机械公敌",
-    "result": "LOSE",
-    "kda": "1.67",
-    "kill": 6,
-    "death": 9,
-    "assist": 9,
-    "created_at": "2026-10-16T01:46:04+09:00",
-    "game_length_second": 2107,
-    "position": "TOP",
-    "timestamp": "2026-10-16T03:44:24.732323+09:00"
   }
 ]
