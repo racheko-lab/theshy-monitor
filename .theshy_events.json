@@ -1,6 +1,15 @@
 [
   {
     "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-10-24T04:13:09+09:00",
+    "level": 303,
+    "is_active": false,
+    "timestamp": "2026-10-24T04:21:19.471319+09:00"
+  },
+  {
+    "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
     "updated_at": "2026-10-24T00:21:30+09:00",
@@ -897,13 +906,5 @@
     "game_length_second": 2107,
     "position": "TOP",
     "timestamp": "2026-10-16T03:44:24.732323+09:00"
-  },
-  {
-    "type": "level_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "old": 98,
-    "new": 99,
-    "timestamp": "2026-10-16T03:44:23.780226+09:00"
   }
 ]
