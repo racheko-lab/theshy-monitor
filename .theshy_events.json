@@ -3,6 +3,33 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-11-14T01:16:09+09:00",
+    "level": 99,
+    "is_active": false,
+    "timestamp": "2026-11-14T07:00:27.624180+09:00"
+  },
+  {
+    "type": "rank_changed",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "game_type": "SOLORANKED",
+    "old": "DIAMOND 1",
+    "new": "DIAMOND 2",
+    "timestamp": "2026-11-14T07:00:26.629610+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-11-14T03:50:33+09:00",
+    "level": 303,
+    "is_active": false,
+    "timestamp": "2026-11-14T07:00:26.628937+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-11-13T17:09:43+09:00",
     "level": 99,
     "is_active": false,
@@ -882,32 +909,5 @@
     "level": 303,
     "is_active": false,
     "timestamp": "2026-11-02T02:55:14.995776+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-11-01T14:53:42+09:00",
-    "level": 99,
-    "is_active": false,
-    "timestamp": "2026-11-01T21:07:30.845952+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-11-01T21:07:22+09:00",
-    "level": 303,
-    "is_active": true,
-    "timestamp": "2026-11-01T21:07:30.844960+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-11-01T09:06:12+09:00",
-    "level": 99,
-    "is_active": false,
-    "timestamp": "2026-11-01T14:53:46.224563+09:00"
   }
 ]
