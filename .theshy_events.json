@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-11-14T17:55:44+09:00",
+    "level": 99,
+    "is_active": false,
+    "timestamp": "2026-11-15T00:27:24.520539+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-11-14T22:49:13+09:00",
+    "level": 303,
+    "is_active": false,
+    "timestamp": "2026-11-15T00:27:24.519736+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-11-14T11:09:18+09:00",
     "level": 99,
     "is_active": false,
@@ -888,26 +906,5 @@
     "level": 99,
     "is_active": false,
     "timestamp": "2026-11-02T09:59:56.627598+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "The shy#asdf",
-    "slug": "main",
-    "updated_at": "2026-11-02T09:59:47+09:00",
-    "level": 303,
-    "is_active": true,
-    "timestamp": "2026-11-02T09:59:56.626921+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "game_type": "SOLORANKED",
-    "old_lp": 355,
-    "new_lp": 280,
-    "delta": -75,
-    "tier": "MASTER",
-    "division": 1,
-    "timestamp": "2026-11-02T06:31:04.577612+09:00"
   }
 ]
