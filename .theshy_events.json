@@ -3,6 +3,24 @@
     "type": "opgg_updated",
     "account": "은여하#1103",
     "slug": "smurf",
+    "updated_at": "2026-11-16T10:35:12+09:00",
+    "level": 99,
+    "is_active": false,
+    "timestamp": "2026-11-16T17:33:13.093442+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "The shy#asdf",
+    "slug": "main",
+    "updated_at": "2026-11-16T17:33:08+09:00",
+    "level": 303,
+    "is_active": true,
+    "timestamp": "2026-11-16T17:33:13.088895+09:00"
+  },
+  {
+    "type": "opgg_updated",
+    "account": "은여하#1103",
+    "slug": "smurf",
     "updated_at": "2026-11-16T06:57:47+09:00",
     "level": 99,
     "is_active": false,
@@ -882,26 +900,5 @@
     "title": "【直播】TES vs IG",
     "room_id": 6,
     "timestamp": "2026-11-04T09:14:26.570413+09:00"
-  },
-  {
-    "type": "lp_changed",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "game_type": "SOLORANKED",
-    "old_lp": 205,
-    "new_lp": 130,
-    "delta": -75,
-    "tier": "MASTER",
-    "division": 1,
-    "timestamp": "2026-11-04T09:14:24.478151+09:00"
-  },
-  {
-    "type": "opgg_updated",
-    "account": "은여하#1103",
-    "slug": "smurf",
-    "updated_at": "2026-11-04T04:51:30+09:00",
-    "level": 99,
-    "is_active": false,
-    "timestamp": "2026-11-04T09:14:24.477250+09:00"
   }
 ]
